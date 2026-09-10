@@ -75,7 +75,8 @@ export default function PrivacyPage() {
       <LegalSection heading="5. Service providers">
         <p>We share personal information only with providers that help us run UNIKMO, under contract and on our instructions:</p>
         <ul className={bullet}>
-          <li>Shopify — checkout, payments and order management.</li>
+          <li>Stripe — checkout, payment processing and fraud prevention.</li>
+          <li>Shopify — historical order management during our payment-provider transition.</li>
           <li>Cloud object storage (e.g. Amazon Web Services / S3) — hosting of uploaded Moment media.</li>
           <li>Database hosting (e.g. MongoDB) — order and Moment records.</li>
           <li>Email delivery — sending access codes and support replies.</li>

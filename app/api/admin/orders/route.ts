@@ -2,35 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import Order from '@/models/Order';
 import MomentCode from '@/models/MomentCode';
-import { createShopifyClient } from '@/lib/shopify';
-import { getEffectiveShopifyTestMode } from '@/lib/shopify-test-mode';
 import { processPaidOrderAndGenerateCodes } from '@/lib/order-processing';
+import { COMMERCE_PRODUCTS } from '@/lib/commerce-products';
 import type { DeliveryType, Quantity } from '@/lib/code-generator';
 
 export const dynamic = 'force-dynamic';
 
-const LIVE_PRODUCTS: Record<Quantity, string> = {
-  1: 'gid://shopify/Product/16094803853657',
-  4: 'gid://shopify/Product/16094852219225',
-  7: 'gid://shopify/Product/16094859526489',
+const PRODUCT_BY_QUANTITY = {
+  1: COMMERCE_PRODUCTS.single,
+  4: COMMERCE_PRODUCTS.four,
+  7: COMMERCE_PRODUCTS.seven,
 };
-
-const TEST_PRODUCTS: Record<Quantity, string> = {
-  1: 'gid://shopify/Product/8326274121914',
-  4: 'gid://shopify/Product/8326277005498',
-  7: 'gid://shopify/Product/8326277234874',
-};
-
-function parseNumericShopifyId(gidOrNumeric: string): string {
-  const value = String(gidOrNumeric || '');
-  return value.includes('/') ? value.split('/').pop() || '' : value;
-}
-
-function toVariantGid(variantId: string): string {
-  return variantId.startsWith('gid://')
-    ? variantId
-    : `gid://shopify/ProductVariant/${variantId}`;
-}
 
 export async function GET(request: NextRequest) {
   try {
@@ -40,7 +22,7 @@ export async function GET(request: NextRequest) {
     const source = (searchParams.get('source') || '').trim();
 
     const query: Record<string, any> = {};
-    if (source === 'admin' || source === 'webhook') {
+    if (source === 'admin' || source === 'webhook' || source === 'stripe') {
       query.source = source;
     }
     if (search) {
@@ -103,6 +85,7 @@ export async function GET(request: NextRequest) {
           totalPrice: order.totalPrice,
           currency: order.currency,
           source: order.source || 'webhook',
+          paymentProvider: order.paymentProvider || (order.source === 'admin' ? 'manual' : 'shopify'),
           tags: order.tags || [],
           orderQuantity: order.orderQuantity,
           createdAt: order.createdAt,
@@ -129,9 +112,9 @@ export async function POST(request: NextRequest) {
     const deliveryType = String(body.deliveryType || '').trim() as DeliveryType;
     const customTag = String(body.customTag || '').trim();
 
-    if (!email || !productId || !variantId || !momentQuantity || !deliveryType) {
+    if (!email || !productId || !momentQuantity || !deliveryType) {
       return NextResponse.json(
-        { error: 'email, productId, variantId, momentQuantity and deliveryType are required' },
+        { error: 'email, productId, momentQuantity and deliveryType are required' },
         { status: 400 }
       );
     }
@@ -140,9 +123,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid quantity or delivery type' }, { status: 400 });
     }
 
-    const isTestMode = await getEffectiveShopifyTestMode();
-    const allowedProducts = isTestMode ? TEST_PRODUCTS : LIVE_PRODUCTS;
-    if (allowedProducts[momentQuantity] !== productId) {
+    const product = PRODUCT_BY_QUANTITY[momentQuantity];
+    if (!product || product.key !== productId || !product.allowedDeliveryTypes.includes(deliveryType)) {
       return NextResponse.json(
         { error: 'Selected product does not match the requested key quantity' },
         { status: 400 }
@@ -150,68 +132,20 @@ export async function POST(request: NextRequest) {
     }
 
     const tags = ['admin_created', ...(customTag ? [customTag] : [])];
-    const variantGid = toVariantGid(variantId);
-    const client = await createShopifyClient();
-
-    const draftCreate = await client.createDraftOrder({
-      email,
-      tags,
-      note: customerName ? `Admin order for ${customerName}` : 'Admin-created order',
-      lineItems: [{ variantId: variantGid, quantity: 1 }],
-    });
-
-    const draftErrors = draftCreate?.draftOrderCreate?.userErrors || [];
-    if (draftErrors.length > 0) {
-      return NextResponse.json({ error: draftErrors[0].message || 'Failed to create draft order' }, { status: 400 });
-    }
-
-    const draftOrderId = draftCreate?.draftOrderCreate?.draftOrder?.id;
-    if (!draftOrderId) {
-      return NextResponse.json({ error: 'Shopify draft order creation failed' }, { status: 500 });
-    }
-
-    const draftComplete = await client.completeDraftOrder(draftOrderId, false);
-    const completeErrors = draftComplete?.draftOrderComplete?.userErrors || [];
-    if (completeErrors.length > 0) {
-      return NextResponse.json({ error: completeErrors[0].message || 'Failed to complete draft order' }, { status: 400 });
-    }
-
-    const orderNode = draftComplete?.draftOrderComplete?.draftOrder?.order;
-    if (!orderNode?.id) {
-      return NextResponse.json({ error: 'Shopify did not return an order after completion' }, { status: 500 });
-    }
-
-    const shopifyOrderId = parseNumericShopifyId(orderNode.id);
-    const orderName = orderNode.name || shopifyOrderId;
-    const orderCurrency = orderNode?.totalPriceSet?.shopMoney?.currencyCode || 'USD';
-    const orderTotal = parseFloat(orderNode?.totalPriceSet?.shopMoney?.amount || '0');
-    const lineItemEdges = orderNode?.lineItems?.edges || [];
-
-    const internalLineItems = lineItemEdges.length
-      ? lineItemEdges.map((edge: any) => ({
-          product_id: parseNumericShopifyId(edge?.node?.variant?.product?.id || productId),
-          variant_id: parseNumericShopifyId(edge?.node?.variant?.id || variantId),
-          quantity: Number(edge?.node?.quantity || 1),
-        }))
-      : [
-          {
-            product_id: parseNumericShopifyId(productId),
-            variant_id: parseNumericShopifyId(variantId),
-            quantity: 1,
-          },
-        ];
+    const orderReference = `ADMIN-${crypto.randomUUID()}`;
 
     await connectDB();
     const result = await processPaidOrderAndGenerateCodes({
-      shopifyOrderId,
-      shopifyOrderNumber: orderName,
-      shopifyOrderName: orderName,
+      shopifyOrderId: orderReference,
+      shopifyOrderNumber: orderReference,
+      shopifyOrderName: orderReference,
       email,
-      totalPrice: orderTotal,
-      currency: orderCurrency,
-      lineItems: internalLineItems,
+      totalPrice: product.unitAmount / 100,
+      currency: product.currency.toUpperCase(),
+      lineItems: [{ product_id: product.key, variant_id: variantId || deliveryType, quantity: 1 }],
       codesToGenerate: [{ quantity: momentQuantity, deliveryType, orderQuantity: 1 }],
       source: 'admin',
+      paymentProvider: 'manual',
       tags,
       customerName,
     });
@@ -226,8 +160,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       orderId: result.orderId,
-      shopifyOrderId,
-      shopifyOrderName: orderName,
+      orderReference,
       generatedCodes: result.generatedCodes,
     });
   } catch (error: any) {
@@ -235,4 +168,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message || 'Failed to create order' }, { status: 500 });
   }
 }
-

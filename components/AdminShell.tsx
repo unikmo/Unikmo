@@ -11,7 +11,7 @@ const NAV = [
   { href: '/admin/codes', label: 'Codes', icon: CodesIcon },
   { href: '/admin/storage', label: 'Storage', icon: StorageIcon },
   { href: '/admin/template-viewer', label: 'Templates', icon: TemplatesIcon },
-  { href: '/admin/shopify', label: 'Shopify', icon: ShopifyIcon },
+  { href: '/admin/payments', label: 'Payments', icon: PaymentsIcon },
 ];
 
 const TITLES: Record<string, string> = {
@@ -21,7 +21,7 @@ const TITLES: Record<string, string> = {
   '/admin/codes': 'Codes',
   '/admin/storage': 'Storage',
   '/admin/template-viewer': 'Templates',
-  '/admin/shopify': 'Shopify',
+  '/admin/payments': 'Payments',
 };
 
 const STORAGE_COLLAPSED = 'admin-sidebar-collapsed';
@@ -77,7 +77,7 @@ function TemplatesIcon({ className }: { className?: string }) {
   );
 }
 
-function ShopifyIcon({ className }: { className?: string }) {
+function PaymentsIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />

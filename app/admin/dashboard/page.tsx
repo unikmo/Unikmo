@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShopifyConnectionStatus } from '@/components/ShopifyConnectionStatus';
 import toast from 'react-hot-toast';
 
 interface Stats {
@@ -12,6 +11,17 @@ interface Stats {
   totalCodes: number;
   claimedCodes: number;
   unclaimedCodes: number;
+  revenue: Array<{ currency: string; amount: number }>;
+  providers: Record<string, number>;
+  recentOrders: Array<{
+    _id: string;
+    shopifyOrderName?: string;
+    totalPrice: number;
+    currency: string;
+    paymentProvider?: 'shopify' | 'stripe' | 'manual';
+    source: string;
+    createdAt: string;
+  }>;
 }
 
 export default function AdminDashboardPage() {
@@ -128,6 +138,7 @@ export default function AdminDashboardPage() {
       icon: '⏳',
     },
   ];
+  const primaryRevenue = stats?.revenue?.find((item) => item.currency === 'USD') || stats?.revenue?.[0];
 
   if (loading) {
     return (
@@ -139,7 +150,20 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
-      <ShopifyConnectionStatus />
+      <div className="rounded-2xl border border-[#E3DAD0] bg-[#2D2926] p-6 text-[#FDF9F5] shadow-sm">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#D9B77A]">Commerce overview</p>
+            <h2 className="mt-2 font-serif text-3xl">{primaryRevenue ? new Intl.NumberFormat('en-US', { style: 'currency', currency: primaryRevenue.currency }).format(primaryRevenue.amount) : '$0.00'}</h2>
+            <p className="mt-1 text-sm text-[#FDF9F5]/60">Recorded paid revenue across current and historical orders</p>
+          </div>
+          <div className="flex gap-2 text-xs">
+            <span className="rounded-full bg-white/10 px-3 py-1.5">Stripe {stats?.providers?.stripe || 0}</span>
+            <span className="rounded-full bg-white/10 px-3 py-1.5">Shopify {stats?.providers?.shopify || 0}</span>
+            <span className="rounded-full bg-white/10 px-3 py-1.5">Manual {stats?.providers?.manual || 0}</span>
+          </div>
+        </div>
+      </div>
       {/* Test Email Section */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
@@ -229,6 +253,32 @@ export default function AdminDashboardPage() {
             <p className="text-2xl font-semibold text-[#2D2926]">{card.value.toLocaleString()}</p>
           </motion.div>
         ))}
+      </div>
+
+      <div className="rounded-2xl border border-[#E3DAD0] bg-white p-6 shadow-sm">
+        <div className="mb-5 flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-[#2D2926]">Recent orders</h2>
+            <p className="mt-1 text-sm text-[#2D2926]/60">Stripe, Shopify, and manually created orders in one view</p>
+          </div>
+          <a href="/admin/orders" className="rounded-full border border-[#D3C7BB] px-4 py-2 text-xs font-medium uppercase tracking-wide text-[#2D2926]">View all</a>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[640px] text-left text-sm">
+            <thead className="text-xs uppercase tracking-wide text-[#2D2926]/50"><tr><th className="pb-3">Order</th><th className="pb-3">Provider</th><th className="pb-3">Total</th><th className="pb-3">Created</th></tr></thead>
+            <tbody className="divide-y divide-[#EFE3D8]">
+              {(stats?.recentOrders || []).map((order) => (
+                <tr key={order._id}>
+                  <td className="py-4 font-medium text-[#2D2926]">{order.shopifyOrderName || order._id}</td>
+                  <td className="py-4 capitalize text-[#2D2926]/70">{order.paymentProvider || (order.source === 'admin' ? 'manual' : 'shopify')}</td>
+                  <td className="py-4 text-[#2D2926]">{new Intl.NumberFormat('en-US', { style: 'currency', currency: order.currency || 'USD' }).format(order.totalPrice)}</td>
+                  <td className="py-4 text-[#2D2926]/60">{new Date(order.createdAt).toLocaleDateString()}</td>
+                </tr>
+              ))}
+              {!stats?.recentOrders?.length && <tr><td colSpan={4} className="py-8 text-center text-[#2D2926]/50">No orders yet</td></tr>}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
