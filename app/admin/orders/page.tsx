@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 interface ProductOption {
   id: string;
   title: string;
-  variantId: string | null;
+  variantId: string;
   quantity: 1 | 4 | 7;
 }
 
@@ -21,7 +21,8 @@ interface AdminOrder {
   customerName: string;
   totalPrice: number;
   currency: string;
-  source: 'admin' | 'webhook';
+  source: 'admin' | 'webhook' | 'stripe';
+  paymentProvider?: 'shopify' | 'stripe' | 'manual';
   tags: string[];
   createdAt: string;
   totalCodes: number;
@@ -38,7 +39,7 @@ export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<AdminOrder[]>([]);
   const [products, setProducts] = useState<ProductOption[]>([]);
   const [search, setSearch] = useState('');
-  const [sourceFilter, setSourceFilter] = useState<'all' | 'admin' | 'webhook'>('all');
+  const [sourceFilter, setSourceFilter] = useState<'all' | 'admin' | 'webhook' | 'stripe'>('all');
   const [form, setForm] = useState({
     email: '',
     customerName: '',
@@ -63,7 +64,7 @@ export default function AdminOrdersPage() {
       const mapped: ProductOption[] = (data.products || []).slice(0, 3).map((p: any, index: number) => ({
         id: p.id,
         title: p.title,
-        variantId: p.variantId,
+        variantId: p.variantId || 'digital',
         quantity: PRESET_QUANTITIES[index] || 1,
       }));
       setProducts(mapped);
@@ -72,13 +73,13 @@ export default function AdminOrdersPage() {
         setForm((prev) => ({
           ...prev,
           productId: initial.id,
-          variantId: initial.variantId || '',
+          variantId: initial.variantId,
           momentQuantity: String(initial.quantity),
         }));
       }
     } catch (error) {
       console.error('Failed to load products:', error);
-      toast.error('Failed to load Shopify products');
+      toast.error('Failed to load products');
     }
   };
 
@@ -149,7 +150,7 @@ export default function AdminOrdersPage() {
     setForm((prev) => ({
       ...prev,
       productId: selected.id,
-      variantId: selected.variantId || '',
+      variantId: selected.variantId,
       momentQuantity: String(selected.quantity),
     }));
     setProductQuery('');
@@ -211,7 +212,7 @@ export default function AdminOrdersPage() {
         <div className="mb-5">
           <h2 className="text-lg font-semibold text-[#2D2926]">Create admin order</h2>
           <p className="text-sm text-[#2D2926]/60 mt-1">
-            Create a paid Shopify order instantly and generate Moment Codes.
+            Create a manual paid order instantly and generate Moment Codes.
           </p>
         </div>
         <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -369,13 +370,14 @@ export default function AdminOrdersPage() {
           <select
             value={sourceFilter}
             onChange={(e) =>
-              setSourceFilter(e.target.value as 'all' | 'admin' | 'webhook')
+              setSourceFilter(e.target.value as 'all' | 'admin' | 'webhook' | 'stripe')
             }
             className="px-4 py-2.5 rounded-xl border border-[#D3C7BB] bg-white text-[#2D2926] text-sm focus:outline-none focus:ring-2 focus:ring-[#2D2926]/20"
           >
             <option value="all">All sources</option>
             <option value="admin">Admin-created</option>
             <option value="webhook">Webhook</option>
+            <option value="stripe">Stripe</option>
           </select>
           <button
             type="button"
@@ -396,7 +398,7 @@ export default function AdminOrdersPage() {
             <tr>
               <th className="px-6 py-4 text-left text-sm font-semibold text-[#2D2926]/85">Order</th>
               <th className="px-6 py-4 text-left text-sm font-semibold text-[#2D2926]/85">Email</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-[#2D2926]/85">Source</th>
+              <th className="px-6 py-4 text-left text-sm font-semibold text-[#2D2926]/85">Payment</th>
               <th className="px-6 py-4 text-left text-sm font-semibold text-[#2D2926]/85">Codes</th>
               <th className="px-6 py-4 text-left text-sm font-semibold text-[#2D2926]/85">Total</th>
               <th className="px-6 py-4 text-left text-sm font-semibold text-[#2D2926]/85">Created</th>
@@ -419,8 +421,8 @@ export default function AdminOrdersPage() {
                 </td>
                 <td className="px-6 py-4 text-[#2D2926]/80">{order.email}</td>
                 <td className="px-6 py-4">
-                  <span className={`px-2 py-1 rounded-full text-[11px] ${order.source === 'admin' ? 'bg-blue-50 text-blue-700' : 'bg-amber-50 text-amber-700'}`}>
-                    {order.source}
+                  <span className={`px-2 py-1 rounded-full text-[11px] ${order.paymentProvider === 'stripe' ? 'bg-violet-50 text-violet-700' : order.paymentProvider === 'manual' ? 'bg-blue-50 text-blue-700' : 'bg-amber-50 text-amber-700'}`}>
+                    {order.paymentProvider || (order.source === 'admin' ? 'manual' : 'shopify')}
                   </span>
                 </td>
                 <td className="px-6 py-4 text-[#2D2926]/80">
@@ -447,4 +449,3 @@ export default function AdminOrdersPage() {
     </div>
   );
 }
-
