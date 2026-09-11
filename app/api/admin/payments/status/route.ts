@@ -7,7 +7,10 @@ export async function GET() {
   const secretConfigured = Boolean(process.env.STRIPE_SECRET_KEY);
   const webhookConfigured = Boolean(process.env.STRIPE_WEBHOOK_SECRET);
   const keyMode = process.env.STRIPE_SECRET_KEY?.startsWith('sk_live_') ? 'live' : 'test';
-  const baseUrl = (process.env.BASE_URL || 'https://unikmo.com').replace(/\/$/, '');
+  const previewOrigin = process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : null;
+  const baseUrl = (previewOrigin || process.env.BASE_URL || 'https://unikmo.com').replace(/\/$/, '');
 
   if (!secretConfigured) {
     return NextResponse.json({ connected: false, secretConfigured, webhookConfigured, keyMode, webhookUrl: `${baseUrl}/api/webhooks/stripe` });
