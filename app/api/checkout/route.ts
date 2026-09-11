@@ -16,7 +16,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid product or delivery type' }, { status: 400 });
     }
 
-    const origin = process.env.BASE_URL?.replace(/\/$/, '') || request.nextUrl.origin;
+    const previewOrigin = process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : null;
+    const origin = previewOrigin || process.env.BASE_URL?.replace(/\/$/, '') || request.nextUrl.origin;
     const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
       customer_creation: 'always',
