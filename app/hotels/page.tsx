@@ -172,8 +172,11 @@ export default function HotelsPage() {
 
           <div className="mx-auto mt-8 max-w-[760px]">
             <p className="text-[15px] leading-[1.65] text-[#22323A]/72 sm:text-[17px]">
-              <strong className="font-semibold text-[#22323A]">Waiting in the room when your guest arrives.</strong>{' '}
-              No pitch at check-in. If it moves them, they simply ask.
+              <strong className="font-semibold text-[#22323A]">Turn the moments your staff already notice into a keepsake your guest keeps and shares.</strong>{' '}
+              An anniversary, a proposal, a milestone stay, remembered by your property.
+            </p>
+            <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-[1.7] text-[#22323A]/58 sm:text-[14px]">
+              No new equipment. No new role. No pitch at check-in.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               <a href="#contact" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]">
@@ -182,6 +185,9 @@ export default function HotelsPage() {
               <a href="#how" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4 transition hover:text-[#22323A]">
                 See how it works
               </a>
+            </div>
+            <div className="mx-auto mt-6 flex max-w-[640px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/52">
+              <span>Guest-initiated</span><span aria-hidden="true">•</span><span>Signed consent</span><span aria-hidden="true">•</span><span>Raw footage deleted</span>
             </div>
           </div>
         </section>
