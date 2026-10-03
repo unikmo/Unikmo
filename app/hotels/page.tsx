@@ -162,29 +162,26 @@ export default function HotelsPage() {
             <h1 className="mx-auto mt-4 max-w-[860px] font-serif text-[35px] leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]">
               Your welcome note was always thoughtful. Now it can last.
             </h1>
-            <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.65] text-[#22323A]/72 sm:text-[17px]">
-              <strong className="font-semibold text-[#22323A]">Turn the moments your staff already notice into a keepsake your guest keeps and shares.</strong>{' '}
-              An anniversary, a proposal, a milestone stay, remembered by your property.
+          </div>
+
+          <div className="mx-auto mt-9 max-w-[820px] rounded-[24px] border border-[#22323A]/[0.07] bg-[radial-gradient(circle_at_50%_38%,#FFFDF9_0%,#F2E8DE_58%,#E4D6C8_100%)] p-5 shadow-[0_24px_70px_rgba(34,50,58,.09)] sm:p-8">
+            <div className="relative mx-auto aspect-[1748/1240] max-w-[680px] overflow-hidden rounded-[16px] border border-white/60 shadow-[0_24px_50px_rgba(40,30,20,.16)]">
+              <Image src="/hotels/unikmo-hotel-card.png" alt="The UNIKMO hotel card: a physical key to a private memory" fill priority className="object-cover" sizes="(max-width:900px) 86vw, 680px" />
+            </div>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-[760px]">
+            <p className="text-[15px] leading-[1.65] text-[#22323A]/72 sm:text-[17px]">
+              <strong className="font-semibold text-[#22323A]">Waiting in the room when your guest arrives.</strong>{' '}
+              No pitch at check-in. If it moves them, they simply ask.
             </p>
-            <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-[1.7] text-[#22323A]/58 sm:text-[14px]">
-              No new equipment. No new role. No pitch at check-in.
-            </p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               <a href="#contact" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]">
                 Start a partner conversation
               </a>
               <a href="#how" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4 transition hover:text-[#22323A]">
                 See how it works
               </a>
-            </div>
-            <div className="mx-auto mt-6 flex max-w-[640px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/52">
-              <span>Guest-initiated</span><span aria-hidden="true">•</span><span>Signed consent</span><span aria-hidden="true">•</span><span>Raw footage deleted</span>
-            </div>
-          </div>
-
-          <div className="mx-auto mt-9 max-w-[820px] rounded-[24px] border border-[#22323A]/[0.07] bg-[radial-gradient(circle_at_50%_38%,#FFFDF9_0%,#F2E8DE_58%,#E4D6C8_100%)] p-5 shadow-[0_24px_70px_rgba(34,50,58,.09)] sm:p-8">
-            <div className="relative mx-auto aspect-[1748/1240] max-w-[680px] overflow-hidden rounded-[16px] border border-white/60 shadow-[0_24px_50px_rgba(40,30,20,.16)]">
-              <Image src="/hotels/unikmo-hotel-card.png" alt="The UNIKMO hotel card: a physical key to a private memory" fill priority className="object-cover" sizes="(max-width:900px) 86vw, 680px" />
             </div>
           </div>
         </section>
@@ -211,8 +208,9 @@ export default function HotelsPage() {
         <section id="how" className="px-5 py-14 sm:px-8 sm:py-18 lg:py-20">
           <div className="mx-auto max-w-[1100px]">
             <div className="mx-auto max-w-[720px] text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">How it reaches the guest</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Low-pressure, guest-led, done.</h2>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The welcome</p>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">It starts with a surprise in the room.</h2>
+              <p className="mx-auto mt-4 max-w-[560px] text-[14px] leading-[1.7] text-[#22323A]/64">The card does the explaining. Interest turns into a request, with no pitch from your team.</p>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-3">
               {steps.map((step, index) => (
