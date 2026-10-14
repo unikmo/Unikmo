@@ -35,6 +35,30 @@ const steps = [
   },
 ];
 
+const offers = [
+  {
+    eyebrow: 'For your guest experience',
+    title: 'Your hotel. Your card.',
+    body: 'A hotel-branded or co-branded UNIKMO, given as part of the stay: a welcome or VIP amenity, an anniversary or honeymoon package, a proposal package, a loyalty gift. Your team activates the key; the guest adds their own photos, video and messages.',
+    figure: 'From around $4–5 per card',
+    note: 'Depending on configuration and volume. The card is yours to use as you see fit.',
+  },
+  {
+    eyebrow: 'For guests who want more',
+    title: 'Sell UNIKMO from the property.',
+    body: 'Hold stock and offer standard UNIKMO cards, Curated UNIKMO and the Times Square experience at normal UNIKMO prices. One published price everywhere, so there is nothing to negotiate and nothing to discount.',
+    figure: 'Your hotel earns 20%',
+    note: 'A $24 Single sold at reception earns you $4.80. The same 20% applies to Curated and Times Square orders.',
+  },
+  {
+    eyebrow: 'Already offer photography?',
+    title: 'Your photographer, your revenue.',
+    body: 'Images from your own photographer can become part of the guest’s UNIKMO. Photography stays entirely your service: you set the price and keep all of it. UNIKMO does not process it.',
+    figure: 'You keep 100%',
+    note: 'An optional layer on top of either offer, never a requirement.',
+  },
+];
+
 const trust = [
   {
     label: 'Guest-initiated, always',
@@ -88,7 +112,7 @@ const faqs = [
   {
     question: 'What does it cost?',
     answer:
-      'Pricing is worked out directly with each property, depending on volume and how the keepsake is offered to guests. Reach out and we will walk through it.',
+      'Hotel-branded or co-branded cards start from around $4–5 each, depending on configuration and volume, and you decide how to use them. Standard UNIKMO cards and services sold from your property are at the normal published prices, and your hotel earns 20% of each sale. Photography you offer is yours to price and keep.',
   },
 ];
 
@@ -226,6 +250,30 @@ export default function HotelsPage() {
                   </div>
                   <h3 className="font-serif text-[24px] leading-[1.08]">{step.title}</h3>
                   <p className="mt-3 text-[13px] leading-[1.65] text-[#22323A]/64">{step.copy}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
+          <div className="mx-auto max-w-[1100px]">
+            <div className="mx-auto max-w-[720px] text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">How hotels work with UNIKMO</p>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Offer it as a gift. Sell it as a service.</h2>
+              <p className="mx-auto mt-4 max-w-[560px] text-[14px] leading-[1.7] text-[#22323A]/64">Use one, or all three. Each is simple, and none needs a new role at your property.</p>
+            </div>
+            <div className="mt-9 grid gap-5 md:grid-cols-3">
+              {offers.map((offer) => (
+                <article key={offer.title} className="flex flex-col rounded-[18px] border border-[#22323A]/[0.07] bg-[#FCF9F4] p-6 shadow-[0_8px_26px_rgba(34,50,58,.04)]">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">{offer.eyebrow}</p>
+                  <h3 className="mt-3 font-serif text-[26px] leading-[1.08]">{offer.title}</h3>
+                  <p className="mt-3 text-[13px] leading-[1.7] text-[#22323A]/66">{offer.body}</p>
+                  <div className="mt-auto pt-6">
+                    <span className="mb-3 block h-[3px] w-9 rounded-full bg-[#4B6A66]/55" aria-hidden="true" />
+                    <p className="font-serif text-[22px] leading-[1.1]">{offer.figure}</p>
+                    <p className="mt-2 text-[12px] leading-[1.6] text-[#22323A]/55">{offer.note}</p>
+                  </div>
                 </article>
               ))}
             </div>
