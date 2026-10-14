@@ -5,20 +5,14 @@ const offerings = [
   {
     eyebrow: 'Keep It',
     title: 'Curated Memory',
-    price: '$199',
+    price: '$250',
     copy: 'We professionally assemble the photos, videos and messages you choose into one finished UNIKMO.',
   },
   {
     eyebrow: 'Show It',
     title: 'Times Square Edition',
-    price: '$399',
+    price: '$449',
     copy: 'We curate it, show it in Times Square, capture the moment and preserve the experience inside your UNIKMO.',
-  },
-  {
-    eyebrow: 'Share It',
-    title: 'Extra Keepsakes',
-    price: '$12 each',
-    copy: 'Give the same finished memory to everyone who was part of it — added at checkout.',
   },
 ] as const;
 
@@ -69,8 +63,11 @@ export default function CuratedUnikmoTeaser() {
               Send us the photos, videos and messages. We&rsquo;ll curate the story, handle the
               optional Times Square experience, and deliver your finished UNIKMO.
             </p>
+            <p className="mt-4 max-w-[540px] font-serif text-[20px] leading-[1.35] text-[#22323A]">
+              Some moments stay between two people. Some deserve the whole city. UNIKMO lets you keep either one.
+            </p>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {offerings.map((offering) => (
                 <article
                   key={offering.eyebrow}
@@ -95,6 +92,11 @@ export default function CuratedUnikmoTeaser() {
                   <p className="mt-2 text-[11px] leading-[1.6] text-[#22323A]/58">{offering.copy}</p>
                 </article>
               ))}
+            </div>
+
+            <div className="mt-3 flex items-center justify-between gap-5 rounded-[16px] border border-[#B38846]/25 bg-white/45 p-5">
+              <div><p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#B38846]">Share it further</p><h3 className="mt-1 font-serif text-[18px]">Extra Keepsakes</h3><p className="mt-1 text-[11px] leading-[1.6] text-[#22323A]/58">Add physical copies of the same finished memory for family, friends, colleagues or employees.</p></div>
+              <p className="shrink-0 font-serif text-[18px] text-[#22323A]">$12 each</p>
             </div>
 
             <div className="mt-7 flex flex-wrap items-center gap-5">
