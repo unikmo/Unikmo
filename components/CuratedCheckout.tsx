@@ -105,10 +105,10 @@ export default function CuratedCheckout() {
 
       <fieldset className="mt-7 border-t border-[#22323A]/[0.08] pt-6">
         <legend className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
-          3. Add extra keepsake cards
+          3. Share it further
         </legend>
         <p className="mt-1 text-[11px] leading-[1.6] text-[#22323A]/52">
-          Same finished curated memory. ${EXTRA_PRICE} per additional physical card.
+          Add physical copies of the same finished curated memory. ${EXTRA_PRICE} per additional card.
         </p>
         <div className="mt-4 flex items-center gap-4">
           <div className="flex items-center rounded-[12px] border border-[#22323A]/[0.14] bg-[#FCF9F4]">
