@@ -29,7 +29,7 @@ export const CURATED_PRODUCTS = {
     key: 'SHOW_IT',
     label: 'Show It — Times Square Edition',
     productId: '16567462461785',
-    price: 449,
+    price: 450,
     variants: {
       physical: { id: '59289397395801', label: 'Physical UNIKMO card' },
       digital: { id: '59289397428569', label: 'Digital delivery' },
