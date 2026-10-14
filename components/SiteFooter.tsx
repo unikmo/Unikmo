@@ -5,6 +5,7 @@ import { COMPANY } from '@/lib/company';
 const nav = [
   { label: 'How it works', href: '/how-unikmo-works' },
   { label: 'Curated UNIKMO', href: '/curated' },
+  { label: 'For hotels', href: '/hotels' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ];

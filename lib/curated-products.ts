@@ -19,7 +19,7 @@ export const CURATED_PRODUCTS = {
     key: 'KEEP_IT',
     label: 'Keep It — Curated',
     productId: '16567461937497',
-    price: 250,
+    price: 199,
     variants: {
       physical: { id: '59289396805977', label: 'Physical UNIKMO card' },
       digital: { id: '59289396838745', label: 'Digital delivery' },
@@ -29,7 +29,7 @@ export const CURATED_PRODUCTS = {
     key: 'SHOW_IT',
     label: 'Show It — Times Square Edition',
     productId: '16567462461785',
-    price: 450,
+    price: 399,
     variants: {
       physical: { id: '59289397395801', label: 'Physical UNIKMO card' },
       digital: { id: '59289397428569', label: 'Digital delivery' },
