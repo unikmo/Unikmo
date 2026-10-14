@@ -5,14 +5,15 @@ import SiteFooter from '@/components/SiteFooter';
 import { COMPANY } from '@/lib/company';
 
 export const metadata: Metadata = {
-  title: 'UNIKMO for Hotels | A Keepsake Service for Boutique Properties',
+  title: 'UNIKMO for Hotels | Guest Keepsakes, Retail & Premium Upsells',
   description:
-    'Replace the welcome note with a shareable, consent-first keepsake. UNIKMO turns the moments your staff already notice into something guests post, keep, and remember your property by.',
+    'Hotel-branded keepsake cards, standard UNIKMO retail and premium memory services for hotels and resorts. Keep photography with the hotel and earn 20% on UNIKMO retail and premium upgrades.',
   alternates: { canonical: 'https://www.unikmo.com/hotels' },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'UNIKMO for Hotels',
-    description: 'A keepsake service for boutique and luxury properties, built to ask almost nothing of your team.',
+    description:
+      'A guest-memory model with hotel or co-branded cards, standard UNIKMO retail, optional curation and Times Square upgrades.',
     url: 'https://www.unikmo.com/hotels',
     siteName: 'UNIKMO',
     images: ['https://www.unikmo.com/og-image.jpg'],
@@ -20,86 +21,49 @@ export const metadata: Metadata = {
   },
 };
 
-const steps = [
-  {
-    title: 'The card is waiting',
-    copy: 'A UNIKMO card is in the room at arrival, with one line inviting the guest to ask reception if they would like moments of their stay captured. Nothing is said at check-in.',
-  },
-  {
-    title: 'The guest asks',
-    copy: 'If they want it, they dial reception or stop by and sign a short consent form. The request is the consent, and it is on the record.',
-  },
-  {
-    title: 'A keepsake to take home',
-    copy: 'The finished piece is handed over at checkout as a gift, something to remember the stay by, carrying your property’s name wherever it is shared.',
-  },
-];
-
-const trust = [
-  {
-    label: 'Guest-initiated, always',
-    body: 'Nothing is captured unless the guest asks and signs the form at reception. No roaming capture of guests who never opted in.',
-  },
-  {
-    label: 'Visible, never covert',
-    body: 'Guests always know a camera is present. Unobtrusive is not the same as hidden, and we do not do hidden.',
-  },
-  {
-    label: 'Raw footage deleted',
-    body: 'Source photos and video are removed the moment the finished keepsake is assembled. Nothing sits on a server afterward.',
-  },
-  {
-    label: 'A seven-day window',
-    body: 'Guests can request prints or extra copies from the finished keepsake, for a fee, for seven days. Then nothing further is produced.',
-  },
-];
-
-const asks = [
-  {
-    label: 'Reception',
-    body: 'Takes the consent form when a guest asks and lets whoever captures the moment know. That is the entire new task.',
-  },
-  {
-    label: 'Capture',
-    body: 'Your own staff, or the freelance photographer many boutique properties already use for portraits and proposals. UNIKMO does not supply or manage this.',
-  },
-  {
-    label: 'Everything else',
-    body: 'UNIKMO supplies the card and the curation behind it, the part that turns footage into a finished keepsake.',
-  },
+const hotelSeoLinks = [
+  ['Hotel guest experience', '/hotel-guest-experience'],
+  ['Luxury hotel amenities', '/luxury-hotel-amenities'],
+  ['Boutique hotel amenities', '/boutique-hotel-amenities'],
+  ['Hotel guest gifts', '/hotel-guest-gifts'],
+  ['Hotel upselling ideas', '/hotel-upselling-ideas'],
+  ['Hotel anniversary packages', '/hotel-anniversary-packages'],
+  ['Hotel proposal packages', '/hotel-proposal-packages'],
+  ['Hotel ancillary revenue', '/hotel-ancillary-revenue'],
 ];
 
 const faqs = [
   {
-    question: 'What does this ask of our staff?',
+    question: 'What is the difference between hotel cards and standard UNIKMO cards?',
     answer:
-      'Reception takes a signed consent form when a guest requests it and lets whoever captures the moment know. Capture itself is done by your own staff, or by a photographer your property already works with. There is no new equipment, booking system, or role to fill.',
+      'Hotel or co-branded cards are a separate B2B product bought by the property for its own guest-experience use. Standard UNIKMO cards remain UNIKMO retail products; hotels can sell them at official UNIKMO prices and earn a 20% commission.',
   },
   {
-    question: 'What happens to the photos and video?',
+    question: 'What does a hotel or co-branded card cost?',
     answer:
-      'Raw footage is used only to assemble the finished keepsake, then deleted immediately. Guests have a seven-day window afterward to request prints or extra copies from the finished piece, for a fee. Nothing is retained beyond that.',
+      'The current partner model is approximately $4–5 per hotel or co-branded card, with final pricing depending on configuration and volume.',
   },
   {
-    question: 'Does this put UNIKMO staff on our property?',
+    question: 'Does UNIKMO arrange photographers?',
     answer:
-      'No. UNIKMO supplies the card and the curation pipeline that assembles submitted footage into a finished memory. Consent, capture, and the guest-facing moment all stay with your property.',
+      'No. Photography is the hotel’s own optional service. The hotel arranges it, sets the price and receives the guest payment. UNIKMO does not take a share of hotel photography revenue.',
   },
   {
-    question: 'What does it cost?',
+    question: 'What if the guest only wants to use their own photos?',
     answer:
-      'Pricing is worked out directly with each property, depending on volume and how the keepsake is offered to guests. Reach out and we will walk through it.',
+      'That is the default low-friction path. The guest can create the UNIKMO memory from their own photos, videos and messages without a hotel photography workflow.',
+  },
+  {
+    question: 'What can the hotel earn on UNIKMO services?',
+    answer:
+      'The current model is a 20% hotel commission on standard UNIKMO retail and on UNIKMO premium services sold through or attributed to the property. At current pricing, Curated is $250 and Show It — Times Square is $450.',
+  },
+  {
+    question: 'Can hotel staff generate keys for cards they issue?',
+    answer:
+      'Yes. The hotel partner model includes access for generating the UNIKMO keys needed for hotel or co-branded cards issued by the property.',
   },
 ];
-
-function KeyMark() {
-  return (
-    <svg viewBox="0 0 32 52" className="h-8 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-      <circle cx="16" cy="10" r="6" />
-      <path d="M16 16v27m0-17h7m-7 8h5m-5 9h5" />
-    </svg>
-  );
-}
 
 export default function HotelsPage() {
   const pageSchema = {
@@ -108,7 +72,8 @@ export default function HotelsPage() {
     '@id': 'https://www.unikmo.com/hotels#webpage',
     url: 'https://www.unikmo.com/hotels',
     name: 'UNIKMO for Hotels',
-    description: 'A keepsake service for boutique and luxury properties, built on UNIKMO’s existing curated-memory pipeline.',
+    description:
+      'A hotel guest-memory model with branded keepsake cards, UNIKMO retail, premium curation and Times Square upgrades.',
     isPartOf: { '@id': 'https://www.unikmo.com/#website' },
     about: { '@id': 'https://www.unikmo.com/#brand' },
     inLanguage: 'en',
@@ -146,10 +111,10 @@ export default function HotelsPage() {
             <Image src="/unikmo-logo-header.png" alt="UNIKMO — The Key to Your Memory" width={729} height={220} priority className="h-8 w-auto sm:h-9" />
           </Link>
           <nav className="ml-auto hidden items-center gap-7 text-[11px] text-[#22323A]/65 md:flex">
-            <Link href="/how-unikmo-works" className="transition-colors hover:text-[#B38846]">How it works</Link>
-            <Link href="/curated" className="transition-colors hover:text-[#B38846]">Curated UNIKMO</Link>
+            <Link href="/hotel-guest-experience" className="transition-colors hover:text-[#B38846]">Guest experience</Link>
+            <Link href="/hotel-upselling-ideas" className="transition-colors hover:text-[#B38846]">Revenue model</Link>
           </nav>
-          <a href="#contact" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white shadow-[0_8px_25px_rgba(179,136,70,.16)] transition-colors hover:bg-[#9F783D] md:ml-8">
+          <a href="#contact" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9F783D] md:ml-8">
             Partner with us
           </a>
         </div>
@@ -157,110 +122,71 @@ export default function HotelsPage() {
 
       <main>
         <section className="px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
-          <div className="mx-auto max-w-[900px]">
+          <div className="mx-auto max-w-[920px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">UNIKMO for Hotels</p>
-            <h1 className="mx-auto mt-4 max-w-[860px] font-serif text-[35px] leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]">
-              Your welcome note was always thoughtful. Now it can last.
+            <h1 className="mx-auto mt-4 max-w-[880px] font-serif text-[37px] leading-[1.04] tracking-[-0.025em] sm:text-[48px] lg:text-[58px]">
+              Make the memory part of the stay.
             </h1>
+            <p className="mx-auto mt-5 max-w-[780px] text-[15px] leading-[1.7] text-[#22323A]/68 sm:text-[17px]">
+              Hotel-branded keepsake cards for your own guest experience. Standard UNIKMO retail when guests want more. Curated and Times Square when the moment deserves another level.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <a href="#contact" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Discuss a partnership</a>
+              <a href="#model" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4">See the model</a>
+            </div>
           </div>
 
-          <div className="mx-auto mt-9 max-w-[820px] rounded-[24px] border border-[#22323A]/[0.07] bg-[radial-gradient(circle_at_50%_38%,#FFFDF9_0%,#F2E8DE_58%,#E4D6C8_100%)] p-5 shadow-[0_24px_70px_rgba(34,50,58,.09)] sm:p-8">
-            <div className="relative mx-auto aspect-[1748/1240] max-w-[680px] overflow-hidden rounded-[16px] border border-white/60 shadow-[0_24px_50px_rgba(40,30,20,.16)]">
-              <Image src="/hotels/unikmo-hotel-card.png" alt="The UNIKMO hotel card: a physical key to a private memory" fill priority className="object-cover" sizes="(max-width:900px) 86vw, 680px" />
+          <div className="mx-auto mt-9 max-w-[860px] rounded-[24px] border border-[#22323A]/[0.07] bg-[radial-gradient(circle_at_50%_38%,#FFFDF9_0%,#F2E8DE_58%,#E4D6C8_100%)] p-5 shadow-[0_24px_70px_rgba(34,50,58,.09)] sm:p-8">
+            <div className="relative mx-auto aspect-[1748/1240] max-w-[700px] overflow-hidden rounded-[16px] border border-white/60 shadow-[0_24px_50px_rgba(40,30,20,.16)]">
+              <Image src="/hotels/unikmo-hotel-card.png" alt="UNIKMO hotel keepsake card" fill priority className="object-cover" sizes="(max-width:900px) 86vw, 700px" />
             </div>
           </div>
 
-          <div className="mx-auto mt-8 max-w-[760px]">
-            <p className="text-[15px] leading-[1.65] text-[#22323A]/72 sm:text-[17px]">
-              <strong className="font-semibold text-[#22323A]">Turn the moments your staff already notice into a keepsake your guest keeps and shares.</strong>{' '}
-              An anniversary, a proposal, a milestone stay, remembered by your property.
-            </p>
-            <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-[1.7] text-[#22323A]/58 sm:text-[14px]">
-              No new equipment. No new role. No pitch at check-in.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <a href="#contact" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]">
-                Start a partner conversation
-              </a>
-              <a href="#how" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4 transition hover:text-[#22323A]">
-                See how it works
-              </a>
-            </div>
-            <div className="mx-auto mt-6 flex max-w-[640px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/52">
-              <span>Guest-initiated</span><span aria-hidden="true">•</span><span>Signed consent</span><span aria-hidden="true">•</span><span>Raw footage deleted</span>
-            </div>
+          <div className="mx-auto mt-7 flex max-w-[760px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/52">
+            <span>Hotel cards from approx. $4–5</span><span aria-hidden="true">•</span><span>20% on UNIKMO retail</span><span aria-hidden="true">•</span><span>Photography stays your service</span>
           </div>
         </section>
 
-        <section className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
-          <div className="mx-auto grid max-w-[1040px] gap-9 lg:grid-cols-2 lg:gap-16">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The moment</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">A note is thoughtful once. Then it is gone.</h2>
-            </div>
-            <div className="self-end text-[15px] leading-[1.75] text-[#22323A]/68">
-              <p>
-                A note on the pillow, a bottle, a handwritten card. It is read once and thrown away: one voice, nothing from the
-                people who matter to the guest, no life after checkout.
-              </p>
-              <p className="mt-4">
-                UNIKMO replaces it with a keepsake. Real footage from the stay, assembled into one finished piece the guest can{' '}
-                <strong className="font-semibold text-[#22323A]">post, or keep, for good.</strong>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section id="how" className="px-5 py-14 sm:px-8 sm:py-18 lg:py-20">
+        <section id="model" className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[1100px]">
-            <div className="mx-auto max-w-[720px] text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The welcome</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">It starts with a surprise in the room.</h2>
-              <p className="mx-auto mt-4 max-w-[560px] text-[14px] leading-[1.7] text-[#22323A]/64">The card does the explaining. Interest turns into a request, with no pitch from your team.</p>
+            <div className="mx-auto max-w-[760px] text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Two card channels</p>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Your hotel card and UNIKMO retail are not the same product.</h2>
             </div>
-            <div className="mt-9 grid gap-5 md:grid-cols-3">
-              {steps.map((step, index) => (
-                <article key={step.title} className="rounded-[18px] border border-[#22323A]/[0.07] bg-[#FCF9F4] p-6 text-center shadow-[0_8px_26px_rgba(34,50,58,.04)]">
-                  <div className="mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-full border border-[#4B6A66]/35 bg-[#E8EFEC] text-[#3F5E5A]">
-                    {index === 1 ? <KeyMark /> : <span className="font-serif text-[21px]">{index === 0 ? 1 : 3}</span>}
-                  </div>
-                  <h3 className="font-serif text-[24px] leading-[1.08]">{step.title}</h3>
-                  <p className="mt-3 text-[13px] leading-[1.65] text-[#22323A]/64">{step.copy}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
-          <div className="mx-auto grid max-w-[1080px] items-center gap-9 lg:grid-cols-2 lg:gap-14">
-            <div className="relative aspect-[3/2] overflow-hidden rounded-[22px] border border-white/60 bg-[#F2E9DF] shadow-[0_18px_44px_rgba(40,30,20,.12)]">
-              <Image src="/story/she-opens.png" alt="A guest unlocking a private UNIKMO memory" fill className="object-cover" sizes="(max-width:1024px) 100vw, 520px" />
-            </div>
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Capture, done right</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Real moments, not posed ones.</h2>
-              <p className="mt-4 max-w-[520px] text-[14px] leading-[1.75] text-[#22323A]/66 sm:text-[15px]">
-                A visible camera and an unobtrusive photographer who stays back and never says &ldquo;smile.&rdquo; Never a hidden or
-                disguised one. The guest knows a camera is nearby, because they asked for it. They are simply not
-                posing for it.
-              </p>
+            <div className="mt-9 grid gap-5 md:grid-cols-2">
+              <article className="rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-7">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">1 · Hotel / co-branded cards</p>
+                <h3 className="mt-3 font-serif text-[28px]">A guest-experience card owned by the property.</h3>
+                <p className="mt-4 text-[13px] leading-[1.7] text-[#22323A]/64">Hotels buy these cards at approximately $4–5 each, depending on final configuration and volume. Use them as a welcome amenity, VIP gift, proposal-package inclusion, anniversary keepsake or another property-led experience.</p>
+                <p className="mt-4 text-[13px] leading-[1.7] text-[#22323A]/64">Hotel partners receive access to generate the UNIKMO keys for the cards they issue.</p>
+              </article>
+              <article className="rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-7">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">2 · Standard UNIKMO retail</p>
+                <h3 className="mt-3 font-serif text-[28px]">A retail product the guest can buy from you.</h3>
+                <p className="mt-4 text-[13px] leading-[1.7] text-[#22323A]/64">The hotel does not buy standard UNIKMO cards as wholesale inventory. It sells them at UNIKMO’s published retail prices and receives a 20% commission on attributed sales.</p>
+                <p className="mt-4 text-[13px] leading-[1.7] text-[#22323A]/64">This keeps the retail offer and pricing consistent across the hotel and direct UNIKMO channels.</p>
+              </article>
             </div>
           </div>
         </section>
 
         <section className="px-5 py-14 sm:px-8 sm:py-18 lg:py-20">
           <div className="mx-auto max-w-[1100px]">
-            <div className="mx-auto max-w-[720px] text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Trust, by design</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Protecting your guests and your name.</h2>
+            <div className="mx-auto max-w-[760px] text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The guest flow</p>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Seamless when they use their own moments. Optional when they want more.</h2>
             </div>
-            <div className="mt-9 grid gap-5 md:grid-cols-2">
-              {trust.map((item) => (
-                <article key={item.label} className="rounded-[18px] border border-[#22323A]/[0.08] bg-white/55 p-6">
-                  <span className="mb-4 block h-[3px] w-9 rounded-full bg-[#4B6A66]/55" aria-hidden="true" />
-                  <h3 className="font-serif text-[24px] leading-[1.08]">{item.label}</h3>
-                  <p className="mt-3 text-[13px] leading-[1.65] text-[#22323A]/64">{item.body}</p>
+            <div className="mt-9 grid gap-5 md:grid-cols-4">
+              {[
+                ['01', 'Discover', 'The guest receives or sees an UNIKMO card during the stay.'],
+                ['02', 'Create', 'They use their own photos, videos and messages in the normal UNIKMO flow.'],
+                ['03', 'Upgrade', 'They can add standard UNIKMO retail, Curated or Show It through the property.'],
+                ['04', 'Photography', 'If they want hotel photography, the hotel arranges, prices and sells that service directly.'],
+              ].map(([number, title, copy]) => (
+                <article key={number} className="rounded-[18px] border border-[#22323A]/[0.08] bg-white/55 p-6 text-center">
+                  <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-[#B38846]/40 text-[10px] font-semibold text-[#B38846]">{number}</div>
+                  <h3 className="mt-4 font-serif text-[23px]">{title}</h3>
+                  <p className="mt-3 text-[12px] leading-[1.65] text-[#22323A]/62">{copy}</p>
                 </article>
               ))}
             </div>
@@ -268,17 +194,59 @@ export default function HotelsPage() {
         </section>
 
         <section className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
+          <div className="mx-auto max-w-[1080px]">
+            <div className="mx-auto max-w-[760px] text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Revenue model</p>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">The hotel keeps its own services. UNIKMO pays commission on ours.</h2>
+            </div>
+            <div className="mt-9 overflow-hidden rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4]">
+              {[
+                ['Hotel / co-branded card', 'Approx. $4–5 each', 'Purchased by the property for its own guest-experience use.'],
+                ['Standard UNIKMO retail', '20% hotel commission', 'Sold at UNIKMO’s published retail price.'],
+                ['Curated UNIKMO', '$250 · $50 hotel commission', 'UNIKMO curates the guest’s selected photos, videos and messages.'],
+                ['Show It — Times Square', '$450 · $90 hotel commission', 'UNIKMO delivers the Times Square experience and finished memory.'],
+                ['Hotel photography', 'Hotel keeps the revenue', 'The hotel arranges the photographer, sets the price and receives guest payment directly.'],
+              ].map(([label, value, copy], index) => (
+                <div key={label} className={'grid gap-3 p-6 md:grid-cols-[240px_250px_1fr] md:items-start ' + (index ? 'border-t border-[#22323A]/[0.08]' : '')}>
+                  <h3 className="font-serif text-[20px]">{label}</h3>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#B38846]">{value}</p>
+                  <p className="text-[13px] leading-[1.65] text-[#22323A]/64">{copy}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-5 py-14 sm:px-8 sm:py-18 lg:py-20">
           <div className="mx-auto max-w-[1100px]">
-            <div className="mx-auto max-w-[720px] text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">What this asks of your property</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Almost nothing changes about how you work.</h2>
+            <div className="mx-auto max-w-[760px] text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Where it fits</p>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Use UNIKMO where the stay already means something.</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-3">
-              {asks.map((item) => (
-                <article key={item.label} className="rounded-[18px] border border-[#22323A]/[0.07] bg-[#FCF9F4] p-6 shadow-[0_8px_26px_rgba(34,50,58,.04)]">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">{item.label}</p>
-                  <p className="mt-3 text-[13px] leading-[1.7] text-[#22323A]/66">{item.body}</p>
+              {[
+                ['Proposal packages', 'The hotel creates the setting and keeps photography as its own optional service. UNIKMO provides the keepsake layer.'],
+                ['Anniversaries & honeymoons', 'Include a hotel-branded card in the stay, then let the guest decide whether to use their own content or upgrade.'],
+                ['VIP & milestone stays', 'Give selected guests a co-branded keepsake and keep standard UNIKMO retail available when they want additional cards.'],
+              ].map(([title, copy]) => (
+                <article key={title} className="rounded-[18px] border border-[#22323A]/[0.08] bg-white/55 p-6">
+                  <h3 className="font-serif text-[24px] leading-[1.08]">{title}</h3>
+                  <p className="mt-3 text-[13px] leading-[1.65] text-[#22323A]/64">{copy}</p>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
+          <div className="mx-auto max-w-[980px] text-center">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Explore the hotel opportunity</p>
+            <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Built for search. Built around the actual operating model.</h2>
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
+              {hotelSeoLinks.map(([label, href]) => (
+                <Link key={href} href={href} className="rounded-full border border-[#22323A]/[0.10] bg-white/55 px-4 py-2 text-[11px] text-[#22323A]/65 transition hover:border-[#B38846]/40 hover:text-[#B38846]">
+                  {label}
+                </Link>
               ))}
             </div>
           </div>
@@ -288,7 +256,7 @@ export default function HotelsPage() {
           <div className="mx-auto max-w-[920px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Questions</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Before you reach out.</h2>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">How the hotel model works.</h2>
             </div>
             <div className="mt-8 divide-y divide-[#22323A]/[0.08] border-y border-[#22323A]/[0.08]">
               {faqs.map((faq) => (
@@ -306,18 +274,17 @@ export default function HotelsPage() {
 
         <section id="contact" className="border-t border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 text-center sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[880px]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Let’s talk</p>
-            <h2 className="mx-auto mt-3 max-w-[680px] font-serif text-[32px] leading-[1.05] sm:text-[40px]">Give your guests something that lasts.</h2>
-            <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-[#22323A]/62">
-              We are starting with a small number of boutique properties. Reach out and we will walk through what a pilot would look like for yours.
+            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Hotel partnerships</p>
+            <h2 className="mx-auto mt-3 max-w-[700px] font-serif text-[32px] leading-[1.05] sm:text-[40px]">Start with the guest experience you already have.</h2>
+            <p className="mx-auto mt-4 max-w-[640px] text-[14px] leading-[1.7] text-[#22323A]/62">
+              We can structure hotel-card inventory, standard UNIKMO retail and premium upgrades around the property’s existing packages and services.
             </p>
             <a
-              href={`mailto:${COMPANY.email}`}
-              className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]"
+              href={'mailto:' + COMPANY.email}
+              className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition hover:bg-[#9F783D]"
             >
               {COMPANY.email}
             </a>
-            <p className="mt-5 text-[11px] leading-[1.6] text-[#22323A]/45">UNIKMO is a project of {COMPANY.legalName}.</p>
           </div>
         </section>
       </main>
