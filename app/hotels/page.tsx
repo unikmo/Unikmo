@@ -7,12 +7,12 @@ import { COMPANY } from '@/lib/company';
 export const metadata: Metadata = {
   title: 'UNIKMO for Hotels | A Keepsake Service for Boutique Properties',
   description:
-    'Replace the welcome note with a shareable, consent-first keepsake. UNIKMO turns the moments your staff already notice into something guests post, keep, and remember your property by.',
+    'Give guests a hotel-branded keepsake that outlasts the welcome note. Co-branded UNIKMO cards for your guest experience, and 20% on every UNIKMO sold from your property.',
   alternates: { canonical: 'https://www.unikmo.com/hotels' },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'UNIKMO for Hotels',
-    description: 'A keepsake service for boutique and luxury properties, built to ask almost nothing of your team.',
+    description: 'Hotel-branded keepsake cards for boutique and luxury properties, with 20% on every UNIKMO sold from your property.',
     url: 'https://www.unikmo.com/hotels',
     siteName: 'UNIKMO',
     images: ['https://www.unikmo.com/og-image.jpg'],
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
 const steps = [
   {
     title: 'The card is waiting',
-    copy: 'A UNIKMO card is in the room at arrival, with one line inviting the guest to ask reception if they would like moments of their stay captured. Nothing is said at check-in.',
+    copy: 'A UNIKMO card, in your branding, is in the room at arrival. It explains itself. Nothing is said at check-in and nothing is sold.',
   },
   {
-    title: 'The guest asks',
-    copy: 'If they want it, they dial reception or stop by and sign a short consent form. The request is the consent, and it is on the record.',
+    title: 'The guest makes it theirs',
+    copy: 'Your team activates the key. The guest adds their own photos, video and messages, and the memory is theirs to open, keep and share.',
   },
   {
-    title: 'A keepsake to take home',
-    copy: 'The finished piece is handed over at checkout as a gift, something to remember the stay by, carrying your property’s name wherever it is shared.',
+    title: 'Remembered, with your name on it',
+    copy: 'The keepsake travels home with your property’s name on it. Guests who want more can ask at reception for more cards or a curated memory.',
   },
 ];
 
@@ -61,35 +61,35 @@ const offers = [
 
 const trust = [
   {
-    label: 'Guest-initiated, always',
-    body: 'Nothing is captured unless the guest asks and signs the form at reception. No roaming capture of guests who never opted in.',
+    label: 'Private by default',
+    body: 'Each UNIKMO opens only with its own key. The guest decides who they share it with, so nothing about their stay becomes public by accident.',
   },
   {
-    label: 'Visible, never covert',
-    body: 'Guests always know a camera is present. Unobtrusive is not the same as hidden, and we do not do hidden.',
+    label: 'Owned by the guest',
+    body: 'The memory belongs to the person who made it. Your property is part of the story, never a gatekeeper of it.',
   },
   {
-    label: 'Raw footage deleted',
-    body: 'Source photos and video are removed the moment the finished keepsake is assembled. Nothing sits on a server afterward.',
+    label: 'Consent stays with you',
+    body: 'UNIKMO does not capture anything on your property. Any photography you offer runs under your own consent process, and you decide what it covers.',
   },
   {
-    label: 'A seven-day window',
-    body: 'Guests can request prints or extra copies from the finished keepsake, for a fee, for seven days. Then nothing further is produced.',
+    label: 'One published price',
+    body: 'Guests pay the same UNIKMO prices everywhere. There is nothing to discount and no awkward comparison for your front desk to explain.',
   },
 ];
 
 const asks = [
   {
     label: 'Reception',
-    body: 'Takes the consent form when a guest asks and lets whoever captures the moment know. That is the entire new task.',
+    body: 'Activates keys for hotel-branded cards and, if you choose to sell, hands over stock at the published price. That is the entire new task.',
   },
   {
-    label: 'Capture',
-    body: 'Your own staff, or the freelance photographer many boutique properties already use for portraits and proposals. UNIKMO does not supply or manage this.',
+    label: 'Photography',
+    body: 'Entirely optional. If you already have a photographer, their images can be added to a guest’s UNIKMO. You set the price and keep the revenue.',
   },
   {
     label: 'Everything else',
-    body: 'UNIKMO supplies the card and the curation behind it, the part that turns footage into a finished keepsake.',
+    body: 'UNIKMO supplies the cards, the platform and the curation behind it, so your team never has to build or run anything.',
   },
 ];
 
@@ -97,17 +97,27 @@ const faqs = [
   {
     question: 'What does this ask of our staff?',
     answer:
-      'Reception takes a signed consent form when a guest requests it and lets whoever captures the moment know. Capture itself is done by your own staff, or by a photographer your property already works with. There is no new equipment, booking system, or role to fill.',
+      'Reception activates the key for any hotel-branded card and, if you sell UNIKMO from the property, hands over stock at the published price. There is no new equipment, booking system, or role to fill.',
   },
   {
-    question: 'What happens to the photos and video?',
+    question: 'Can the cards carry our branding?',
     answer:
-      'Raw footage is used only to assemble the finished keepsake, then deleted immediately. Guests have a seven-day window afterward to request prints or extra copies from the finished piece, for a fee. Nothing is retained beyond that.',
+      'Yes. Cards can be hotel-branded or co-branded with UNIKMO, and the hotel decides how to use them: a welcome or VIP amenity, an anniversary or honeymoon package, a proposal package, a loyalty gift, or part of another package.',
+  },
+  {
+    question: 'How does the 20% work?',
+    answer:
+      'Standard UNIKMO cards, Curated UNIKMO and the Times Square experience are sold at the published UNIKMO price, which the hotel does not change. When a guest buys through your property, your hotel earns 20% of the sale. For example, a $24 Single earns $4.80.',
+  },
+  {
+    question: 'Who handles photography and consent?',
+    answer:
+      'You do, if you offer photography. It is your service and your revenue, and it runs under your own consent process. UNIKMO does not capture anything on your property and does not process photography payments. Images you provide can become part of a guest’s UNIKMO.',
   },
   {
     question: 'Does this put UNIKMO staff on our property?',
     answer:
-      'No. UNIKMO supplies the card and the curation pipeline that assembles submitted footage into a finished memory. Consent, capture, and the guest-facing moment all stay with your property.',
+      'No. UNIKMO supplies the cards, the platform and the curation behind it. The guest-facing moment stays with your property.',
   },
   {
     question: 'What does it cost?',
@@ -132,7 +142,7 @@ export default function HotelsPage() {
     '@id': 'https://www.unikmo.com/hotels#webpage',
     url: 'https://www.unikmo.com/hotels',
     name: 'UNIKMO for Hotels',
-    description: 'A keepsake service for boutique and luxury properties, built on UNIKMO’s existing curated-memory pipeline.',
+    description: 'Hotel-branded keepsake cards for boutique and luxury properties, built on UNIKMO’s existing memory platform.',
     isPartOf: { '@id': 'https://www.unikmo.com/#website' },
     about: { '@id': 'https://www.unikmo.com/#brand' },
     inLanguage: 'en',
@@ -196,7 +206,7 @@ export default function HotelsPage() {
 
           <div className="mx-auto mt-8 max-w-[760px]">
             <p className="text-[15px] leading-[1.65] text-[#22323A]/72 sm:text-[17px]">
-              <strong className="font-semibold text-[#22323A]">Turn the moments your staff already notice into a keepsake your guest keeps and shares.</strong>{' '}
+              <strong className="font-semibold text-[#22323A]">Give guests a keepsake with your name on it, that they keep and share.</strong>{' '}
               An anniversary, a proposal, a milestone stay, remembered by your property.
             </p>
             <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-[1.7] text-[#22323A]/58 sm:text-[14px]">
@@ -211,7 +221,7 @@ export default function HotelsPage() {
               </a>
             </div>
             <div className="mx-auto mt-6 flex max-w-[640px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/52">
-              <span>Guest-initiated</span><span aria-hidden="true">•</span><span>Signed consent</span><span aria-hidden="true">•</span><span>Raw footage deleted</span>
+              <span>Hotel-branded</span><span aria-hidden="true">•</span><span>Private by default</span><span aria-hidden="true">•</span><span>20% on every sale</span>
             </div>
           </div>
         </section>
@@ -228,7 +238,7 @@ export default function HotelsPage() {
                 people who matter to the guest, no life after checkout.
               </p>
               <p className="mt-4">
-                UNIKMO replaces it with a keepsake. Real footage from the stay, assembled into one finished piece the guest can{' '}
+                UNIKMO replaces it with a keepsake. The guest’s own photos, video and messages, in one private memory they can{' '}
                 <strong className="font-semibold text-[#22323A]">post, or keep, for good.</strong>
               </p>
             </div>
@@ -286,12 +296,12 @@ export default function HotelsPage() {
               <Image src="/story/she-opens.png" alt="A guest unlocking a private UNIKMO memory" fill className="object-cover" sizes="(max-width:1024px) 100vw, 520px" />
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Capture, done right</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Real moments, not posed ones.</h2>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Photography, if you offer it</p>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Your photographer. Your revenue.</h2>
               <p className="mt-4 max-w-[520px] text-[14px] leading-[1.75] text-[#22323A]/66 sm:text-[15px]">
-                A visible camera and an unobtrusive photographer who stays back and never says &ldquo;smile.&rdquo; Never a hidden or
-                disguised one. The guest knows a camera is nearby, because they asked for it. They are simply not
-                posing for it.
+                Many boutique properties already work with a photographer for portraits and proposals. Those images can
+                become part of a guest&rsquo;s UNIKMO, an unposed, candid record of the stay. It is your service: you set the
+                price, you run consent, and you keep the revenue. UNIKMO simply gives the photographs somewhere to live.
               </p>
             </div>
           </div>
@@ -301,7 +311,7 @@ export default function HotelsPage() {
           <div className="mx-auto max-w-[1100px]">
             <div className="mx-auto max-w-[720px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Trust, by design</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Protecting your guests and your name.</h2>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Built to protect your guests and your name.</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-2">
               {trust.map((item) => (
