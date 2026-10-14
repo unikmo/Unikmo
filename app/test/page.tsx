@@ -76,7 +76,7 @@ function getProductDetails(title: string) {
     return {
       count: '7 cards · 7 private memories',
       explanation: 'Seven individual UNIKMO cards, each unlocking its own private moment.',
-      use: 'Best for a sequence of meaningful moments',
+      use: 'Best value: $10.29/card — save $96 vs. 7 Singles',
       button: 'Choose 7 Cards',
       bestValue: true,
     };
@@ -201,7 +201,7 @@ export default function TestPage() {
       <Header />
       <main>
         <section id="top" className="px-5 pb-14 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
-          <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Give a moment. They’ll keep it forever.</h1>
+          <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Give a moment they can come back to.</h1>
           <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">Turn a video, voice note, photo or message into a beautiful physical card.</strong> They scan it to unlock your private moment.</p>
           <div className="mt-7 sm:mt-9"><HeroCarousel /></div>
           <div className="mx-auto mt-6 flex max-w-[620px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/55 sm:text-[12px]"><span>No app required</span><span aria-hidden="true">•</span><span>Private by design</span><span aria-hidden="true">•</span><span>Made to revisit</span></div>
