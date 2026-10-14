@@ -93,7 +93,7 @@ const faqs = [
   {
     question: 'How much does Curated UNIKMO cost?',
     answer:
-      'Keep It — Curated is $199. Show It — Times Square Edition is $399 and includes everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
+      `Keep It — Curated is ${CURATED_PRODUCTS.KEEP_IT.price}. Show It — Times Square Edition is ${CURATED_PRODUCTS.SHOW_IT.price} and includes everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are ${CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard} each and can be added at checkout. Prices are in USD.`,
   },
   {
     question: 'What is the Times Square Edition?',
@@ -216,7 +216,7 @@ export default function CuratedPage() {
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             <a href="#order" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Start Curated</a>
-            <a href="#choices" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See the three choices</a>
+            <a href="#choices" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See the two experiences</a>
           </div>
           <p className="mt-5 text-[11px] leading-[1.6] text-[#22323A]/45">Curated is optional. Standard UNIKMO remains self-created and private by design.</p>
         </section>
@@ -224,12 +224,13 @@ export default function CuratedPage() {
         <section id="choices" className="border-y border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1120px]">
             <div className="mx-auto max-w-[720px] text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Keep it. Show it. Share it.</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">One memory. Three ways to take it further.</h2>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Private or public</p>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Some moments stay between two people. Some deserve the whole city.</h2>
+              <p className="mx-auto mt-4 max-w-[560px] text-[14px] leading-[1.7] text-[#22323A]/62">UNIKMO lets you keep either one.</p>
             </div>
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-3">
-              {choices.map((choice) => (
+            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+              {choices.slice(0, 2).map((choice) => (
                 <article key={choice.number} className="flex flex-col overflow-hidden rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] shadow-[0_14px_38px_rgba(34,50,58,.04)]">
                   <div className="relative aspect-[16/10] overflow-hidden bg-[#EDE4D8]">
                     <Image src={choice.image} alt={choice.imageAlt} fill className="object-cover" sizes="(max-width:1024px) 100vw, 360px" />
@@ -262,6 +263,19 @@ export default function CuratedPage() {
                 </article>
               ))}
             </div>
+
+            <div className="mx-auto mt-6 flex max-w-[760px] flex-col gap-4 rounded-[18px] border border-[#B38846]/25 bg-[#FCF9F4] p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">Share it further</p>
+                <h3 className="mt-2 font-serif text-[24px]">Extra Keepsakes</h3>
+                <p className="mt-2 max-w-[520px] text-[12px] leading-[1.65] text-[#22323A]/60">Add physical copies of the same finished curated memory for family, friends, colleagues or employees.</p>
+              </div>
+              <div className="shrink-0 text-left sm:text-right">
+                <p className="font-serif text-[24px]">$12 each</p>
+                <a href="#order" className="mt-2 inline-flex text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Add at checkout</a>
+              </div>
+            </div>
+
             <p className="mx-auto mt-8 max-w-[640px] text-center text-[11px] leading-[1.6] text-[#22323A]/45">
               Prices are in USD. Checkout is handled securely by Shopify. Digital delivery is available for the same price at checkout.
             </p>
