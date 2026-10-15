@@ -1,9 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import {
   CURATED_PRODUCTS,
-  curatedCheckoutUrl,
   type CuratedDeliveryKey,
   type CuratedExperienceKey,
 } from '@/lib/curated-products';
@@ -31,18 +30,32 @@ export default function CuratedCheckout() {
   const [delivery, setDelivery] = useState<CuratedDeliveryKey>('physical');
   const [extras, setExtras] = useState(0);
   const [redirecting, setRedirecting] = useState(false);
+  const [error, setError] = useState('');
 
   const basePrice = CURATED_PRODUCTS[experience].price;
   const total = basePrice + extras * EXTRA_PRICE;
 
-  const checkoutUrl = useMemo(
-    () => curatedCheckoutUrl({ experience, delivery, extraKeepsakes: extras }),
-    [experience, delivery, extras],
-  );
-
-  function goToCheckout() {
+  async function goToCheckout() {
     setRedirecting(true);
-    window.location.href = checkoutUrl;
+    setError('');
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productKey: experience === 'KEEP_IT' ? 'curated-keep' : 'curated-show',
+          deliveryType: delivery,
+          quantity: 1,
+          extraKeepsakes: extras,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.checkoutUrl) throw new Error(data.error || 'Checkout is unavailable');
+      window.location.href = data.checkoutUrl;
+    } catch (checkoutError) {
+      setError(checkoutError instanceof Error ? checkoutError.message : 'Checkout is unavailable');
+      setRedirecting(false);
+    }
   }
 
   return (
@@ -160,9 +173,10 @@ export default function CuratedCheckout() {
       </div>
 
       <p className="mt-4 text-[10px] leading-[1.6] text-[#22323A]/45">
-        Checkout is handled securely by Shopify. After payment we email you to collect your photos, videos and
+        Checkout is handled securely by Stripe. After payment we email you to collect your photos, videos and
         messages and to confirm Times Square scheduling where selected.
       </p>
+      {error ? <p className="mt-2 text-xs text-red-700">{error}</p> : null}
     </div>
   );
 }

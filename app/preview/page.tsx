@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type ProductVariant = {
   id?: string | null;
@@ -11,6 +11,7 @@ type ProductVariant = {
 
 type Product = {
   id: string;
+  productKey?: 'single' | 'four' | 'seven';
   title: string;
   handle?: string;
   variantId?: string | null;
@@ -250,33 +251,36 @@ function HowItWorks() {
   );
 }
 
-function CheckoutModal({ product, storeDomain, onClose }: { product: Product; storeDomain: string; onClose: () => void }) {
+function CheckoutModal({ product, onClose }: { product: Product; onClose: () => void }) {
   const [email, setEmail] = useState('');
   const [delivery, setDelivery] = useState<'physical' | 'digital'>('physical');
   const [error, setError] = useState('');
+  const [redirecting, setRedirecting] = useState(false);
 
-  const variantId = useMemo(() => {
-    const variants = product.variants || [];
-    if (!variants.length) return product.variantId || null;
-    const physical = variants.find((v) => /physical/i.test(v.title || ''));
-    const digital = variants.find((v) => /digital/i.test(v.title || ''));
-    return (delivery === 'physical' ? physical || digital : digital || physical)?.id || variants[0]?.id || product.variantId || null;
-  }, [delivery, product]);
-
-  const buy = () => {
+  const buy = async () => {
     const value = email.trim().toLowerCase();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
       setError('Please enter a valid email address.');
       return;
     }
-    if (!storeDomain || !variantId) {
+    if (!product.productKey) {
       setError('Checkout is not available in this preview.');
       return;
     }
-    const params = new URLSearchParams();
-    params.set('checkout[email]', value);
-    params.set('attributes[Delivery preference]', delivery === 'physical' ? 'Physical card + digital access' : 'Digital card ( Images )');
-    window.location.href = `https://${storeDomain}/cart/${variantId}:1?checkout&${params.toString()}`;
+    setRedirecting(true);
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productKey: product.productKey, deliveryType: delivery, quantity: 1, email: value }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.checkoutUrl) throw new Error(data.error || 'Checkout is unavailable');
+      window.location.href = data.checkoutUrl;
+    } catch (checkoutError) {
+      setError(checkoutError instanceof Error ? checkoutError.message : 'Checkout is unavailable');
+      setRedirecting(false);
+    }
   };
 
   return (
@@ -303,7 +307,7 @@ function CheckoutModal({ product, storeDomain, onClose }: { product: Product; st
         <label className="mt-5 block text-[12px] font-medium text-[#22323A]">Email</label>
         <input value={email} onChange={(e) => { setEmail(e.target.value); setError(''); }} type="email" className="mt-2 w-full rounded-xl border border-[#22323A]/12 bg-white px-4 py-3 text-[14px] outline-none focus:border-[#B38846]" placeholder="you@example.com" />
         {error ? <p className="mt-2 text-[12px] text-red-600">{error}</p> : null}
-        <button onClick={buy} className="mt-5 w-full rounded-lg bg-[#22323A] px-5 py-4 text-[12px] font-medium text-white transition hover:bg-[#17252C]">Buy now</button>
+        <button onClick={buy} disabled={redirecting} className="mt-5 w-full rounded-lg bg-[#22323A] px-5 py-4 text-[12px] font-medium text-white transition hover:bg-[#17252C] disabled:opacity-60">{redirecting ? 'Opening secure checkout…' : 'Buy now'}</button>
       </div>
     </div>
   );
@@ -311,7 +315,6 @@ function CheckoutModal({ product, storeDomain, onClose }: { product: Product; st
 
 function Shop() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [storeDomain, setStoreDomain] = useState('');
   const [selected, setSelected] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -319,7 +322,6 @@ function Shop() {
       .then((r) => r.json())
       .then((data: ProductsResponse) => {
         setProducts(data.products || []);
-        setStoreDomain(data.storeDomain || '');
       })
       .catch(() => setProducts([]));
   }, []);
@@ -350,7 +352,7 @@ function Shop() {
           ))}
         </div>
       </div>
-      {selected ? <CheckoutModal product={selected} storeDomain={storeDomain} onClose={() => setSelected(null)} /> : null}
+      {selected ? <CheckoutModal product={selected} onClose={() => setSelected(null)} /> : null}
     </section>
   );
 }
