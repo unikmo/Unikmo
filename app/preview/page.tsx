@@ -388,7 +388,7 @@ const testimonials = [
     image: '/testimonials/customer-london.jpg',
   },
   {
-    quote: "Such a simple idea, but incredibly powerful. The moment we unlocked the message together, it became something we'll remember forever.",
+    quote: "Such a simple idea, but incredibly powerful. The moment we unlocked the message together, it became something we'll always remember.",
     name: 'Sophie M., New York',
     image: '/testimonials/customer-newyork.jpg',
   },
