@@ -1,12 +1,12 @@
 # UNIKMO Gifting Platform
 
-A secure gifting platform integrated with Shopify, built with Next.js 14, TypeScript, MongoDB, and Cloudinary.
+A secure gifting platform with Stripe Checkout, built with Next.js 14, TypeScript, MongoDB, and Amazon S3.
 
 ## Features
 
-- **Shopify Integration**: Webhook-based order processing with `orders/paid` event
+- **Stripe Checkout**: Hosted checkout with signed, webhook-based fulfillment
 - **Moment Codes**: Unique, encoded codes generated after payment confirmation
-- **Media Upload**: Secure media upload with Cloudinary (1GB limit per file)
+- **Media Upload**: Secure direct-to-S3 uploads
 - **Recipient Unlock**: Code-based media unlocking with rate limiting
 - **Admin Dashboard**: Full-featured admin panel for managing users, orders, and codes
 
@@ -17,7 +17,7 @@ A secure gifting platform integrated with Shopify, built with Next.js 14, TypeSc
 - **Styling**: Tailwind CSS 3.4.x
 - **Animations**: Framer Motion
 - **Database**: MongoDB + Mongoose
-- **Media**: Cloudinary
+- **Media**: Amazon S3
 - **Auth**: JWT + bcrypt (admin only)
 - **Email**: Nodemailer with SMTP
 
@@ -37,12 +37,17 @@ Create a `.env.local` file in the root directory with the following variables:
 # MongoDB
 MONGODB_URI=your_mongodb_connection_string
 
-# Cloudinary
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+# Amazon S3
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_S3_BUCKET=your_bucket
 
-# Shopify
+# Stripe (use test-mode values until checkout is verified end to end)
+STRIPE_SECRET_KEY=sk_test_replace_me
+STRIPE_WEBHOOK_SECRET=whsec_replace_me
+
+# Shopify (temporary fallback and historical-order support during migration)
 SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
 SHOPIFY_ACCESS_TOKEN=your_access_token
 SHOPIFY_WEBHOOK_SECRET=your_webhook_secret
@@ -72,18 +77,14 @@ Create the initial admin user:
 npm run seed:admin
 ```
 
-### 4. Subscribe to Shopify Webhooks
+### 4. Configure Stripe Webhooks
 
-Subscribe to the `orders/paid` webhook:
+In Stripe test mode, create a webhook endpoint at `${BASE_URL}/api/webhooks/stripe` and subscribe it to:
 
-```bash
-npm run sub:shopify:hook
-```
+- `checkout.session.completed`
+- `checkout.session.async_payment_succeeded`
 
-This script will:
-- Read `BASE_URL` from environment variables
-- Subscribe to `orders/paid` webhook via Shopify GraphQL API
-- Set the callback URL to `${BASE_URL}/api/webhooks/shopify/orders-paid`
+Copy its signing secret to `STRIPE_WEBHOOK_SECRET`. The Admin → Payments page reports whether the key and webhook secret are configured. Keep the legacy Shopify configuration only until a Stripe test purchase has created the order, generated its Moment Codes, and sent the buyer email.
 
 ### 5. Run Development Server
 
@@ -101,10 +102,11 @@ The application will be available at `http://localhost:3000`
     /dashboard        # Overview stats
     /buyers           # Buyers management
     /codes            # Codes management
+    /payments         # Stripe connection status
   /upload             # Media upload page
   /unlock             # Recipient unlock page
   /api                # API routes
-    /webhooks/shopify # Shopify webhook handlers
+    /webhooks         # Stripe and legacy Shopify webhook handlers
     /admin            # Admin API endpoints
     /media            # Media upload endpoints
 /models               # Mongoose models
@@ -127,21 +129,24 @@ Codes are generated in the format: `UNIKMO-XXXX-[Q][D]XX-XXX`
 
 Example: `UNIKMO-A7FQ-1D23-XYZ` = 1 Digital
 
-### Shopify Integration
+### Stripe Integration
 
-The platform uses Shopify's `orders/paid` webhook to:
-1. Validate HMAC signature
-2. Create/find user by email
-3. Store order with product IDs and quantities
-4. Extract variant metafields (quantity and deliveryType)
-5. Generate Moment Codes (one per unique variant)
-6. Send email to buyer with codes
+The platform uses Stripe Checkout and signed webhooks to:
+1. Create a hosted Checkout Session from the server-owned product catalog
+2. Validate the Stripe webhook signature
+3. Verify that the Checkout Session is paid
+4. Create/find the buyer by email
+5. Store the order and payment provider
+6. Generate the correct Moment Codes
+7. Send the buyer email
+
+The Shopify webhook remains in the repository temporarily for historical-order compatibility and rollback. New storefront and admin-created orders do not require Shopify.
 
 ### Media Upload
 
 - Buyers can upload media using their Moment Code
 - Files are validated (1GB limit)
-- Uploads go to Cloudinary
+- Uploads go to Amazon S3
 - Code must be in "new" status (not claimed)
 
 ### Recipient Unlock
@@ -154,15 +159,18 @@ The platform uses Shopify's `orders/paid` webhook to:
 ### Admin Dashboard
 
 Protected routes requiring admin authentication:
-- **Overview**: Total buyers, orders, codes, claimed/unclaimed stats
+- **Overview**: Revenue, provider mix, recent orders, and buyer/code stats
 - **Buyers**: List of buyers with search and sorting
 - **Codes**: Code management with filters and actions
 - **Media Viewer**: View media for specific codes
+- **Payments**: Verify Stripe API and webhook configuration
 
 ## API Endpoints
 
 ### Public
-- `POST /api/webhooks/shopify/orders-paid` - Shopify webhook handler
+- `POST /api/checkout` - Create a Stripe Checkout Session
+- `POST /api/webhooks/stripe` - Stripe fulfillment webhook
+- `POST /api/webhooks/shopify/orders-paid` - Legacy Shopify webhook handler
 - `POST /api/unlock` - Unlock media with code
 - `GET /api/media/validate-code` - Validate code for upload
 - `POST /api/media/upload` - Upload media
@@ -178,7 +186,7 @@ Protected routes requiring admin authentication:
 
 ## Security
 
-- HMAC validation for Shopify webhooks
+- Stripe signature validation for payment webhooks
 - JWT authentication for admin routes
 - HTTP-only cookies for session management
 - Rate limiting on unlock attempts

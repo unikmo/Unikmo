@@ -27,7 +27,8 @@ export interface ProcessOrderInput {
   currency: string;
   lineItems: ShopifyLineItemLike[];
   codesToGenerate: CodesToGenerateItem[];
-  source?: 'webhook' | 'admin';
+  source?: 'webhook' | 'admin' | 'stripe';
+  paymentProvider?: 'shopify' | 'stripe' | 'manual';
   tags?: string[];
   shopifyOrderName?: string;
   customerName?: string;
@@ -180,6 +181,7 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
     currency: input.currency || 'USD',
     paymentStatus: 'paid',
     source: input.source || 'webhook',
+    paymentProvider: input.paymentProvider || (input.source === 'admin' ? 'manual' : 'shopify'),
     tags: input.tags || [],
     lineItems: input.lineItems.map((item) => ({
       productId: normalizeShopifyId(item.product_id),
@@ -232,4 +234,3 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
     generatedCodes,
   };
 }
-

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import CuratedCheckout from '@/components/CuratedCheckout';
 import TimesSquareRotator from '@/components/TimesSquareRotator';
 import SiteFooter from '@/components/SiteFooter';
-import { CURATED_PRODUCTS, curatedBuyUrl } from '@/lib/curated-products';
+import { CURATED_PRODUCTS } from '@/lib/curated-products';
 
 export const metadata: Metadata = {
   title: 'Curated UNIKMO | Keep It, Show It, Share It',
@@ -32,7 +32,7 @@ const choices = [
     imageAlt: 'A finished UNIKMO keepsake card beside printed photos',
     price: `$${CURATED_PRODUCTS.KEEP_IT.price}`,
     priceNote: 'Physical or digital delivery',
-    href: curatedBuyUrl(CURATED_PRODUCTS.KEEP_IT.variants.physical.id),
+    href: '#order',
     cta: 'Buy Keep It',
     description:
       'You send the photos, videos and messages you want us to work with. We select, sequence and edit them into one finished memory worth keeping.',
@@ -52,7 +52,7 @@ const choices = [
     imageAlt: 'A UNIKMO card held up in front of a Times Square billboard',
     price: `$${CURATED_PRODUCTS.SHOW_IT.price}`,
     priceNote: 'Everything in Keep It, plus Times Square',
-    href: curatedBuyUrl(CURATED_PRODUCTS.SHOW_IT.variants.physical.id),
+    href: '#order',
     cta: 'Buy Show It',
     description:
       'Take the finished moment public. We prepare the Times Square creative, coordinate the appearance, capture it, and incorporate that public moment into the finished UNIKMO memory.',
@@ -71,7 +71,7 @@ const choices = [
     imageAlt: 'Four people holding matching UNIKMO keepsake cards',
     price: `$${CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard} each`,
     priceNote: 'Add any quantity at checkout',
-    href: curatedBuyUrl(CURATED_PRODUCTS.EXTRA_KEEPSAKES.variants.standard.id),
+    href: '#order',
     cta: 'Buy an extra card',
     description:
       'Give the same finished curated memory to family, friends, colleagues or employees who were part of it.',
@@ -263,7 +263,7 @@ export default function CuratedPage() {
               ))}
             </div>
             <p className="mx-auto mt-8 max-w-[640px] text-center text-[11px] leading-[1.6] text-[#22323A]/45">
-              Prices are in USD. Checkout is handled securely by Shopify. Digital delivery is available for the same price at checkout.
+              Prices are in USD. Checkout is handled securely by Stripe. Digital delivery is available for the same price at checkout.
             </p>
           </div>
         </section>
@@ -320,7 +320,7 @@ export default function CuratedPage() {
             <div className="mx-auto max-w-[680px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Order your curated memory</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose it, then check out.</h2>
-              <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Pick your experience, delivery and any extra keepsake cards. Payment is handled securely by Shopify. Right after checkout we email you to collect your photos, videos and messages.</p>
+              <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Pick your experience, delivery and any extra keepsake cards. Payment is handled securely by Stripe. Right after checkout we email you to collect your photos, videos and messages.</p>
             </div>
             <div className="mt-9"><CuratedCheckout /></div>
           </div>
