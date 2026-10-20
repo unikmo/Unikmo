@@ -153,7 +153,7 @@ function Hero() {
           A card that unlocks<br />a private memory.
         </h1>
         <p className="mx-auto mt-6 max-w-[620px] text-[15px] leading-[1.7] text-[#22323A]/68 sm:text-[17px]">
-          Turn a private video, voice note, photo or message into a beautifully made card they can hold — and return to whenever it matters.
+          Turn a private video, voice note, photo or message into a beautifully made card they can hold — and revisit while the memory remains available.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href="#shop" className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a>
@@ -260,7 +260,7 @@ function CheckoutModal({ product, storeDomain, onClose }: { product: Product; st
     if (!variants.length) return product.variantId || null;
     const physical = variants.find((v) => /physical/i.test(v.title || ''));
     const digital = variants.find((v) => /digital/i.test(v.title || ''));
-    return (delivery === 'physical' ? physical || digital : digital || physical)?.id || variants[0]?.id || product.variantId || null;
+    return (delivery === 'physical' ? physical : digital)?.id || (variants.length === 1 ? variants[0]?.id : null);
   }, [delivery, product]);
 
   const buy = () => {
@@ -270,13 +270,13 @@ function CheckoutModal({ product, storeDomain, onClose }: { product: Product; st
       return;
     }
     if (!storeDomain || !variantId) {
-      setError('Checkout is not available in this preview.');
+      setError('This delivery option is currently unavailable. Please choose another option or try again later.');
       return;
     }
     const params = new URLSearchParams();
     params.set('checkout[email]', value);
-    params.set('attributes[Delivery preference]', delivery === 'physical' ? 'Physical card + digital access' : 'Digital card ( Images )');
-    window.location.href = `https://${storeDomain}/cart/${variantId}:1?checkout&${params.toString()}`;
+    params.set('attributes[Delivery preference]', delivery === 'physical' ? 'Physical card + digital access' : 'Digital card');
+    window.location.href = `https://${storeDomain}/cart/${variantId}:1?${params.toString()}`;
   };
 
   return (
@@ -388,7 +388,7 @@ const testimonials = [
     image: '/testimonials/customer-london.jpg',
   },
   {
-    quote: "Such a simple idea, but incredibly powerful. The moment we unlocked the message together, it became something we'll remember forever.",
+    quote: "Such a simple idea, but incredibly powerful. The moment we unlocked the message together, it became something we'll always remember.",
     name: 'Sophie M., New York',
     image: '/testimonials/customer-newyork.jpg',
   },
