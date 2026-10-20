@@ -260,7 +260,7 @@ function CheckoutModal({ product, storeDomain, onClose }: { product: Product; st
     if (!variants.length) return product.variantId || null;
     const physical = variants.find((v) => /physical/i.test(v.title || ''));
     const digital = variants.find((v) => /digital/i.test(v.title || ''));
-    return (delivery === 'physical' ? physical || digital : digital || physical)?.id || variants[0]?.id || product.variantId || null;
+    return (delivery === 'physical' ? physical : digital)?.id || (variants.length === 1 ? variants[0]?.id : null);
   }, [delivery, product]);
 
   const buy = () => {
@@ -270,13 +270,13 @@ function CheckoutModal({ product, storeDomain, onClose }: { product: Product; st
       return;
     }
     if (!storeDomain || !variantId) {
-      setError('Checkout is not available in this preview.');
+      setError('This delivery option is currently unavailable. Please choose another option or try again later.');
       return;
     }
     const params = new URLSearchParams();
     params.set('checkout[email]', value);
-    params.set('attributes[Delivery preference]', delivery === 'physical' ? 'Physical card + digital access' : 'Digital card ( Images )');
-    window.location.href = `https://${storeDomain}/cart/${variantId}:1?checkout&${params.toString()}`;
+    params.set('attributes[Delivery preference]', delivery === 'physical' ? 'Physical card + digital access' : 'Digital card');
+    window.location.href = `https://${storeDomain}/cart/${variantId}:1?${params.toString()}`;
   };
 
   return (
