@@ -154,7 +154,7 @@ function Hero() {
           A card that unlocks<br />a private memory.
         </h1>
         <p className="mx-auto mt-6 max-w-[620px] text-[15px] leading-[1.7] text-[#22323A]/68 sm:text-[17px]">
-          Turn a private video, voice note, photo or message into a beautifully made card they can hold — and return to whenever it matters.
+          Turn a private video, voice note, photo or message into a beautifully made card they can hold — and revisit while the memory remains available.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href="#shop" className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a>
