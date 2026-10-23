@@ -13,6 +13,9 @@ export interface IRetailPack extends Document {
   soldBy?: string;
   saleReference?: string;
   retailPrice: number;
+  discountAmount?: number;
+  saleValue?: number;
+  commissionAmount?: number;
   commissionRate: number;
   createdAt: Date;
   updatedAt: Date;
@@ -30,6 +33,9 @@ const RetailPackSchema = new Schema<IRetailPack>({
   soldBy: String,
   saleReference: String,
   retailPrice: { type: Number, required: true },
+  discountAmount: Number,
+  saleValue: Number,
+  commissionAmount: Number,
   commissionRate: { type: Number, required: true },
 }, { timestamps: true });
 RetailPackSchema.index({ organisationId: 1, status: 1 });
