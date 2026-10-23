@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
   const user = await User.findById(actor.userId);
   if (!user) return NextResponse.json({ error: 'Admin user not found' }, { status: 403 });
   const created: { barcode: string; keys: string[] }[] = [];
+  const allocated: string[] = [];
   try {
     for (let i = 0; i < count; i++) {
       let pack = null;
@@ -64,6 +65,7 @@ export async function POST(request: NextRequest) {
         } catch (error: any) { if (error?.code !== 11000) throw error; }
       }
       if (!pack) throw new Error('Unable to allocate unique barcode');
+      allocated.push(pack.barcode);
       const keys: string[] = [];
       for (let k = 0; k < bundleSize; k++) {
         let issued = false;
@@ -82,8 +84,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, created }, { status: 201 });
   } catch (error) {
     // Fail closed: remove incomplete available packs and their associated keys.
-    for (const item of created) {
-      const pack = await RetailPack.findOne({ barcode: item.barcode, status: 'available' });
+    for (const barcode of allocated) {
+      const pack = await RetailPack.findOne({ barcode, status: 'available' });
       if (pack) { await MomentCode.deleteMany({ retailPack: pack._id }); await pack.deleteOne(); }
     }
     return NextResponse.json({ error: 'Package generation failed; inspect inventory before retrying' }, { status: 500 });
