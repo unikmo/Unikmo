@@ -47,7 +47,10 @@ export default function RetailPacksPage() {
       const media = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
       stream.current = media;
       setScanning(true);
-      if (video.current) { video.current.srcObject = media; await video.current.play(); }
+      await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+      if (!video.current) throw new Error('Camera view unavailable');
+      video.current.srcObject = media;
+      await video.current.play();
       const detector = new Detector({ formats: ['code_128'] });
       timer.current = window.setInterval(async () => {
         if (!video.current || video.current.readyState < 2) return;
