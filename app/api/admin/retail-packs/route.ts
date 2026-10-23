@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
   const locationId = typeof body?.locationId === 'string' ? body.locationId.trim() : '';
   const voyageId = typeof body?.voyageId === 'string' ? body.voyageId.trim() : '';
   const commissionRate = Number(body?.commissionRate);
+  // Pilot status must be determined from a verified organisation agreement before partner rollout.
   if (![1,4,7].includes(bundleSize) || !Number.isInteger(count) || count < 1 || count > 100 ||
       !['hotel','cruise'].includes(channel) || !organisationId || !locationId ||
       organisationId.length > 120 || locationId.length > 120 ||
