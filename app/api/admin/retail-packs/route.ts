@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { randomInt } from 'crypto';
+import { generateMomentCode } from '@/lib/code-generator';
 import connectDB from '@/lib/db';
 import RetailPack from '@/models/RetailPack';
 import MomentCode from '@/models/MomentCode';
@@ -9,12 +9,6 @@ import { generateRetailPackBarcode } from '@/lib/retail-pack-barcode';
 
 export const dynamic = 'force-dynamic';
 const prices: Record<number, number> = { 1: 24, 4: 64, 7: 72 };
-const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-function momentKey() {
-  let value = '';
-  for (let i = 0; i < 8; i++) value += chars[randomInt(chars.length)];
-  return value.slice(0,4) + '-' + value.slice(4);
-}
 async function admin(request: NextRequest) {
   const token = request.cookies.get('admin-token')?.value;
   const actor = token ? await verifyToken(token) : null;
@@ -70,7 +64,7 @@ export async function POST(request: NextRequest) {
       for (let k = 0; k < bundleSize; k++) {
         let issued = false;
         for (let attempt = 0; attempt < 8 && !issued; attempt++) {
-          const key = momentKey();
+          const key = generateMomentCode(bundleSize as 1 | 4 | 7, 'physical');
           try {
             await MomentCode.create({ code: key, user: user._id, retailPack: pack._id, quantity: bundleSize, deliveryType: 'physical', status: 'new' });
             keys.push(key);
