@@ -2,27 +2,30 @@
 
 import { useState } from 'react';
 
-type View = 'global' | 'cruise' | 'ship' | 'hotel' | 'store';
+type View = 'global' | 'cruise' | 'ship' | 'hotelManager' | 'hotel' | 'store';
 const views: { id: View; title: string; description: string }[] = [
   { id: 'global', title: 'UNIKMO HQ', description: 'All partners · Global operations' },
   { id: 'cruise', title: 'Cruise line', description: 'Company-wide · All ships' },
   { id: 'ship', title: 'Ship admin', description: 'Voyages · Inventory · Team' },
-  { id: 'hotel', title: 'Hotel admin', description: 'Property · Inventory · Team' },
+  { id: 'hotelManager', title: 'Hotel manager', description: 'Property performance · Team · Inventory' },
+  { id: 'hotel', title: 'Hotel user', description: 'Create keys · Inventory' },
   { id: 'store', title: 'Store user', description: 'Retail · Moment Keys' },
 ];
 const metricSets: Record<View, string[]> = {
-  global: ['Partner organisations', 'Active ships & hotels', 'Keys generated', 'Monthly billable', 'Retail sales', 'Commission payable'],
+  global: ['B2C revenue', 'B2C orders', 'B2B partners', 'B2B keys generated', 'B2B monthly billable', 'B2B commissions'],
   cruise: ['Ships', 'Voyages', 'Passengers reported', 'Keys generated', 'Retail sales', 'Monthly invoice'],
   ship: ['Voyages', 'Passengers reported', 'Trip-code accesses', 'Keys generated', 'Cards in stock', 'Retail sales'],
-  hotel: ['Keys generated', 'Cards in stock', 'Retail sales', 'Commission earned', 'Monthly invoice', 'Team seats used'],
-  store: ['Keys generated', 'Retail sales', 'Bundles sold', 'Cards remaining'],
+  hotelManager: ['Hotel cards issued', 'Hotel cards in stock', 'Hotel card sales', '30% commission earned', 'Moment Keys generated', 'Monthly invoice'],
+  hotel: ['Keys generated', 'Cards in stock'],
+  store: ['Keys generated', 'Cards in stock'],
 };
 const sections: Record<View, string[]> = {
-  global: ['Partner directory', 'Monthly billing', 'Commercial terms & pilot commissions', 'Ship-level price overrides', 'Audit & exports'],
+  global: ['B2C orders, revenue & customers', 'B2B partner directory', 'Monthly billing', 'Cruise retail discount: 10%', 'Cruise sales commission: 25% pilot / 30% after', 'Hotel cards: $8 each; 30% sales commission', 'Key inventory & audit'],
   cruise: ['Fleet performance', 'Voyage breakdown', 'Passenger evidence', 'Ship administrators', 'Monthly settlement'],
   ship: ['Voyage registry & passenger evidence', 'Create voyage Trip Code', 'Cruise Director welcome media', 'Departure keepsake media', 'Ship card & retail card orders', 'Staff access (5 initial seats)'],
-  hotel: ['Create Moment Keys', 'Retail sales & commissions', 'Ship-card equivalent: hotel-branded inventory', 'Card replenishment', 'Staff access (5 initial seats)'],
-  store: ['Create 1 / 4 / 7-key bundles', 'Record retail transaction', 'Available cards', 'Recent transactions'],
+  hotelManager: ['Hotel performance by period', 'Hotel cards at $8 each', 'Retail card sales & 30% commission', 'Create Moment Keys & view inventory', 'Monthly billing', 'Staff access (5 initial seats)'],
+  hotel: ['Create Moment Keys', 'View inventory'],
+  store: ['Create 1 / 4 / 7-key bundles', 'View inventory'],
 };
 
 export default function B2BDashboardConcept() {
@@ -30,7 +33,9 @@ export default function B2BDashboardConcept() {
   const [bundle, setBundle] = useState<1 | 4 | 7>(4);
   const [quantity, setQuantity] = useState(1);
   const [period, setPeriod] = useState('month');
+  const [globalScope, setGlobalScope] = useState<'all' | 'b2c' | 'b2b'>('all');
   const active = views.find((item) => item.id === view)!;
+  const metrics = view === 'global' && globalScope !== 'all' ? metricSets.global.filter(m => m.startsWith(globalScope === 'b2c' ? 'B2C' : 'B2B')) : metricSets[view];
   const prices = { 1: 24, 4: 64, 7: 72 };
   return (
     <main className="mx-auto max-w-7xl space-y-7 pb-16 text-[#263039]">
@@ -45,6 +50,7 @@ export default function B2BDashboardConcept() {
         {views.map(item => <button key={item.id} type="button" onClick={() => setView(item.id)}
           className={`rounded-full border px-4 py-2 text-sm transition-colors ${view === item.id ? 'border-[#263039] bg-[#263039] text-white' : 'border-[#d8d0c5] bg-white hover:bg-[#f5eee5]'}`}>{item.title}</button>)}
       </section>
+      {view === 'global' && <div className="flex flex-wrap gap-2" aria-label="Business scope">{(['all','b2c','b2b'] as const).map(scope => <button key={scope} type="button" aria-pressed={globalScope === scope} onClick={() => setGlobalScope(scope)} className={`rounded-full px-4 py-2 text-sm ${globalScope === scope ? 'bg-[#263039] text-white' : 'border border-[#d8d0c5] bg-white'}`}>{scope === 'all' ? 'Combined' : scope.toUpperCase()}</button>)}</div>}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div><h2 className="font-serif text-3xl">Overview</h2><p className="text-sm text-[#6c7275]">Operational metrics will populate from organisation-scoped records.</p></div>
         <select aria-label="Reporting period" value={period} onChange={e=>setPeriod(e.target.value)} className="rounded-xl border border-[#d8d0c5] bg-white px-4 py-3 text-sm">
@@ -52,7 +58,7 @@ export default function B2BDashboardConcept() {
         </select>
       </div>
       <section className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-        {metricSets[view].map(metric => <article key={metric} className="min-h-32 rounded-2xl border border-[#e6dfd5] bg-white p-5">
+        {metrics.map(metric => <article key={metric} className="min-h-32 rounded-2xl border border-[#e6dfd5] bg-white p-5">
           <p className="text-xs uppercase tracking-wider text-[#827b70]">{metric}</p>
           <p className="mt-5 font-serif text-3xl text-[#a6a098]">—</p>
           <p className="mt-1 text-xs text-[#827b70]">Awaiting connected records</p>
@@ -73,7 +79,8 @@ export default function B2BDashboardConcept() {
           <input id="b2b-bundles" type="number" min="1" max="1000" value={quantity} onChange={e=>setQuantity(Math.max(1,Math.min(1000,Number(e.target.value)||1)))} className="w-full rounded-xl border border-[#d1c7bb] bg-white p-3"/>
           <div className="border-t border-[#d1c7bb] pt-4 text-sm">
             <div className="flex justify-between"><span>Keys requested</span><strong>{bundle*quantity}</strong></div>
-            <div className="mt-2 flex justify-between"><span>Cruise B2B charge (10% retail)</span><strong>${(prices[bundle]*quantity*.1).toFixed(2)}</strong></div>
+            {(view === 'cruise' || view === 'ship' || view === 'store') && <div className="mt-2 flex justify-between"><span>Cruise B2B charge (10% retail)</span><strong>${(prices[bundle]*quantity*.1).toFixed(2)}</strong></div>}
+            {(view === 'hotel' || view === 'hotelManager') && <p className="mt-2 text-xs">Hotel cards: $8 each. No 10% cruise retail discount. Hotel earns 30% commission on sold cards.</p>}
           </div>
           <button disabled className="w-full cursor-not-allowed rounded-xl bg-[#263039] p-4 text-sm font-semibold text-white opacity-60">Create keys · Backend pending</button>
           <p className="text-xs leading-5 text-[#746b61]">Generated keys must be attributed to the organisation, property, voyage and staff member. Monthly invoicing uses creation records; commissions use actual sales.</p>
