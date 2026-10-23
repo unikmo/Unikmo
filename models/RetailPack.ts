@@ -12,6 +12,8 @@ export interface IRetailPack extends Document {
   soldAt?: Date;
   soldBy?: string;
   saleReference?: string;
+  retailPrice: number;
+  commissionRate: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,6 +29,8 @@ const RetailPackSchema = new Schema<IRetailPack>({
   soldAt: Date,
   soldBy: String,
   saleReference: String,
+  retailPrice: { type: Number, required: true },
+  commissionRate: { type: Number, required: true },
 }, { timestamps: true });
 RetailPackSchema.index({ organisationId: 1, status: 1 });
 const RetailPack: Model<IRetailPack> = mongoose.models.RetailPack || mongoose.model<IRetailPack>('RetailPack', RetailPackSchema);
