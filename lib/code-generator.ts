@@ -1,5 +1,5 @@
 /**
- * Generates Moment Codes in the format: UNIKMO-XXXX-[Q][D]XX-XXX
+ * Generates new Moment Keys as XXXX-XXXX. Legacy keys remain supported by the parser.
  * Where:
  * - XXXX = 4 random alphanumeric characters
  * - Q = quantity (1, 4, or 7)
@@ -17,8 +17,10 @@ export type DeliveryType = 'digital' | 'physical' | 'split';
 function generateRandomString(length: number): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let result = '';
+  const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const crypto = require('crypto') as typeof import('crypto');
   for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
+    result += alphabet[crypto.randomInt(alphabet.length)];
   }
   return result;
 }
@@ -44,12 +46,7 @@ function getDeliveryTypeCode(deliveryType: DeliveryType): string {
  * @returns A unique Moment Code string
  */
 export function generateMomentCode(quantity: Quantity, deliveryType: DeliveryType): string {
-  const prefix = 'UNIKMO';
-  const segment1 = generateRandomString(4); // 4 random chars
-  const segment2 = `${quantity}${getDeliveryTypeCode(deliveryType)}${generateRandomString(2)}`; // Q + D + 2 random chars
-  const segment3 = generateRandomString(3); // 3 random chars
-
-  return `${prefix}-${segment1}-${segment2}-${segment3}`;
+  return `${generateRandomString(4)}-${generateRandomString(4)}`;
 }
 
 /**
