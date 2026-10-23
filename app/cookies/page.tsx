@@ -66,8 +66,8 @@ export default function CookiePolicyPage() {
           We do <span className="font-medium text-[#22323A]">not</span> use advertising, retargeting or marketing cookies.
         </p>
         <p>
-          Checkout and payment take place on Shopify. When you proceed to checkout, Shopify sets its own strictly
-          necessary cookies to process the order securely and prevent fraud, under Shopify&rsquo;s own cookie and privacy
+          Checkout and payment take place on Stripe. When you proceed to checkout, Stripe sets its own strictly
+          necessary cookies to process the order securely and prevent fraud, under Stripe&rsquo;s own cookie and privacy
           notices.
         </p>
       </LegalSection>
@@ -127,7 +127,7 @@ export default function CookiePolicyPage() {
             necessary cookies may stop parts of the site or checkout from working.
           </li>
           <li>
-            You can manage Shopify checkout cookies from the checkout page and through your browser.
+            You can manage Stripe checkout cookies from the checkout page and through your browser.
           </li>
           <li>
             General guidance is available at{' '}
