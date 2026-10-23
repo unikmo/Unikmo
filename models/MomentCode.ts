@@ -9,7 +9,8 @@ export interface IMedia {
 export interface IMomentCode extends Document {
   code: string;
   user: Types.ObjectId;
-  order: Types.ObjectId;
+  order?: Types.ObjectId;
+  retailPack?: Types.ObjectId;
   quantity: 1 | 4 | 7;
   deliveryType: 'digital' | 'physical' | 'split';
   status: 'new' | 'claimed' | 'revoked';
@@ -56,8 +57,9 @@ const MomentCodeSchema: Schema = new Schema(
     order: {
       type: Schema.Types.ObjectId,
       ref: 'Order',
-      required: true,
+      required: false,
     },
+    retailPack: { type: Schema.Types.ObjectId, ref: 'RetailPack', index: true },
     quantity: {
       type: Number,
       enum: [1, 4, 7],
