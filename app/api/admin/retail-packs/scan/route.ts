@@ -28,5 +28,7 @@ export async function POST(request: NextRequest) {
     const existing = await RetailPack.findOne({ barcode }).select('status');
     return NextResponse.json({ error: existing ? 'Pack is not available for sale' : 'Pack not found' }, { status: existing ? 409 : 404 });
   }
-  return NextResponse.json({ success: true, barcode: pack.barcode, bundleSize: pack.bundleSize, status: pack.status, soldAt: pack.soldAt, retailPrice: pack.retailPrice, commission: Number((pack.retailPrice * pack.commissionRate).toFixed(2)) });
+  const discount = pack.channel === 'cruise' ? Number((pack.retailPrice * 0.1).toFixed(2)) : 0;
+  const saleValue = Number((pack.retailPrice - discount).toFixed(2));
+  return NextResponse.json({ success: true, barcode: pack.barcode, bundleSize: pack.bundleSize, status: pack.status, soldAt: pack.soldAt, retailPrice: pack.retailPrice, discount, saleValue, commission: Number((saleValue * pack.commissionRate).toFixed(2)) });
 }
