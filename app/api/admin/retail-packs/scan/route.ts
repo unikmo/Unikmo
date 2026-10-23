@@ -21,7 +21,13 @@ export async function POST(request: NextRequest) {
   // Atomic state transition prevents repeat scans from creating duplicate sales.
   const pack = await RetailPack.findOneAndUpdate(
     { barcode, status: 'available' },
-    { $set: { status: 'sold', soldAt: new Date(), soldBy: actor.userId, ...(saleReference ? { saleReference } : {}), ...(recoveryEmail ? { recoveryEmail } : {}) } },
+    [{ $set: {
+      status: 'sold', soldAt: new Date(), soldBy: actor.userId,
+      discountAmount: { $cond: [{ $eq: ['$channel', 'cruise'] }, { $round: [{ $multiply: ['$retailPrice', 0.1] }, 2] }, 0] },
+      saleValue: { $round: [{ $multiply: ['$retailPrice', { $cond: [{ $eq: ['$channel', 'cruise'] }, 0.9, 1] }] }, 2] },
+      commissionAmount: { $round: [{ $multiply: ['$retailPrice', { $cond: [{ $eq: ['$channel', 'cruise'] }, 0.9, 1] }, '$commissionRate'] }, 2] },
+      ...(saleReference ? { saleReference } : {}), ...(recoveryEmail ? { recoveryEmail } : {})
+    } }],
     { new: true }
   );
   if (!pack) {
