@@ -18,7 +18,8 @@ export interface IOrder extends Document {
   totalPrice: number;
   currency: string;
   paymentStatus: 'paid';
-  source: 'webhook' | 'admin';
+  source: 'webhook' | 'admin' | 'stripe';
+  paymentProvider: 'shopify' | 'stripe' | 'manual';
   tags: string[];
   lineItems: ILineItem[];
   createdAt: Date;
@@ -79,8 +80,15 @@ const OrderSchema: Schema = new Schema(
     },
     source: {
       type: String,
-      enum: ['webhook', 'admin'],
+      enum: ['webhook', 'admin', 'stripe'],
       default: 'webhook',
+      required: true,
+      index: true,
+    },
+    paymentProvider: {
+      type: String,
+      enum: ['shopify', 'stripe', 'manual'],
+      default: 'shopify',
       required: true,
       index: true,
     },

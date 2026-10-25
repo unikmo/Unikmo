@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import MomentCode from '@/models/MomentCode';
+import { isRetailKeyEligible } from '@/lib/retail-key-eligibility';
 import '@/models/Order';
 import '@/models/User';
 import { sendUnlockNotificationEmail } from '@/lib/email';
@@ -83,6 +84,8 @@ export async function POST(request: NextRequest) {
         { status: 404 }
       );
     }
+
+    if (!await isRetailKeyEligible(momentCode)) return NextResponse.json({ error: 'This Moment Key has not been sold.', reason: 'not_sold' }, { status: 403 });
 
     if (momentCode.status === 'revoked') {
       return NextResponse.json(
