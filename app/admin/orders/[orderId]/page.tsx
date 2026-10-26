@@ -7,8 +7,8 @@ import { motion } from 'framer-motion';
 
 interface OrderDetail {
   _id: string;
-  shopifyOrderId: string;
-  shopifyOrderName: string;
+  orderReference: string;
+  orderName: string;
   email: string;
   customerName: string;
   source: 'admin' | 'webhook';
@@ -96,7 +96,7 @@ export default function AdminOrderDetailPage() {
       >
         <h2 className="text-xl font-semibold text-[#2D2926] mb-4">Order info</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-[#2D2926]/80">
-          <p><span className="font-semibold text-[#2D2926]">Order:</span> {order.shopifyOrderName || order.shopifyOrderId}</p>
+          <p><span className="font-semibold text-[#2D2926]">Order:</span> {order.orderName || order.orderReference}</p>
           <p><span className="font-semibold text-[#2D2926]">Source:</span> {order.source}</p>
           <p><span className="font-semibold text-[#2D2926]">Email:</span> {order.email}</p>
           <p><span className="font-semibold text-[#2D2926]">Customer name:</span> {order.customerName || '—'}</p>
