@@ -15,10 +15,10 @@ interface Stats {
   providers: Record<string, number>;
   recentOrders: Array<{
     _id: string;
-    shopifyOrderName?: string;
+    orderName?: string;
     totalPrice: number;
     currency: string;
-    paymentProvider?: 'shopify' | 'stripe' | 'manual';
+    paymentProvider?: 'stripe' | 'manual';
     source: string;
     createdAt: string;
   }>;
@@ -159,7 +159,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="flex gap-2 text-xs">
             <span className="rounded-full bg-white/10 px-3 py-1.5">Stripe {stats?.providers?.stripe || 0}</span>
-            <span className="rounded-full bg-white/10 px-3 py-1.5">Shopify {stats?.providers?.shopify || 0}</span>
+            <span className="rounded-full bg-white/10 px-3 py-1.5">Stripe {stats?.providers?.shopify || 0}</span>
             <span className="rounded-full bg-white/10 px-3 py-1.5">Manual {stats?.providers?.manual || 0}</span>
           </div>
         </div>
@@ -259,7 +259,7 @@ export default function AdminDashboardPage() {
         <div className="mb-5 flex items-center justify-between">
           <div>
             <h2 className="text-lg font-semibold text-[#2D2926]">Recent orders</h2>
-            <p className="mt-1 text-sm text-[#2D2926]/60">Stripe, Shopify, and manually created orders in one view</p>
+            <p className="mt-1 text-sm text-[#2D2926]/60">Stripe, Stripe, and manually created orders in one view</p>
           </div>
           <a href="/admin/orders" className="rounded-full border border-[#D3C7BB] px-4 py-2 text-xs font-medium uppercase tracking-wide text-[#2D2926]">View all</a>
         </div>
@@ -269,8 +269,8 @@ export default function AdminDashboardPage() {
             <tbody className="divide-y divide-[#EFE3D8]">
               {(stats?.recentOrders || []).map((order) => (
                 <tr key={order._id}>
-                  <td className="py-4 font-medium text-[#2D2926]">{order.shopifyOrderName || order._id}</td>
-                  <td className="py-4 capitalize text-[#2D2926]/70">{order.paymentProvider || (order.source === 'admin' ? 'manual' : 'shopify')}</td>
+                  <td className="py-4 font-medium text-[#2D2926]">{order.orderName || order._id}</td>
+                  <td className="py-4 capitalize text-[#2D2926]/70">{order.paymentProvider || (order.source === 'admin' ? 'manual' : 'stripe')}</td>
                   <td className="py-4 text-[#2D2926]">{new Intl.NumberFormat('en-US', { style: 'currency', currency: order.currency || 'USD' }).format(order.totalPrice)}</td>
                   <td className="py-4 text-[#2D2926]/60">{new Date(order.createdAt).toLocaleDateString()}</td>
                 </tr>
