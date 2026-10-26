@@ -28,8 +28,8 @@ export async function GET(request: NextRequest) {
     if (search) {
       query.$or = [
         { email: { $regex: search, $options: 'i' } },
-        { shopifyOrderId: { $regex: search, $options: 'i' } },
-        { shopifyOrderName: { $regex: search, $options: 'i' } },
+        { orderReference: { $regex: search, $options: 'i' } },
+        { orderName: { $regex: search, $options: 'i' } },
         { customerName: { $regex: search, $options: 'i' } },
       ];
     }
@@ -78,8 +78,8 @@ export async function GET(request: NextRequest) {
         };
         return {
           _id: order._id.toString(),
-          shopifyOrderId: order.shopifyOrderId,
-          shopifyOrderName: order.shopifyOrderName || '',
+          orderReference: order.shopifyOrderId,
+          orderName: order.shopifyOrderName || '',
           email: order.email,
           customerName: order.customerName || '',
           totalPrice: order.totalPrice,
@@ -136,9 +136,9 @@ export async function POST(request: NextRequest) {
 
     await connectDB();
     const result = await processPaidOrderAndGenerateCodes({
-      shopifyOrderId: orderReference,
-      shopifyOrderNumber: orderReference,
-      shopifyOrderName: orderReference,
+      orderReference: orderReference,
+      orderNumber: orderReference,
+      orderName: orderReference,
       email,
       totalPrice: product.unitAmount / 100,
       currency: product.currency.toUpperCase(),
