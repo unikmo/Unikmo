@@ -18,6 +18,10 @@ const FAQ_ITEMS = [
     q: 'How does it work?',
     a: 'Choose your card, create your private memory, and give the card to someone special. They scan its QR code, enter the private code, and open the memory in their browser — no app or recipient account required.',
   },
+  { q: 'How do hotel and cruise cards differ?', a: 'Each hotel card has its own unique code and costs $8, including TISONIK guest-experience access. Cruise welcome cards cost $5 each, include TISONIK, and share one voyage code across cards for the same sailing.' },
+  { q: 'What is the onboard retail discount?', a: 'The 10% cruise discount applies only to retail Moment Key packages of 1, 4 or 7 sold onboard. It does not apply to the $5 voyage card, hotel cards or additional curated photo cards.' },
+  { q: 'How do curated cruise photo cards work?', a: 'A purchased curated photo and video collection is linked to a code on its activated card. Additional copies cost $12 per card and use the same code to access the same purchased collection. Photos can be downloaded; video is normally available for streaming.' },
+  { q: 'How long is a curated cruise photo collection kept?', a: 'The curated cruise photo product is planned to include 10 years of access, followed by an optional five-year renewal for $9 per collection code. One renewal covers all cards sharing that code. A one-month grace period and advance notice are planned; the full retention commitment takes effect only when confirmed in the applicable purchase terms.' },
   { q: 'What can I upload?', a: 'You can add a video, photo, voice note, or written message.' },
   { q: 'Does the recipient need an app?', a: 'No. The recipient does not need to download an app or create an account.' },
   {
