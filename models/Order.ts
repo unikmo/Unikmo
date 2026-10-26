@@ -8,9 +8,9 @@ export interface ILineItem {
 }
 
 export interface IOrder extends Document {
-  shopifyOrderId: string;
-  shopifyOrderName?: string;
-  shopifyProductId: string;
+  orderReference: string;
+  orderName?: string;
+  productReference: string;
   orderQuantity: number;
   user: Types.ObjectId;
   email: string;
@@ -19,7 +19,7 @@ export interface IOrder extends Document {
   currency: string;
   paymentStatus: 'paid';
   source: 'webhook' | 'admin' | 'stripe';
-  paymentProvider: 'shopify' | 'stripe' | 'manual';
+  paymentProvider: 'stripe' | 'manual';
   tags: string[];
   lineItems: ILineItem[];
   createdAt: Date;
@@ -28,17 +28,17 @@ export interface IOrder extends Document {
 
 const OrderSchema: Schema = new Schema(
   {
-    shopifyOrderId: {
+    orderReference: {
       type: String,
       required: true,
       unique: true,
       index: true,
     },
-    shopifyProductId: {
+    productReference: {
       type: String,
       required: true,
     },
-    shopifyOrderName: {
+    orderName: {
       type: String,
       required: false,
     },
@@ -87,8 +87,8 @@ const OrderSchema: Schema = new Schema(
     },
     paymentProvider: {
       type: String,
-      enum: ['shopify', 'stripe', 'manual'],
-      default: 'shopify',
+      enum: ['stripe', 'manual'],
+      default: 'stripe',
       required: true,
       index: true,
     },
