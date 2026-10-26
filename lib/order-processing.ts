@@ -37,7 +37,7 @@ function normalizeId(id: string | number | undefined): string {
 }
 
 /**
- * Extracts quantity from product metafields and deliveryType from variant metafields.
+ * Persists a paid order and issues the purchased Moment Codes.
  */
 export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput): Promise<{
   created: boolean;
@@ -83,7 +83,7 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
 
   const generatedCodes: string[] = [];
   for (const item of input.codesToGenerate) {
-    for (let i = 0; i < item.quantity; i++) {
+    for (let i = 0; i < item.orderQuantity; i++) {
       try {
         let code = '';
         let attempts = 0;
