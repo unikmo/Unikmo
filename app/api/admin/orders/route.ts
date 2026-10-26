@@ -78,14 +78,14 @@ export async function GET(request: NextRequest) {
         };
         return {
           _id: order._id.toString(),
-          orderReference: order.shopifyOrderId,
-          orderName: order.shopifyOrderName || '',
+          orderReference: order.orderReference,
+          orderName: order.orderName || '',
           email: order.email,
           customerName: order.customerName || '',
           totalPrice: order.totalPrice,
           currency: order.currency,
           source: order.source || 'webhook',
-          paymentProvider: order.paymentProvider || (order.source === 'admin' ? 'manual' : 'shopify'),
+          paymentProvider: order.paymentProvider || (order.source === 'admin' ? 'manual' : 'stripe'),
           tags: order.tags || [],
           orderQuantity: order.orderQuantity,
           createdAt: order.createdAt,
