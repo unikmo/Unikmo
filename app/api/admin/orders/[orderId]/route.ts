@@ -25,8 +25,8 @@ export async function GET(
     return NextResponse.json({
       order: {
         _id: order._id.toString(),
-        shopifyOrderId: order.shopifyOrderId,
-        shopifyOrderName: order.shopifyOrderName || '',
+        orderReference: order.orderReference,
+        orderName: order.orderName || '',
         email: order.email,
         customerName: order.customerName || '',
         source: order.source || 'webhook',
