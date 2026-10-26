@@ -25,14 +25,14 @@ export async function GET(request: NextRequest) {
             _id: {
               $ifNull: [
                 '$paymentProvider',
-                { $cond: [{ $eq: ['$source', 'admin'] }, 'manual', 'shopify'] },
+                { $cond: [{ $eq: ['$source', 'admin'] }, 'manual', 'stripe'] },
               ],
             },
             count: { $sum: 1 },
           },
         },
       ]),
-      Order.find().sort({ createdAt: -1 }).limit(5).select('shopifyOrderName totalPrice currency paymentProvider source createdAt').lean(),
+      Order.find().sort({ createdAt: -1 }).limit(5).select('orderName totalPrice currency paymentProvider source createdAt').lean(),
     ]);
 
     return NextResponse.json({
