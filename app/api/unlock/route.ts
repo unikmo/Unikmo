@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
 
     const momentCode = await MomentCode.findOne({ code: code.toUpperCase().trim() })
       .populate('user', 'email')
-      .populate('order', 'shopifyOrderId');
+      .populate('order', 'orderReference');
 
     if (!momentCode) {
       return NextResponse.json(
