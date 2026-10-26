@@ -38,9 +38,9 @@ export async function POST(request: NextRequest) {
 
   await connectDB();
   await processPaidOrderAndGenerateCodes({
-    orderReference: session.id,
-    orderNumber: session.id,
-    orderName: session.id,
+    shopifyOrderId: session.id,
+    shopifyOrderNumber: session.id,
+    shopifyOrderName: session.id,
     email,
     customerName: session.customer_details?.name || '',
     totalPrice: (session.amount_total || 0) / 100,
