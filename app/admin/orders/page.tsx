@@ -15,14 +15,14 @@ interface ProductOption {
 
 interface AdminOrder {
   _id: string;
-  shopifyOrderId: string;
-  shopifyOrderName: string;
+  orderReference: string;
+  orderName: string;
   email: string;
   customerName: string;
   totalPrice: number;
   currency: string;
   source: 'admin' | 'webhook' | 'stripe';
-  paymentProvider?: 'shopify' | 'stripe' | 'manual';
+  paymentProvider?: 'stripe' | 'manual';
   tags: string[];
   createdAt: string;
   totalCodes: number;
@@ -416,13 +416,13 @@ export default function AdminOrdersPage() {
               >
                 <td className="px-6 py-4">
                   <Link href={`/admin/orders/${order._id}`} className="text-[#2D2926] hover:underline font-mono text-sm">
-                    {order.shopifyOrderName || order.shopifyOrderId}
+                    {order.orderName || order.orderReference}
                   </Link>
                 </td>
                 <td className="px-6 py-4 text-[#2D2926]/80">{order.email}</td>
                 <td className="px-6 py-4">
                   <span className={`px-2 py-1 rounded-full text-[11px] ${order.paymentProvider === 'stripe' ? 'bg-violet-50 text-violet-700' : order.paymentProvider === 'manual' ? 'bg-blue-50 text-blue-700' : 'bg-amber-50 text-amber-700'}`}>
-                    {order.paymentProvider || (order.source === 'admin' ? 'manual' : 'shopify')}
+                    {order.paymentProvider || (order.source === 'admin' ? 'manual' : 'stripe')}
                   </span>
                 </td>
                 <td className="px-6 py-4 text-[#2D2926]/80">
