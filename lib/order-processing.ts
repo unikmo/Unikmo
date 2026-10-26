@@ -63,7 +63,7 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
   const orderRecord = await Order.create({
     orderReference: input.orderReference,
     orderName: input.orderName || input.orderNumber,
-    shopifyProductId: firstProductId,
+    productReference: firstProductId,
     orderQuantity: totalQuantity,
     user: user._id,
     email: normalizedEmail,
