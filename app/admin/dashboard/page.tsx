@@ -159,7 +159,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="flex gap-2 text-xs">
             <span className="rounded-full bg-white/10 px-3 py-1.5">Stripe {stats?.providers?.stripe || 0}</span>
-            <span className="rounded-full bg-white/10 px-3 py-1.5">Stripe {stats?.providers?.shopify || 0}</span>
+            <span className="rounded-full bg-white/10 px-3 py-1.5">Stripe {stats?.providers?.stripe || 0}</span>
             <span className="rounded-full bg-white/10 px-3 py-1.5">Manual {stats?.providers?.manual || 0}</span>
           </div>
         </div>
