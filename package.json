@@ -10,7 +10,6 @@
     "prestart": "tsx scripts/check-admin.ts",
     "start": "next start",
     "lint": "next lint",
-    "sub:shopify:hook": "tsx scripts/subscribe-webhook.ts",
     "seed:admin": "tsx scripts/seed-admin.ts",
     "check:admin": "tsx scripts/check-admin.ts",
     "qa:offline": "tsx scripts/qa-retail-identifiers.ts"
