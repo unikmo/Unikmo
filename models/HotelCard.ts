@@ -1,4 +1,4 @@
 import mongoose,{Schema,type Model} from 'mongoose';
-export interface HotelCard {code:string;hotelId:string;hotelName:string;logoUrl?:string;welcomeVideoUrl?:string;welcomeMessage?:string;tisonikUrl?:string;guestReference?:string;stayEndsAt?:Date;active:boolean}
-const schema=new Schema<HotelCard>({code:{type:String,unique:true,required:true,uppercase:true},hotelId:{type:String,required:true},hotelName:{type:String,required:true},logoUrl:String,welcomeVideoUrl:String,welcomeMessage:String,tisonikUrl:String,guestReference:String,stayEndsAt:Date,active:{type:Boolean,default:false}},{timestamps:true});
+export interface HotelCard {code:string;accessToken:string;hotelId:string;hotelName:string;logoUrl?:string;welcomeVideoUrl?:string;welcomeMessage?:string;guestReference?:string;stayEndsAt?:Date;active:boolean}
+const schema=new Schema<HotelCard>({code:{type:String,unique:true,required:true,uppercase:true},accessToken:{type:String,unique:true,required:true,index:true,select:false},hotelId:{type:String,required:true},hotelName:{type:String,required:true},logoUrl:String,welcomeVideoUrl:String,welcomeMessage:String,guestReference:String,stayEndsAt:Date,active:{type:Boolean,default:false}},{timestamps:true});
 export default (mongoose.models.HotelCard as Model<HotelCard>)||mongoose.model<HotelCard>('HotelCard',schema);
