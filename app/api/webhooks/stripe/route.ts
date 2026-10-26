@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     totalPrice: (session.amount_total || 0) / 100,
     currency: (session.currency || 'usd').toUpperCase(),
     lineItems: [{ product_id: session.metadata?.productKey || '', variant_id: deliveryType, quantity: purchaseQuantity }],
-    codesToGenerate: Array.from({ length: purchaseQuantity }, () => ({ quantity: momentQuantity, deliveryType, orderQuantity: 1 })),
+    codesToGenerate: [{ quantity: momentQuantity, deliveryType, orderQuantity: purchaseQuantity }],
     source: 'stripe',
     paymentProvider: 'stripe',
   });
