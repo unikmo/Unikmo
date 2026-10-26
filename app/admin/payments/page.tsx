@@ -40,7 +40,7 @@ export default function PaymentsPage() {
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#B38846]">Stripe</p>
             <h2 className="mt-2 font-serif text-3xl text-[#2D2926]">Payment connection</h2>
-            <p className="mt-2 text-sm text-[#2D2926]/60">Checkout runs independently from Shopify while historic orders remain intact.</p>
+            <p className="mt-2 text-sm text-[#2D2926]/60">Checkout and payment processing are powered by Stripe.</p>
           </div>
           <StatusPill ok={status.connected}>{status.connected ? 'Connected' : 'Setup required'}</StatusPill>
         </div>
@@ -71,7 +71,7 @@ export default function PaymentsPage() {
 
       <section className="rounded-2xl border border-[#E3DAD0] bg-[#2D2926] p-6 text-[#FDF9F5] shadow-sm">
         <h3 className="font-serif text-2xl">Safe migration status</h3>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-[#FDF9F5]/70">Stripe is being introduced in test mode first. Shopify checkout stays available until a successful payment creates the order, generates every Moment Code, and sends the buyer email.</p>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-[#FDF9F5]/70">Stripe handles checkout. Successful paid sessions generate purchased Moment Codes and trigger confirmation emails.</p>
       </section>
     </div>
   );
