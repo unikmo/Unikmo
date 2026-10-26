@@ -47,12 +47,6 @@ AWS_S3_BUCKET=your_bucket
 STRIPE_SECRET_KEY=sk_test_replace_me
 STRIPE_WEBHOOK_SECRET=whsec_replace_me
 
-# Shopify (temporary fallback and historical-order support during migration)
-SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
-SHOPIFY_ACCESS_TOKEN=your_access_token
-SHOPIFY_WEBHOOK_SECRET=your_webhook_secret
-SHOPIFY_API_VERSION=2024-10
-
 # Application
 BASE_URL=https://yourdomain.com
 JWT_SECRET=your_jwt_secret
@@ -84,7 +78,6 @@ In Stripe test mode, create a webhook endpoint at `${BASE_URL}/api/webhooks/stri
 - `checkout.session.completed`
 - `checkout.session.async_payment_succeeded`
 
-Copy its signing secret to `STRIPE_WEBHOOK_SECRET`. The Admin → Payments page reports whether the key and webhook secret are configured. Keep the legacy Shopify configuration only until a Stripe test purchase has created the order, generated its Moment Codes, and sent the buyer email.
 
 ### 5. Run Development Server
 
@@ -106,7 +99,6 @@ The application will be available at `http://localhost:3000`
   /upload             # Media upload page
   /unlock             # Recipient unlock page
   /api                # API routes
-    /webhooks         # Stripe and legacy Shopify webhook handlers
     /admin            # Admin API endpoints
     /media            # Media upload endpoints
 /models               # Mongoose models
@@ -140,7 +132,6 @@ The platform uses Stripe Checkout and signed webhooks to:
 6. Generate the correct Moment Codes
 7. Send the buyer email
 
-The Shopify webhook remains in the repository temporarily for historical-order compatibility and rollback. New storefront and admin-created orders do not require Shopify.
 
 ### Media Upload
 
@@ -170,7 +161,6 @@ Protected routes requiring admin authentication:
 ### Public
 - `POST /api/checkout` - Create a Stripe Checkout Session
 - `POST /api/webhooks/stripe` - Stripe fulfillment webhook
-- `POST /api/webhooks/shopify/orders-paid` - Legacy Shopify webhook handler
 - `POST /api/unlock` - Unlock media with code
 - `GET /api/media/validate-code` - Validate code for upload
 - `POST /api/media/upload` - Upload media
