@@ -4,12 +4,13 @@ import MomentCode from '@/models/MomentCode';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { codeId: string } }
+  { params }: { params: Promise<{ codeId: string }> }
 ) {
   try {
     await connectDB();
 
-    const code = await MomentCode.findById(params.codeId)
+    const { codeId } = await params;
+    const code = await MomentCode.findById(codeId)
       .populate('user', 'email')
       .populate('order', 'orderReference email totalPrice');
 
