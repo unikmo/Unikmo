@@ -36,8 +36,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid checkout metadata' }, { status: 400 });
   }
 
-  await connectDB();
-  await processPaidOrderAndGenerateCodes({
+  try {
+    await connectDB();
+    await processPaidOrderAndGenerateCodes({
     orderReference: session.id,
     orderNumber: session.id,
     orderName: session.id,
@@ -49,6 +50,10 @@ export async function POST(request: NextRequest) {
     codesToGenerate: [{ quantity: momentQuantity, deliveryType, orderQuantity: purchaseQuantity }],
     source: 'stripe',
     paymentProvider: 'stripe',
-  });
-  return NextResponse.json({ received: true });
+    });
+    return NextResponse.json({ received: true });
+  } catch (error) {
+    console.error('Stripe fulfillment failed; requesting webhook retry:', error);
+    return NextResponse.json({ error: 'Fulfillment pending retry' }, { status: 500 });
+  }
 }
