@@ -7,11 +7,11 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { orderId: string } }
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
     await connectDB();
-    const { orderId } = params;
+    const { orderId } = await params;
 
     const order = await Order.findById(orderId).populate('user', 'email');
     if (!order) {
