@@ -42,7 +42,7 @@ function isMongoConnectivityError(err: unknown): boolean {
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
-    const ip = request.headers.get('x-forwarded-for') || request.ip || 'unknown';
+    const ip = request.headers.get('x-real-ip') || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { error: 'Too many attempts. Please try again later.' },
