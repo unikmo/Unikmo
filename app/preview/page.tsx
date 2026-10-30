@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
@@ -449,7 +451,7 @@ function Footer() {
           <a href="/faq" className="block hover:text-[#B38846]">FAQ</a>
         </div>
         <div className="text-[11px] leading-7 text-[#22323A]/58 sm:text-right">
-          <a href="/" className="block hover:text-[#B38846]">Current site</a>
+          <Link href="/" className="block hover:text-[#B38846]">Current site</Link>
           <p>Preview implementation — no production mutation.</p>
         </div>
       </div>

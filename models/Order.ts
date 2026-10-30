@@ -22,6 +22,8 @@ export interface IOrder extends Document {
   paymentProvider: 'stripe' | 'manual';
   tags: string[];
   lineItems: ILineItem[];
+  fulfillmentEmailStatus?: 'pending' | 'sending' | 'sent';
+  fulfillmentEmailLeaseAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -96,6 +98,8 @@ const OrderSchema: Schema = new Schema(
       type: [String],
       default: [],
     },
+    fulfillmentEmailStatus: { type: String, enum: ['pending', 'sending', 'sent'], default: 'pending' },
+    fulfillmentEmailLeaseAt: { type: Date },
     lineItems: [
       {
         productId: String,

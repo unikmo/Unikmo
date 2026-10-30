@@ -34,6 +34,7 @@ async function connectDB(): Promise<typeof mongoose> {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      ...(process.env.VERCEL_ENV === 'preview' ? { dbName: 'unikmo_preview' } : {}),
     };
 
     const uri = getMongoUri();

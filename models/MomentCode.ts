@@ -10,6 +10,7 @@ export interface IMomentCode extends Document {
   code: string;
   user: Types.ObjectId;
   order?: Types.ObjectId;
+  fulfillmentSlot?: number;
   retailPack?: Types.ObjectId;
   quantity: 1 | 4 | 7;
   deliveryType: 'digital' | 'physical' | 'split';
@@ -59,6 +60,7 @@ const MomentCodeSchema: Schema = new Schema(
       ref: 'Order',
       required: false,
     },
+    fulfillmentSlot: { type: Number, min: 0 },
     retailPack: { type: Schema.Types.ObjectId, ref: 'RetailPack', index: true },
     quantity: {
       type: Number,
@@ -94,6 +96,8 @@ const MomentCodeSchema: Schema = new Schema(
     timestamps: true,
   }
 );
+
+MomentCodeSchema.index({ order: 1, fulfillmentSlot: 1 }, { unique: true, partialFilterExpression: { order: { $exists: true }, fulfillmentSlot: { $exists: true } } });
 
 // Prevent re-compilation during development
 const MomentCode: Model<IMomentCode> =

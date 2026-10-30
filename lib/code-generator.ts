@@ -1,4 +1,5 @@
 import { randomInt } from 'crypto';
+import { isMomentKeyFormat } from './moment-key-format';
 
 export type Quantity = 1 | 4 | 7;
 export type DeliveryType = 'digital' | 'physical' | 'split';
@@ -23,5 +24,5 @@ export function parseMomentCode(code: string): { quantity: Quantity; deliveryTyp
   return { quantity: Number(match[1]) as Quantity, deliveryType };
 }
 export function isMomentCodeFormat(code: string): boolean {
-  return /^[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}$/.test(code.toUpperCase()) || parseMomentCode(code) !== null;
+  return isMomentKeyFormat(code);
 }

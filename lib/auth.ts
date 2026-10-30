@@ -2,11 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { jwtVerify } from 'jose';
 
-function getJwtSecret(): string {
-  const secret = process.env.JWT_SECRET;
-  if (!secret) throw new Error('JWT_SECRET environment variable is required');
-  return secret;
-}
+import { getJwtSecret } from './jwt-secret';
 
 export interface JWTPayload {
   userId: string;

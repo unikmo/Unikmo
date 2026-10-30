@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useState, useCallback, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
@@ -15,6 +17,7 @@ import {
   MAX_VIDEO_UPLOAD_LABEL,
 } from '@/lib/media-upload-limits';
 import { uploadFileViaPresignedPut } from '@/lib/s3-browser-upload';
+import { isMomentKeyFormat, normalizeMomentKey } from '@/lib/moment-key-format';
 
 interface MediaItem {
   type: 'image' | 'video' | 'audio' | 'text';
@@ -24,7 +27,7 @@ interface MediaItem {
 
 function UploadPageContent() {
   const searchParams = useSearchParams();
-  const codeParam = searchParams.get('code') || '';
+  const codeParam = normalizeMomentKey(searchParams.get('code') || '');
   const recipientName = searchParams.get('name') || 'there';
   const [code, setCode] = useState(codeParam);
   const [isValidating, setIsValidating] = useState(false);
@@ -105,7 +108,7 @@ function UploadPageContent() {
   }, [isValid, code]);
 
   const loadMedia = async () => {
-    if (!code || code.length < 10) return;
+    if (!isMomentKeyFormat(code)) return;
 
     setLoadingMedia(true);
     try {
@@ -122,7 +125,7 @@ function UploadPageContent() {
   };
 
   const validateCode = async (codeToValidate: string) => {
-    if (!codeToValidate || codeToValidate.length < 10) {
+    if (!isMomentKeyFormat(codeToValidate)) {
       setIsValid(null);
       return;
     }
@@ -138,7 +141,7 @@ function UploadPageContent() {
         setIsValid(true);
       } else {
         setIsValid(false);
-        setError(data.error || 'Invalid code');
+        setError(data.message || data.error || 'Check your key and try again.');
       }
     } catch (err: any) {
       setIsValid(false);
@@ -518,7 +521,7 @@ function UploadPageContent() {
       />
       <header className="bg-[#FCF9F4] border-b border-[#22323A]/[0.07]">
         <div className="mx-auto flex h-[72px] w-full max-w-[1440px] items-center px-5 sm:px-8 lg:px-12">
-          <a href="/" className="shrink-0 inline-flex items-center" aria-label="UNIKMO home">
+          <Link href="/" className="shrink-0 inline-flex items-center" aria-label="UNIKMO home">
             <Image
               src="/unikmo-logo-header.png"
               alt="UNIKMO — The Key to Your Memory"
@@ -527,36 +530,33 @@ function UploadPageContent() {
               priority
               className="h-8 sm:h-9 lg:h-10 w-auto"
             />
-          </a>
+          </Link>
         </div>
       </header>
       <div className="p-6 sm:p-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="rounded-2xl p-6 sm:p-8 border border-[#22323A]/10 bg-white shadow-sm"
         >
-          <div className="mb-5 text-[#B38846]" aria-hidden>
-            <svg viewBox="0 0 32 52" className="h-9 w-6" fill="none" stroke="currentColor" strokeWidth="1.6">
-              <circle cx="16" cy="10" r="6" />
-              <path d="M16 16v27m0-17h7m-7 8h5m-5 9h5" />
-            </svg>
-          </div>
           <h1 className="text-3xl sm:text-4xl font-semibold text-[#22323A] mb-2 font-serif">
-            Upload your moment
+            Create your moment
           </h1>
-          <p className="text-[#22323A]/65 mb-8">Share your special moment with a secure code</p>
+          <p className="text-[#22323A]/65 mb-8">Add photos, a video or a message.</p>
 
           {/* Code Input */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-[#22323A] mb-2">Moment Code</label>
+            <label htmlFor="moment-key" className="block text-sm font-medium text-[#22323A] mb-2">Moment Key</label>
             <input
               type="text"
+              id="moment-key"
+              autoComplete="off"
+              spellCheck={false}
               value={code}
-              onChange={(e) => setCode(e.target.value.toUpperCase())}
-              placeholder="UNIKMO-XXXX-XXXX-XXX"
+              onChange={(e) => setCode(normalizeMomentKey(e.target.value))}
+              placeholder="ABCD-EFGH"
               className="w-full px-4 py-3 bg-white border border-[#D3C7BB] rounded-xl text-[#22323A] placeholder-[#22323A]/35 focus:outline-none focus:ring-2 focus:ring-[#22323A]/20 focus:border-transparent"
             />
             {isValidating && (
@@ -578,7 +578,7 @@ function UploadPageContent() {
                     clipRule="evenodd"
                   />
                 </svg>
-                Code validated successfully
+                Key confirmed
               </motion.p>
             )}
           </div>

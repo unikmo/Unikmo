@@ -23,7 +23,7 @@ export const COMMERCE_PRODUCTS: Record<ProductKey, CommerceProduct> = {
 };
 
 export function getCommerceProduct(value: unknown): CommerceProduct | null {
-  return typeof value === 'string' && value in COMMERCE_PRODUCTS
+  return typeof value === 'string' && Object.prototype.hasOwnProperty.call(COMMERCE_PRODUCTS, value)
     ? COMMERCE_PRODUCTS[value as ProductKey]
     : null;
 }
