@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verifyToken } from './lib/auth';
+import { verifyToken } from './lib/token-verification';
 
 // Ensure middleware has access to environment variables
 // Middleware runs on Edge runtime, so we need to ensure JWT_SECRET is available

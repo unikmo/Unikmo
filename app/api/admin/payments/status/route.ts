@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { getStripe } from '@/lib/stripe';
+import { getStripe, getStripeWebhookSecret } from '@/lib/stripe';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const secretConfigured = Boolean(process.env.STRIPE_SECRET_KEY);
-  const webhookConfigured = Boolean(process.env.STRIPE_WEBHOOK_SECRET);
+  const webhookConfigured = Boolean(getStripeWebhookSecret());
   const keyMode = process.env.STRIPE_SECRET_KEY?.startsWith('sk_live_') ? 'live' : 'test';
   const previewOrigin = process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`

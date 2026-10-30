@@ -138,7 +138,7 @@ export async function sendMomentCodesEmail(
   codes: string[],
   orderId: string
 ): Promise<void> {
-  const baseUrl = (process.env.BASE_URL || 'https://unikmo.com').replace(/\/$/, '');
+  const baseUrl = (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : process.env.BASE_URL || 'https://unikmo.com').replace(/\/$/, '');
   const { html } = buildMomentCodesEmailHtml({ codes, orderId, baseUrl });
 
   const subject = 'Your UNIKMO Moment Keys Are Ready';
@@ -158,7 +158,7 @@ export async function sendUnlockNotificationEmail(params: {
   code: string;
   unlockedAt?: Date;
 }): Promise<void> {
-  const baseUrl = (process.env.BASE_URL || 'https://yourdomain.com').replace(/\/$/, '');
+  const baseUrl = (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : process.env.BASE_URL || 'https://unikmo.com').replace(/\/$/, '');
   const unlockedAtText = (params.unlockedAt || new Date()).toLocaleString('en-US', {
     year: 'numeric',
     month: 'short',

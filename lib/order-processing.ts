@@ -150,5 +150,8 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
       throw error;
     }
   }
+  if (!leased && (await Order.findById(order._id).select('fulfillmentEmailStatus'))?.fulfillmentEmailStatus !== 'sent') {
+    throw new Error('Fulfillment email is still in progress; retry required');
+  }
   return { created, orderId: order._id.toString(), generatedCodes: codes };
 }

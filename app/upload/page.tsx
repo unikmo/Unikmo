@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useState, useCallback, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
@@ -518,7 +520,7 @@ function UploadPageContent() {
       />
       <header className="bg-[#FCF9F4] border-b border-[#22323A]/[0.07]">
         <div className="mx-auto flex h-[72px] w-full max-w-[1440px] items-center px-5 sm:px-8 lg:px-12">
-          <a href="/" className="shrink-0 inline-flex items-center" aria-label="UNIKMO home">
+          <Link href="/" className="shrink-0 inline-flex items-center" aria-label="UNIKMO home">
             <Image
               src="/unikmo-logo-header.png"
               alt="UNIKMO — The Key to Your Memory"
@@ -527,7 +529,7 @@ function UploadPageContent() {
               priority
               className="h-8 sm:h-9 lg:h-10 w-auto"
             />
-          </a>
+          </Link>
         </div>
       </header>
       <div className="p-6 sm:p-8">

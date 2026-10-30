@@ -1,24 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import type Stripe from 'stripe';
 import connectDB from '@/lib/db';
-import { getStripe } from '@/lib/stripe';
+import { getStripe, getStripeWebhookSecret } from '@/lib/stripe';
 import { processPaidOrderAndGenerateCodes } from '@/lib/order-processing';
-import type { DeliveryType, Quantity } from '@/lib/code-generator';
+import { stripeOrderInput } from '@/lib/stripe-order-input';
 
 export const runtime = 'nodejs';
+export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
   const signature = request.headers.get('stripe-signature');
-  const webhookSecret = process.env.VERCEL_ENV === 'preview'
-    ? process.env.Stripe_Preview_v2 || process.env.STRIPE_WEBHOOK_SECRET
-    : process.env.STRIPE_WEBHOOK_SECRET;
+  const webhookSecret = getStripeWebhookSecret();
   if (!signature || !webhookSecret) return NextResponse.json({ error: 'Stripe webhook is not configured' }, { status: 503 });
 
   let event: Stripe.Event;
   try {
     event = getStripe().webhooks.constructEvent(await request.text(), signature, webhookSecret);
-  } catch (error) {
-    console.error('Invalid Stripe webhook signature:', error);
+  } catch {
+    console.warn('Stripe webhook signature verification failed');
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
   }
 
@@ -28,31 +27,13 @@ export async function POST(request: NextRequest) {
 
   const session = event.data.object as Stripe.Checkout.Session;
   if (session.payment_status !== 'paid') return NextResponse.json({ received: true });
-  const email = session.customer_details?.email || session.customer_email;
-  if (!email) return NextResponse.json({ error: 'Paid session has no customer email' }, { status: 400 });
-
-  const momentQuantity = Number(session.metadata?.momentQuantity) as Quantity;
-  const deliveryType = session.metadata?.deliveryType as DeliveryType;
-  const purchaseQuantity = Math.max(1, Number(session.metadata?.purchaseQuantity) || 1);
-  if (![1, 4, 7].includes(momentQuantity) || !['digital', 'physical', 'split'].includes(deliveryType)) {
-    return NextResponse.json({ error: 'Invalid checkout metadata' }, { status: 400 });
-  }
+  let input;
+  try { input = stripeOrderInput(session); }
+  catch { return NextResponse.json({ error: 'Invalid checkout metadata' }, { status: 400 }); }
 
   try {
     await connectDB();
-    await processPaidOrderAndGenerateCodes({
-    orderReference: session.id,
-    orderNumber: session.id,
-    orderName: session.id,
-    email,
-    customerName: session.customer_details?.name || '',
-    totalPrice: (session.amount_total || 0) / 100,
-    currency: (session.currency || 'usd').toUpperCase(),
-    lineItems: [{ product_id: session.metadata?.productKey || '', variant_id: deliveryType, quantity: purchaseQuantity }],
-    codesToGenerate: [{ quantity: momentQuantity, deliveryType, orderQuantity: purchaseQuantity }],
-    source: 'stripe',
-    paymentProvider: 'stripe',
-    });
+    await processPaidOrderAndGenerateCodes(input);
     return NextResponse.json({ received: true });
   } catch (error) {
     console.error('Stripe fulfillment failed; requesting webhook retry:', error);

@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -261,7 +263,7 @@ export default function AdminDashboardPage() {
             <h2 className="text-lg font-semibold text-[#2D2926]">Recent orders</h2>
             <p className="mt-1 text-sm text-[#2D2926]/60">Stripe, Stripe, and manually created orders in one view</p>
           </div>
-          <a href="/admin/orders" className="rounded-full border border-[#D3C7BB] px-4 py-2 text-xs font-medium uppercase tracking-wide text-[#2D2926]">View all</a>
+          <Link href="/admin/orders" className="rounded-full border border-[#D3C7BB] px-4 py-2 text-xs font-medium uppercase tracking-wide text-[#2D2926]">View all</Link>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px] text-left text-sm">
