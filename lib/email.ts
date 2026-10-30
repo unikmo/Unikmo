@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import { buildMomentCodesEmailHtml } from './moment-code-email-html';
+import type { DeliveryType } from './code-generator';
 
 /**
  * Creates and configures Nodemailer transporter for SMTP fallback
@@ -136,12 +137,13 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
 export async function sendMomentCodesEmail(
   to: string,
   codes: string[],
-  orderId: string
+  orderId: string,
+  deliveryType?: DeliveryType
 ): Promise<void> {
   const baseUrl = (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : process.env.BASE_URL || 'https://unikmo.com').replace(/\/$/, '');
-  const { html } = buildMomentCodesEmailHtml({ codes, orderId, baseUrl });
+  const { html } = buildMomentCodesEmailHtml({ codes, orderId, baseUrl, deliveryType });
 
-  const subject = 'Your UNIKMO Moment Keys Are Ready';
+  const subject = codes.length === 1 ? 'Your UNIKMO Moment Key' : 'Your UNIKMO Moment Keys';
 
   const success = await sendEmail(to, subject, html);
   

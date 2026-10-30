@@ -2,8 +2,8 @@
 
 Scope: UNIKMO `madonna`, Preview only. No production deployment, merge, production credential change, or deletion of the existing Stripe webhook was performed.
 
-Implementation commit: `0c75e65ce19f4766dc52886f731fc0babbba9d39`.
-Verified deployment: https://madonna-ah5kiwgqa-unikmos-projects.vercel.app (Vercel Authentication remains enabled).
+Initial audit implementation: `0c75e65ce19f4766dc52886f731fc0babbba9d39`; subsequent branch commits include the legacy-key, short-key entry and minimal email corrections below.
+Initial verified deployment: https://madonna-ah5kiwgqa-unikmos-projects.vercel.app (Vercel Authentication remains enabled). The pull request identifies the latest Preview.
 
 ## Fixed deployment risks
 
@@ -13,7 +13,10 @@ Verified deployment: https://madonna-ah5kiwgqa-unikmos-projects.vercel.app (Verc
 - Preview refuses live Stripe API keys. The Preview signing-secret override is selected consistently, trimmed, and reflected in the admin payment status check.
 - Payment confirmation now retrieves the Checkout Session from Stripe and only acknowledges a verified paid session. It resumes the same idempotent fulfillment path when webhook processing is delayed.
 - Concurrent retries no longer acknowledge success while an email lease is still active. A retryable error keeps fulfillment recoverable.
+- Existing legacy keys without fulfillment slots are adopted only when the complete compatible set is present. Incomplete or mixed legacy sets fail closed for review, rather than creating more keys.
 - Preview fulfillment emails link to the Preview deployment, not the production site.
+- Upload and unlock now accept the issued `ABCD-EFGH` format instead of requiring ten characters. A browser-safe shared formatter also accepts a pasted eight-character key and preserves legacy format support.
+- The fulfillment email has no image, printing tip, oversized order reference or generic upload button. A single-key email has one direct creation link with the key prefilled. Multi-key emails link each key individually, and physical delivery text is selected from actual order metadata.
 - Reduced the Server Actions request allowance from 1 GB to 1 MB; large media remains on the existing browser-to-S3 presigned upload path. Added explicit 60-second payment handler budgets.
 - Removed raw signature-error objects from logs and rejected inherited object keys in the product lookup.
 - Fixed Next.js 15 client route parameter compatibility and internal navigation errors exposed by the upgraded build checks.
@@ -35,6 +38,9 @@ Verified deployment: https://madonna-ah5kiwgqa-unikmos-projects.vercel.app (Verc
 | Signed webhook-handler replay against the isolated Preview database | PASS; three concurrent simulated deliveries returned 200 and retained the same single order/code |
 | Invalid webhook signature | PASS; HTTP 400 |
 | Active email lease | PASS; HTTP 500 requests a retry; no extra code issued |
+| Legacy paid-order retry | PASS; complete compatible keys reused; incomplete legacy set stops without additional keys |
+| Short-key and email regression suite | PASS; current/legacy keys, prefilled creation links, no image or generic upload link, and physical delivery wording |
+| Identifier generation | PASS; 20,000 key/barcode generation checks |
 | Deployed admin authentication | PASS; wrong password 401, login 200, authorized orders 200, logout 200, access after logout 401 |
 | Unauthenticated admin orders/payment status | PASS; HTTP 401 |
 

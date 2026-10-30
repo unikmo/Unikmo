@@ -93,6 +93,20 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
     throw new Error('Conflicting order reference');
   }
 
+  // Older paid orders can already own keys without fulfillment slots. Adopt a
+  // complete compatible set rather than issuing a second set on webhook retry.
+  const legacyCodes = await MomentCode.find({ order: order._id, fulfillmentSlot: null }).sort({ _id: 1 });
+  if (legacyCodes.length) {
+    const slottedCount = await MomentCode.countDocuments({ order: order._id, fulfillmentSlot: { $ne: null } });
+    if (slottedCount || legacyCodes.length !== expected.length || legacyCodes.some((code, index) =>
+      code.quantity !== expected[index].quantity || code.deliveryType !== expected[index].deliveryType)) {
+      throw new Error('Legacy fulfillment requires review before issuing more keys');
+    }
+    for (let slot = 0; slot < legacyCodes.length; slot++) {
+      await MomentCode.updateOne({ _id: legacyCodes[slot]._id, fulfillmentSlot: null }, { $set: { fulfillmentSlot: slot } });
+    }
+  }
+
   for (let slot = 0; slot < expected.length; slot++) {
     const item = expected[slot];
     let codeRecord = await MomentCode.findOne({ order: order._id, fulfillmentSlot: slot });
@@ -141,7 +155,8 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
 
   if (leased) {
     try {
-      await sendMomentCodesEmail(email, codes, input.orderNumber);
+      const deliveryTypes = new Set(expected.map(item => item.deliveryType));
+      await sendMomentCodesEmail(email, codes, input.orderNumber, deliveryTypes.size === 1 ? expected[0].deliveryType : 'split');
       await Order.updateOne({ _id: order._id, fulfillmentEmailStatus: 'sending', fulfillmentEmailLeaseAt: leased.fulfillmentEmailLeaseAt },
         { $set: { fulfillmentEmailStatus: 'sent' }, $unset: { fulfillmentEmailLeaseAt: '' } });
     } catch (error) {

@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import { normalizeMomentKey, isMomentKeyFormat } from '../lib/moment-key-format';
+import { buildMomentCodesEmailHtml } from '../lib/moment-code-email-html';
+
+assert.equal(normalizeMomentKey(' jqab afcf '), 'JQAB-AFCF');
+assert.equal(isMomentKeyFormat('JQAB-AFCF'), true);
+assert.equal(isMomentKeyFormat('JQABAFCF'), true);
+assert.equal(isMomentKeyFormat('UNIKMO-ABCD-1PAB-ABC'), true);
+assert.equal(isMomentKeyFormat('ABCD'), false);
+const baseUrl = 'https://preview.example';
+const single = buildMomentCodesEmailHtml({ codes: ['JQAB-AFCF'], orderId: 'qa-order-12345678', baseUrl }).html;
+assert.ok(single.includes('href="https://preview.example/upload?code=JQAB-AFCF"'));
+assert.ok(!single.includes('<img'));
+assert.ok(!single.includes('keepsake'));
+assert.ok(!single.includes('Tip:'));
+assert.ok(!single.includes('href="https://preview.example/upload"'));
+assert.equal((single.match(/<a /g) || []).length, 1);
+const physical = buildMomentCodesEmailHtml({ codes: ['JQAB-AFCF'], orderId: 'qa-order', baseUrl, deliveryType: 'physical' }).html;
+assert.ok(physical.includes('physical card will be delivered separately'));
+const multiple = buildMomentCodesEmailHtml({ codes: ['JQAB-AFCF', 'ABCD-EFGH'], orderId: 'qa-order', baseUrl }).html;
+for (const code of ['JQAB-AFCF', 'ABCD-EFGH']) assert.ok(multiple.includes(`/upload?code=${code}`));
+console.log('PASS: current and legacy key formats; direct email links; minimal image-free email; delivery copy.');

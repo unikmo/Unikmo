@@ -16,6 +16,7 @@ import {
   MAX_VIDEO_UPLOAD_LABEL,
 } from '@/lib/media-upload-limits';
 import { uploadFileViaPresignedPut } from '@/lib/s3-browser-upload';
+import { isMomentKeyFormat, normalizeMomentKey } from '@/lib/moment-key-format';
 
 interface MediaItem {
   type: 'image' | 'video' | 'audio' | 'text';
@@ -51,7 +52,7 @@ function IconHeart() {
 
 function UnlockPageContent() {
   const searchParams = useSearchParams();
-  const codeParam = searchParams.get('code') || '';
+  const codeParam = normalizeMomentKey(searchParams.get('code') || '');
 
   // --- Upload state ---
   const [uploadCode, setUploadCode] = useState(codeParam);
@@ -173,7 +174,7 @@ function UnlockPageContent() {
 
   // Upload: validate code when it changes
   useEffect(() => {
-    if (uploadCode && uploadCode.length >= 10) {
+    if (isMomentKeyFormat(uploadCode)) {
       setUploadValidating(true);
       setUploadError(null);
       fetch(`/api/media/validate-code?code=${encodeURIComponent(uploadCode.toUpperCase())}`)
@@ -195,7 +196,7 @@ function UnlockPageContent() {
 
   // Upload: load media when valid
   useEffect(() => {
-    if (!uploadValid || !uploadCode || uploadCode.length < 10) return;
+    if (!uploadValid || !isMomentKeyFormat(uploadCode)) return;
     setLoadingMedia(true);
     fetch(`/api/media/list?code=${encodeURIComponent(uploadCode.toUpperCase())}`)
       .then((r) => parseResponseSafely(r))
@@ -339,13 +340,13 @@ function UnlockPageContent() {
   };
 
   const handleUnlock = async () => {
-    if (!unlockCode || unlockCode.length < 10) {
+    if (!isMomentKeyFormat(unlockCode)) {
       setUnlockError('Please enter a valid code');
       setUnlockMomentModal({
         open: true,
         variant: 'gentle',
         title: 'Almost there',
-        message: 'Please enter your full Moment Key in the format UNIKMO-XXXX-XXXX-XXX.',
+        message: 'Enter the Moment Key from your email or card, for example ABCD-EFGH.',
         emoji: '🔑✨',
       });
       return;
@@ -529,13 +530,13 @@ function UnlockPageContent() {
           <div className="rounded-xl bg-white/60 border border-[#2D2926]/10 p-4 sm:p-6 shadow-sm">
             {!unlocked ? (
               <>
-                <label className="block text-sm font-medium text-[#2D2926] mb-2">Moment Code</label>
+                <label className="block text-sm font-medium text-[#2D2926] mb-2">Moment Key</label>
                 <input
                   type="text"
                   value={unlockCode}
-                  onChange={(e) => setUnlockCode(e.target.value.toUpperCase())}
+                  onChange={(e) => setUnlockCode(normalizeMomentKey(e.target.value))}
                   onKeyDown={(e) => e.key === 'Enter' && handleUnlock()}
-                  placeholder="UNIKMO-XXXX-XXXX-XXX"
+                  placeholder="ABCD-EFGH"
                   className="w-full px-4 py-3 rounded-lg border border-[#2D2926]/20 bg-white text-[#2D2926] placeholder-[#2D2926]/40 focus:outline-none focus:ring-2 focus:ring-[#2D2926]/20"
                   disabled={unlockLoading}
                 />
