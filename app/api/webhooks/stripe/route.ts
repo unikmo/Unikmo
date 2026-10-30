@@ -9,7 +9,9 @@ export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
   const signature = request.headers.get('stripe-signature');
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const webhookSecret = process.env.VERCEL_ENV === 'preview'
+    ? process.env.Stripe_Preview_v2 || process.env.STRIPE_WEBHOOK_SECRET
+    : process.env.STRIPE_WEBHOOK_SECRET;
   if (!signature || !webhookSecret) return NextResponse.json({ error: 'Stripe webhook is not configured' }, { status: 503 });
 
   let event: Stripe.Event;
