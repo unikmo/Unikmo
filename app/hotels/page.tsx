@@ -5,14 +5,14 @@ import SiteFooter from '@/components/SiteFooter';
 import { COMPANY } from '@/lib/company';
 
 export const metadata: Metadata = {
-  title: 'UNIKMO for Hotels | A Keepsake Service for Boutique Properties',
+  title: 'UNIKMO for Hotels | A Guest Experience Keepsake for Luxury Hotels & Resorts',
   description:
     'Replace the welcome note with a shareable, consent-first keepsake. UNIKMO turns the moments your staff already notice into something guests post, keep, and remember your property by.',
   alternates: { canonical: 'https://www.unikmo.com/hotels' },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'UNIKMO for Hotels',
-    description: 'A keepsake service for boutique and luxury properties, built to ask almost nothing of your team.',
+    description: 'A guest experience keepsake for premium and luxury hospitality, built to ask almost nothing of your team.',
     url: 'https://www.unikmo.com/hotels',
     siteName: 'UNIKMO',
     images: ['https://www.unikmo.com/og-image.jpg'],
@@ -61,7 +61,7 @@ const asks = [
   },
   {
     label: 'Capture',
-    body: 'Your own staff, or the freelance photographer many boutique properties already use for portraits and proposals. UNIKMO does not supply or manage this.',
+    body: 'Your own staff, your existing on-property photography teams or preferred partners. UNIKMO does not supply or manage this.',
   },
   {
     label: 'Everything else',
@@ -108,7 +108,7 @@ export default function HotelsPage() {
     '@id': 'https://www.unikmo.com/hotels#webpage',
     url: 'https://www.unikmo.com/hotels',
     name: 'UNIKMO for Hotels',
-    description: 'A keepsake service for boutique and luxury properties, built on UNIKMO’s existing curated-memory pipeline.',
+    description: 'A guest experience keepsake for premium and luxury hospitality, built on UNIKMO’s existing curated-memory pipeline.',
     isPartOf: { '@id': 'https://www.unikmo.com/#website' },
     about: { '@id': 'https://www.unikmo.com/#brand' },
     inLanguage: 'en',
@@ -165,8 +165,8 @@ export default function HotelsPage() {
           </div>
 
           <div className="mx-auto mt-9 max-w-[820px] rounded-[24px] border border-[#22323A]/[0.07] bg-[radial-gradient(circle_at_50%_38%,#FFFDF9_0%,#F2E8DE_58%,#E4D6C8_100%)] p-5 shadow-[0_24px_70px_rgba(34,50,58,.09)] sm:p-8">
-            <div className="relative mx-auto aspect-[1748/1240] max-w-[680px] overflow-hidden rounded-[16px] border border-white/60 shadow-[0_24px_50px_rgba(40,30,20,.16)]">
-              <Image src="/hotels/unikmo-hotel-card.png" alt="The UNIKMO hotel card: a physical key to a private memory" fill priority className="object-cover" sizes="(max-width:900px) 86vw, 680px" />
+            <div className="relative mx-auto aspect-[4/3] max-w-[680px] overflow-hidden rounded-[16px] border border-white/60 shadow-[0_24px_50px_rgba(40,30,20,.16)]">
+              <Image src="/hotels/hotel-card.webp" alt="The UNIKMO hotel card: a physical key to a private memory" fill priority className="object-cover" sizes="(max-width:900px) 86vw, 680px" />
             </div>
           </div>
 
@@ -309,7 +309,7 @@ export default function HotelsPage() {
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Let’s talk</p>
             <h2 className="mx-auto mt-3 max-w-[680px] font-serif text-[32px] leading-[1.05] sm:text-[40px]">Give your guests something that lasts.</h2>
             <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-[#22323A]/62">
-              We are starting with a small number of boutique properties. Reach out and we will walk through what a pilot would look like for yours.
+              We are selecting a limited number of launch partners for our 2026 resort and luxury hotel pilots. Reach out and we will walk through what a pilot would look like for yours.
             </p>
             <a
               href={`mailto:${COMPANY.email}`}
