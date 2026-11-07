@@ -227,6 +227,12 @@ export default function HotelsPage() {
               <br />
               Scale only when the numbers prove it.
             </h2>
+            <div className="mx-auto mt-8 max-w-[680px] rounded-[18px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-6 text-left shadow-[0_8px_26px_rgba(34,50,58,.04)] sm:p-7">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">Pilot pricing</p>
+              <p className="mt-3 text-[14px] leading-[1.75] text-[#22323A]/72 sm:text-[15px]">
+                For the first one-ship / one-property pilot we keep pricing deliberately simple and low ($5 per guest on ships / $8 per stay in hotels) so the focus stays on measuring real impact. After a successful pilot we move to standard commercial pricing.
+              </p>
+            </div>
             <a
               href={PILOT_MAILTO}
               className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]"
