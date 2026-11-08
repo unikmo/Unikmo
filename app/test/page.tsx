@@ -130,7 +130,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-[#22323A]/[0.06] bg-[#FCF9F4]/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-[1440px] items-center px-5 sm:px-8 lg:px-12">
-        <a href="#top" aria-label="UNIKMO home"><Image src="/unikmo-logo-header.png" alt="UNIKMO — The Key to Your Memory" width={729} height={220} priority className="h-8 w-auto sm:h-9" /></a>
+        <a href="#top" aria-label="UNIKMO home"><Image src="/unikmo-logo.svg" alt="UNIKMO" width={729} height={220} priority className="h-8 w-auto sm:h-9" /></a>
         <nav className="ml-auto hidden items-center gap-8 text-[11px] text-[#22323A]/70 md:flex">
           <a href="#how" className="hover:text-[#B38846]">How it works</a>
           <a href="#moments" className="hover:text-[#B38846]">Occasions</a>
