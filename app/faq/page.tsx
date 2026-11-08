@@ -19,6 +19,7 @@ const FAQ_ITEMS = [
     a: 'Choose your card, create your private memory, and give the card to someone special. They scan its QR code, enter the private code, and open the memory in their browser — no app or recipient account required.',
   },
   { q: 'What can I upload?', a: 'You can add a video, photo, voice note, or written message.' },
+  { q: 'Can hotels offer UNIKMO cards to guests for purchase?', a: 'Yes. Hotels can hold a supply of UNIKMO cards and offer them to guests who want to give someone a private memory, with the hotel earning a commission on cards sold. Terms are agreed with each property. Contact us to discuss.' },
   { q: 'Does the recipient need an app?', a: 'No. The recipient does not need to download an app or create an account.' },
   {
     q: 'Is the memory private?',
