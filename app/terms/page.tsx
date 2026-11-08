@@ -31,7 +31,7 @@ export default function TermsPage() {
         <p>
           UNIKMO lets you create, store and share private digital Moments (video, audio, images or text) that a recipient
           opens through a unique private access code connected to a physical card. Checkout and payment are handled by
-          Shopify.
+          Stripe. Historical orders may continue to reference Shopify during our payment-provider transition.
         </p>
       </LegalSection>
 
