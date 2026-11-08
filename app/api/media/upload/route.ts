@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import MomentCode from '@/models/MomentCode';
+import { isRetailKeyEligible } from '@/lib/retail-key-eligibility';
 import {
   buildMomentObjectKey,
   buildPublicUrlForKey,
@@ -85,6 +86,8 @@ export async function POST(request: NextRequest) {
     if (!momentCode) {
       return NextResponse.json({ error: 'Invalid code' }, { status: 404 });
     }
+
+    if (!await isRetailKeyEligible(momentCode)) return NextResponse.json({ error: 'Key not sold' }, { status: 403 });
 
     if (momentCode.status !== 'new') {
       return NextResponse.json(

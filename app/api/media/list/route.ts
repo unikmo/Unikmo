@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import MomentCode from '@/models/MomentCode';
+import { isRetailKeyEligible } from '@/lib/retail-key-eligibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,11 +16,13 @@ export async function GET(request: NextRequest) {
 
     await connectDB();
 
-    const momentCode = await MomentCode.findOne({ code }).select('media status');
+    const momentCode = await MomentCode.findOne({ code }).select('media status retailPack');
 
     if (!momentCode) {
       return NextResponse.json({ error: 'Invalid code' }, { status: 404 });
     }
+
+    if (!await isRetailKeyEligible(momentCode)) return NextResponse.json({ error: 'Key not sold' }, { status: 403 });
 
     return NextResponse.json({
       media: momentCode.media || [],

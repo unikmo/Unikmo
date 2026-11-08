@@ -31,7 +31,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `User` schema with email (unique), roles (`buyer` | `admin`), optional password hash, optional `shopifyCustomerId`, timestamps; used for buyers created from orders and admin login.
 
 ### 2
 
@@ -39,7 +38,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `Order` schema: Shopify order id (unique), line items, buyer ref, email, totals, currency, `paymentStatus`, `source` (`webhook` | `admin` | `waitlist`), tags, customer name; indexes for admin listing and idempotency.
 
 ### 3
 
@@ -63,15 +61,12 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `AdminSettings` for `sellingEnabled`, Shopify test override, and waitlist popup copy fields; dedupe/single-document patch pattern in `admin-settings-store`.
 
 ### 6
 
-**Subject:** ShopifyCredentials model  
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** Encrypted storage of store domain, access token, webhook secret for Shopify Admin API and webhooks.
 
 ### 7
 
@@ -91,7 +86,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `lib/order-processing.ts` — `processPaidOrderAndGenerateCodes`: upsert user, create order once per Shopify id, loop `codesToGenerate`, unique code generation, `MomentCode` rows, `sendMomentCodesEmail`.
 
 ### 9
 
@@ -99,7 +93,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `extractProductData` / `deriveCodesToGenerateFromLineItems` — read Shopify product + variant metafields for moment quantity (1/4/7) and delivery type (digital/physical/split).
 
 ### 10
 
@@ -111,27 +104,21 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 ### 11
 
-**Subject:** Shopify GraphQL client  
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `lib/shopify.ts` — HMAC validation for webhooks, credential resolution, `ShopifyGraphQLClient` (query, metafields, draft order create/complete, webhook subscription CRUD).
 
 ### 12
 
-**Subject:** Shopify credential loading & encryption  
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `lib/shopify-credentials.ts`, `lib/encryption.ts` — load/decrypt credentials for API use.
 
 ### 13
 
-**Subject:** Shopify test vs live mode  
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `lib/shopify-test-mode.ts` — effective test mode for product IDs and env fallbacks.
 
 ### 14
 
@@ -139,7 +126,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `lib/shopify-resolve-variant.ts` — map moment quantity + delivery to Shopify variant for admin waitlist code generation.
 
 ### 15
 
@@ -231,7 +217,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Develop Website and Integrated with SaaS System  
 
-**Task Description:** `GET /api/products` — Shopify GraphQL fetch of fixed product set (test/live IDs), variants, prices, images, `storeDomain` for checkout links.
 
 ### 26
 
@@ -299,19 +284,15 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 ### 34
 
-**Subject:** Shopify check connection (public/tooling)  
 
 **Milestone:** Develop Website and Integrated with SaaS System  
 
-**Task Description:** `app/api/shopify/check-connection/route.ts` — verify Shopify connectivity.
 
 ### 35
 
-**Subject:** Shopify reconnect  
 
 **Milestone:** Develop Website and Integrated with SaaS System  
 
-**Task Description:** `app/api/shopify/reconnect/route.ts` — reconnect flow for store integration.
 
 ---
 
@@ -319,11 +300,9 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 ### 36
 
-**Subject:** Shopify orders paid webhook  
 
 **Milestone:** Backend Architecture (Node.js + Express + MongoDB/Redis)  
 
-**Task Description:** `POST /api/webhooks/shopify/orders-paid` — raw body HMAC check (optional bypass env), idempotency, derive codes, `processPaidOrderAndGenerateCodes`, tag parsing.
 
 ---
 
@@ -367,7 +346,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Admin App & Platform Management  
 
-**Task Description:** `GET /api/admin/orders` — search/filter by source, aggregate code stats; `POST` — create paid draft order via Shopify, then run code generation.
 
 ### 42
 
@@ -451,27 +429,21 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 ### 52
 
-**Subject:** Admin Shopify credentials  
 
 **Milestone:** Admin App & Platform Management  
 
-**Task Description:** `GET/POST/PUT/DELETE /api/admin/shopify-credentials` — manage encrypted Shopify settings (auth-guarded).
 
 ### 53
 
-**Subject:** Admin Shopify test mode setting  
 
 **Milestone:** Admin App & Platform Management  
 
-**Task Description:** `GET/PUT /api/admin/settings/shopify-test-mode` — toggle test credentials behavior.
 
 ### 54
 
-**Subject:** Admin Shopify webhook subscribe  
 
 **Milestone:** Admin App & Platform Management  
 
-**Task Description:** `POST /api/admin/shopify-webhooks/subscribe` — register webhook subscription with Shopify.
 
 ### 55
 
@@ -567,7 +539,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** Develop Website and Integrated with SaaS System  
 
-**Task Description:** Fetch `/api/products`, grid of tiers, product modal with delivery choice, checkout URL to Shopify cart with email + cart attributes, waitlist path when selling off.
 
 ### 66
 
@@ -715,19 +686,15 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 ### 83
 
-**Subject:** Admin Shopify page  
 
 **Milestone:** Admin App & Platform Management  
 
-**Task Description:** `app/admin/shopify/page.tsx` — connection UI; uses `ShopifyConnectionStatus` where applicable.
 
 ### 84
 
-**Subject:** Shopify connection status component  
 
 **Milestone:** Tailwind CSS Design System & Reusable Components  
 
-**Task Description:** `components/ShopifyConnectionStatus.tsx` — display connection state.
 
 ### 85
 
@@ -767,11 +734,9 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 ### 89
 
-**Subject:** Subscribe Shopify webhook  
 
 **Milestone:** DevOps & Deployment  
 
-**Task Description:** `scripts/subscribe-webhook.ts` + `npm run sub:shopify:hook` — register orders/paid webhook.
 
 ### 90
 
@@ -795,7 +760,6 @@ Stack note: **Next.js 14 (App Router)** API routes + **MongoDB (Mongoose)** — 
 
 **Milestone:** QA and Deployment  
 
-**Task Description:** `.env.example` — documented variables including MongoDB, Cloudinary, Shopify, JWT, SMTP, cPanel SMTP notes, contact email.
 
 ---
 

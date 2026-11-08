@@ -9,7 +9,7 @@ interface Code {
   _id: string;
   code: string;
   user: { email: string };
-  order: { shopifyOrderId: string; email: string; source?: 'admin' | 'webhook'; tags?: string[] };
+  order: { orderReference: string; email: string; source?: 'admin' | 'webhook'; tags?: string[] };
   quantity: number;
   deliveryType: string;
   status: string;
@@ -167,7 +167,7 @@ export default function CodesPage() {
                     </Link>
                   </td>
                   <td className="px-6 py-4 text-[#2D2926] whitespace-nowrap">{code.user?.email}</td>
-                  <td className="px-6 py-4 text-[#2D2926]/75 whitespace-nowrap font-mono text-sm">{code.order?.shopifyOrderId}</td>
+                  <td className="px-6 py-4 text-[#2D2926]/75 whitespace-nowrap font-mono text-sm">{code.order?.orderReference}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {(() => {
                       const isAdminGenerated =

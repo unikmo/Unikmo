@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { SignJWT, jwtVerify } from 'jose';
+import { jwtVerify } from 'jose';
 
-const JWT_SECRET = process.env.JWT_SECRET || '';
-
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is required');
+function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) throw new Error('JWT_SECRET environment variable is required');
+  return secret;
 }
 
 export interface JWTPayload {
@@ -15,13 +15,12 @@ export interface JWTPayload {
 }
 
 // Create a TextEncoder for jose (works in both Node and Edge)
-const secretKey = new TextEncoder().encode(JWT_SECRET);
 
 /**
  * Generates a JWT token for admin authentication (Node.js runtime)
  */
 export function generateToken(payload: JWTPayload): string {
-  return jwt.sign(payload, JWT_SECRET, {
+  return jwt.sign(payload, getJwtSecret(), {
     expiresIn: '7d',
   });
 }
@@ -32,14 +31,11 @@ export function generateToken(payload: JWTPayload): string {
  */
 export async function verifyToken(token: string): Promise<JWTPayload | null> {
   try {
-    if (!JWT_SECRET) {
-      console.error('[Auth] JWT_SECRET is not set!');
-      return null;
-    }
+    const secret = getJwtSecret();
 
     // Try using jose (Edge-compatible) first
     try {
-      const { payload } = await jwtVerify(token, secretKey, {
+      const { payload } = await jwtVerify(token, new TextEncoder().encode(secret), {
         algorithms: ['HS256'],
       });
       // jose returns a generic JWTPayload, we need to cast it to our custom type
@@ -47,7 +43,7 @@ export async function verifyToken(token: string): Promise<JWTPayload | null> {
     } catch (joseError) {
       // Fallback to jsonwebtoken for Node.js runtime
       try {
-        const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
+        const decoded = jwt.verify(token, secret) as JWTPayload;
         return decoded;
       } catch (jwtError: any) {
         console.error('[Auth] Token verification failed:', jwtError.message);

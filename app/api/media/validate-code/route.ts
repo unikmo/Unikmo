@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import MomentCode from '@/models/MomentCode';
+import { isRetailKeyEligible } from '@/lib/retail-key-eligibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +16,7 @@ export async function GET(request: NextRequest) {
 
     await connectDB();
 
-    const momentCode = await MomentCode.findOne({ code }).select('status');
+    const momentCode = await MomentCode.findOne({ code }).select('status retailPack');
 
     if (!momentCode) {
       return NextResponse.json(
@@ -28,6 +29,8 @@ export async function GET(request: NextRequest) {
         { status: 200 }
       );
     }
+
+    if (!await isRetailKeyEligible(momentCode)) return NextResponse.json({ valid: false, reason: 'not_sold', message: 'This Moment Key has not been activated at checkout.' });
 
     if (momentCode.status === 'revoked') {
       return NextResponse.json(
