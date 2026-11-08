@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import CuratedUnikmoTeaser from '@/components/CuratedUnikmoTeaser';
 import SiteFooter from '@/components/SiteFooter';
@@ -284,6 +285,8 @@ export default function TestPage() {
         </section>
 
         <CuratedUnikmoTeaser />
+
+        <section className="border-t border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-8 sm:px-8"><div className="mx-auto flex max-w-[900px] flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left"><p className="text-[13px] leading-[1.7] text-[#22323A]/70">UNIKMO is also used by cruise lines and luxury hotels as a welcome and keepsake.</p><Link href="/hotels" className="text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">For hotels and cruise lines <span aria-hidden="true">→</span></Link></div></section>
 
         <section className="border-t border-[#22323A]/[0.06] bg-[#FCF9F4] px-5 py-8 sm:px-8"><div className="mx-auto grid max-w-[1180px] gap-5 sm:grid-cols-2 lg:grid-cols-4">{[
           ['lock', 'Private & secure', 'Your moments stay private.'],
