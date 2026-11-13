@@ -130,13 +130,13 @@ function Header() {
           <KeyMark className="h-9 w-4" />
           <span className="font-serif text-[23px] tracking-[0.24em] text-[#22323A]">UNIKMO</span>
         </a>
-        <nav className="ml-auto hidden items-center gap-8 text-[11px] text-[#22323A]/70 md:flex">
-          <a href="#how" className="hover:text-[#B38846]">How it works</a>
-          <a href="#occasions" className="hover:text-[#B38846]">Occasions</a>
-          <a href="#stories" className="hover:text-[#B38846]">Stories</a>
-          <a href="/faq" className="hover:text-[#B38846]">FAQ</a>
+        <nav className="ml-auto hidden items-center gap-8 text-[12px] text-[#22323A]/70 md:flex">
+          <a href="#how" className="hover:text-[#8A6528]">How it works</a>
+          <a href="#occasions" className="hover:text-[#8A6528]">Occasions</a>
+          <a href="#stories" className="hover:text-[#8A6528]">Stories</a>
+          <a href="/faq" className="hover:text-[#8A6528]">FAQ</a>
         </nav>
-        <a href="#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white shadow-[0_9px_25px_rgba(179,136,70,.22)] transition hover:bg-[#9D773D] md:ml-8">
+        <a href="#shop" className="ml-auto rounded-lg bg-[#8F6A2C] px-5 py-3 text-[12px] font-medium text-white shadow-[0_9px_25px_rgba(179,136,70,.22)] transition hover:bg-[#7A5A24] md:ml-8">
           Choose Your Card
         </a>
       </div>
@@ -148,15 +148,15 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-[#FCF9F4] px-5 pb-10 pt-14 sm:px-8 sm:pt-20 lg:pt-24">
       <div className="mx-auto max-w-[1120px] text-center">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-[#B38846]">The key to your memory</p>
+        <p className="text-[12px] font-semibold uppercase tracking-[0.34em] text-[#8A6528]">The key to your memory</p>
         <h1 className="mx-auto mt-5 max-w-[900px] font-serif text-[48px] leading-[0.98] tracking-[-0.035em] text-[#22323A] sm:text-[64px] lg:text-[78px]">
           A card that unlocks<br />a private memory.
         </h1>
-        <p className="mx-auto mt-6 max-w-[620px] text-[15px] leading-[1.7] text-[#22323A]/68 sm:text-[17px]">
+        <p className="mx-auto mt-6 max-w-[620px] text-[15px] leading-[1.7] text-[#22323A]/70 sm:text-[17px]">
           Turn a private video, voice note, photo or message into a beautifully made card they can hold — and return to whenever it matters.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="#shop" className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a>
+          <a href="#shop" className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#8F6A2C] px-7 text-[12px] font-medium text-white transition hover:bg-[#7A5A24]">Choose Your Card</a>
           <a href="#how" className="inline-flex min-h-[50px] items-center justify-center rounded-lg border border-[#22323A]/20 bg-white/40 px-7 text-[12px] font-medium text-[#22323A] transition hover:border-[#B38846]/45">See how it works</a>
         </div>
 
@@ -184,10 +184,10 @@ function TrustStrip() {
       <div className="mx-auto grid max-w-[1180px] grid-cols-1 px-5 py-3 sm:grid-cols-3 sm:px-8">
         {trust.map((item, i) => (
           <div key={item.title} className={`flex items-center gap-4 px-3 py-4 ${i ? 'border-t border-[#22323A]/[0.06] sm:border-l sm:border-t-0' : ''}`}>
-            <div className="text-[#B38846]">{item.icon}</div>
+            <div className="text-[#8A6528]">{item.icon}</div>
             <div>
               <h3 className="text-[12px] font-medium text-[#22323A]">{item.title}</h3>
-              <p className="mt-1 text-[11px] leading-relaxed text-[#22323A]/55">{item.body}</p>
+              <p className="mt-1 text-[12px] leading-relaxed text-[#22323A]/70">{item.body}</p>
             </div>
           </div>
         ))}
@@ -201,9 +201,9 @@ function CardExperience() {
     <section className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-[1180px]">
         <div className="text-center">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Made to connect</p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#8A6528]">Made to connect</p>
           <h2 className="mt-3 font-serif text-[34px] text-[#22323A] sm:text-[44px]">One card. Two sides. One private memory.</h2>
-          <p className="mx-auto mt-3 max-w-[580px] text-[14px] leading-relaxed text-[#22323A]/60">The front is the keepsake. The back gives access to the private memory you created.</p>
+          <p className="mx-auto mt-3 max-w-[580px] text-[14px] leading-relaxed text-[#22323A]/70">The front is the keepsake. The back gives access to the private memory you created.</p>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
           <figure>
@@ -234,14 +234,14 @@ function HowItWorks() {
   return (
     <section id="how" className="bg-[#FCF9F4] px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-[1120px]">
-        <p className="text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">How it works</p>
+        <p className="text-center text-[12px] font-semibold uppercase tracking-[0.3em] text-[#8A6528]">How it works</p>
         <div className="mt-9 grid grid-cols-1 gap-5 md:grid-cols-3">
           {steps.map((step) => (
             <article key={step.n} className="relative rounded-[18px] border border-[#22323A]/[0.08] bg-white/45 px-7 py-8 text-center">
-              <span className="absolute -top-4 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-[#B38846] text-[11px] text-white">{step.n}</span>
+              <span className="absolute -top-4 left-1/2 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-[#8F6A2C] text-[12px] text-white">{step.n}</span>
               <div className="mx-auto flex h-10 items-center justify-center text-[#22323A]"><StepIcon kind={step.icon} /></div>
               <h3 className="mt-3 font-serif text-[24px] text-[#22323A]">{step.title}</h3>
-              <p className="mx-auto mt-2 max-w-[245px] text-[12px] leading-relaxed text-[#22323A]/58">{step.body}</p>
+              <p className="mx-auto mt-2 max-w-[245px] text-[12px] leading-relaxed text-[#22323A]/70">{step.body}</p>
             </article>
           ))}
         </div>
@@ -284,18 +284,18 @@ function CheckoutModal({ product, storeDomain, onClose }: { product: Product; st
       <div className="w-full max-w-lg rounded-[22px] bg-[#FCF9F4] p-6 shadow-2xl sm:p-8" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-[#B38846]">Your card</p>
+            <p className="text-[12px] uppercase tracking-[0.24em] text-[#8A6528]">Your card</p>
             <h3 className="mt-2 font-serif text-[28px] text-[#22323A]">{product.title}</h3>
             <p className="mt-1 text-[14px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p>
           </div>
-          <button onClick={onClose} className="text-2xl leading-none text-[#22323A]/50" aria-label="Close">×</button>
+          <button onClick={onClose} className="text-2xl leading-none text-[#22323A]/70" aria-label="Close">×</button>
         </div>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {(['physical', 'digital'] as const).map((type) => (
             <button key={type} onClick={() => setDelivery(type)} className={`rounded-xl border px-4 py-4 text-left text-[12px] transition ${delivery === type ? 'border-[#B38846] bg-[#B38846]/8' : 'border-[#22323A]/12 bg-white/45'}`}>
               <span className="block font-medium text-[#22323A]">{type === 'physical' ? 'Physical card + digital access' : 'Digital card'}</span>
-              <span className="mt-1 block text-[#22323A]/55">{type === 'physical' ? 'We ship the card and email your private access code.' : 'Receive the digital card and private access code by email.'}</span>
+              <span className="mt-1 block text-[#22323A]/70">{type === 'physical' ? 'We ship the card and email your private access code.' : 'Receive the digital card and private access code by email.'}</span>
             </button>
           ))}
         </div>
@@ -334,9 +334,9 @@ function Shop() {
     <section id="shop" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-[1240px]">
         <div className="text-center">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your set</p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#8A6528]">Choose your set</p>
           <h2 className="mt-3 font-serif text-[36px] text-[#22323A] sm:text-[46px]">Find the perfect fit.</h2>
-          <p className="mx-auto mt-3 max-w-[560px] text-[14px] leading-relaxed text-[#22323A]/58">No invented packaging. Just the actual UNIKMO cards, shown as the sets you receive.</p>
+          <p className="mx-auto mt-3 max-w-[560px] text-[14px] leading-relaxed text-[#22323A]/70">No invented packaging. Just the actual UNIKMO cards, shown as the sets you receive.</p>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
           {tiers.map((tier) => (
@@ -344,8 +344,8 @@ function Shop() {
               <CardStack count={tier.count} />
               <h3 className="font-serif text-[26px] text-[#22323A]">{tier.title}</h3>
               <p className="mt-2 text-[14px] font-medium text-[#22323A]">{tier.product ? formatCurrency(tier.product.price, tier.product.currencyCode) : 'Loading price…'}</p>
-              <p className="mx-auto mt-2 min-h-10 max-w-[240px] text-[12px] leading-relaxed text-[#22323A]/55">{tier.count === 1 ? 'One beautifully made card with one private memory.' : tier.count === 4 ? 'Four cards for four moments that matter most.' : 'Seven cards for a story told over time.'}</p>
-              <button disabled={!tier.product} onClick={() => tier.product && setSelected(tier.product)} className="mt-5 rounded-lg bg-[#B38846] px-6 py-3 text-[11px] font-medium text-white transition hover:bg-[#9D773D] disabled:opacity-45">Choose This</button>
+              <p className="mx-auto mt-2 min-h-10 max-w-[240px] text-[12px] leading-relaxed text-[#22323A]/70">{tier.count === 1 ? 'One beautifully made card with one private memory.' : tier.count === 4 ? 'Four cards for four moments that matter most.' : 'Seven cards for a story told over time.'}</p>
+              <button disabled={!tier.product} onClick={() => tier.product && setSelected(tier.product)} className="mt-5 rounded-lg bg-[#8F6A2C] px-6 py-3 text-[12px] font-medium text-white transition hover:bg-[#7A5A24] disabled:opacity-45">Choose This</button>
             </article>
           ))}
         </div>
@@ -370,9 +370,9 @@ function Occasions() {
         <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {occasions.map(([title, body]) => (
             <article key={title} className="rounded-[18px] border border-[#22323A]/[0.08] bg-white/35 px-5 py-7 text-center">
-              <div className="mx-auto flex h-10 items-center justify-center text-[#B38846]"><HeartIcon /></div>
+              <div className="mx-auto flex h-10 items-center justify-center text-[#8A6528]"><HeartIcon /></div>
               <h3 className="mt-3 font-serif text-[21px] text-[#22323A]">{title}</h3>
-              <p className="mt-2 text-[12px] leading-relaxed text-[#22323A]/55">{body}</p>
+              <p className="mt-2 text-[12px] leading-relaxed text-[#22323A]/70">{body}</p>
             </article>
           ))}
         </div>
@@ -399,7 +399,7 @@ function Testimonials() {
     <section id="stories" className="bg-[#F4ECE3] px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-[1160px]">
         <div className="text-center">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Their words</p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#8A6528]">Their words</p>
           <h2 className="mt-3 font-serif text-[34px] text-[#22323A] sm:text-[44px]">The moment they open it is the gift.</h2>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -411,7 +411,7 @@ function Testimonials() {
               <div className="flex flex-col justify-center p-7 sm:p-8">
                 <div className="font-serif text-[50px] leading-none text-[#B38846]/55">“</div>
                 <blockquote className="font-serif text-[23px] leading-[1.35] text-[#22323A]">{item.quote}</blockquote>
-                <p className="mt-5 text-[11px] text-[#22323A]/55">— {item.name}</p>
+                <p className="mt-5 text-[12px] text-[#22323A]/70">— {item.name}</p>
               </div>
             </article>
           ))}
@@ -426,8 +426,8 @@ function FinalCta() {
     <section className="bg-[#FCF9F4] px-5 py-16 text-center sm:px-8 lg:py-20">
       <div className="mx-auto max-w-[820px]">
         <h2 className="font-serif text-[40px] leading-[1.05] text-[#22323A] sm:text-[52px]">You already know who it’s for.</h2>
-        <p className="mx-auto mt-4 max-w-[520px] text-[14px] leading-relaxed text-[#22323A]/58">Give a moment they can hold, unlock and revisit.</p>
-        <a href="#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a>
+        <p className="mx-auto mt-4 max-w-[520px] text-[14px] leading-relaxed text-[#22323A]/70">Give a moment they can hold, unlock and revisit.</p>
+        <a href="#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#8F6A2C] px-7 text-[12px] font-medium text-white transition hover:bg-[#7A5A24]">Choose Your Card</a>
       </div>
     </section>
   );
@@ -439,15 +439,15 @@ function Footer() {
       <div className="mx-auto grid max-w-[1180px] gap-8 sm:grid-cols-3">
         <div>
           <div className="inline-flex items-center gap-3"><KeyMark className="h-8 w-4" /><span className="font-serif text-[21px] tracking-[0.2em] text-[#22323A]">UNIKMO</span></div>
-          <p className="mt-3 max-w-[260px] text-[11px] leading-relaxed text-[#22323A]/50">The key to your memory.</p>
+          <p className="mt-3 max-w-[260px] text-[12px] leading-relaxed text-[#22323A]/70">The key to your memory.</p>
         </div>
-        <div className="text-[11px] leading-7 text-[#22323A]/58">
-          <a href="#shop" className="block hover:text-[#B38846]">Choose your card</a>
-          <a href="#how" className="block hover:text-[#B38846]">How it works</a>
-          <a href="/faq" className="block hover:text-[#B38846]">FAQ</a>
+        <div className="text-[12px] leading-7 text-[#22323A]/70">
+          <a href="#shop" className="block hover:text-[#8A6528]">Choose your card</a>
+          <a href="#how" className="block hover:text-[#8A6528]">How it works</a>
+          <a href="/faq" className="block hover:text-[#8A6528]">FAQ</a>
         </div>
-        <div className="text-[11px] leading-7 text-[#22323A]/58 sm:text-right">
-          <a href="/" className="block hover:text-[#B38846]">Current site</a>
+        <div className="text-[12px] leading-7 text-[#22323A]/70 sm:text-right">
+          <a href="/" className="block hover:text-[#8A6528]">Current site</a>
           <p>Preview implementation — no production mutation.</p>
         </div>
       </div>

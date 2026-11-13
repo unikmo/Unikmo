@@ -11,8 +11,8 @@ const offerings = [
   {
     eyebrow: 'Show It',
     title: 'Times Square Edition',
-    price: '$399',
-    copy: 'We curate it, show it in Times Square, capture the moment and preserve the experience inside your UNIKMO.',
+    price: 'Coming soon',
+    copy: 'A public Times Square moment, captured and preserved inside your UNIKMO. Not available to order yet.',
   },
   {
     eyebrow: 'Share It',
@@ -59,15 +59,15 @@ export default function CuratedUnikmoTeaser() {
 
         <div className="flex items-center p-7 sm:p-10 lg:p-12">
           <div className="w-full">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#B38846]">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.28em] text-[#8A6528]">
               Curated UNIKMO
             </p>
             <h2 className="mt-4 max-w-[520px] font-serif text-[32px] leading-[1.08] sm:text-[42px]">
               Want the memory without doing the work?
             </h2>
-            <p className="mt-5 max-w-[540px] text-[13px] leading-[1.75] text-[#22323A]/64 sm:text-[14px]">
-              Send us the photos, videos and messages. We&rsquo;ll curate the story, handle the
-              optional Times Square experience, and deliver your finished UNIKMO.
+            <p className="mt-5 max-w-[540px] text-[13px] leading-[1.75] text-[#22323A]/70 sm:text-[14px]">
+              Send us the photos, videos and messages. We&rsquo;ll curate the story and deliver your
+              finished UNIKMO. A Times Square Edition is coming soon.
             </p>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
@@ -76,7 +76,7 @@ export default function CuratedUnikmoTeaser() {
                   key={offering.eyebrow}
                   className="rounded-[16px] border border-[#B38846]/25 bg-white/55 p-5 text-center"
                 >
-                  <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-[#B38846]/45 text-[#B38846]">
+                  <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-[#B38846]/45 text-[#8A6528]">
                     <OfferingIcon
                       kind={
                         offering.eyebrow === 'Keep It'
@@ -87,12 +87,12 @@ export default function CuratedUnikmoTeaser() {
                       }
                     />
                   </div>
-                  <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#B38846]">
+                  <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#8A6528]">
                     {offering.eyebrow}
                   </p>
                   <h3 className="mt-1 font-serif text-[18px]">{offering.title}</h3>
                   <p className="mt-2 font-serif text-[17px] text-[#22323A]">{offering.price}</p>
-                  <p className="mt-2 text-[11px] leading-[1.6] text-[#22323A]/58">{offering.copy}</p>
+                  <p className="mt-2 text-[12px] leading-[1.6] text-[#22323A]/70">{offering.copy}</p>
                 </article>
               ))}
             </div>
@@ -100,19 +100,19 @@ export default function CuratedUnikmoTeaser() {
             <div className="mt-7 flex flex-wrap items-center gap-5">
               <Link
                 href="/curated#order"
-                className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]"
+                className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#8F6A2C] px-6 text-[12px] font-medium text-white transition hover:bg-[#7A5A24]"
               >
                 Have Us Create It <span className="ml-2" aria-hidden="true">&rarr;</span>
               </Link>
               <Link
                 href="/curated"
-                className="text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/55 underline-offset-4"
+                className="text-[12px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/55 underline-offset-4"
               >
                 Learn about Curated UNIKMO &rarr;
               </Link>
             </div>
 
-            <p className="mt-5 text-[11px] text-[#22323A]/48">
+            <p className="mt-5 text-[12px] text-[#22323A]/70">
               Curated is optional. Standard UNIKMO remains self-created and private by design.
             </p>
           </div>

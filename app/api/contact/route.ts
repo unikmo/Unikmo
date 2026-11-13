@@ -4,6 +4,10 @@ import { sendEmail } from '@/lib/email';
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'mbanwie@gmail.com';
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function escapeHtml(value: string) {
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -21,9 +25,9 @@ export async function POST(request: NextRequest) {
 
     const subject = `Unikmo contact from ${email.trim()}`;
     const html = `
-      <p><strong>From:</strong> ${email.trim()}</p>
+      <p><strong>From:</strong> ${escapeHtml(email.trim())}</p>
       <p><strong>Message:</strong></p>
-      <p>${message.trim().replace(/\n/g, '<br>')}</p>
+      <p>${escapeHtml(message.trim()).replace(/\n/g, '<br>')}</p>
     `;
 
     const ok = await sendEmail(CONTACT_EMAIL, subject, html);

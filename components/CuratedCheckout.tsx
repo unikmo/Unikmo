@@ -15,12 +15,6 @@ const EXPERIENCES: Array<{ key: CuratedExperienceKey; title: string; note: strin
     note: 'We assemble your moments into one finished UNIKMO memory.',
     price: CURATED_PRODUCTS.KEEP_IT.price,
   },
-  {
-    key: 'SHOW_IT',
-    title: 'Show It — Times Square Edition',
-    note: 'Everything in Keep It, plus a Times Square appearance captured into the memory.',
-    price: CURATED_PRODUCTS.SHOW_IT.price,
-  },
 ];
 
 const EXTRA_PRICE = CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard;
@@ -48,7 +42,7 @@ export default function CuratedCheckout() {
   return (
     <div className="rounded-[20px] border border-[#22323A]/[0.08] bg-white/60 p-6 shadow-[0_16px_45px_rgba(34,50,58,.05)] sm:p-8">
       <fieldset>
-        <legend className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
+        <legend className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#8A6528]">
           1. Choose your experience
         </legend>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -70,15 +64,22 @@ export default function CuratedCheckout() {
                   <span className="font-serif text-[17px]">{option.title}</span>
                   <span className="text-[13px] font-medium text-[#22323A]">${option.price}</span>
                 </div>
-                <p className="mt-2 text-[11px] leading-[1.55] text-[#22323A]/58">{option.note}</p>
+                <p className="mt-2 text-[12px] leading-[1.55] text-[#22323A]/70">{option.note}</p>
               </button>
             );
           })}
+          <div className="rounded-[14px] border border-dashed border-[#22323A]/[0.2] bg-[#FCF9F4] p-4 text-left">
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="font-serif text-[17px]">Show It — Times Square Edition</span>
+              <span className="text-[13px] font-medium text-[#22323A]">Coming soon</span>
+            </div>
+            <p className="mt-2 text-[12px] leading-[1.55] text-[#22323A]/70">Not available to order yet.</p>
+          </div>
         </div>
       </fieldset>
 
       <fieldset className="mt-7 border-t border-[#22323A]/[0.08] pt-6">
-        <legend className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
+        <legend className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#8A6528]">
           2. Choose delivery
         </legend>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -104,10 +105,10 @@ export default function CuratedCheckout() {
       </fieldset>
 
       <fieldset className="mt-7 border-t border-[#22323A]/[0.08] pt-6">
-        <legend className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
+        <legend className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#8A6528]">
           3. Add extra keepsake cards
         </legend>
-        <p className="mt-1 text-[11px] leading-[1.6] text-[#22323A]/52">
+        <p className="mt-1 text-[12px] leading-[1.6] text-[#22323A]/70">
           Same finished curated memory. ${EXTRA_PRICE} per additional physical card.
         </p>
         <div className="mt-4 flex items-center gap-4">
@@ -115,7 +116,7 @@ export default function CuratedCheckout() {
             <button
               type="button"
               onClick={() => setExtras((n) => Math.max(0, n - 1))}
-              className="flex h-11 w-11 items-center justify-center text-[18px] text-[#22323A]/70 transition hover:text-[#B38846] disabled:opacity-40"
+              className="flex h-11 w-11 items-center justify-center text-[18px] text-[#22323A]/70 transition hover:text-[#8A6528] disabled:opacity-40"
               disabled={extras === 0}
               aria-label="Remove one extra card"
             >
@@ -125,7 +126,7 @@ export default function CuratedCheckout() {
             <button
               type="button"
               onClick={() => setExtras((n) => Math.min(MAX_EXTRAS, n + 1))}
-              className="flex h-11 w-11 items-center justify-center text-[18px] text-[#22323A]/70 transition hover:text-[#B38846] disabled:opacity-40"
+              className="flex h-11 w-11 items-center justify-center text-[18px] text-[#22323A]/70 transition hover:text-[#8A6528] disabled:opacity-40"
               disabled={extras === MAX_EXTRAS}
               aria-label="Add one extra card"
             >
@@ -133,7 +134,7 @@ export default function CuratedCheckout() {
             </button>
           </div>
           {extras > 0 ? (
-            <span className="text-[12px] text-[#22323A]/55">
+            <span className="text-[12px] text-[#22323A]/70">
               +${extras * EXTRA_PRICE} for {extras} card{extras === 1 ? '' : 's'}
             </span>
           ) : null}
@@ -142,9 +143,9 @@ export default function CuratedCheckout() {
 
       <div className="mt-8 flex flex-col gap-4 border-t border-[#22323A]/[0.08] pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">Total today</p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#8A6528]">Total today</p>
           <p className="mt-1 font-serif text-[30px] leading-none">${total}</p>
-          <p className="mt-1 text-[11px] text-[#22323A]/50">
+          <p className="mt-1 text-[12px] text-[#22323A]/70">
             {CURATED_PRODUCTS[experience].label} · {delivery === 'physical' ? 'Physical' : 'Digital'}
             {extras > 0 ? ` · ${extras} extra card${extras === 1 ? '' : 's'}` : ''}
           </p>
@@ -153,15 +154,15 @@ export default function CuratedCheckout() {
           type="button"
           onClick={goToCheckout}
           disabled={redirecting}
-          className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[12px] font-medium text-white transition hover:bg-[#9D773D] disabled:cursor-wait disabled:opacity-70"
+          className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#8F6A2C] px-8 text-[12px] font-medium text-white transition hover:bg-[#7A5A24] disabled:cursor-wait disabled:opacity-70"
         >
           {redirecting ? 'Opening checkout…' : 'Continue to checkout'}
         </button>
       </div>
 
-      <p className="mt-4 text-[10px] leading-[1.6] text-[#22323A]/45">
+      <p className="mt-4 text-[12px] leading-[1.6] text-[#22323A]/70">
         Checkout is handled securely by Shopify. After payment we email you to collect your photos, videos and
-        messages and to confirm Times Square scheduling where selected.
+        messages.
       </p>
     </div>
   );

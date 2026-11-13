@@ -538,7 +538,7 @@ function UploadPageContent() {
           transition={{ duration: 0.5 }}
           className="rounded-2xl p-6 sm:p-8 border border-[#22323A]/10 bg-white shadow-sm"
         >
-          <div className="mb-5 text-[#B38846]" aria-hidden>
+          <div className="mb-5 text-[#8A6528]" aria-hidden>
             <svg viewBox="0 0 32 52" className="h-9 w-6" fill="none" stroke="currentColor" strokeWidth="1.6">
               <circle cx="16" cy="10" r="6" />
               <path d="M16 16v27m0-17h7m-7 8h5m-5 9h5" />
@@ -547,23 +547,26 @@ function UploadPageContent() {
           <h1 className="text-3xl sm:text-4xl font-semibold text-[#22323A] mb-2 font-serif">
             Upload your moment
           </h1>
-          <p className="text-[#22323A]/65 mb-8">Share your special moment with a secure code</p>
+          <p className="text-[#22323A]/70 mb-8">Share your special moment with a secure code</p>
 
           {/* Code Input */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-[#22323A] mb-2">Moment Code</label>
+            <label htmlFor="moment-code" className="block text-sm font-medium text-[#22323A] mb-2">Moment Code</label>
             <input
+              id="moment-code"
+              name="moment-code"
               type="text"
+              autoComplete="off"
               value={code}
               onChange={(e) => setCode(e.target.value.toUpperCase())}
               placeholder="UNIKMO-XXXX-XXXX-XXX"
-              className="w-full px-4 py-3 bg-white border border-[#D3C7BB] rounded-xl text-[#22323A] placeholder-[#22323A]/35 focus:outline-none focus:ring-2 focus:ring-[#22323A]/20 focus:border-transparent"
+              className="w-full px-4 py-3 bg-white border border-[#D3C7BB] rounded-xl text-[#22323A] placeholder-[#22323A]/60 focus:outline-none focus:ring-2 focus:ring-[#22323A]/20 focus:border-transparent"
             />
             {isValidating && (
-              <p className="mt-2 text-sm text-[#22323A]/55">Validating...</p>
+              <p className="mt-2 text-sm text-[#22323A]/70">Validating...</p>
             )}
             {isValid === false && !isValidating && error && (
-              <p className="mt-2 text-sm text-[#22323A]/55">{error}</p>
+              <p className="mt-2 text-sm text-[#22323A]/70">{error}</p>
             )}
             {isValid === true && !isValidating && (
               <motion.p
@@ -615,7 +618,7 @@ function UploadPageContent() {
                     className="space-y-4"
                   >
                     <svg
-                      className="w-16 h-16 mx-auto text-[#22323A]/65"
+                      className="w-16 h-16 mx-auto text-[#22323A]/70"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -631,8 +634,8 @@ function UploadPageContent() {
                       <p className="text-xl font-semibold text-[#22323A] mb-2">
                         Drag your moment here
                       </p>
-                      <p className="text-[#22323A]/65">or click to upload</p>
-                      <div className="text-sm text-[#22323A]/55 mt-2 space-y-1">
+                      <p className="text-[#22323A]/70">or click to upload</p>
+                      <div className="text-sm text-[#22323A]/70 mt-2 space-y-1">
                         <p>Video, audio, or photo</p>
                       </div>
                     </div>
@@ -678,7 +681,7 @@ function UploadPageContent() {
                         )}
                       </div>
                       <div className="flex flex-col items-center">
-                        <p className="text-sm text-[#22323A]/65 mb-3 inline-flex items-center justify-center gap-2 text-center">
+                        <p className="text-sm text-[#22323A]/70 mb-3 inline-flex items-center justify-center gap-2 text-center">
                           <svg
                             className="h-4 w-4 animate-spin text-[#22323A]/70"
                             xmlns="http://www.w3.org/2000/svg"
@@ -710,7 +713,7 @@ function UploadPageContent() {
 
               {/* Uploaded Media */}
               {loadingMedia ? (
-                <div className="text-center py-12 text-[#22323A]/55">Loading media...</div>
+                <div className="text-center py-12 text-[#22323A]/70">Loading media...</div>
               ) : media.length > 0 ? (
                 <div className="mt-8">
                   <motion.div
@@ -778,7 +781,7 @@ function UploadPageContent() {
                         {item.type === 'audio' && (
                           <div className="p-8 bg-[#F5ECE3] flex items-center justify-center h-64">
                             <div className="text-center">
-                              <svg className="w-16 h-16 text-[#22323A]/55 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                              <svg className="w-16 h-16 text-[#22323A]/70 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
                               </svg>
                               <audio src={item.url} controls className="w-full max-w-md" />
@@ -787,7 +790,7 @@ function UploadPageContent() {
                         )}
                         {item.type === 'text' && (
                           <div className="p-8 bg-[#F5ECE3] flex items-center justify-center h-64">
-                            <svg className="w-16 h-16 text-[#22323A]/55" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-16 h-16 text-[#22323A]/70" fill="currentColor" viewBox="0 0 20 20">
                               <path
                                 fillRule="evenodd"
                                 d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
@@ -800,7 +803,7 @@ function UploadPageContent() {
                         {/* Media Info */}
                         <div className="p-4">
                           <p className="text-[#22323A] font-medium capitalize text-sm">{item.type}</p>
-                          <p className="text-[#22323A]/55 text-xs mt-1">
+                          <p className="text-[#22323A]/70 text-xs mt-1">
                             {new Date(item.createdAt).toLocaleDateString()}
                           </p>
                         </div>
@@ -809,7 +812,7 @@ function UploadPageContent() {
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-12 text-[#22323A]/55">
+                <div className="text-center py-12 text-[#22323A]/70">
                   <p>Nothing here yet. This is where your moment begins.</p>
                 </div>
               )}

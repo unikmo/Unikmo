@@ -3,11 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SiteFooter from '@/components/SiteFooter';
 import { COMPANY } from '@/lib/company';
+import { withSocial } from '@/lib/seo';
 
 const TISONIK_HOTELS_URL = 'https://tisonik.com/hotels';
 const PILOT_MAILTO = `mailto:${COMPANY.email}?subject=${encodeURIComponent('UNIKMO for Hotels: pilot conversation')}`;
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'UNIKMO for Hotels | A Guest Experience Keepsake for Luxury Hotels & Resorts',
   description:
     'A UNIKMO card waits in the room. Guests scan it, receive a personal welcome, and leave with a digital keepsake of their stay. No new app. Start with one property.',
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
+
+export const metadata = withSocial(baseMetadata);
 
 const moments = [
   {
@@ -91,11 +94,11 @@ export default function HotelsPage() {
           <Link href="/" className="inline-flex items-center" aria-label="UNIKMO home">
             <Image src="/unikmo-logo-header.png" alt="UNIKMO — The Key to Your Memory" width={729} height={220} priority className="h-8 w-auto sm:h-9" />
           </Link>
-          <nav className="ml-auto hidden items-center gap-7 text-[11px] text-[#22323A]/65 md:flex">
-            <Link href="/how-unikmo-works" className="transition-colors hover:text-[#B38846]">How it works</Link>
-            <a href={TISONIK_HOTELS_URL} className="transition-colors hover:text-[#B38846]">Tisonik for Hotels</a>
+          <nav className="ml-auto hidden items-center gap-7 text-[12px] text-[#22323A]/70 md:flex">
+            <Link href="/how-unikmo-works" className="transition-colors hover:text-[#8A6528]">How it works</Link>
+            <a href={TISONIK_HOTELS_URL} className="transition-colors hover:text-[#8A6528]">Tisonik for Hotels</a>
           </nav>
-          <a href="#pilot" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white shadow-[0_8px_25px_rgba(179,136,70,.16)] transition-colors hover:bg-[#9F783D] md:ml-8">
+          <a href="#pilot" className="ml-auto rounded-lg bg-[#8F6A2C] px-5 py-3 text-[12px] font-medium text-white shadow-[0_8px_25px_rgba(179,136,70,.16)] transition-colors hover:bg-[#7A5A24] md:ml-8">
             Request a pilot conversation
           </a>
         </div>
@@ -105,7 +108,7 @@ export default function HotelsPage() {
         {/* Hero */}
         <section className="px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
           <div className="mx-auto max-w-[900px]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">UNIKMO for Hotels</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#8A6528]">UNIKMO for Hotels</p>
             <h1 className="mx-auto mt-4 max-w-[860px] font-serif text-[35px] leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]">
               Your welcome used to disappear.
               <br />
@@ -124,16 +127,16 @@ export default function HotelsPage() {
               <strong className="font-semibold text-[#22323A]">A beautiful UNIKMO card waits in the room.</strong>{' '}
               Guests scan it, receive a personal welcome, and leave with a digital keepsake of their stay.
             </p>
-            <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-[1.7] text-[#22323A]/58 sm:text-[14px]">
+            <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-[1.7] text-[#22323A]/70 sm:text-[14px]">
               No new app. No pitch at check-in. Just a moment that lasts.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <a href="#pilot" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]">
+              <a href="#pilot" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#8F6A2C] px-7 text-[12px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#7A5A24]">
                 Start a one-property pilot
               </a>
               <ArrowLink
                 href={TISONIK_HOTELS_URL}
-                className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4 transition hover:text-[#22323A]"
+                className="inline-flex min-h-[44px] items-center text-[12px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/45 underline-offset-4 transition hover:text-[#22323A]"
               >
                 See the full in-stay experience with Tisonik →
               </ArrowLink>
@@ -145,11 +148,11 @@ export default function HotelsPage() {
         <section className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
           <div className="mx-auto grid max-w-[1040px] gap-9 lg:grid-cols-2 lg:gap-16">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The problem</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-[#8A6528]">The problem</p>
               <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Most welcome notes are read once and thrown away.</h2>
             </div>
-            <div className="self-end text-[15px] leading-[1.75] text-[#22323A]/68">
-              <p>Printed letters, flyers and programmes create clutter and waste, then disappear.</p>
+            <div className="self-end text-[15px] leading-[1.75] text-[#22323A]/70">
+              <p>Printed letters, flyers and programs create clutter and waste, then disappear.</p>
               <p className="mt-4">
                 <strong className="font-semibold text-[#22323A]">Guests remember how they felt. They rarely keep the paper.</strong>
               </p>
@@ -161,15 +164,15 @@ export default function HotelsPage() {
         <section className="px-5 py-14 sm:px-8 sm:py-18 lg:py-20">
           <div className="mx-auto max-w-[1100px]">
             <div className="mx-auto max-w-[720px] text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The solution</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-[#8A6528]">The solution</p>
               <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">One card. Two moments.</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-2">
               {moments.map((item) => (
                 <article key={item.label} className="rounded-[18px] border border-[#22323A]/[0.07] bg-[#FCF9F4] p-7 shadow-[0_8px_26px_rgba(34,50,58,.04)]">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">{item.label}</p>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#8A6528]">{item.label}</p>
                   <h3 className="mt-3 font-serif text-[26px] leading-[1.1]">{item.title}</h3>
-                  <p className="mt-3 text-[14px] leading-[1.7] text-[#22323A]/66">{item.copy}</p>
+                  <p className="mt-3 text-[14px] leading-[1.7] text-[#22323A]/70">{item.copy}</p>
                 </article>
               ))}
             </div>
@@ -183,7 +186,7 @@ export default function HotelsPage() {
               <Image src="/story/she-opens.png" alt="A person unlocking a private UNIKMO memory from a card" fill className="object-cover" sizes="(max-width:1024px) 100vw, 520px" />
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">How it works</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-[#8A6528]">How it works</p>
               <ol className="mt-4 space-y-4">
                 {steps.map((step, index) => (
                   <li key={step} className="flex gap-4 text-[14px] leading-[1.65] text-[#22323A]/72 sm:text-[15px]">
@@ -203,7 +206,7 @@ export default function HotelsPage() {
         <section className="px-5 py-14 sm:px-8 sm:py-18 lg:py-20">
           <div className="mx-auto max-w-[900px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Why properties choose it</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-[#8A6528]">Why properties choose it</p>
             </div>
             <ul className="mt-8 grid gap-4 sm:grid-cols-2">
               {reasons.map((reason) => (
@@ -219,7 +222,7 @@ export default function HotelsPage() {
         {/* Controlled pilots */}
         <section id="pilot" className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 text-center sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[880px]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Controlled pilots</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-[#8A6528]">Controlled pilots</p>
             <h2 className="mx-auto mt-3 max-w-[680px] font-serif text-[32px] leading-[1.05] sm:text-[40px]">
               Start with one property.
               <br />
@@ -228,34 +231,34 @@ export default function HotelsPage() {
               Scale only when the numbers prove it.
             </h2>
             <div className="mx-auto mt-8 max-w-[680px] rounded-[18px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-6 text-left shadow-[0_8px_26px_rgba(34,50,58,.04)] sm:p-7">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">Pilot pricing</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#8A6528]">Pilot pricing</p>
               <p className="mt-3 text-[14px] leading-[1.75] text-[#22323A]/72 sm:text-[15px]">
                 For the first one-ship / one-property pilot we keep pricing deliberately simple and low ($5 per guest on ships / $8 per stay in hotels) so the focus stays on measuring real impact. After a successful pilot we move to standard commercial pricing.
               </p>
             </div>
             <a
               href={PILOT_MAILTO}
-              className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]"
+              className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#8F6A2C] px-8 text-[12px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#7A5A24]"
             >
               Request a pilot conversation
             </a>
-            <p className="mt-4 text-[12px] text-[#22323A]/55">{COMPANY.email}</p>
+            <p className="mt-4 text-[12px] text-[#22323A]/70">{COMPANY.email}</p>
           </div>
         </section>
 
         {/* Cross-link */}
         <section className="px-5 py-12 text-center sm:px-8 sm:py-14">
           <div className="mx-auto max-w-[720px]">
-            <p className="text-[14px] leading-[1.7] text-[#22323A]/66 sm:text-[15px]">
+            <p className="text-[14px] leading-[1.7] text-[#22323A]/70 sm:text-[15px]">
               Want the full experience layer during the stay: real-time recovery, staff recognition and relevant offers?
             </p>
             <ArrowLink
               href={TISONIK_HOTELS_URL}
-              className="mt-4 inline-flex min-h-[44px] items-center text-[13px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4 transition hover:text-[#B38846]"
+              className="mt-4 inline-flex min-h-[44px] items-center text-[13px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4 transition hover:text-[#8A6528]"
             >
               → Explore Tisonik for Hotels
             </ArrowLink>
-            <p className="mt-8 text-[11px] leading-[1.6] text-[#22323A]/45">UNIKMO is a project of {COMPANY.legalName}.</p>
+            <p className="mt-8 text-[12px] leading-[1.6] text-[#22323A]/70">UNIKMO is a project of {COMPANY.legalName}.</p>
           </div>
         </section>
       </main>

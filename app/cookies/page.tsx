@@ -1,16 +1,18 @@
 import type { Metadata } from 'next';
+import { withSocial } from '@/lib/seo';
 import LegalPageShell, { LegalSection } from '@/components/LegalPageShell';
 import { COMPANY } from '@/lib/company';
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'Cookie Policy | UNIKMO',
   description:
     'Which cookies UNIKMO uses, why, the legal basis under the GDPR and ePrivacy rules, and how to control them.',
   alternates: { canonical: 'https://www.unikmo.com/cookies' },
 };
+export const metadata: Metadata = withSocial(baseMetadata);
 
 const bullet = 'list-disc space-y-1 pl-5 marker:text-[#B38846]/60';
-const link = 'underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]';
+const link = 'underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#8A6528]';
 
 const categories: Array<{ name: string; consent: string; copy: string }> = [
   {
@@ -76,7 +78,7 @@ export default function CookiePolicyPage() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] border-collapse text-left text-[13px]">
             <thead>
-              <tr className="border-b border-[#22323A]/[0.12] text-[11px] uppercase tracking-[0.1em] text-[#22323A]/55">
+              <tr className="border-b border-[#22323A]/[0.12] text-[12px] uppercase tracking-[0.1em] text-[#22323A]/70">
                 <th className="py-2 pr-4 font-medium">Category</th>
                 <th className="py-2 pr-4 font-medium">Consent</th>
                 <th className="py-2 font-medium">What it is for</th>

@@ -40,7 +40,7 @@ export const acquisitionPages: Record<string, AcquisitionPage> = {
     examplesTitle: 'What could you put inside?',
     examplesIntro: 'A thoughtful gift does not need a long production. It needs one detail that feels unmistakably yours.',
     examples: [
-      { title: 'A 45-second voice note', copy: 'Tell them the small thing they do that you notice more than they realise.' },
+      { title: 'A 45-second voice note', copy: 'Tell them the small thing they do that you notice more than they realize.' },
       { title: 'A photo with the story behind it', copy: 'Use one image and explain why that day still matters to you.' },
       { title: 'A short private video', copy: 'Say what you would want them to hear again on a difficult or distant day.' },
     ],
@@ -165,7 +165,7 @@ export const acquisitionPages: Record<string, AcquisitionPage> = {
     situationCopy: 'The best long-distance gifts do something simpler: they create a small ritual of closeness. A card on a nightstand, a voice they can replay, a message for the next difficult goodbye, or a memory they can open when time zones do not line up.',
     whyTitle: 'Built for being apart without feeling absent',
     whyPoints: [
-      { title: 'A physical reminder remains with them', copy: 'The card is there even when you are asleep, travelling or in another time zone.' },
+      { title: 'A physical reminder remains with them', copy: 'The card is there even when you are asleep, traveling or in another time zone.' },
       { title: 'Your voice travels better than generic copy', copy: 'Record exactly what you want them to hear instead of choosing a prewritten message.' },
       { title: 'Open-when moments work naturally', copy: 'Multi-card sets can become “open when you miss me”, “open after a hard day” or “open before our next trip” moments.' },
     ],
@@ -207,7 +207,7 @@ export const acquisitionPages: Record<string, AcquisitionPage> = {
     examples: [
       { title: 'Birthday video message', copy: 'Tell them what you noticed or admired about the year they just lived.' },
       { title: 'Anniversary video', copy: 'Choose one shared memory and explain why it still matters.' },
-      { title: 'Message for later', copy: 'Record something they can revisit when you are apart, travelling or simply missing you.' },
+      { title: 'Message for later', copy: 'Record something they can revisit when you are apart, traveling or simply missing you.' },
     ],
     productFit: ['One video message, one card.', 'Four videos or mixed-format moments.', 'Seven moments for a complete video-led story.'],
     faqs: [

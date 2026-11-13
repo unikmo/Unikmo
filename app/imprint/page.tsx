@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
+import { withSocial } from '@/lib/seo';
 import LegalPageShell, { LegalSection } from '@/components/LegalPageShell';
 import { COMPANY } from '@/lib/company';
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'Legal Notice | UNIKMO',
   description: `Company and contact information for UNIKMO, operated by ${COMPANY.legalName} (Wyoming, USA). Also serves as the imprint for visitors in the EU/EEA.`,
   alternates: { canonical: 'https://www.unikmo.com/imprint' },
 };
+export const metadata: Metadata = withSocial(baseMetadata);
 
 const rows: Array<[string, React.ReactNode]> = [
   ['Company', COMPANY.legalName],
@@ -19,7 +21,7 @@ const rows: Array<[string, React.ReactNode]> = [
   ['Represented by', COMPANY.founder],
   [
     'Email',
-    <a key="e" href={`mailto:${COMPANY.email}`} className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">
+    <a key="e" href={`mailto:${COMPANY.email}`} className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#8A6528]">
       {COMPANY.email}
     </a>,
   ],
@@ -41,11 +43,11 @@ export default function LegalNoticePage() {
           ))}
         </dl>
         <p className="text-[13px] text-[#22323A]/70">
-          For all enquiries — orders, a lost access code, Curated UNIKMO, press, or a data request — email{' '}
-          <a href={`mailto:${COMPANY.email}`} className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">
+          For all inquiries — orders, a lost access code, Curated UNIKMO, press, or a data request — email{' '}
+          <a href={`mailto:${COMPANY.email}`} className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#8A6528]">
             {COMPANY.email}
           </a>{' '}
-          or use the <a href="/contact" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">contact form</a>.
+          or use the <a href="/contact" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#8A6528]">contact form</a>.
         </p>
       </LegalSection>
 
@@ -56,7 +58,7 @@ export default function LegalNoticePage() {
             href="https://ec.europa.eu/consumers/odr"
             target="_blank"
             rel="noreferrer"
-            className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]"
+            className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#8A6528]"
           >
             ec.europa.eu/consumers/odr
           </a>
@@ -76,9 +78,9 @@ export default function LegalNoticePage() {
       <LegalSection heading="Related">
         <p>
           See our{' '}
-          <a href="/privacy" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">Privacy Policy</a>,{' '}
-          <a href="/cookies" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">Cookie Policy</a> and{' '}
-          <a href="/terms" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">Terms &amp; Conditions</a>.
+          <a href="/privacy" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#8A6528]">Privacy Policy</a>,{' '}
+          <a href="/cookies" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#8A6528]">Cookie Policy</a> and{' '}
+          <a href="/terms" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#8A6528]">Terms &amp; Conditions</a>.
         </p>
       </LegalSection>
     </LegalPageShell>

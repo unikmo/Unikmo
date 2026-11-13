@@ -18,9 +18,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.unikmo.com"),
   title: siteTitle,
   description: siteDescription,
-  alternates: {
-    canonical: "https://www.unikmo.com/",
-  },
   icons: {
     icon: [{ url: "/unikmo-monogram.svg", type: "image/svg+xml" }],
     apple: "/apple-touch-icon.png",

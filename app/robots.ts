@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const privateRoutes = ['/admin', '/api', '/unlock', '/upload'];
+const privateRoutes = ['/admin', '/api', '/unlock', '/upload', '/hotel/', '/checkout/', '/preview'];
 
 export default function robots(): MetadataRoute.Robots {
   return {
