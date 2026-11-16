@@ -235,6 +235,9 @@ export default function HotelsPage() {
               <p className="mt-3 text-[14px] leading-[1.75] text-[#22323A]/72 sm:text-[15px]">
                 For the first one-ship / one-property pilot we keep pricing deliberately simple and low ($5 per guest on ships / $8 per stay in hotels) so the focus stays on measuring real impact. After a successful pilot we move to standard commercial pricing.
               </p>
+              <p className="mt-3 text-[14px] leading-[1.75] text-[#22323A]/72 sm:text-[15px]">
+                A one-time onboarding fee applies. We confirm it in writing before the pilot starts.
+              </p>
             </div>
             <a
               href={PILOT_MAILTO}

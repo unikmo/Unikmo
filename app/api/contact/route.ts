@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/email';
 
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'mbanwie@gmail.com';
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'hello@unikmo.com';
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function escapeHtml(value: string) {
