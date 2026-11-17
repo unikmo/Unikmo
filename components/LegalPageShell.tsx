@@ -22,8 +22,8 @@ export default function LegalPageShell({
         <div className="mx-auto flex h-[72px] max-w-[1080px] items-center px-5 sm:px-8">
           <Link href="/" aria-label="UNIKMO home">
             <Image
-              src="/unikmo-logo-header.png"
-              alt="UNIKMO — The Key to Your Memory"
+              src="/unikmo-logo.svg"
+              alt="UNIKMO"
               width={729}
               height={220}
               priority

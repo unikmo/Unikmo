@@ -26,7 +26,7 @@ export default function SiteFooter() {
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="text-center sm:text-left">
             <Link href="/" aria-label="UNIKMO home" className="inline-block">
-              <Image src="/unikmo-logo-header.png" alt="UNIKMO" width={729} height={220} className="h-8 w-auto" />
+              <Image src="/unikmo-logo.svg" alt="UNIKMO" width={729} height={220} className="h-8 w-auto" />
             </Link>
             <p className="mt-3 max-w-[280px] text-[11px] leading-[1.6] text-[#22323A]/50">
               A card that unlocks a private memory. A tree planted with every order.

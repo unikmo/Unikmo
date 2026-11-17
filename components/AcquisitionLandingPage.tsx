@@ -45,7 +45,7 @@ function PageHeader() {
     <header className="sticky top-0 z-40 border-b border-[#22323A]/[0.07] bg-[#FCF9F4]/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] w-full max-w-[1240px] items-center px-5 sm:px-8">
         <Link href="/" className="inline-flex items-center" aria-label="UNIKMO home">
-          <Image src="/unikmo-logo-header.png" alt="UNIKMO — The Key to Your Memory" width={729} height={220} priority className="h-8 w-auto sm:h-9" />
+          <Image src="/unikmo-logo.svg" alt="UNIKMO" width={729} height={220} priority className="h-8 w-auto sm:h-9" />
         </Link>
         <nav className="ml-auto hidden items-center gap-7 text-[11px] text-[#22323A]/65 md:flex">
           <Link href="/#how-it-works" className="transition-colors hover:text-[#B38846]">How it works</Link>
