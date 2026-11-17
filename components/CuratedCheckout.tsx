@@ -71,17 +71,18 @@ export default function CuratedCheckout() {
               <button
                 key={option.key}
                 type="button"
-                onClick={() => setExperience(option.key)}
+                onClick={() => option.key === 'KEEP_IT' && setExperience(option.key)}
+                disabled={option.key === 'SHOW_IT'}
                 aria-pressed={active}
                 className={`rounded-[14px] border p-4 text-left transition ${
                   active
                     ? 'border-[#B38846] bg-[#F8F2EB] shadow-[0_10px_30px_rgba(179,136,70,.12)]'
                     : 'border-[#22323A]/[0.12] bg-[#FCF9F4] hover:border-[#B38846]/60'
-                }`}
+                } ${option.key === 'SHOW_IT' ? 'cursor-not-allowed opacity-60' : ''}`}
               >
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="font-serif text-[17px]">{option.title}</span>
-                  <span className="text-[13px] font-medium text-[#22323A]">${option.price}</span>
+                  <span className="text-[13px] font-medium text-[#22323A]">{option.key === 'SHOW_IT' ? 'Coming soon' : `$${option.price}`}</span>
                 </div>
                 <p className="mt-2 text-[11px] leading-[1.55] text-[#22323A]/58">{option.note}</p>
               </button>

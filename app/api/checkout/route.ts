@@ -12,6 +12,9 @@ export async function POST(request: NextRequest) {
     const deliveryType = String(body.deliveryType || 'digital') as DeliveryType;
     const quantity = Math.max(1, Math.min(50, Math.floor(Number(body.quantity) || 1)));
     const extraKeepsakes = Math.max(0, Math.min(25, Math.floor(Number(body.extraKeepsakes) || 0)));
+    if (product?.key === 'curated-show') {
+      return NextResponse.json({ error: 'Times Square Edition is coming soon' }, { status: 400 });
+    }
     if (!product || !product.allowedDeliveryTypes.includes(deliveryType)) {
       return NextResponse.json({ error: 'Invalid product or delivery type' }, { status: 400 });
     }

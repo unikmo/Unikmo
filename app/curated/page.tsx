@@ -50,10 +50,10 @@ const choices = [
     subtitle: 'Times Square Edition',
     image: '/curated/ts-ny.webp',
     imageAlt: 'A UNIKMO card held up in front of a Times Square billboard',
-    price: `$${CURATED_PRODUCTS.SHOW_IT.price}`,
+    price: 'Coming soon',
     priceNote: 'Everything in Keep It, plus Times Square',
     href: '#order',
-    cta: 'Buy Show It',
+    cta: 'Coming soon',
     description:
       'Take the finished moment public. We prepare the Times Square creative, coordinate the appearance, capture it, and incorporate that public moment into the finished UNIKMO memory.',
     points: [
@@ -93,7 +93,7 @@ const faqs = [
   {
     question: 'How much does Curated UNIKMO cost?',
     answer:
-      'Keep It — Curated is $199. Show It — Times Square Edition is $449 and includes everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
+      'Keep It — Curated is $249. Show It — Times Square Edition is coming soon and will include everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
   },
   {
     question: 'What is the Times Square Edition?',
@@ -143,7 +143,6 @@ export default function CuratedPage() {
       'Customers intentionally submit selected photos, videos and messages for professional curation into a finished UNIKMO memory, with an optional Times Square Edition and additional physical keepsakes.',
     offers: [
       { '@type': 'Offer', name: 'Keep It — Curated', price: String(CURATED_PRODUCTS.KEEP_IT.price), priceCurrency: 'USD' },
-      { '@type': 'Offer', name: 'Show It — Times Square Edition', price: String(CURATED_PRODUCTS.SHOW_IT.price), priceCurrency: 'USD' },
       { '@type': 'Offer', name: 'Extra Keepsake Card', price: String(CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard), priceCurrency: 'USD' },
     ],
   };
@@ -255,7 +254,7 @@ export default function CuratedPage() {
                       ))}
                     </ul>
                     <div className="mt-6 flex flex-1 flex-col justify-end gap-3 pt-1">
-                      <a href={choice.href} className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">{choice.cta}</a>
+                      {choice.cta === 'Coming soon' ? <span aria-disabled="true" className="inline-flex min-h-[46px] items-center justify-center rounded-lg border border-[#B38846]/50 px-6 text-[11px] font-medium text-[#B38846]">Coming soon</span> : <a href={choice.href} className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">{choice.cta}</a>}
                       <a href="#order" className="text-center text-[11px] font-medium text-[#22323A]/60 underline decoration-[#B38846]/45 underline-offset-4">Configure delivery &amp; extras</a>
                     </div>
                   </div>

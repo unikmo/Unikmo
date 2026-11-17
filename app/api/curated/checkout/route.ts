@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as CheckoutRequest;
     const experience: CuratedExperienceKey = /times square|show it/i.test(body.experience ?? '') ? 'SHOW_IT' : 'KEEP_IT';
+    if (experience === 'SHOW_IT') return NextResponse.json({ error: 'Times Square Edition is coming soon' }, { status: 400 });
     const delivery: CuratedDeliveryKey = /digital/i.test(body.delivery ?? '') ? 'digital' : 'physical';
     const extraKeepsakes = Math.max(0, Math.min(25, Math.floor(Number(body.extraKeepsakes) || 0)));
     const product = getCommerceProduct(experience === 'KEEP_IT' ? 'curated-keep' : 'curated-show');
