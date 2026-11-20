@@ -192,7 +192,7 @@ export default function CuratedPage() {
         <section className="px-5 pb-14 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
           <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Curated UNIKMO</p>
           <h1 className="mx-auto mt-4 max-w-[980px] font-serif text-[39px] leading-[1.03] tracking-[-0.025em] sm:text-[52px] lg:text-[62px]">
-            You bring the moments. We make the memory.
+            Your story. Our craft. More us.
           </h1>
 
           <div className="mx-auto mt-9 grid max-w-[1180px] gap-5 lg:grid-cols-2">
@@ -225,7 +225,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[1120px]">
             <div className="mx-auto max-w-[720px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Keep it. Show it. Share it.</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">One memory. Three ways to take it further.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Less ordinary. More personal.</h2>
             </div>
 
             <div className="mt-10 grid gap-6 lg:grid-cols-3">
@@ -319,7 +319,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[900px]">
             <div className="mx-auto max-w-[680px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Order your curated memory</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose it, then check out.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose the experience. We'll help make it yours.</h2>
               <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Pick your experience, delivery and any extra keepsake cards. Payment is handled securely by Shopify. Right after checkout we email you to collect your photos, videos and messages.</p>
             </div>
             <div className="mt-9"><CuratedCheckout /></div>
@@ -330,7 +330,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[900px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Clear distinction</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Curated when you want help. Standard when you do not.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Your moment. Your choice of how to make it.</h2>
               <p className="mx-auto mt-4 max-w-[680px] text-[14px] leading-[1.75] text-[#22323A]/62">With standard UNIKMO, you create the private memory yourself. With Curated UNIKMO, you intentionally submit selected materials for us to assemble into the finished story.</p>
               <Link href="/#shop" className="mt-7 inline-flex min-h-[46px] items-center justify-center text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Choose standard UNIKMO instead</Link>
             </div>
