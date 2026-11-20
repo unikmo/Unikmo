@@ -225,7 +225,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[1120px]">
             <div className="mx-auto max-w-[720px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Keep it. Show it. Share it.</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">One memory. Three ways to take it further.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">One story. What would you like to do with it?</h2>
             </div>
 
             <div className="mt-10 grid gap-6 lg:grid-cols-3">
@@ -272,7 +272,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[980px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Times Square Edition</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">POP. Go public. Keep it.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Make the celebration part of the story.</h2>
               <p className="mx-auto mt-4 max-w-[700px] text-[14px] leading-[1.75] text-[#22323A]/62 sm:text-[15px]">
                 The public moment can begin with your own POP — confetti, a cork, a team cheer or another celebration burst. We curate the submitted material, the Times Square appearance and its capture into the finished memory.
               </p>
@@ -298,7 +298,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[920px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Digital or physical</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose how the finished memory arrives.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Will they open a link or unwrap the card?</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-2">
               <article className="rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-7 text-center">
@@ -319,7 +319,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[900px]">
             <div className="mx-auto max-w-[680px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Order your curated memory</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose it, then check out.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose the moment you want us to create.</h2>
               <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Pick your experience, delivery and any extra keepsake cards. Payment is handled securely by Shopify. Right after checkout we email you to collect your photos, videos and messages.</p>
             </div>
             <div className="mt-9"><CuratedCheckout /></div>
@@ -330,7 +330,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[900px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Clear distinction</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Curated when you want help. Standard when you do not.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Your story. As much help as you want.</h2>
               <p className="mx-auto mt-4 max-w-[680px] text-[14px] leading-[1.75] text-[#22323A]/62">With standard UNIKMO, you create the private memory yourself. With Curated UNIKMO, you intentionally submit selected materials for us to assemble into the finished story.</p>
               <Link href="/#shop" className="mt-7 inline-flex min-h-[46px] items-center justify-center text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Choose standard UNIKMO instead</Link>
             </div>
