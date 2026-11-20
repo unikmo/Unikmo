@@ -1,31 +1,30 @@
 import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
-const read=(path)=>readFileSync(path,'utf8');
-const h=read('app/test/page.tsx');
-const home=read('app/page.tsx');
-assert.ok(home.includes("import TestPage from './test/page'"),'Marketing homepage must stay connected to actual live route');
-for(const phrase of [
-  'Some moments deserve more than a message.',
-  'Imagine them hearing your voice when they least expect it.',
-  'The card is the key. The memory is the gift.',
-  'Who would you love to surprise?',
-  'The best part is what only they will hear.',
-  'Illustrative gift ideas, not customer testimonials.',
-  'One moment, or a story told in chapters?',
-  'QR code + private access code on every card'
-]) assert.ok(h.includes(phrase),'Homepage missing: '+phrase);
-assert.ok(!h.includes('They’ll keep it forever'), 'No lifetime promise without a storage guarantee');
-assert.ok(!h.includes('Matt L., London')&&!h.includes('Sophie M., New York'),'Do not claim unverified customer testimony');
-assert.ok(!h.includes('A tree planted'),'Do not claim third-party offset without corroboration');
-for(const [path,phrase] of [
-  ['app/faq/page.tsx','The little details behind a meaningful gift.'],
-  ['app/how-unikmo-works/page.tsx','One small card. A moment only they can open.'],
-  ['app/curated/page.tsx','One story. What would you like to do with it?'],
-  ['app/hotels/page.tsx','They arrive as guests. They leave with a story.'],
-  ['app/contact/page.tsx','Tell us what would help.']
-])assert.ok(read(path).includes(phrase),path+' missing editorial hook');
-assert.ok(read('app/faq/page.tsx').includes('does not promise permanent storage'),'Critical storage disclosure must remain');
-assert.ok(read('app/curated/page.tsx').includes('subject to availability'),'Times Square availability disclosure must remain');
-assert.ok(read('app/test/page.tsx').includes('product.price'),'Displayed pricing must come from actual product source');
-assert.ok(read('app/api/products/route.ts').includes('createShopifyClient'),'Commerce routing intentionally unchanged until reconciled');
-console.log('UNIKMO editorial and integrity smoke: PASS');
+const read=path=>readFileSync(path,'utf8');
+const home=read('app/test/page.tsx');
+assert.ok(read('app/page.tsx').includes("import TestPage from './test/page'"));
+for(const term of ['Less stuff. More us.','The gift isn\'t the card. It\'s what they feel when they open it.','The card is the key. The memory is the gift.','Illustrative gift ideas, not customer testimonials.','One moment. Or a few more.','QR code + private access code on every card'])assert.ok(home.includes(term),'Missing brand promise: '+term);
+for(const forbidden of ['They’ll keep it forever','Matt L., London','Sophie M., New York','A tree planted','/cart/${product.variantId}'])assert.ok(!home.includes(forbidden),'Unverified or Shopify statement: '+forbidden);
+for(const [path,term] of [
+ ['app/faq/page.tsx','Less fuss. More answers.'],
+ ['app/how-unikmo-works/page.tsx','Little card. Big feeling.'],
+ ['app/curated/page.tsx','More meaning. Less editing.'],
+ ['app/hotels/page.tsx','They check out. The feeling checks in.'],
+ ['components/CuratedUnikmoTeaser.tsx','Your story. Our hands. All heart.'],
+ ['app/checkout/success/page.tsx','Your payment is being confirmed.']
+])assert.ok(read(path).includes(term),path+': '+term);
+assert.ok(read('app/faq/page.tsx').includes('does not promise permanent storage'));
+assert.ok(read('app/curated/page.tsx').includes('subject to availability'));
+for(const p of ['app/test/page.tsx','app/curated/page.tsx','components/CuratedCheckout.tsx','app/api/products/route.ts','app/api/curated/checkout/route.ts','lib/curated-products.ts']){
+ const s=read(p);
+ assert.ok(!/myshopify|https:\/\/[^\s"'\x60]+\/cart\/|curatedCartUrl|createShopifyClient/.test(s),p+' still directs new orders to Shopify');
+}
+const checkout=read('app/api/checkout/route.ts');
+for(const term of ['stripePost','STRIPE_SHIPPING_RATE_ID','shipping_address_collection','allowedShippingCountries','priceId','CURATED_EXPECTED_CENTS'])assert.ok(checkout.includes(term),'Missing Stripe checkout protection: '+term);
+const webhook=read('app/api/stripe/webhook/route.ts');
+for(const term of ['verifyStripeSignature','payment_status','stripeCodesEmailSentAt','deferCodeEmail:true','StripeCuratedOrder','STRIPE_FULFILLMENT_ENABLED','verifiedLines'])assert.ok(webhook.includes(term),'Missing webhook protection: '+term);
+assert.ok(read('lib/code-generator.ts').includes('getRandomValues'));
+assert.ok(read('app/upload/page.tsx').includes('codeToValidate.length < 8'));
+assert.ok(read('app/unlock/page.tsx').includes('unlockCode.length < 8'));
+assert.ok(read('app/api/webhooks/shopify/orders-paid/route.ts').includes("SHOPIFY_HISTORICAL_WEBHOOKS_ENABLED !== 'true'"));
+console.log('PASS UNIKMO: desire-first brand copy, no Shopify new purchases, gated signed Stripe flow and eight-character keys');
