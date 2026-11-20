@@ -1,6 +1,6 @@
 import mongoose,{Schema,type Document,type Model} from 'mongoose';
 export interface IStripeCuratedOrder extends Document {
-  sessionId:string;email:string;sku:string;extraCards:number;totalCents:number;status:'pending'|'notified'|'needs_attention';
+  sessionId:string;email:string;sku:string;extraCards:number;totalCents:number;status:'pending'|'notified'|'needs_attention';staffNotifiedAt?:Date;buyerNotifiedAt?:Date;
 }
 const schema=new Schema<IStripeCuratedOrder>({
   sessionId:{type:String,required:true,unique:true,index:true},
