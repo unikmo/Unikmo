@@ -8,11 +8,11 @@ import { Analytics } from "@vercel/analytics/react";
 // Initialize admin user on app startup
 import "@/lib/init-admin";
 
-const siteTitle = "UNIKMO | Turn a Precious Memory Into a Lasting Gift";
+const siteTitle = "UNIKMO | Less stuff. More us.";
 const siteDescription =
-  "Create a private video, voice note, photo, or written message and connect it to a physical UNIKMO card someone can keep and revisit. No app, login, or ads.";
+  "Less stuff. More us. Your voice, your words, their private moment — inside a premium physical UNIKMO card. No recipient app or account required.";
 const twitterDescription =
-  "Turn a private video, voice note, photo, or message into a physical gift someone can revisit.";
+  "Less stuff. More us. Give a private, personal moment inside a physical card.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.unikmo.com"),
