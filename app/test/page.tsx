@@ -11,12 +11,11 @@ type Product = {
   title: string;
   image?: string | null;
   imageAlt?: string | null;
-  variantId?: string | null;
   price?: string | null;
   currencyCode?: string | null;
 };
 
-type ProductsResponse = { products?: Product[]; storeDomain?: string };
+type ProductsResponse = { available?: boolean; products?: Product[]; message?: string };
 
 const slides = [
   { image: '/story/matt-writes.png', caption: 'A thought becomes something worth keeping.', position: 'object-[50%_25%]' },
@@ -170,14 +169,16 @@ function ProductStage({ side }: { side: 'front' | 'back' }) {
 
 export default function TestPage() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [storeDomain, setStoreDomain] = useState('');
+  const [productsAvailable, setProductsAvailable] = useState(false);
+  const [checkoutSku, setCheckoutSku] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState('');
   const [activeOccasion, setActiveOccasion] = useState(0);
 
   useEffect(() => {
     fetch('/api/products')
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('product fetch failed'))))
-      .then((data: ProductsResponse) => { setProducts(data.products || []); setStoreDomain(data.storeDomain || ''); })
-      .catch(() => { setProducts([]); setStoreDomain(''); });
+      .then((data: ProductsResponse) => { setProducts(data.products || []); setProductsAvailable(Boolean(data.available)); })
+      .catch(() => { setProducts([]); setProductsAvailable(false); });
   }, []);
 
   const orderedProducts = useMemo(() => {
@@ -192,10 +193,22 @@ export default function TestPage() {
 
   const active = occasions[activeOccasion];
   const fallbackProducts: Product[] = [
-    { id: 'single', title: 'Single Key', image: '/cardfrontunikmo.jpg', price: '24', currencyCode: 'USD' },
-    { id: 'four', title: '4-Key Bundle', image: '/cardfrontsite4.png', price: '64', currencyCode: 'USD' },
-    { id: 'seven', title: '7-Key Bundle', image: '/cardfrontsite7.png', price: '72', currencyCode: 'USD' },
+    { id: 'single', title: 'Single Key', image: '/cardfrontunikmo.jpg' },
+    { id: 'four', title: '4-Key Bundle', image: '/cardfrontsite4.png' },
+    { id: 'seven', title: '7-Key Bundle', image: '/cardfrontsite7.png' },
   ];
+
+  async function openStripeCheckout(sku: string) {
+    if (!productsAvailable) return;
+    setCheckoutSku(sku);
+    setCheckoutError('');
+    try {
+      const response = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sku }) });
+      const data = await response.json();
+      if (!response.ok || typeof data.url !== 'string') throw new Error('Checkout is not available right now.');
+      window.location.assign(data.url);
+    } catch { setCheckoutError('Checkout is unavailable. Please contact UNIKMO before ordering.'); setCheckoutSku(null); }
+  }
 
   return (
     <div className="min-h-screen bg-[#FCF9F4] text-[#22323A]">
@@ -270,9 +283,11 @@ export default function TestPage() {
             <div className="mt-10 grid gap-6 md:grid-cols-3">{(orderedProducts.length ? orderedProducts : fallbackProducts).map((product) => {
               const details = getProductDetails(product.title);
               const displayName = normalizedProductName(product.title);
-              const checkoutHref = product.variantId && storeDomain ? `https://${storeDomain}/cart/${product.variantId}:1` : '#shop';
-              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white">Best value</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><a href={checkoutHref} className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[11px] font-medium text-white transition hover:bg-[#17232A]">{details.button}</a></article>;
+              const sku = product.id === 'single' || product.id === 'four' || product.id === 'seven' ? product.id : normalizedProductName(product.title) === '7-Key Bundle' ? 'seven' : normalizedProductName(product.title) === '4-Key Bundle' ? 'four' : 'single';
+              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white">Best value</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><button type="button" onClick={() => openStripeCheckout(sku)} disabled={!productsAvailable || checkoutSku !== null} className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[11px] font-medium text-white transition hover:bg-[#17232A] disabled:cursor-not-allowed disabled:opacity-45">{checkoutSku === sku ? 'Opening secure checkout…' : productsAvailable ? details.button : 'Ordering temporarily unavailable'}</button></article>;
             })}</div>
+            {!productsAvailable && <p role="status" className="mt-6 text-center text-[12px] text-[#22323A]/70">We’re preparing secure checkout. No orders are being accepted here yet. <Link href="/contact" className="underline">Contact UNIKMO</Link> for questions.</p>}
+            {checkoutError && <p role="alert" className="mt-4 text-center text-[12px] text-red-700">{checkoutError}</p>}
           </div>
         </section>
 
