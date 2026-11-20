@@ -162,7 +162,7 @@ export default function HotelsPage() {
           <div className="mx-auto max-w-[1100px]">
             <div className="mx-auto max-w-[720px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The solution</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">They arrive as guests. They leave with a story.</h2>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">They check out. The feeling checks in.</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-2">
               {moments.map((item) => (
