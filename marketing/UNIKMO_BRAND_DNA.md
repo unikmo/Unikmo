@@ -49,3 +49,8 @@ Funny/relatable gifting insight -> genuine comments & tags -> trusted visit to p
 Primary metric: qualified visits -> purchase conversion, with separate reach, meaningful comments, share rate and recipient-driven referrals.
 Start with A, B and D, using consistent channel/format where practical. Measure meaningful comment rate, shares and downstream traffic before scaling. Do not invent benchmarks. Decision: SCALE / ITERATE / STOP / NEEDS_MORE_EVIDENCE / WEBSITE_INTERVENTION_REQUIRED.
 Before traffic push verify actual site copy, product pricing and checkout, creative rights, privacy/UGC consent, link targets and analytics tracking.
+
+## Approved price correction (2026-11-20)
+- **Show It — Times Square Edition: $449 USD** (founder-approved). Never use historical $399 in campaign copy.
+- Curated marketing visuals and FAQs must use $449; product configuration source price should use 449.
+- The existing curated checkout builds Shopify variant URLs. **Displayed/configured $449 is not proof of the external checkout charge**. Before accepting paid orders, verify the connected checkout is active and charges exactly $449, including correct payment provider and tax/shipping disclosures. Do not falsely claim an external price has been updated.
