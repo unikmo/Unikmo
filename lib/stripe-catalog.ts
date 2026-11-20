@@ -15,7 +15,7 @@ export const CURATED: Record<CuratedSku,{name:string;env:string;physical:boolean
   show_digital:{name:'Show It — Times Square (digital)',env:'STRIPE_PRICE_CURATED_SHOW_DIGITAL',physical:false,kind:'show'},
 };
 export const EXTRA_PRICE_ENV='STRIPE_PRICE_EXTRA_CARD';
-export const CURATED_EXPECTED_CENTS={keep:19900,show:39900,extra:1200} as const;
+export const CURATED_EXPECTED_CENTS={keep:19900,show:44900,extra:1200} as const;
 export const isStandardSku=(x:unknown):x is StandardSku=>typeof x==='string'&&Object.hasOwn(STANDARD,x);
 export const isCuratedSku=(x:unknown):x is CuratedSku=>typeof x==='string'&&Object.hasOwn(CURATED,x);
 export function priceId(env:string){const id=process.env[env];if(!id||!/^price_[A-Za-z0-9]+$/.test(id))throw new Error('Missing configured Stripe price: '+env);return id;}
