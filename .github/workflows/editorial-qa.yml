@@ -24,3 +24,5 @@ jobs:
         run: npx tsx scripts/verify-stripe-security.ts
       - name: TypeScript check
         run: npx tsc --noEmit
+      - name: Next.js production build
+        run: npm run build
