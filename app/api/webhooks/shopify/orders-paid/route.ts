@@ -9,6 +9,8 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
+  // Legacy-only historical webhook: never accept new Shopify orders by default.
+  if (process.env.SHOPIFY_HISTORICAL_WEBHOOKS_ENABLED !== 'true') return NextResponse.json({ error: 'Shopify checkout retired' }, { status: 410 });
   try {
     // Get raw body for HMAC validation
     // IMPORTANT: Must get body as text BEFORE any parsing
