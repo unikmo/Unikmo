@@ -202,11 +202,11 @@ export default function TestPage() {
       <Header />
       <main>
         <section id="top" className="px-5 pb-14 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
-          <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Some moments deserve more than a message.</h1>
-          <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">Imagine them hearing your voice when they least expect it.</strong> Give them a beautiful card that opens your private video, voice note, photo or message.</p>
+          <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Less stuff. More us.</h1>
+          <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">The gift isn't the card. It's what they feel when they open it.</strong> Your voice. Your words. Their private moment.</p>
           <div className="mt-7 sm:mt-9"><HeroCarousel /></div>
           <div className="mx-auto mt-6 flex max-w-[620px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/55 sm:text-[12px]"><span>No app required</span><span aria-hidden="true">•</span><span>Private by design</span><span aria-hidden="true">•</span><span>Made to revisit</span></div>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"><a href="#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Make it personal</a><a href="#moments" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">Picture the moment</a></div>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"><a href="#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Give them a moment</a><a href="#moments" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">Picture the moment</a></div>
         </section>
 
         <section className="border-y border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
@@ -227,7 +227,7 @@ export default function TestPage() {
 
         <section id="moments" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1160px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture who it is for</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Who would you love to surprise?</h2></div>
+            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture who it is for</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Who deserves a little more us?</h2></div>
             <div className="mx-auto mt-8 grid max-w-[860px] grid-cols-2 gap-2 rounded-[16px] border border-[#22323A]/[0.07] bg-[#FCF9F4]/70 p-2 sm:grid-cols-4">{occasions.map((occasion, index) => <button key={occasion.title} type="button" onClick={() => setActiveOccasion(index)} aria-pressed={activeOccasion === index} className={`min-h-[48px] rounded-[11px] px-3 py-2 text-[10px] font-medium uppercase tracking-[0.12em] transition ${activeOccasion === index ? 'bg-[#22323A] text-white shadow-sm' : 'text-[#22323A]/58 hover:bg-white hover:text-[#22323A]'}`}>{occasion.title}</button>)}</div>
             <div className="mt-6 overflow-hidden rounded-[22px] border border-[#22323A]/[0.07] bg-[#FCF9F4] shadow-[0_18px_55px_rgba(34,50,58,.07)]">
               <div className="grid lg:grid-cols-[1.35fr_.85fr]">
@@ -245,7 +245,7 @@ export default function TestPage() {
           <div className="mx-auto max-w-[960px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture the moment</p>
-              <h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The best part is what only they will hear.</h2>
+              <h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">More feeling. Less filler.</h2>
               <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.75] text-[#22323A]/65">The card is beautiful. But the feeling begins when they scan it and realize you made something just for them.</p>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-2">
@@ -266,7 +266,7 @@ export default function TestPage() {
 
         <section id="shop" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1240px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">One moment, or a story told in chapters?</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Choose one card for one meaningful moment, or a set of separate cards for the moments you want to share over time.</p></div>
+            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">One moment. Or a few more.</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Choose one card for one meaningful moment, or a set of separate cards for the moments you want to share over time.</p></div>
             <div className="mt-10 grid gap-6 md:grid-cols-3">{(orderedProducts.length ? orderedProducts : fallbackProducts).map((product) => {
               const details = getProductDetails(product.title);
               const displayName = normalizedProductName(product.title);
