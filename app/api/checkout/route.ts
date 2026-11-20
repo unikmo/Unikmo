@@ -1,6 +1,6 @@
 import {NextRequest,NextResponse} from 'next/server';
 import {randomUUID} from 'node:crypto';
-import {STANDARD,CURATED,EXTRA_PRICE_ENV,isStandardSku,isCuratedSku,allowedShippingCountries,priceId,stripeKey} from '@/lib/stripe-catalog';
+import {STANDARD,CURATED,CURATED_EXPECTED_CENTS,EXTRA_PRICE_ENV,isStandardSku,isCuratedSku,allowedShippingCountries,priceId,stripeKey} from '@/lib/stripe-catalog';
 import {activePrice,stripePost} from '@/lib/stripe-http';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
@@ -17,9 +17,10 @@ export async function POST(request:NextRequest){
     const selectedPrice=priceId(env);
     const main=await activePrice(selectedPrice);
     if(main.currency!=='usd')throw new Error('Unsupported currency');
+    if(isCuratedSku(sku)&&main.unit_amount!==CURATED_EXPECTED_CENTS[CURATED[sku].kind])throw new Error('Curated price does not match public offer');
     const isPhysical=isStandardSku(sku)||(isCuratedSku(sku)&&CURATED[sku].physical)||extra>0;
     const extrasPrice=extra>0?priceId(EXTRA_PRICE_ENV):null;
-    if(extrasPrice){const p=await activePrice(extrasPrice);if(p.currency!=='usd')throw new Error('Mismatched currency');}
+    if(extrasPrice){const p=await activePrice(extrasPrice);if(p.currency!=='usd'||p.unit_amount!==CURATED_EXPECTED_CENTS.extra)throw new Error('Mismatched extras price');}
     const origin=new URL(request.url).origin;
     const canonical=(process.env.NEXT_PUBLIC_SITE_URL||process.env.BASE_URL||origin).replace(/\/$/,'');
     const u=new URL(canonical);
