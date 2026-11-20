@@ -3,8 +3,8 @@ import HashAlias from '@/components/HashAlias';
 import TestPage from './test/page';
 
 export const metadata: Metadata = {
-  title: 'UNIKMO | Give a moment they can revisit',
-  description: 'Turn a private video, voice note, photo or message into a physical UNIKMO card they can scan and keep.',
+  title: 'UNIKMO | Less stuff. More us.',
+  description: 'Give a moment, not more stuff. A physical UNIKMO card unlocks your private video, voice note, photo or message.',
   alternates: { canonical: 'https://www.unikmo.com/' },
 };
 
