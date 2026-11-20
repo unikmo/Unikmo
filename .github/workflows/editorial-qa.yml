@@ -25,4 +25,6 @@ jobs:
       - name: TypeScript check
         run: npx tsc --noEmit
       - name: Next.js production build
+        env:
+          JWT_SECRET: CI_ONLY_NOT_FOR_PRODUCTION_0123456789_AA_BB_CC
         run: npm run build
