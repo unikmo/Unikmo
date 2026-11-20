@@ -202,11 +202,11 @@ export default function TestPage() {
       <Header />
       <main>
         <section id="top" className="px-5 pb-14 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
-          <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Give a moment. They’ll keep it forever.</h1>
-          <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">Turn a video, voice note, photo or message into a beautiful physical card.</strong> They scan it to unlock your private moment.</p>
+          <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Less stuff. More us.</h1>
+          <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">The gift isn't the card. It's what they feel when they open it.</strong> Your voice. Your words. Their private moment.</p>
           <div className="mt-7 sm:mt-9"><HeroCarousel /></div>
           <div className="mx-auto mt-6 flex max-w-[620px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/55 sm:text-[12px]"><span>No app required</span><span aria-hidden="true">•</span><span>Private by design</span><span aria-hidden="true">•</span><span>Made to revisit</span></div>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"><a href="#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a><a href="#how" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See how it works</a></div>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"><a href="#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Give them a moment.</a><a href="#how" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See how it works</a></div>
         </section>
 
         <section className="border-y border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
@@ -227,7 +227,7 @@ export default function TestPage() {
 
         <section id="moments" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1160px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture who it is for</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">For life’s meaningful moments.</h2></div>
+            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture who it is for</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Their day. Your words. More us.</h2></div>
             <div className="mx-auto mt-8 grid max-w-[860px] grid-cols-2 gap-2 rounded-[16px] border border-[#22323A]/[0.07] bg-[#FCF9F4]/70 p-2 sm:grid-cols-4">{occasions.map((occasion, index) => <button key={occasion.title} type="button" onClick={() => setActiveOccasion(index)} aria-pressed={activeOccasion === index} className={`min-h-[48px] rounded-[11px] px-3 py-2 text-[10px] font-medium uppercase tracking-[0.12em] transition ${activeOccasion === index ? 'bg-[#22323A] text-white shadow-sm' : 'text-[#22323A]/58 hover:bg-white hover:text-[#22323A]'}`}>{occasion.title}</button>)}</div>
             <div className="mt-6 overflow-hidden rounded-[22px] border border-[#22323A]/[0.07] bg-[#FCF9F4] shadow-[0_18px_55px_rgba(34,50,58,.07)]">
               <div className="grid lg:grid-cols-[1.35fr_.85fr]">
@@ -243,7 +243,7 @@ export default function TestPage() {
 
         <section id="stories" className="px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[900px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Trust comes from people</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The feeling is the proof.</h2></div>
+            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Trust comes from people</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">What matters is how they feel.</h2></div>
             <div className="mt-10 grid gap-5 md:grid-cols-2">
               <article className="overflow-hidden rounded-[20px] border border-[#22323A]/[0.07] bg-white/45"><div className="relative aspect-[4/3]"><Image src="/testimonials/customer-london.jpg" alt="Matt L., London" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" /></div><div className="p-6"><blockquote className="font-serif text-[20px] leading-[1.42]">“I gave it to my partner for her birthday. <strong className="font-semibold text-[#17232A]">She cried within seconds.</strong> It felt deeply personal — not just another gift.”</blockquote><p className="mt-4 text-[11px] text-[#22323A]/55">— Matt L., London</p></div></article>
               <article className="overflow-hidden rounded-[20px] border border-[#22323A]/[0.07] bg-white/45"><div className="relative aspect-[4/3]"><Image src="/testimonials/customer-newyork.jpg" alt="Sophie M., New York" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" /></div><div className="p-6"><blockquote className="font-serif text-[20px] leading-[1.42]">“Such a simple idea, but <strong className="font-semibold text-[#17232A]">incredibly powerful.</strong> The moment we unlocked the message together, it became something we’ll remember.”</blockquote><p className="mt-4 text-[11px] text-[#22323A]/55">— Sophie M., New York</p></div></article>
@@ -253,7 +253,7 @@ export default function TestPage() {
 
         <section id="shop" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1240px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Pick the way you want to give it.</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Same UNIKMO experience. Choose how many separate cards — and private memories — you want to give.</p></div>
+            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">One person or a whole story. Make it yours.</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Same UNIKMO experience. Choose how many separate cards — and private memories — you want to give.</p></div>
             <div className="mt-10 grid gap-6 md:grid-cols-3">{(orderedProducts.length ? orderedProducts : fallbackProducts).map((product) => {
               const details = getProductDetails(product.title);
               const displayName = normalizedProductName(product.title);

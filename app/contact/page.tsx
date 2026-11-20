@@ -14,7 +14,7 @@ export default function ContactPage() {
     <LegalPageShell
       eyebrow="Get in touch"
       title="Contact"
-      intro="Questions about an order, a lost access code, Curated UNIKMO, or a privacy request — send us a message and we'll reply by email."
+      intro="Less stuff. More us. Need help giving a moment, finding an access code, or checking an order? Send us a message and we'll reply by email. For Curated UNIKMO and privacy requests, we're here too."
     >
       <ContactForm />
 

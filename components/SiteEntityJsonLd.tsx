@@ -9,7 +9,7 @@ export default function SiteEntityJsonLd() {
         legalName: 'TSquare Ventures LLC',
         url: 'https://www.unikmo.com/',
         description:
-          'UNIKMO creates physical keepsake cards that unlock a private digital memory such as a video, voice note, photo, or written message.',
+          'Less stuff. More us. UNIKMO creates premium physical keepsake cards that unlock a private video, voice note, photo or written message from someone who matters.',
         email: 'hello@unikmo.com',
         address: {
           '@type': 'PostalAddress',
@@ -45,7 +45,7 @@ export default function SiteEntityJsonLd() {
         name: 'UNIKMO',
         url: 'https://www.unikmo.com/',
         description:
-          'A physical card that gives someone a private route back to a video, voice note, photo, or written message.',
+          'Less stuff. More us. Your voice, your words, their private moment — carried in a physical UNIKMO card.',
         logo: { '@id': 'https://www.unikmo.com/#logo' },
       },
       {
@@ -54,7 +54,7 @@ export default function SiteEntityJsonLd() {
         url: 'https://www.unikmo.com/',
         name: 'UNIKMO',
         description:
-          'Official website for UNIKMO physical memory cards, private digital moments, and the optional Curated UNIKMO service.',
+          'Less stuff. More us. Discover private moments in physical UNIKMO cards, and the optional Curated UNIKMO experience.',
         publisher: { '@id': 'https://www.unikmo.com/#organization' },
         inLanguage: 'en',
         hasPart: [

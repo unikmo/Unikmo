@@ -29,7 +29,7 @@ export default function SiteFooter() {
               <Image src="/unikmo-logo.svg" alt="UNIKMO" width={729} height={220} className="h-8 w-auto" />
             </Link>
             <p className="mt-3 max-w-[280px] text-[11px] leading-[1.6] text-[#22323A]/50">
-              A card that unlocks a private memory. A tree planted with every order.
+              Less stuff. More us. Your voice, your words, their private moment.
             </p>
           </div>
 

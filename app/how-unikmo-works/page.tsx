@@ -4,13 +4,13 @@ import Link from 'next/link';
 import SiteFooter from '@/components/SiteFooter';
 
 export const metadata: Metadata = {
-  title: 'How UNIKMO Works | Physical Memory Cards for Private Messages',
+  title: 'How UNIKMO Works | Less stuff. More us.',
   description:
     'UNIKMO is a physical keepsake card that unlocks a private video, voice note, photo, or written message using a QR code and private access code. No app required.',
   alternates: { canonical: 'https://www.unikmo.com/how-unikmo-works' },
   robots: { index: true, follow: true },
   openGraph: {
-    title: 'How UNIKMO Works | Physical Memory Cards for Private Messages',
+    title: 'How UNIKMO Works | Less stuff. More us.',
     description:
       'A physical UNIKMO card gives someone a private route back to your video, voice note, photo, or written message.',
     url: 'https://www.unikmo.com/how-unikmo-works',
@@ -195,7 +195,7 @@ export default function HowUnikmoWorksPage() {
               <strong className="font-semibold text-[#22323A]">UNIKMO is a physical keepsake card that unlocks a private digital memory.</strong> The memory can be a video, voice note, photo, or written message.
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
+              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Give them a moment.</Link>
               <Link href="/faq" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4">Read the FAQ</Link>
             </div>
           </div>
@@ -218,7 +218,7 @@ export default function HowUnikmoWorksPage() {
           <div className="mx-auto max-w-[1040px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">UNIKMO at a glance</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">The core product facts.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">A simple card. A deeply personal experience.</h2>
             </div>
             <dl className="mt-9 grid overflow-hidden rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] sm:grid-cols-2">
               {facts.map(([term, value]) => (
@@ -278,7 +278,7 @@ export default function HowUnikmoWorksPage() {
               ))}
             </div>
             <div className="mt-8 text-center">
-              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#22323A] px-7 text-[11px] font-medium text-white transition hover:bg-[#34464F]">Choose Your Card</Link>
+              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#22323A] px-7 text-[11px] font-medium text-white transition hover:bg-[#34464F]">Give them a moment.</Link>
             </div>
           </div>
         </section>
@@ -309,9 +309,9 @@ export default function HowUnikmoWorksPage() {
         <section className="bg-[#22323A] px-5 py-14 text-center text-white sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[760px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#D7B77C]">The card is the key</p>
-            <h2 className="mt-3 font-serif text-[34px] leading-[1.05] sm:text-[42px]">The memory is the gift.</h2>
-            <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-white/68">Choose a card, make it personal, and give someone a moment they can return to.</p>
-            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
+            <h2 className="mt-3 font-serif text-[34px] leading-[1.05] sm:text-[42px]">The feeling is the gift.</h2>
+            <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-white/68">Your voice. Your words. Their private moment. A tangible card gives it a place in their hands.</p>
+            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Give them a moment.</Link>
           </div>
         </section>
       </main>

@@ -547,7 +547,7 @@ function UploadPageContent() {
           <h1 className="text-3xl sm:text-4xl font-semibold text-[#22323A] mb-2 font-serif">
             Upload your moment
           </h1>
-          <p className="text-[#22323A]/65 mb-8">Share your special moment with a secure code</p>
+          <p className="text-[#22323A]/65 mb-8">Your voice. Your words. Their private moment.</p>
 
           {/* Code Input */}
           <div className="mb-8">

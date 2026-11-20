@@ -77,7 +77,7 @@ export default function FaqPage() {
             <Link href="/#how-it-works" className="hover:text-[#B38846]">How it works</Link>
             <Link href="/faq" className="text-[#B38846]">FAQ</Link>
           </nav>
-          <Link href="/#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9F783D] md:ml-8">Choose Your Card</Link>
+          <Link href="/#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9F783D] md:ml-8">Give them a moment.</Link>
         </div>
       </header>
 
@@ -90,7 +90,7 @@ export default function FaqPage() {
               <strong className="font-semibold text-[#22323A]">A physical card that unlocks your private video, voice note, photo or message.</strong> Here is what to know before you give one.
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
+              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Give them a moment.</Link>
               <Link href="/#how-it-works" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4">See how it works</Link>
             </div>
           </div>
@@ -119,9 +119,9 @@ export default function FaqPage() {
         <section className="px-5 py-14 text-center sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[760px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Ready when the moment is</p>
-            <h2 className="mt-3 font-serif text-[32px] leading-[1.06] sm:text-[40px]">Choose the card. Then make it personal.</h2>
-            <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-[#22323A]/62">Single Key, 4-Key Bundle, or 7-Key Bundle — each card unlocks its own private memory.</p>
-            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
+            <h2 className="mt-3 font-serif text-[32px] leading-[1.06] sm:text-[40px]">Less stuff. More us. Make it personal.</h2>
+            <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-[#22323A]/62">Choose one moment or a story in parts. Each UNIKMO card opens a private message made by you.</p>
+            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Give them a moment.</Link>
           </div>
         </section>
       </main>
