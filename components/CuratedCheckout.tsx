@@ -1,9 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CURATED_PRODUCTS,
-  curatedCheckoutUrl,
   type CuratedDeliveryKey,
   type CuratedExperienceKey,
 } from '@/lib/curated-products';
@@ -31,18 +30,28 @@ export default function CuratedCheckout() {
   const [delivery, setDelivery] = useState<CuratedDeliveryKey>('physical');
   const [extras, setExtras] = useState(0);
   const [redirecting, setRedirecting] = useState(false);
+  const [available, setAvailable] = useState(false);
+  const [checkoutError, setCheckoutError] = useState('');
+  useEffect(() => {
+    fetch('/api/curated-prices').then(r => r.ok ? r.json() : {available:false}).then(data => setAvailable(Boolean(data.available))).catch(() => setAvailable(false));
+  }, []);
 
   const basePrice = CURATED_PRODUCTS[experience].price;
   const total = basePrice + extras * EXTRA_PRICE;
 
-  const checkoutUrl = useMemo(
-    () => curatedCheckoutUrl({ experience, delivery, extraKeepsakes: extras }),
-    [experience, delivery, extras],
-  );
-
-  function goToCheckout() {
-    setRedirecting(true);
-    window.location.href = checkoutUrl;
+  async function goToCheckout() {
+    if (!available) return;
+    setRedirecting(true); setCheckoutError('');
+    const sku = (experience === 'KEEP_IT' ? 'keep' : 'show') + '_' + delivery;
+    try {
+      const r = await fetch('/api/checkout', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sku,extras})});
+      const data = await r.json();
+      if (!r.ok || typeof data.url !== 'string') throw new Error('Unavailable');
+      window.location.assign(data.url);
+    } catch {
+      setCheckoutError('Secure checkout is unavailable. Contact UNIKMO before ordering.');
+      setRedirecting(false);
+    }
   }
 
   return (
@@ -152,17 +161,18 @@ export default function CuratedCheckout() {
         <button
           type="button"
           onClick={goToCheckout}
-          disabled={redirecting}
+          disabled={redirecting || !available}
           className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[12px] font-medium text-white transition hover:bg-[#9D773D] disabled:cursor-wait disabled:opacity-70"
         >
-          {redirecting ? 'Opening checkout…' : 'Continue to checkout'}
+          {redirecting ? 'Opening Stripe…' : available ? 'Continue to secure checkout' : 'Ordering temporarily unavailable'}
         </button>
       </div>
 
       <p className="mt-4 text-[10px] leading-[1.6] text-[#22323A]/45">
-        Checkout is handled securely by Shopify. After payment we email you to collect your photos, videos and
-        messages and to confirm Times Square scheduling where selected.
+        When available, payment is processed by Stripe. We then contact you to collect your materials and confirm Times Square scheduling where selected. Prices in USD. No card is charged on this page.
       </p>
+      {!available && <p role="status" className="mt-3 text-[12px] text-[#22323A]/65">Checkout is being configured. <a href="/contact" className="underline">Contact UNIKMO</a> about your order.</p>}
+      {checkoutError && <p role="alert" className="mt-3 text-[12px] text-red-700">{checkoutError}</p>}
     </div>
   );
 }

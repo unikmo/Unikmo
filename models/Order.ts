@@ -18,6 +18,7 @@ export interface IOrder extends Document {
   totalPrice: number;
   currency: string;
   paymentStatus: 'paid';
+  stripeCodesEmailSentAt?: Date;
   source: 'webhook' | 'admin';
   tags: string[];
   lineItems: ILineItem[];
@@ -71,6 +72,7 @@ const OrderSchema: Schema = new Schema(
       required: true,
       default: 'USD',
     },
+    stripeCodesEmailSentAt: { type: Date, required: false },
     paymentStatus: {
       type: String,
       enum: ['paid'],

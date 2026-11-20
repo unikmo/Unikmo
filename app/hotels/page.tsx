@@ -146,7 +146,7 @@ export default function HotelsPage() {
           <div className="mx-auto grid max-w-[1040px] gap-9 lg:grid-cols-2 lg:gap-16">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The problem</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Most welcome notes are read once and thrown away.</h2>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">What if your welcome was the beginning, not the end?</h2>
             </div>
             <div className="self-end text-[15px] leading-[1.75] text-[#22323A]/68">
               <p>Printed letters, flyers and programmes create clutter and waste, then disappear.</p>
@@ -162,7 +162,7 @@ export default function HotelsPage() {
           <div className="mx-auto max-w-[1100px]">
             <div className="mx-auto max-w-[720px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">The solution</p>
-              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">One card. Two moments.</h2>
+              <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">They check out. The feeling checks in.</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-2">
               {moments.map((item) => (
@@ -194,7 +194,7 @@ export default function HotelsPage() {
                   </li>
                 ))}
               </ol>
-              <p className="mt-6 font-serif text-[22px] leading-[1.2]">Almost nothing changes in your daily operations.</p>
+              <p className="mt-6 font-serif text-[22px] leading-[1.2]">Begin with a small, practical pilot.</p>
             </div>
           </div>
         </section>

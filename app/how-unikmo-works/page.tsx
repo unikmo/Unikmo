@@ -190,7 +190,7 @@ export default function HowUnikmoWorksPage() {
         <section className="px-5 pb-14 pt-14 text-center sm:px-8 sm:pb-16 sm:pt-18 lg:pt-20">
           <div className="mx-auto max-w-[860px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">The factual guide</p>
-            <h1 className="mt-4 font-serif text-[38px] leading-[1.04] tracking-[-0.025em] sm:text-[48px] lg:text-[56px]">How UNIKMO works.</h1>
+            <h1 className="mt-4 font-serif text-[38px] leading-[1.04] tracking-[-0.025em] sm:text-[48px] lg:text-[56px]">Little card. Big feeling.</h1>
             <p className="mx-auto mt-5 max-w-[760px] text-[16px] leading-[1.68] text-[#22323A]/72 sm:text-[18px]">
               <strong className="font-semibold text-[#22323A]">UNIKMO is a physical keepsake card that unlocks a private digital memory.</strong> The memory can be a video, voice note, photo, or written message.
             </p>
@@ -218,7 +218,7 @@ export default function HowUnikmoWorksPage() {
           <div className="mx-auto max-w-[1040px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">UNIKMO at a glance</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">The core product facts.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">All the little details, when you want them.</h2>
             </div>
             <dl className="mt-9 grid overflow-hidden rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] sm:grid-cols-2">
               {facts.map(([term, value]) => (
@@ -235,7 +235,7 @@ export default function HowUnikmoWorksPage() {
           <div className="mx-auto max-w-[1080px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Four simple steps</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">Create. Give. Scan. Revisit.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">A surprise they can open in four simple steps.</h2>
             </div>
             <div className="mt-9 grid gap-6 md:grid-cols-4">
               {[
@@ -258,7 +258,7 @@ export default function HowUnikmoWorksPage() {
           <div className="mx-auto max-w-[1040px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Card options</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">Choose how many moments you want to give.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">One message, or several moments to discover?</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-3">
               {[
@@ -287,7 +287,7 @@ export default function HowUnikmoWorksPage() {
           <div className="mx-auto max-w-[900px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Clear answers</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">Frequently asked questions.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">What you might want to know before giving.</h2>
             </div>
             <div className="mt-8 divide-y divide-[#22323A]/[0.08] border-y border-[#22323A]/[0.08]">
               {faqs.map((faq) => (
@@ -309,7 +309,7 @@ export default function HowUnikmoWorksPage() {
         <section className="bg-[#22323A] px-5 py-14 text-center text-white sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[760px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#D7B77C]">The card is the key</p>
-            <h2 className="mt-3 font-serif text-[34px] leading-[1.05] sm:text-[42px]">The memory is the gift.</h2>
+            <h2 className="mt-3 font-serif text-[34px] leading-[1.05] sm:text-[42px]">The part they will remember is yours.</h2>
             <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-white/68">Choose a card, make it personal, and give someone a moment they can return to.</p>
             <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
           </div>

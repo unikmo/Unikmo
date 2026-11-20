@@ -11,12 +11,11 @@ type Product = {
   title: string;
   image?: string | null;
   imageAlt?: string | null;
-  variantId?: string | null;
   price?: string | null;
   currencyCode?: string | null;
 };
 
-type ProductsResponse = { products?: Product[]; storeDomain?: string };
+type ProductsResponse = { available?: boolean; products?: Product[]; message?: string };
 
 const slides = [
   { image: '/story/matt-writes.png', caption: 'A thought becomes something worth keeping.', position: 'object-[50%_25%]' },
@@ -134,9 +133,9 @@ function Header() {
         <nav className="ml-auto hidden items-center gap-8 text-[11px] text-[#22323A]/70 md:flex">
           <a href="#how" className="hover:text-[#B38846]">How it works</a>
           <a href="#moments" className="hover:text-[#B38846]">Occasions</a>
-          <a href="#stories" className="hover:text-[#B38846]">Reviews</a>
+          <a href="#stories" className="hover:text-[#B38846]">The moment</a>
         </nav>
-        <a href="#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9D773D] md:ml-8">Choose Your Card</a>
+        <a href="#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9D773D] md:ml-8">Create their moment</a>
       </div>
     </header>
   );
@@ -170,14 +169,16 @@ function ProductStage({ side }: { side: 'front' | 'back' }) {
 
 export default function TestPage() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [storeDomain, setStoreDomain] = useState('');
+  const [productsAvailable, setProductsAvailable] = useState(false);
+  const [checkoutSku, setCheckoutSku] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState('');
   const [activeOccasion, setActiveOccasion] = useState(0);
 
   useEffect(() => {
     fetch('/api/products')
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('product fetch failed'))))
-      .then((data: ProductsResponse) => { setProducts(data.products || []); setStoreDomain(data.storeDomain || ''); })
-      .catch(() => { setProducts([]); setStoreDomain(''); });
+      .then((data: ProductsResponse) => { setProducts(data.products || []); setProductsAvailable(Boolean(data.available)); })
+      .catch(() => { setProducts([]); setProductsAvailable(false); });
   }, []);
 
   const orderedProducts = useMemo(() => {
@@ -192,26 +193,38 @@ export default function TestPage() {
 
   const active = occasions[activeOccasion];
   const fallbackProducts: Product[] = [
-    { id: 'single', title: 'Single Key', image: '/cardfrontunikmo.jpg', price: '24', currencyCode: 'USD' },
-    { id: 'four', title: '4-Key Bundle', image: '/cardfrontsite4.png', price: '64', currencyCode: 'USD' },
-    { id: 'seven', title: '7-Key Bundle', image: '/cardfrontsite7.png', price: '72', currencyCode: 'USD' },
+    { id: 'single', title: 'Single Key', image: '/cardfrontunikmo.jpg' },
+    { id: 'four', title: '4-Key Bundle', image: '/cardfrontsite4.png' },
+    { id: 'seven', title: '7-Key Bundle', image: '/cardfrontsite7.png' },
   ];
+
+  async function openStripeCheckout(sku: string) {
+    if (!productsAvailable) return;
+    setCheckoutSku(sku);
+    setCheckoutError('');
+    try {
+      const response = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sku }) });
+      const data = await response.json();
+      if (!response.ok || typeof data.url !== 'string') throw new Error('Checkout is not available right now.');
+      window.location.assign(data.url);
+    } catch { setCheckoutError('Checkout is unavailable. Please contact UNIKMO before ordering.'); setCheckoutSku(null); }
+  }
 
   return (
     <div className="min-h-screen bg-[#FCF9F4] text-[#22323A]">
       <Header />
       <main>
         <section id="top" className="px-5 pb-14 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
-          <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Give a moment. They’ll keep it forever.</h1>
-          <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">Turn a video, voice note, photo or message into a beautiful physical card.</strong> They scan it to unlock your private moment.</p>
+          <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Less stuff. More us.</h1>
+          <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">The gift isn&apos;t the card. It&apos;s what they feel when they open it.</strong> Your voice. Your words. Their private moment.</p>
           <div className="mt-7 sm:mt-9"><HeroCarousel /></div>
           <div className="mx-auto mt-6 flex max-w-[620px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/55 sm:text-[12px]"><span>No app required</span><span aria-hidden="true">•</span><span>Private by design</span><span aria-hidden="true">•</span><span>Made to revisit</span></div>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"><a href="#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a><a href="#how" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See how it works</a></div>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"><a href="#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Give them a moment</a><a href="#moments" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">Picture the moment</a></div>
         </section>
 
         <section className="border-y border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1120px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">One card. Two sides.</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The card is the key. The memory is the gift.</h2><p className="mx-auto mt-3 max-w-[560px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">The real UNIKMO card — front and back.</p></div>
+            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">One card. Two sides.</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The card is the key. The memory is the gift.</h2><p className="mx-auto mt-3 max-w-[560px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Something they can hold before they discover what you have to say.</p></div>
             <div className="mt-10 grid gap-6 md:grid-cols-2"><ProductStage side="front" /><ProductStage side="back" /></div>
           </div>
         </section>
@@ -227,7 +240,7 @@ export default function TestPage() {
 
         <section id="moments" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1160px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture who it is for</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">For life’s meaningful moments.</h2></div>
+            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture who it is for</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Who deserves a little more us?</h2></div>
             <div className="mx-auto mt-8 grid max-w-[860px] grid-cols-2 gap-2 rounded-[16px] border border-[#22323A]/[0.07] bg-[#FCF9F4]/70 p-2 sm:grid-cols-4">{occasions.map((occasion, index) => <button key={occasion.title} type="button" onClick={() => setActiveOccasion(index)} aria-pressed={activeOccasion === index} className={`min-h-[48px] rounded-[11px] px-3 py-2 text-[10px] font-medium uppercase tracking-[0.12em] transition ${activeOccasion === index ? 'bg-[#22323A] text-white shadow-sm' : 'text-[#22323A]/58 hover:bg-white hover:text-[#22323A]'}`}>{occasion.title}</button>)}</div>
             <div className="mt-6 overflow-hidden rounded-[22px] border border-[#22323A]/[0.07] bg-[#FCF9F4] shadow-[0_18px_55px_rgba(34,50,58,.07)]">
               <div className="grid lg:grid-cols-[1.35fr_.85fr]">
@@ -242,35 +255,50 @@ export default function TestPage() {
         </section>
 
         <section id="stories" className="px-5 py-16 sm:px-8 lg:py-20">
-          <div className="mx-auto max-w-[900px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Trust comes from people</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The feeling is the proof.</h2></div>
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
-              <article className="overflow-hidden rounded-[20px] border border-[#22323A]/[0.07] bg-white/45"><div className="relative aspect-[4/3]"><Image src="/testimonials/customer-london.jpg" alt="Matt L., London" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" /></div><div className="p-6"><blockquote className="font-serif text-[20px] leading-[1.42]">“I gave it to my partner for her birthday. <strong className="font-semibold text-[#17232A]">She cried within seconds.</strong> It felt deeply personal — not just another gift.”</blockquote><p className="mt-4 text-[11px] text-[#22323A]/55">— Matt L., London</p></div></article>
-              <article className="overflow-hidden rounded-[20px] border border-[#22323A]/[0.07] bg-white/45"><div className="relative aspect-[4/3]"><Image src="/testimonials/customer-newyork.jpg" alt="Sophie M., New York" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" /></div><div className="p-6"><blockquote className="font-serif text-[20px] leading-[1.42]">“Such a simple idea, but <strong className="font-semibold text-[#17232A]">incredibly powerful.</strong> The moment we unlocked the message together, it became something we’ll remember.”</blockquote><p className="mt-4 text-[11px] text-[#22323A]/55">— Sophie M., New York</p></div></article>
+          <div className="mx-auto max-w-[960px]">
+            <div className="text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture the moment</p>
+              <h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">More feeling. Less filler.</h2>
+              <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.75] text-[#22323A]/65">The card is beautiful. But the feeling begins when they scan it and realize you made something just for them.</p>
             </div>
+            <div className="mt-9 grid gap-5 md:grid-cols-2">
+              <article className="rounded-[20px] border border-[#22323A]/[0.07] bg-[#F8F2EB] p-7 sm:p-9">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">For someone far away</p>
+                <h3 className="mt-4 font-serif text-[25px] leading-[1.2]">“I wish I could tell you this in person.”</h3>
+                <p className="mt-4 text-[13px] leading-[1.75] text-[#22323A]/67">Your voice, your words, their own quiet moment to open it. Sometimes the distance makes the message matter even more.</p>
+              </article>
+              <article className="rounded-[20px] border border-[#22323A]/[0.07] bg-[#F8F2EB] p-7 sm:p-9">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">For the person who has everything</p>
+                <h3 className="mt-4 font-serif text-[25px] leading-[1.2]">Give them something they could never buy themselves.</h3>
+                <p className="mt-4 text-[13px] leading-[1.75] text-[#22323A]/67">A specific memory. A sincere thank-you. Something only you could say. One private moment made personal.</p>
+              </article>
+            </div>
+            <p className="mt-6 text-center text-[11px] text-[#22323A]/55">Illustrative gift ideas, not customer testimonials. For access, storage and delivery details, see the <Link href="/faq" className="underline decoration-[#B38846]/50 underline-offset-4">FAQ</Link>.</p>
           </div>
         </section>
 
         <section id="shop" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1240px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Pick the way you want to give it.</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Same UNIKMO experience. Choose how many separate cards — and private memories — you want to give.</p></div>
+            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">One moment. Or a few more.</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Choose one card for one meaningful moment, or a set of separate cards for the moments you want to share over time.</p></div>
             <div className="mt-10 grid gap-6 md:grid-cols-3">{(orderedProducts.length ? orderedProducts : fallbackProducts).map((product) => {
               const details = getProductDetails(product.title);
               const displayName = normalizedProductName(product.title);
-              const checkoutHref = product.variantId && storeDomain ? `https://${storeDomain}/cart/${product.variantId}:1` : '#shop';
-              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white">Best value</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><a href={checkoutHref} className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[11px] font-medium text-white transition hover:bg-[#17232A]">{details.button}</a></article>;
+              const sku = product.id === 'single' || product.id === 'four' || product.id === 'seven' ? product.id : normalizedProductName(product.title) === '7-Key Bundle' ? 'seven' : normalizedProductName(product.title) === '4-Key Bundle' ? 'four' : 'single';
+              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white">Best value</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><button type="button" onClick={() => openStripeCheckout(sku)} disabled={!productsAvailable || checkoutSku !== null} className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[11px] font-medium text-white transition hover:bg-[#17232A] disabled:cursor-not-allowed disabled:opacity-45">{checkoutSku === sku ? 'Opening secure checkout…' : productsAvailable ? details.button : 'Ordering temporarily unavailable'}</button></article>;
             })}</div>
+            {!productsAvailable && <p role="status" className="mt-6 text-center text-[12px] text-[#22323A]/70">We’re preparing secure checkout. No orders are being accepted here yet. <Link href="/contact" className="underline">Contact UNIKMO</Link> for questions.</p>}
+            {checkoutError && <p role="alert" className="mt-4 text-center text-[12px] text-red-700">{checkoutError}</p>}
           </div>
         </section>
 
         <CuratedUnikmoTeaser />
 
-        <section className="border-t border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-8 sm:px-8"><div className="mx-auto flex max-w-[900px] flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left"><p className="text-[13px] leading-[1.7] text-[#22323A]/70">UNIKMO is also used by cruise lines and luxury hotels as a welcome and keepsake.</p><Link href="/hotels" className="text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">For hotels and cruise lines <span aria-hidden="true">→</span></Link></div></section>
+        <section className="border-t border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-8 sm:px-8"><div className="mx-auto flex max-w-[900px] flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left"><p className="text-[13px] leading-[1.7] text-[#22323A]/70">A welcome worth remembering. A keepsake guests can take home.</p><Link href="/hotels" className="text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Explore hospitality partnerships <span aria-hidden="true">→</span></Link></div></section>
 
         <section className="border-t border-[#22323A]/[0.06] bg-[#FCF9F4] px-5 py-8 sm:px-8"><div className="mx-auto grid max-w-[1180px] gap-5 sm:grid-cols-2 lg:grid-cols-4">{[
-          ['lock', 'Private & secure', 'Your moments stay private.'],
+          ['lock', 'Private by design', 'The card and private access code control who can open it.'],
           ['phone', 'No app required', 'They open it in the browser.'],
-          ['leaf', 'A tree planted', 'For every order.'],
+          ['leaf', 'Made with intention', 'A keepsake, not another fleeting message.'],
           ['quality', 'Premium quality', 'Made to be kept.'],
         ].map(([kind, title, body]) => <div key={title} className="flex items-center gap-4"><div className="text-[#B38846]"><TrustIcon kind={kind as 'lock' | 'phone' | 'leaf' | 'quality'} /></div><div><p className="text-[12px] font-medium">{title}</p><p className="mt-1 text-[11px] text-[#22323A]/55">{body}</p></div></div>)}</div></section>
       </main>
