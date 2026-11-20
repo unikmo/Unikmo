@@ -93,7 +93,7 @@ const faqs = [
   {
     question: 'How much does Curated UNIKMO cost?',
     answer:
-      'Keep It — Curated is $199. Show It — Times Square Edition is $399 and includes everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
+      'Keep It — Curated is $199. Show It — Times Square Edition is $449 and includes everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
   },
   {
     question: 'What is the Times Square Edition?',
