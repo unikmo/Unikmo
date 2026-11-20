@@ -63,10 +63,10 @@ export default function CuratedUnikmoTeaser() {
               Curated UNIKMO
             </p>
             <h2 className="mt-4 max-w-[520px] font-serif text-[32px] leading-[1.08] sm:text-[42px]">
-              Want the memory without doing the work?
+              Your story. Our hands. All heart.
             </h2>
             <p className="mt-5 max-w-[540px] text-[13px] leading-[1.75] text-[#22323A]/64 sm:text-[14px]">
-              Send us the photos, videos and messages. We&rsquo;ll curate the story, handle the
+              You bring the moments. We curate the story, handle the
               optional Times Square experience, and deliver your finished UNIKMO.
             </p>
 
