@@ -140,11 +140,11 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">{page.eyebrow}</p>
             <h1 className="mx-auto mt-4 max-w-[860px] font-serif text-[35px] leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]">{page.title}</h1>
             <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.65] text-[#22323A]/72 sm:text-[17px]">
-              <strong className="font-semibold text-[#22323A]">Turn a video, voice note, photo or message into a beautiful physical card.</strong> They scan it to unlock your private moment.
+              <strong className="font-semibold text-[#22323A]">Less stuff. More us.</strong> Your voice, your words and your private moment — held in a physical card they'll want to keep.
             </p>
             <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-[1.7] text-[#22323A]/58 sm:text-[14px]">{page.intro}</p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]">Choose Your Card</Link>
+              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]">Give them a moment.</Link>
               <Link href="/#how-it-works" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4 transition hover:text-[#22323A]">See how it works</Link>
             </div>
             <div className="mx-auto mt-6 flex max-w-[640px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/52">
@@ -163,7 +163,7 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
           <div className="mx-auto max-w-[1180px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">One moment or a story told in parts.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">One person, one private moment. Or a story in parts.</h2>
             </div>
             <div className="mt-9 grid gap-5 lg:grid-cols-3">
               {PRODUCTS.map((product, index) => <ProductCard key={product.name} product={product} fit={page.productFit[index]} featured={index === 2} />)}
@@ -214,7 +214,7 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
                 </article>
               ))}
             </div>
-            <div className="mt-9 text-center"><Link href="/#shop" className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition-colors hover:bg-[#9F783D]">Choose Your Card</Link></div>
+            <div className="mt-9 text-center"><Link href="/#shop" className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition-colors hover:bg-[#9F783D]">Give them a moment.</Link></div>
           </div>
         </section>
 
@@ -246,9 +246,9 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
                 return related ? <Link key={slug} href={`/${slug}`} className="rounded-full border border-[#22323A]/[0.10] bg-white/55 px-4 py-2 text-[11px] text-[#22323A]/65 transition hover:border-[#B38846]/40 hover:text-[#B38846]">{related.primaryKeyword}</Link> : null;
               })}
             </div>
-            <h2 className="mx-auto mt-10 max-w-[680px] font-serif text-[32px] leading-[1.05] sm:text-[40px]">Give the feeling. Let the card carry it.</h2>
+            <h2 className="mx-auto mt-10 max-w-[680px] font-serif text-[32px] leading-[1.05] sm:text-[40px]">The gift isn't the card. It's what they feel when they open it.</h2>
             <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-[#22323A]/62">Choose the number of UNIKMO cards that fits the moment you want to give.</p>
-            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition-colors hover:bg-[#9F783D]">Choose Your Card</Link>
+            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition-colors hover:bg-[#9F783D]">Give them a moment.</Link>
           </div>
         </section>
       </main>
