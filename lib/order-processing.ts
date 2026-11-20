@@ -31,6 +31,7 @@ export interface ProcessOrderInput {
   tags?: string[];
   shopifyOrderName?: string;
   customerName?: string;
+  deferCodeEmail?: boolean;
 }
 
 function normalizeShopifyId(id: string | number | undefined): string {
