@@ -148,15 +148,15 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-[#FCF9F4] px-5 pb-10 pt-14 sm:px-8 sm:pt-20 lg:pt-24">
       <div className="mx-auto max-w-[1120px] text-center">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-[#B38846]">The key to your memory</p>
+        <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-[#B38846]">Less stuff. More us.</p>
         <h1 className="mx-auto mt-5 max-w-[900px] font-serif text-[48px] leading-[0.98] tracking-[-0.035em] text-[#22323A] sm:text-[64px] lg:text-[78px]">
-          A card that unlocks<br />a private memory.
+          Less stuff.<br />More us.
         </h1>
         <p className="mx-auto mt-6 max-w-[620px] text-[15px] leading-[1.7] text-[#22323A]/68 sm:text-[17px]">
-          Turn a private video, voice note, photo or message into a beautifully made card they can hold — and return to whenever it matters.
+          The gift isn't the card. It's what they feel when they open it. Your voice. Your words. Their private moment.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="#shop" className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a>
+          <a href="#shop" className="inline-flex min-h-[50px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Give them a moment.</a>
           <a href="#how" className="inline-flex min-h-[50px] items-center justify-center rounded-lg border border-[#22323A]/20 bg-white/40 px-7 text-[12px] font-medium text-[#22323A] transition hover:border-[#B38846]/45">See how it works</a>
         </div>
 
@@ -335,7 +335,7 @@ function Shop() {
       <div className="mx-auto max-w-[1240px]">
         <div className="text-center">
           <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your set</p>
-          <h2 className="mt-3 font-serif text-[36px] text-[#22323A] sm:text-[46px]">Find the perfect fit.</h2>
+          <h2 className="mt-3 font-serif text-[36px] text-[#22323A] sm:text-[46px]">Give one private moment. Or make a whole story.</h2>
           <p className="mx-auto mt-3 max-w-[560px] text-[14px] leading-relaxed text-[#22323A]/58">No invented packaging. Just the actual UNIKMO cards, shown as the sets you receive.</p>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -366,7 +366,7 @@ function Occasions() {
   return (
     <section id="occasions" className="bg-[#FCF9F4] px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-[1120px]">
-        <h2 className="text-center font-serif text-[34px] text-[#22323A] sm:text-[44px]">Perfect for life’s meaningful moments.</h2>
+        <h2 className="text-center font-serif text-[34px] text-[#22323A] sm:text-[44px]">Make it about the two of you.</h2>
         <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {occasions.map(([title, body]) => (
             <article key={title} className="rounded-[18px] border border-[#22323A]/[0.08] bg-white/35 px-5 py-7 text-center">
@@ -427,7 +427,7 @@ function FinalCta() {
       <div className="mx-auto max-w-[820px]">
         <h2 className="font-serif text-[40px] leading-[1.05] text-[#22323A] sm:text-[52px]">You already know who it’s for.</h2>
         <p className="mx-auto mt-4 max-w-[520px] text-[14px] leading-relaxed text-[#22323A]/58">Give a moment they can hold, unlock and revisit.</p>
-        <a href="#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a>
+        <a href="#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Give them a moment.</a>
       </div>
     </section>
   );
@@ -439,7 +439,7 @@ function Footer() {
       <div className="mx-auto grid max-w-[1180px] gap-8 sm:grid-cols-3">
         <div>
           <div className="inline-flex items-center gap-3"><KeyMark className="h-8 w-4" /><span className="font-serif text-[21px] tracking-[0.2em] text-[#22323A]">UNIKMO</span></div>
-          <p className="mt-3 max-w-[260px] text-[11px] leading-relaxed text-[#22323A]/50">The key to your memory.</p>
+          <p className="mt-3 max-w-[260px] text-[11px] leading-relaxed text-[#22323A]/50">Less stuff. More us..</p>
         </div>
         <div className="text-[11px] leading-7 text-[#22323A]/58">
           <a href="#shop" className="block hover:text-[#B38846]">Choose your card</a>
