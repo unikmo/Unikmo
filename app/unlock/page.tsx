@@ -752,7 +752,7 @@ function UnlockPageContent() {
               className="absolute left-1/2 top-[27%] -translate-x-1/2 text-center"
             >
               <p className="font-serif text-2xl sm:text-4xl text-[#2D2926] tracking-wide">Moment Unlocked</p>
-              <p className="text-sm sm:text-base text-[#2D2926]/65 mt-2">A memory worth celebrating</p>
+              <p className="text-sm sm:text-base text-[#2D2926]/65 mt-2">Their words. Your private moment.</p>
             </motion.div>
           </motion.div>
         )}
