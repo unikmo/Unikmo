@@ -20,5 +20,7 @@ jobs:
         run: node scripts/verify-editorial.mjs
       - name: Install dependencies without invoking admin prebuild
         run: npm ci --ignore-scripts
+      - name: Verify Stripe webhook signatures and eight-character keys
+        run: npx tsx scripts/verify-stripe-security.ts
       - name: TypeScript check
         run: npx tsc --noEmit
