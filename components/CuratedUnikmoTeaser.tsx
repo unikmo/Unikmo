@@ -11,7 +11,7 @@ const offerings = [
   {
     eyebrow: 'Show It',
     title: 'Times Square Edition',
-    price: '$399',
+    price: '$449',
     copy: 'We curate it, show it in Times Square, capture the moment and preserve the experience inside your UNIKMO.',
   },
   {
