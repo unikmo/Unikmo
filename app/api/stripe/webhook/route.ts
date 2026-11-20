@@ -92,6 +92,8 @@ export async function POST(request:NextRequest){
   if(event.livemode!==key.startsWith('sk_live_')||session.livemode!==event.livemode)throw new Error('Stripe mode mismatch');
   // Never issue keys or send notifications on unapproved production configuration.
   if(process.env.STRIPE_FULFILLMENT_ENABLED!=='true')throw new Error('Stripe fulfillment not enabled');
+  if(process.env.EMAIL_PROVIDER!=='smtp')throw new Error('Authenticated SMTP is required for private-key delivery');
+  if(!/^https:\/\/[^/]+/.test(process.env.BASE_URL||''))throw new Error('Verified https BASE_URL is required for private-key links');
   const email=(session.customer_details?.email||session.customer_email||'').trim().toLowerCase();
   if(!/^\S+@\S+\.\S+$/.test(email))throw new Error('Paid Stripe checkout missing customer email');
   const {sku,extra}=await verifiedLines(session);
