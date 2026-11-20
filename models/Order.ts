@@ -72,6 +72,7 @@ const OrderSchema: Schema = new Schema(
       required: true,
       default: 'USD',
     },
+    stripeCodesEmailSentAt: { type: Date, required: false },
     paymentStatus: {
       type: String,
       enum: ['paid'],
