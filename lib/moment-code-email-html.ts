@@ -55,21 +55,16 @@ function normalizeBaseUrl(baseUrl: string) {
 export function buildMomentCodesEmailHtml({ codes, orderId, baseUrl, deliveryType }: BuildArgs): { html: string } {
   const safeBaseUrl = normalizeBaseUrl(baseUrl ?? 'https://yourdomain.com');
   const uploadPageUrl = `${safeBaseUrl}/upload`;
-  const uploadUrl = `${uploadPageUrl}?code=${encodeURIComponent(codes[0] || '')}`;
+  const uploadUrl = uploadPageUrl; // Private keys must not enter email-link or analytics URLs.
   const unlockBaseUrl = `${safeBaseUrl}/unlock`;
 
-  const firstCode = codes[0] || '';
 
   const count = codes.length as Quantity | number;
   const tierCount = (count === 7 || count === 4 || count === 1 ? count : 1) as 1 | 4 | 7;
   const tier = TIER_BY_COUNT[tierCount];
   const cardBlocksHtml = codes
     .map((code, index) => {
-      const unlockUrlForCode = `${unlockBaseUrl}?code=${encodeURIComponent(code)}`;
-      const qrUrlForCode = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
-        unlockUrlForCode
-      )}&bgcolor=${tier.qrBgColor}&color=2D2926`;
-
+      // Never send a private Moment Key to a third-party QR service.\n
       return `
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 16px auto 0; max-width: 520px; width: 100%;">
           <tr>
@@ -86,21 +81,7 @@ export function buildMomentCodesEmailHtml({ codes, orderId, baseUrl, deliveryTyp
                   alt="UNIKMO card"
                   style="width: 100%; max-width: 520px; height: auto; display: block; border: 0;"
                 />
-                <img
-                  src="${qrUrlForCode}"
-                  width="92"
-                  alt="QR for Key ${code}"
-                  style="
-                    position: absolute;
-                    left: ${tier.qr.leftPct}%;
-                    top: ${tier.qr.topPct}%;
-                    width: ${tier.qr.sizeXPct}%;
-                    height: ${tier.qr.sizeYPct}%;
-                    transform: translate(-50%, -50%);
-                    border: 0;
-                    background: #${tier.qrBgColor};
-                  "
-                />
+                <div style="position:absolute;left:36%;right:36%;top:27%;padding:12px 2px;color:#22323A;background:#F7F2EF;border-radius:5px;text-align:center;font-family:Arial,sans-serif;font-size:10px;line-height:1.4;">OPEN WITH YOUR<br>PRIVATE KEY</div>
                 <div
                   style="
                     position: absolute;
@@ -215,7 +196,7 @@ export function buildMomentCodesEmailHtml({ codes, orderId, baseUrl, deliveryTyp
           <div class="info-box">
             <div class="info-title"><span>Important information</span></div>
             <div class="info-text">
-              <strong>Upload your media:</strong> <a href="${uploadUrl}" style="color: #22323A; font-weight: 600;">${uploadPageUrl.replace(/^https?:\/\//, '')}</a> (your Key is pre-filled)<br>
+              <strong>Upload your media:</strong> <a href="${uploadUrl}" style="color: #22323A; font-weight: 600;">${uploadPageUrl.replace(/^https?:\/\//, '')}</a> (enter the private Key above)<br>
               <strong>Share with recipient:</strong> Give them the Key above and they can unlock at <a href="${unlockBaseUrl}" style="color: #22323A; font-weight: 600;">${unlockBaseUrl.replace(/^https?:\/\//, '')}</a><br>
               <strong>Remember:</strong> Keep your Key safe - it's the only way to access your moment!
             </div>
