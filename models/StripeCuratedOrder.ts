@@ -8,7 +8,9 @@ const schema=new Schema<IStripeCuratedOrder>({
   sku:{type:String,required:true},
   extraCards:{type:Number,default:0},
   totalCents:{type:Number,required:true},
-  status:{type:String,enum:['pending','notified','needs_attention'],default:'pending'}
+  status:{type:String,enum:['pending','notified','needs_attention'],default:'pending'},
+  staffNotifiedAt:{type:Date,required:false},
+  buyerNotifiedAt:{type:Date,required:false}
 },{timestamps:true});
 const StripeCuratedOrder:Model<IStripeCuratedOrder>=mongoose.models.StripeCuratedOrder||mongoose.model<IStripeCuratedOrder>('StripeCuratedOrder',schema);
 export default StripeCuratedOrder;
