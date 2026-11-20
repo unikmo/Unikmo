@@ -4,7 +4,7 @@ import Link from 'next/link';
 import CuratedCheckout from '@/components/CuratedCheckout';
 import TimesSquareRotator from '@/components/TimesSquareRotator';
 import SiteFooter from '@/components/SiteFooter';
-import { CURATED_PRODUCTS, curatedBuyUrl } from '@/lib/curated-products';
+import { CURATED_PRODUCTS } from '@/lib/curated-products';
 
 export const metadata: Metadata = {
   title: 'Curated UNIKMO | Keep It, Show It, Share It',
@@ -32,7 +32,7 @@ const choices = [
     imageAlt: 'A finished UNIKMO keepsake card beside printed photos',
     price: `$${CURATED_PRODUCTS.KEEP_IT.price}`,
     priceNote: 'Physical or digital delivery',
-    href: curatedBuyUrl(CURATED_PRODUCTS.KEEP_IT.variants.physical.id),
+    href: '#order',
     cta: 'Buy Keep It',
     description:
       'You send the photos, videos and messages you want us to work with. We select, sequence and edit them into one finished memory worth keeping.',
@@ -52,7 +52,7 @@ const choices = [
     imageAlt: 'A UNIKMO card held up in front of a Times Square billboard',
     price: `$${CURATED_PRODUCTS.SHOW_IT.price}`,
     priceNote: 'Everything in Keep It, plus Times Square',
-    href: curatedBuyUrl(CURATED_PRODUCTS.SHOW_IT.variants.physical.id),
+    href: '#order',
     cta: 'Buy Show It',
     description:
       'Take the finished moment public. We prepare the Times Square creative, coordinate the appearance, capture it, and incorporate that public moment into the finished UNIKMO memory.',
@@ -71,7 +71,7 @@ const choices = [
     imageAlt: 'Four people holding matching UNIKMO keepsake cards',
     price: `$${CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard} each`,
     priceNote: 'Add any quantity at checkout',
-    href: curatedBuyUrl(CURATED_PRODUCTS.EXTRA_KEEPSAKES.variants.standard.id),
+    href: '#order',
     cta: 'Buy an extra card',
     description:
       'Give the same finished curated memory to family, friends, colleagues or employees who were part of it.',
@@ -93,7 +93,7 @@ const faqs = [
   {
     question: 'How much does Curated UNIKMO cost?',
     answer:
-      'Keep It — Curated is $199. Show It — Times Square Edition is $399 and includes everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
+      'Keep It — Curated is $199. Show It — Times Square Edition is $449 and includes everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
   },
   {
     question: 'What is the Times Square Edition?',
@@ -225,7 +225,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[1120px]">
             <div className="mx-auto max-w-[720px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Keep it. Show it. Share it.</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">One memory. Three ways to take it further.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">More meaning. Less editing.</h2>
             </div>
 
             <div className="mt-10 grid gap-6 lg:grid-cols-3">
@@ -255,7 +255,7 @@ export default function CuratedPage() {
                       ))}
                     </ul>
                     <div className="mt-6 flex flex-1 flex-col justify-end gap-3 pt-1">
-                      <a href={choice.href} className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">{choice.cta}</a>
+                      <a href={choice.href} className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Customize this gift</a>
                       <a href="#order" className="text-center text-[11px] font-medium text-[#22323A]/60 underline decoration-[#B38846]/45 underline-offset-4">Configure delivery &amp; extras</a>
                     </div>
                   </div>
@@ -263,7 +263,7 @@ export default function CuratedPage() {
               ))}
             </div>
             <p className="mx-auto mt-8 max-w-[640px] text-center text-[11px] leading-[1.6] text-[#22323A]/45">
-              Prices are in USD. Checkout is handled securely by Shopify. Digital delivery is available for the same price at checkout.
+              Prices are in USD. Payment uses secure Stripe Checkout when ordering is available. Digital delivery is the same price.
             </p>
           </div>
         </section>
@@ -272,7 +272,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[980px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Times Square Edition</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">POP. Go public. Keep it.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Make the celebration part of the story.</h2>
               <p className="mx-auto mt-4 max-w-[700px] text-[14px] leading-[1.75] text-[#22323A]/62 sm:text-[15px]">
                 The public moment can begin with your own POP — confetti, a cork, a team cheer or another celebration burst. We curate the submitted material, the Times Square appearance and its capture into the finished memory.
               </p>
@@ -298,7 +298,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[920px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Digital or physical</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose how the finished memory arrives.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Will they open a link or unwrap the card?</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-2">
               <article className="rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-7 text-center">
@@ -319,8 +319,8 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[900px]">
             <div className="mx-auto max-w-[680px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Order your curated memory</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose it, then check out.</h2>
-              <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Pick your experience, delivery and any extra keepsake cards. Payment is handled securely by Shopify. Right after checkout we email you to collect your photos, videos and messages.</p>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose the moment you want us to create.</h2>
+              <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Choose your experience, delivery and extra cards. Pay securely with Stripe when checkout is available. We contact you to collect your chosen memories after payment.</p>
             </div>
             <div className="mt-9"><CuratedCheckout /></div>
           </div>
@@ -330,7 +330,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[900px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Clear distinction</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Curated when you want help. Standard when you do not.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Your story. As much help as you want.</h2>
               <p className="mx-auto mt-4 max-w-[680px] text-[14px] leading-[1.75] text-[#22323A]/62">With standard UNIKMO, you create the private memory yourself. With Curated UNIKMO, you intentionally submit selected materials for us to assemble into the finished story.</p>
               <Link href="/#shop" className="mt-7 inline-flex min-h-[46px] items-center justify-center text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Choose standard UNIKMO instead</Link>
             </div>

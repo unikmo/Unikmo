@@ -7,7 +7,7 @@ import { acquisitionPages } from '@/lib/acquisition-pages';
 const PRODUCTS = [
   {
     name: 'Single Key',
-    price: '$24',
+    price: 'See current price',
     cards: '1 card · 1 private memory',
     image: '/cardfrontunikmo.jpg',
     cta: 'Choose Single',
@@ -15,7 +15,7 @@ const PRODUCTS = [
   },
   {
     name: '4-Key Bundle',
-    price: '$64',
+    price: 'See current price',
     cards: '4 cards · 4 private memories',
     image: '/cardfrontsite4.png',
     cta: 'Choose 4 Cards',
@@ -23,7 +23,7 @@ const PRODUCTS = [
   },
   {
     name: '7-Key Bundle',
-    price: '$72',
+    price: 'See current price',
     cards: '7 cards · 7 private memories',
     image: '/cardfrontsite7.png',
     cta: 'Choose 7 Cards',
@@ -48,7 +48,7 @@ function PageHeader() {
           <Image src="/unikmo-logo.svg" alt="UNIKMO" width={729} height={220} priority className="h-8 w-auto sm:h-9" />
         </Link>
         <nav className="ml-auto hidden items-center gap-7 text-[11px] text-[#22323A]/65 md:flex">
-          <Link href="/#how-it-works" className="transition-colors hover:text-[#B38846]">How it works</Link>
+          <Link href="/#how" className="transition-colors hover:text-[#B38846]">How it works</Link>
           <Link href="/faq" className="transition-colors hover:text-[#B38846]">FAQ</Link>
         </nav>
         <Link href="/#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white shadow-[0_8px_25px_rgba(179,136,70,.16)] transition-colors hover:bg-[#9F783D] md:ml-8">
@@ -117,13 +117,6 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
       position: index + 1,
       name: product.name,
       brand: { '@type': 'Brand', name: 'UNIKMO' },
-      offers: {
-        '@type': 'Offer',
-        price: product.price.replace('$', ''),
-        priceCurrency: 'USD',
-        availability: 'https://schema.org/InStock',
-        url: 'https://www.unikmo.com/#shop',
-      },
     })),
   };
 
@@ -140,15 +133,15 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">{page.eyebrow}</p>
             <h1 className="mx-auto mt-4 max-w-[860px] font-serif text-[35px] leading-[1.04] tracking-[-0.025em] sm:text-[44px] lg:text-[52px]">{page.title}</h1>
             <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.65] text-[#22323A]/72 sm:text-[17px]">
-              <strong className="font-semibold text-[#22323A]">Turn a video, voice note, photo or message into a beautiful physical card.</strong> They scan it to unlock your private moment.
+              <strong className="font-semibold text-[#22323A]">Less stuff. More us.</strong> A personal moment. A beautiful card. Your voice, words, photo or video, just for them.
             </p>
             <p className="mx-auto mt-4 max-w-[720px] text-[13px] leading-[1.7] text-[#22323A]/58 sm:text-[14px]">{page.intro}</p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white shadow-[0_10px_28px_rgba(179,136,70,.18)] transition-colors hover:bg-[#9F783D]">Choose Your Card</Link>
-              <Link href="/#how-it-works" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4 transition hover:text-[#22323A]">See how it works</Link>
+              <Link href="/#how" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4 transition hover:text-[#22323A]">See how it works</Link>
             </div>
             <div className="mx-auto mt-6 flex max-w-[640px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/52">
-              <span>No app required</span><span aria-hidden="true">•</span><span>Private by design</span><span aria-hidden="true">•</span><span>A tree planted with every order</span>
+              <span>No app required</span><span aria-hidden="true">•</span><span>Private by design</span><span aria-hidden="true">•</span><span>Made to revisit</span>
             </div>
           </div>
 
@@ -163,7 +156,7 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
           <div className="mx-auto max-w-[1180px]">
             <div className="text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">One moment or a story told in parts.</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">One moment. Or a few more.</h2>
             </div>
             <div className="mt-9 grid gap-5 lg:grid-cols-3">
               {PRODUCTS.map((product, index) => <ProductCard key={product.name} product={product} fit={page.productFit[index]} featured={index === 2} />)}
@@ -246,7 +239,7 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
                 return related ? <Link key={slug} href={`/${slug}`} className="rounded-full border border-[#22323A]/[0.10] bg-white/55 px-4 py-2 text-[11px] text-[#22323A]/65 transition hover:border-[#B38846]/40 hover:text-[#B38846]">{related.primaryKeyword}</Link> : null;
               })}
             </div>
-            <h2 className="mx-auto mt-10 max-w-[680px] font-serif text-[32px] leading-[1.05] sm:text-[40px]">Give the feeling. Let the card carry it.</h2>
+            <h2 className="mx-auto mt-10 max-w-[680px] font-serif text-[32px] leading-[1.05] sm:text-[40px]">The card is the key. The memory is the gift.</h2>
             <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-[#22323A]/62">Choose the number of UNIKMO cards that fits the moment you want to give.</p>
             <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition-colors hover:bg-[#9F783D]">Choose Your Card</Link>
           </div>

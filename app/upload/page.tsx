@@ -105,7 +105,7 @@ function UploadPageContent() {
   }, [isValid, code]);
 
   const loadMedia = async () => {
-    if (!code || code.length < 10) return;
+    if (!code || code.length < 8) return;
 
     setLoadingMedia(true);
     try {
@@ -122,7 +122,7 @@ function UploadPageContent() {
   };
 
   const validateCode = async (codeToValidate: string) => {
-    if (!codeToValidate || codeToValidate.length < 10) {
+    if (!codeToValidate || codeToValidate.length < 8) {
       setIsValid(null);
       return;
     }
@@ -556,7 +556,7 @@ function UploadPageContent() {
               type="text"
               value={code}
               onChange={(e) => setCode(e.target.value.toUpperCase())}
-              placeholder="UNIKMO-XXXX-XXXX-XXX"
+              placeholder="8-character Moment Key"
               className="w-full px-4 py-3 bg-white border border-[#D3C7BB] rounded-xl text-[#22323A] placeholder-[#22323A]/35 focus:outline-none focus:ring-2 focus:ring-[#22323A]/20 focus:border-transparent"
             />
             {isValidating && (

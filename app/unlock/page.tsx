@@ -195,7 +195,7 @@ function UnlockPageContent() {
 
   // Upload: load media when valid
   useEffect(() => {
-    if (!uploadValid || !uploadCode || uploadCode.length < 10) return;
+    if (!uploadValid || !uploadCode || uploadCode.length < 8) return;
     setLoadingMedia(true);
     fetch(`/api/media/list?code=${encodeURIComponent(uploadCode.toUpperCase())}`)
       .then((r) => parseResponseSafely(r))
@@ -339,13 +339,13 @@ function UnlockPageContent() {
   };
 
   const handleUnlock = async () => {
-    if (!unlockCode || unlockCode.length < 10) {
+    if (!unlockCode || unlockCode.length < 8) {
       setUnlockError('Please enter a valid code');
       setUnlockMomentModal({
         open: true,
         variant: 'gentle',
         title: 'Almost there',
-        message: 'Please enter your full Moment Key in the format UNIKMO-XXXX-XXXX-XXX.',
+        message: 'Please enter your full Moment Key in the format 8-character Moment Key.',
         emoji: '🔑✨',
       });
       return;
@@ -535,7 +535,7 @@ function UnlockPageContent() {
                   value={unlockCode}
                   onChange={(e) => setUnlockCode(e.target.value.toUpperCase())}
                   onKeyDown={(e) => e.key === 'Enter' && handleUnlock()}
-                  placeholder="UNIKMO-XXXX-XXXX-XXX"
+                  placeholder="8-character Moment Key"
                   className="w-full px-4 py-3 rounded-lg border border-[#2D2926]/20 bg-white text-[#2D2926] placeholder-[#2D2926]/40 focus:outline-none focus:ring-2 focus:ring-[#2D2926]/20"
                   disabled={unlockLoading}
                 />

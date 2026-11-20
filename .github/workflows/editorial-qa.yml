@@ -1,0 +1,30 @@
+name: UNIKMO editorial source QA
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  editorial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Verify editorial hooks and preserve disclosures
+        run: node scripts/verify-editorial.mjs
+      - name: Install dependencies without invoking admin prebuild
+        run: npm ci --ignore-scripts
+      - name: Verify Stripe webhook signatures and eight-character keys
+        run: npx tsx scripts/verify-stripe-security.ts
+      - name: TypeScript check
+        run: npx tsc --noEmit
+      - name: Next.js production build
+        env:
+          JWT_SECRET: CI_ONLY_NOT_FOR_PRODUCTION_0123456789_AA_BB_CC
+        run: npm run build

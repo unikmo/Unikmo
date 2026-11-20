@@ -85,9 +85,9 @@ export default function FaqPage() {
         <section className="px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16">
           <div className="mx-auto max-w-[820px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Before you choose</p>
-            <h1 className="mt-4 font-serif text-[36px] leading-[1.04] tracking-[-0.025em] sm:text-[46px]">Questions about UNIKMO.</h1>
+            <h1 className="mt-4 font-serif text-[36px] leading-[1.04] tracking-[-0.025em] sm:text-[46px]">Less fuss. More answers.</h1>
             <p className="mx-auto mt-5 max-w-[700px] text-[15px] leading-[1.7] text-[#22323A]/68 sm:text-[16px]">
-              <strong className="font-semibold text-[#22323A]">A physical card that unlocks your private video, voice note, photo or message.</strong> Here is what to know before you give one.
+              <strong className="font-semibold text-[#22323A]">Make the moment personal. Then give with confidence.</strong> Here are the practical answers about opening, keeping, sharing and delivering a private UNIKMO memory.
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>

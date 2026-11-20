@@ -1,12 +1,6 @@
 /**
- * Generates Moment Codes in the format: UNIKMO-XXXX-[Q][D]XX-XXX
- * Where:
- * - XXXX = 4 random alphanumeric characters
- * - Q = quantity (1, 4, or 7)
- * - D = deliveryType first letter (D=digital, P=physical, S=split)
- * - XX = 2 random alphanumeric characters
- * - XXX = 3 random alphanumeric characters
- */
+ * Generates eight-character private Moment Keys for all new purchases.
+ * Legacy keys still work using the parser below.\n */
 
 export type Quantity = 1 | 4 | 7;
 export type DeliveryType = 'digital' | 'physical' | 'split';
@@ -15,41 +9,19 @@ export type DeliveryType = 'digital' | 'physical' | 'split';
  * Generates a random alphanumeric string of specified length
  */
 function generateRandomString(length: number): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // omit easily confused glyphs
+  const alphabetSize = chars.length; // 32 symbols, exact unbiased mapping
+  const bytes = new Uint8Array(length);
+  globalThis.crypto.getRandomValues(bytes);
+  return Array.from(bytes, n => chars[n % alphabetSize]).join('');
 }
 
-/**
- * Gets the delivery type letter code
+/** New physical-card keys: eight cryptographically random, case-insensitive characters.
+ * Card count and delivery type are persisted on MomentCode, not leaked in the key.
+ * Legacy UNIKMO- prefixed keys remain valid and parseable below.
  */
-function getDeliveryTypeCode(deliveryType: DeliveryType): string {
-  const mapping: Record<DeliveryType, string> = {
-    digital: 'D',
-    physical: 'P',
-    split: 'S',
-  };
-  return mapping[deliveryType];
-}
-
-/**
- * Generates a Moment Code with encoded quantity and delivery type
- * Format: UNIKMO-XXXX-[Q][D]XX-XXX
- * 
- * @param quantity - The quantity value (1, 4, or 7)
- * @param deliveryType - The delivery type (digital, physical, or split)
- * @returns A unique Moment Code string
- */
-export function generateMomentCode(quantity: Quantity, deliveryType: DeliveryType): string {
-  const prefix = 'UNIKMO';
-  const segment1 = generateRandomString(4); // 4 random chars
-  const segment2 = `${quantity}${getDeliveryTypeCode(deliveryType)}${generateRandomString(2)}`; // Q + D + 2 random chars
-  const segment3 = generateRandomString(3); // 3 random chars
-
-  return `${prefix}-${segment1}-${segment2}-${segment3}`;
+export function generateMomentCode(_quantity: Quantity, _deliveryType: DeliveryType): string {
+  return generateRandomString(8);
 }
 
 /**

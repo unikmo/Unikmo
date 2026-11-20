@@ -31,6 +31,7 @@ export interface ProcessOrderInput {
   tags?: string[];
   shopifyOrderName?: string;
   customerName?: string;
+  deferCodeEmail?: boolean;
 }
 
 function normalizeShopifyId(id: string | number | undefined): string {
@@ -218,7 +219,7 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
     }
   }
 
-  if (generatedCodes.length > 0) {
+  if (generatedCodes.length > 0 && !input.deferCodeEmail) {
     try {
       await sendMomentCodesEmail(normalizedEmail, generatedCodes, input.shopifyOrderNumber);
     } catch (emailError) {
