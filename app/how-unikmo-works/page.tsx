@@ -190,7 +190,7 @@ export default function HowUnikmoWorksPage() {
         <section className="px-5 pb-14 pt-14 text-center sm:px-8 sm:pb-16 sm:pt-18 lg:pt-20">
           <div className="mx-auto max-w-[860px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">The factual guide</p>
-            <h1 className="mt-4 font-serif text-[38px] leading-[1.04] tracking-[-0.025em] sm:text-[48px] lg:text-[56px]">One small card. A moment only they can open.</h1>
+            <h1 className="mt-4 font-serif text-[38px] leading-[1.04] tracking-[-0.025em] sm:text-[48px] lg:text-[56px]">Little card. Big feeling.</h1>
             <p className="mx-auto mt-5 max-w-[760px] text-[16px] leading-[1.68] text-[#22323A]/72 sm:text-[18px]">
               <strong className="font-semibold text-[#22323A]">UNIKMO is a physical keepsake card that unlocks a private digital memory.</strong> The memory can be a video, voice note, photo, or written message.
             </p>
