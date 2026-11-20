@@ -219,7 +219,7 @@ export async function processPaidOrderAndGenerateCodes(input: ProcessOrderInput)
     }
   }
 
-  if (generatedCodes.length > 0) {
+  if (generatedCodes.length > 0 && !input.deferCodeEmail) {
     try {
       await sendMomentCodesEmail(normalizedEmail, generatedCodes, input.shopifyOrderNumber);
     } catch (emailError) {
