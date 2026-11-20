@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 const read=path=>readFileSync(path,'utf8');
 const home=read('app/test/page.tsx');
 assert.ok(read('app/page.tsx').includes("import TestPage from './test/page'"));
-for(const term of ['Less stuff. More us.','The gift isn\'t the card. It\'s what they feel when they open it.','The card is the key. The memory is the gift.','Illustrative gift ideas, not customer testimonials.','One moment. Or a few more.','QR code + private access code on every card'])assert.ok(home.includes(term),'Missing brand promise: '+term);
+for(const term of ['Less stuff. More us.','The gift isn&apos;t the card. It&apos;s what they feel when they open it.','The card is the key. The memory is the gift.','Illustrative gift ideas, not customer testimonials.','One moment. Or a few more.','QR code + private access code on every card'])assert.ok(home.includes(term),'Missing brand promise: '+term);
 for(const forbidden of ['They’ll keep it forever','Matt L., London','Sophie M., New York','A tree planted','/cart/${product.variantId}'])assert.ok(!home.includes(forbidden),'Unverified or Shopify statement: '+forbidden);
 for(const [path,term] of [
  ['app/faq/page.tsx','Less fuss. More answers.'],
