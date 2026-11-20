@@ -18,6 +18,7 @@ export interface IOrder extends Document {
   totalPrice: number;
   currency: string;
   paymentStatus: 'paid';
+  stripeCodesEmailSentAt?: Date;
   source: 'webhook' | 'admin';
   tags: string[];
   lineItems: ILineItem[];
