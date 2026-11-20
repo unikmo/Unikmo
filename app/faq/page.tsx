@@ -85,7 +85,7 @@ export default function FaqPage() {
         <section className="px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16">
           <div className="mx-auto max-w-[820px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Before you choose</p>
-            <h1 className="mt-4 font-serif text-[36px] leading-[1.04] tracking-[-0.025em] sm:text-[46px]">The little details behind a meaningful gift.</h1>
+            <h1 className="mt-4 font-serif text-[36px] leading-[1.04] tracking-[-0.025em] sm:text-[46px]">Less fuss. More answers.</h1>
             <p className="mx-auto mt-5 max-w-[700px] text-[15px] leading-[1.7] text-[#22323A]/68 sm:text-[16px]">
               <strong className="font-semibold text-[#22323A]">Make the moment personal. Then give with confidence.</strong> Here are the practical answers about opening, keeping, sharing and delivering a private UNIKMO memory.
             </p>
