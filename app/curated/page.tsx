@@ -225,7 +225,7 @@ export default function CuratedPage() {
           <div className="mx-auto max-w-[1120px]">
             <div className="mx-auto max-w-[720px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Keep it. Show it. Share it.</p>
-              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">One story. What would you like to do with it?</h2>
+              <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">More meaning. Less editing.</h2>
             </div>
 
             <div className="mt-10 grid gap-6 lg:grid-cols-3">
