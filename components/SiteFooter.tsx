@@ -14,7 +14,7 @@ export default function SiteFooter() {
   return (
     <footer className="border-t border-[#22323A]/[0.08] bg-[#FCF9F4] px-5 py-10 sm:px-8 lg:py-12">
       <div className="mx-auto max-w-[1180px]">
-        <div className="flex flex-col items-center gap-4 border-t border-[#22323A]/[0.08] pt-6 text-[10px] uppercase tracking-[0.14em] text-[#22323A]/48 sm:flex-row sm:justify-between">
+        <div className="flex flex-col items-center gap-4 text-[10px] uppercase tracking-[0.14em] text-[#22323A]/48 sm:flex-row sm:justify-between">
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <span>UNIKMO &copy; {year}</span>
             <span aria-hidden="true" className="text-[#22323A]/20">|</span>
