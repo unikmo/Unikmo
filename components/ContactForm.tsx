@@ -31,7 +31,7 @@ export default function ContactForm() {
       setEmail('');
       setMessage('');
     } catch {
-      setError('Failed to send. Please email hello@unikmo.com instead.');
+      setError('Message could not be delivered. Please try again later.');
       setStatus('error');
     }
   }
