@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { COMPANY } from '@/lib/company';
 
 const legal = [
+  { label: 'Contact', href: '/contact' },
   { label: 'Privacy', href: '/privacy' },
   { label: 'Cookies', href: '/cookies' },
   { label: 'Terms', href: '/terms' },
