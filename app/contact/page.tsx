@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import LegalPageShell from '@/components/LegalPageShell';
 import ContactForm from '@/components/ContactForm';
-import { COMPANY } from '@/lib/company';
 
 export const metadata: Metadata = {
   title: 'Contact | UNIKMO',
@@ -18,22 +17,6 @@ export default function ContactPage() {
     >
       <ContactForm />
 
-      <div className="text-[13px] leading-[1.75] text-[#22323A]/70">
-        <p>
-          You can also email us directly at{' '}
-          <a href={`mailto:${COMPANY.email}`} className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">
-            {COMPANY.email}
-          </a>
-          .
-        </p>
-        <p className="mt-3">
-          UNIKMO is a product of {COMPANY.legalName}, {COMPANY.addressOneLine}. Full company details are on the{' '}
-          <a href="/imprint" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">
-            legal notice
-          </a>{' '}
-          page.
-        </p>
-      </div>
     </LegalPageShell>
   );
 }
