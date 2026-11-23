@@ -16,4 +16,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node scripts/contact-production-probe.mjs
+      - run: node scripts/qa-uniko-public-links-once.mjs
