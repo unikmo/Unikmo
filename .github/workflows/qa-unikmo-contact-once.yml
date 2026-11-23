@@ -1,0 +1,19 @@
+name: One-off UNIKMO Contact Delivery Probe
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  probe:
+    if: github.head_ref == 'qa/unikmo-contact-delivery-probe-20261123'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/contact-production-probe.mjs
