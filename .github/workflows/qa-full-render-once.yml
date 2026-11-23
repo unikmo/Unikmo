@@ -1,0 +1,31 @@
+name: One-off Full Site Render Audit
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  render:
+    if: github.head_ref == 'qa/full-site-visual-audit-20261123'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser tooling
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.58.2
+          npx playwright install --with-deps chromium
+      - name: Render public site at desktop and mobile widths
+        run: node scripts/full-render-audit-once.mjs
+      - name: Save screenshots and findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unikmo-full-render-audit
+          path: render-audit/
+          if-no-files-found: ignore
