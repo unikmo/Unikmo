@@ -1,38 +1,67 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendEmail } from '@/lib/email';
+import nodemailer from 'nodemailer';
 
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'mbanwie@gmail.com';
+export const runtime = 'nodejs';
+
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[char] || char));
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, message } = body;
+    const email = typeof body?.email === 'string' ? body.email.trim() : '';
+    const message = typeof body?.message === 'string' ? body.message.trim() : '';
 
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    if (!emailRegex.test(email) || email.length > 254 || /[\r\n]/.test(email)) {
+      return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 });
     }
-    if (!emailRegex.test(email.trim())) {
-      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
-    }
-    if (!message || typeof message !== 'string' || !message.trim()) {
-      return NextResponse.json({ error: 'Message is required' }, { status: 400 });
+    if (!message || message.length > 10000) {
+      return NextResponse.json({ error: 'Enter a message (up to 10,000 characters).' }, { status: 400 });
     }
 
-    const subject = `Unikmo contact from ${email.trim()}`;
-    const html = `
-      <p><strong>From:</strong> ${email.trim()}</p>
-      <p><strong>Message:</strong></p>
-      <p>${message.trim().replace(/\n/g, '<br>')}</p>
-    `;
+    const host = process.env.SMTP_HOST?.trim();
+    const port = Number(process.env.SMTP_PORT || '465');
+    const user = process.env.SMTP_USER?.trim();
+    const pass = process.env.SMTP_PASS;
+    const recipient = process.env.CONTACT_EMAIL?.trim() || 'hello@unikmo.com';
 
-    const ok = await sendEmail(CONTACT_EMAIL, subject, html);
-    if (!ok) {
-      return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
+    // No unrelated email API fallback: never claim success if SMTP is unavailable.
+    if (!host || !user || !pass || ![465, 587].includes(port)) {
+      console.error('UNIKMO contact SMTP not configured');
+      return NextResponse.json({ error: 'Message delivery is temporarily unavailable. Please try again later.' }, { status: 503 });
     }
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error('Contact form error:', err);
-    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
+
+    const transporter = nodemailer.createTransport({
+      host, port, secure: port === 465, auth: { user, pass },
+      connectionTimeout: 10000, greetingTimeout: 10000, socketTimeout: 15000,
+    });
+
+    try {
+      await transporter.sendMail({
+        from: { name: 'UNIKMO Contact', address: user },
+        to: recipient,
+        replyTo: email,
+        subject: 'UNIKMO contact form message',
+        text: `From: ${email}\n\n${message}`,
+        html: `<p><strong>From:</strong> ${escapeHtml(email)}</p><p><strong>Message:</strong></p><p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`,
+      });
+      return NextResponse.json({ success: true });
+    } catch (error: unknown) {
+      const failure = error as { code?: unknown; responseCode?: unknown };
+      const code = typeof failure?.code === 'string' ? failure.code : '';
+      const responseCode = typeof failure?.responseCode === 'number' ? failure.responseCode : 0;
+      console.error('UNIKMO contact SMTP rejected', {
+        code: /^[A-Z_]{2,25}$/.test(code) ? code : 'UNKNOWN',
+        responseCode,
+      });
+      return NextResponse.json({ error: 'Message could not be delivered. Please try again later.' }, { status: 502 });
+    }
+  } catch {
+    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
   }
 }
