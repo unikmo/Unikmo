@@ -28,7 +28,11 @@ export async function POST(request: NextRequest) {
     const port = Number(process.env.SMTP_PORT || '465');
     const user = process.env.SMTP_USER?.trim();
     const pass = process.env.SMTP_PASS;
-    const recipient = process.env.CONTACT_EMAIL?.trim() || 'hello@unikmo.com';
+    // Always deliver the original enquiry to the brand's support mailbox.
+    // CONTACT_EMAIL can receive an additional copy, never replace the mailbox.
+    const recipient = 'hello@unikmo.com';
+    const copyRecipient = process.env.CONTACT_EMAIL?.trim().toLowerCase();
+    const bcc = copyRecipient && copyRecipient !== recipient ? copyRecipient : undefined;
 
     // No unrelated email API fallback: never claim success if SMTP is unavailable.
     if (!host || !user || !pass || ![465, 587].includes(port)) {
@@ -45,6 +49,7 @@ export async function POST(request: NextRequest) {
       await transporter.sendMail({
         from: { name: 'UNIKMO Contact', address: user },
         to: recipient,
+        ...(bcc ? { bcc } : {}),
         replyTo: email,
         subject: 'UNIKMO contact form message',
         text: `From: ${email}\n\n${message}`,
