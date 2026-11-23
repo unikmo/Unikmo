@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { COMPANY } from '@/lib/company';
 
@@ -23,16 +22,7 @@ export default function SiteFooter() {
   return (
     <footer className="border-t border-[#22323A]/[0.08] bg-[#FCF9F4] px-5 py-10 sm:px-8 lg:py-12">
       <div className="mx-auto max-w-[1180px]">
-        <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div className="text-center sm:text-left">
-            <Link href="/" aria-label="UNIKMO home" className="inline-block">
-              <Image src="/unikmo-logo.svg" alt="UNIKMO" width={729} height={220} className="h-8 w-auto" />
-            </Link>
-            <p className="mt-3 max-w-[280px] text-[11px] leading-[1.6] text-[#22323A]/50">
-              A card that unlocks a private memory. A tree planted with every order.
-            </p>
-          </div>
-
+        <div className="flex justify-center sm:justify-end">
           <nav className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-[11px] font-medium text-[#22323A]/65 sm:justify-end">
             {nav.map((item) => (
               <Link key={item.href} href={item.href} className="transition hover:text-[#B38846]">
