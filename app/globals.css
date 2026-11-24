@@ -25,3 +25,13 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Shared marketing rhythm. Compact utility strips and heroes retain their own spacing. */
+:root { --marketing-section-inset: 64px; }
+@media (min-width: 1024px) { :root { --marketing-section-inset: 80px; } }
+main > section:not(:first-child):has(h2) {
+  padding-block: var(--marketing-section-inset);
+}
+/* Accessible dark gold for text and controls on the light brand palette. */
+[class*="text-\[\#B38846\]"] { color: #795721; }
+[class*="bg-\[\#B38846\]"][class*="text-white"] { background-color: #795721; }
