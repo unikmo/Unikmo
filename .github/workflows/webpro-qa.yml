@@ -32,6 +32,10 @@ jobs:
           QA_BASE_URL: https://unikmo.com
           VISUAL_BASELINES_APPROVED: ${{ vars.VISUAL_BASELINES_APPROVED }}
         run: npm test
+      - name: Lighthouse performance and SEO
+        if: always()
+        working-directory: qa/browser
+        run: npm run lighthouse
       - uses: actions/upload-artifact@v4
         if: always()
         with:
