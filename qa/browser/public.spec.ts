@@ -16,7 +16,7 @@ for (const route of routes) {
       for (const img of document.images) img.loading = 'eager';
     });
     await page.evaluate(async () => {
-      await Promise.all(Array.from(document.images).map(img => img.decode().catch(() => {})));
+      await Promise.race([Promise.all(Array.from(document.images).map(img => img.decode().catch(() => {}))), new Promise(resolve => setTimeout(resolve, 10000))]);
     });
     const findings = await page.evaluate(() => {
       const failures: string[] = [];
