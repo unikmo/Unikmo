@@ -3,10 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "playwright test --config playwright.config.ts"
+    "test": "playwright test --config playwright.config.ts",
+    "lighthouse": "node lighthouse.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.58.2",
-    "@axe-core/playwright": "4.11.1"
+    "@axe-core/playwright": "4.11.1",
+    "lighthouse": "12.6.0"
   }
 }
