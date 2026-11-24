@@ -1,0 +1,46 @@
+name: WebPro permanent browser QA
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '30 5 * * 1'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated QA tools
+        working-directory: qa/browser
+        run: npm install --no-audit --no-fund
+      - name: Install browsers
+        working-directory: qa/browser
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Audit live public site (read only)
+        working-directory: qa/browser
+        env:
+          QA_BASE_URL: https://unikmo.com
+          VISUAL_BASELINES_APPROVED: ${{ vars.VISUAL_BASELINES_APPROVED }}
+        run: npm test
+      - name: Lighthouse performance and SEO
+        if: always()
+        working-directory: qa/browser
+        run: npm run lighthouse
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unikmo-browser-qa
+          path: |
+            qa-results/
+            qa/browser/playwright-report/
+          if-no-files-found: warn
