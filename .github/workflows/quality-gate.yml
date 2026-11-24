@@ -23,6 +23,12 @@ jobs:
         with:
           node-version: '20'
           cache: npm
+      - name: Reject retired commerce provider references
+        shell: bash
+        run: |
+          retired="$(printf '%s%s' 'shop' 'ify')"
+          if git ls-files | grep -i "$retired"; then exit 1; fi
+          if git grep -niI "$retired"; then exit 1; fi
       - name: Install locked dependencies
         run: npm ci
       - name: Offline identifier regression checks
