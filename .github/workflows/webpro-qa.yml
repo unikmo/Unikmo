@@ -27,10 +27,11 @@ jobs:
         working-directory: qa/browser
         run: npx playwright install --with-deps chromium firefox webkit
       - name: Build and start isolated candidate
+        id: preview
         if: github.event_name == 'pull_request'
         run: |
           npm install --no-audit --no-fund
-          npm audit fix --ignore-scripts --no-fund --omit=dev --audit-level=high
+          npm audit fix --ignore-scripts --no-fund --audit-level=high
           npm run build
           npm start -- --hostname 127.0.0.1 --port 3000 > /tmp/unikmo-preview.log 2>&1 &
           for i in $(seq 1 60); do
@@ -46,7 +47,7 @@ jobs:
           VISUAL_BASELINES_APPROVED: ${{ vars.VISUAL_BASELINES_APPROVED }}
         run: npm test
       - name: Lighthouse performance and SEO
-        if: always()
+        if: ${{ !cancelled() && steps.preview.outcome != 'failure' }}
         working-directory: qa/browser
         env:
           QA_BASE_URL: ${{ github.event_name == 'pull_request' && 'http://127.0.0.1:3000' || 'https://unikmo.com' }}
