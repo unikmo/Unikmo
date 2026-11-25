@@ -17,7 +17,7 @@ export default function PrivacyPage() {
     <LegalPageShell
       title="Privacy Policy"
       intro={`UNIKMO is operated by ${COMPANY.legalName}, a Wyoming (USA) limited liability company ("UNIKMO", "we", "us"). This policy explains what personal information we handle and the choices you have. It applies to unikmo.com and the connected upload and unlock pages.`}
-      updated="September 2026"
+      updated="November 2026"
     >
       <LegalSection heading="1. Who is responsible">
         <p>
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
       <LegalSection heading="2. Information we collect">
         <p>We collect only what is necessary to provide the product:</p>
         <ul className={bullet}>
-          <li>Contact and order data — your email address and the details of your order.</li>
+          <li>Contact and order data: your name, email address, billing address and, for physical delivery, your shipping address, plus the details of your order. Your card details go directly to Stripe and are not received or stored by us.</li>
           <li>Content you upload — the video, audio, photo or written message you attach to a Moment.</li>
           <li>
             Support messages — anything you send us through the contact form or by email.
@@ -75,13 +75,13 @@ export default function PrivacyPage() {
       <LegalSection heading="5. Service providers">
         <p>We share personal information only with providers that help us run UNIKMO, under contract and on our instructions:</p>
         <ul className={bullet}>
-          <li>Stripe — checkout, payment processing and fraud prevention.</li>
+          <li>Stripe: checkout and payment processing. Stripe also uses payment data as an independent controller for fraud prevention, its own legal obligations and, if you choose it, its Link saved-payment service, under the Stripe Privacy Policy (stripe.com/privacy).</li>
           <li>Cloud object storage (e.g. Amazon Web Services / S3) — hosting of uploaded Moment media.</li>
           <li>Database hosting (e.g. MongoDB) — order and Moment records.</li>
           <li>Email delivery — sending access codes and support replies.</li>
           <li>Hosting / CDN — serving the website.</li>
         </ul>
-        <p>These providers process data under their own terms and safeguards. We do not sell data to anyone.</p>
+        <p>Some providers, such as Stripe, also process data for their own purposes under their own terms. We do not sell data to anyone.</p>
       </LegalSection>
 
       <LegalSection heading="6. International transfers">

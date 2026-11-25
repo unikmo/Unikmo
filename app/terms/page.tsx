@@ -15,7 +15,7 @@ export default function TermsPage() {
     <LegalPageShell
       title="Terms &amp; Conditions"
       intro={`These Terms are a contract between you and ${COMPANY.legalName}, a Wyoming (USA) limited liability company that operates UNIKMO ("UNIKMO", "we", "us"). By purchasing or using UNIKMO you agree to them.`}
-      updated="September 2026"
+      updated="November 2026"
     >
       <LegalSection heading="1. Who you are contracting with">
         <p>
@@ -31,7 +31,7 @@ export default function TermsPage() {
         <p>
           UNIKMO lets you create, store and share private digital Moments (video, audio, images or text) that a recipient
           opens through a unique private access code connected to a physical card. Checkout and payment are handled by
-          Stripe.
+          Stripe. We never receive or store your full card details.
         </p>
       </LegalSection>
 
@@ -56,7 +56,11 @@ export default function TermsPage() {
         <ul className={bullet}>
           <li>One private access code equals one Moment.</li>
           <li>Once a Moment is created it cannot be edited or reassigned.</li>
-          <li>Codes and cards may not be resold or redistributed commercially.</li>
+          <li>
+            Codes and cards may not be resold or redistributed commercially unless we have agreed this with you in
+            writing. Organizations may give cards free of charge to their own employees, clients or guests as gifts or
+            recognition.
+          </li>
         </ul>
       </LegalSection>
 
@@ -82,13 +86,15 @@ export default function TermsPage() {
         <ul className={bullet}>
           <li>Curated UNIKMO is an optional concierge service. After checkout we contact you to collect your materials.</li>
           <li>
-            The Times Square Edition is coming soon and is not currently available to order.
+            The Times Square Edition is coming soon. It is not available to order, no price has been set, and we do not
+            take payments, deposits or reservations for it. Its terms will be added here before orders open.
           </li>
           <li>Extra keepsake cards for the same finished memory can be added at checkout at the price shown.</li>
           <li>
-            Curated orders are personalized and made to order. By ordering, you ask us to begin work immediately and
-            acknowledge that once production has started the order cannot be canceled or refunded, and (where a statutory
-            cancellation right would otherwise apply) that right is lost once we have begun.
+            Curated orders are personalized and made to order. At checkout you ask us to start work straight away. If
+            you are a consumer in the EU/EEA or UK and cancel within 14 days, we will refund you minus a proportionate
+            amount for work already done. Once the curated memory is complete and delivered, the cancellation right no
+            longer applies. Personalized physical cards cannot be returned once produced.
           </li>
         </ul>
       </LegalSection>
@@ -104,7 +110,7 @@ export default function TermsPage() {
         <ul className={bullet}>
           <li>Digital access codes and delivered digital Moments are non-refundable once issued.</li>
           <li>Unused physical cards may be returned in line with the return details provided with your order.</li>
-          <li>Personalized and Curated items are non-refundable once production has begun (see section 8).</li>
+          <li>Personalized physical cards are non-refundable once produced. Curated orders are handled as described in section 8.</li>
           <li>Nothing here limits a refund we are required to give for a faulty or misdescribed product.</li>
         </ul>
         <p>

@@ -1,3 +1,4 @@
+import { termsConsent } from '@/lib/checkout-consent';
 import { NextRequest, NextResponse } from 'next/server';
 import { getCommerceProduct } from '@/lib/commerce-products';
 import { getStripe } from '@/lib/stripe';
@@ -26,6 +27,7 @@ export async function POST(request: NextRequest) {
     const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
       adaptive_pricing: { enabled: false },
+      ...termsConsent(),
       customer_creation: 'always',
       customer_email: typeof body.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email) ? body.email.toLowerCase() : undefined,
       billing_address_collection: 'auto',

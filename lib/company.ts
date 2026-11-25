@@ -5,7 +5,6 @@
 export const COMPANY = {
   legalName: 'TSquare Ventures LLC',
   product: 'UNIKMO',
-  founder: 'Tichi Mbanwie',
   formationState: 'Wyoming',
   formationCountry: 'United States',
   filingId: '2026-002072750',

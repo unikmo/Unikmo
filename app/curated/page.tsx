@@ -208,6 +208,8 @@ export default function CuratedPage() {
             </div>
           </div>
 
+          <p className="mx-auto mt-3 text-center text-[12px] text-[#22323A]/55">Times Square images are concept images.</p>
+
           <p className="mx-auto mt-7 max-w-[820px] text-[15px] leading-[1.75] text-[#22323A]/68 sm:text-[17px]">
             Send us the photos, videos and messages you choose. We professionally assemble them into one finished
             UNIKMO memory — then you decide whether to keep it private or share extra

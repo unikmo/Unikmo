@@ -16,7 +16,7 @@ const categories: Array<{ name: string; consent: string; copy: string }> = [
   {
     name: 'Strictly necessary',
     consent: 'No consent required',
-    copy: 'Needed to load the site, keep it secure, and carry your basket through to checkout. The site does not work properly without them.',
+    copy: 'Needed to load the site, keep it secure, and start checkout securely. The site does not work properly without them.',
   },
   {
     name: 'Preferences / functional',
@@ -40,7 +40,7 @@ export default function CookiePolicyPage() {
     <LegalPageShell
       title="Cookie Policy"
       intro="This policy explains the cookies and similar technologies used on unikmo.com, why we use them, and how you can control them. It should be read alongside our Privacy Policy."
-      updated="September 2026"
+      updated="November 2026"
     >
       <LegalSection heading="1. What cookies are">
         <p>
@@ -66,9 +66,9 @@ export default function CookiePolicyPage() {
           We do <span className="font-medium text-[#22323A]">not</span> use advertising, retargeting or marketing cookies.
         </p>
         <p>
-          Checkout and payment take place on Stripe. When you proceed to checkout, Stripe sets its own strictly
-          necessary cookies to process the order securely and prevent fraud, under Stripe&rsquo;s own cookie and privacy
-          notices.
+          Checkout and payment take place on a secure page hosted by Stripe (checkout.stripe.com). Stripe sets cookies
+          there to run checkout securely and prevent fraud. Stripe is responsible for those cookies; see{' '}
+          <a href="https://stripe.com/legal/cookies-policy" target="_blank" rel="noreferrer" className={link}>Stripe&rsquo;s Cookie Policy</a>.
         </p>
       </LegalSection>
 
@@ -127,7 +127,8 @@ export default function CookiePolicyPage() {
             necessary cookies may stop parts of the site or checkout from working.
           </li>
           <li>
-            You can manage Stripe checkout cookies from the checkout page and through your browser.
+            Stripe&rsquo;s checkout page is controlled by Stripe. You can block or delete its cookies in your browser
+            settings; see Stripe&rsquo;s Cookie Policy for details.
           </li>
           <li>
             General guidance is available at{' '}

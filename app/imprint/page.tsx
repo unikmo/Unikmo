@@ -16,7 +16,7 @@ const rows: Array<[string, React.ReactNode]> = [
   ['Wyoming Secretary of State filing ID', COMPANY.filingId],
   ['Principal / mailing address', COMPANY.addressOneLine],
   ['Registered agent', COMPANY.registeredAgent],
-  ['Represented by', COMPANY.founder],
+  ['Represented by', `Manager of ${COMPANY.legalName}`],
   [
     'Email',
     <a key="e" href={`mailto:${COMPANY.email}`} className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">
@@ -51,17 +51,8 @@ export default function LegalNoticePage() {
 
       <LegalSection heading="EU/EEA online dispute resolution">
         <p>
-          The European Commission provides a platform for online dispute resolution (ODR) at{' '}
-          <a
-            href="https://ec.europa.eu/consumers/odr"
-            target="_blank"
-            rel="noreferrer"
-            className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]"
-          >
-            ec.europa.eu/consumers/odr
-          </a>
-          . We are not obliged, and are not generally willing, to participate in dispute resolution proceedings before a
-          consumer arbitration board.
+          We are not obliged and not willing to take part in dispute resolution proceedings before a consumer
+          arbitration board. Please contact us first at {COMPANY.email}.
         </p>
       </LegalSection>
 

@@ -43,8 +43,8 @@ const uses = [
 
 const steps = [
   ['01', 'Contact us', 'Tell us about the occasion and the number of recipients.'],
-  ['02', 'We confirm the details', 'We respond by email to agree the scope with you.'],
-  ['03', 'You prepare the messages', 'A video, voice note, photos or written words for each recipient.'],
+  ['02', 'We confirm the details', 'We respond by email to agree the scope, price and delivery, and confirm them in a written order confirmation.'],
+  ['03', 'You prepare the messages', 'A video, voice note, photos or written words for each recipient. Please make sure you have permission from anyone who appears in them and the rights to any music or images you use.'],
   ['04', 'You present the cards', 'Each recipient scans their card to open their message. No app or account is required.'],
 ];
 
@@ -154,7 +154,7 @@ export default function CorporatePage() {
             <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-[#8A6528]">Enquiries</p>
             <h2 className="mt-3 font-serif text-[30px] sm:text-[38px]">Contact us</h2>
             <p className="mt-4 text-[15px] leading-[1.75] text-[#22323A]/75">
-              To discuss your requirements, write to us and we will reply by email.
+              To discuss your requirements, write to us and we will reply by email. Organizational orders are governed by our Terms together with the written order confirmation; where they differ, the order confirmation applies.
             </p>
             <p className="mt-6">
               <a
