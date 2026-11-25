@@ -483,7 +483,7 @@ function UnlockPageContent() {
           <Link href="/" className="font-serif text-lg tracking-wide text-[#2D2926]/80 hover:text-[#2D2926]">
             UNIKMO
           </Link>
-          <Link href="/" className="text-xs sm:text-sm text-[#2D2926]/60 hover:text-[#2D2926]">
+          <Link href="/" className="text-xs sm:text-sm text-[#2D2926]/75 hover:text-[#2D2926]">
             ← Home
           </Link>
         </div>
@@ -517,7 +517,7 @@ function UnlockPageContent() {
               <h1 className="font-serif text-2xl sm:text-4xl text-[#2D2926] mt-2">
                 A private memory is waiting for you
               </h1>
-              <p className="text-sm sm:text-base text-[#2D2926]/65 mt-3 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-[#2D2926]/75 mt-3 max-w-2xl mx-auto">
                 Enter your Moment Key to unlock it.
               </p>
             </div>
@@ -556,7 +556,7 @@ function UnlockPageContent() {
                   Moment unlocked
                 </p>
                 {unlockMedia.length === 0 ? (
-                  <p className="text-[#2D2926]/60">No media for this moment yet.</p>
+                  <p className="text-[#2D2926]/75">No media for this moment yet.</p>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {unlockMedia.map((item, index) => (
@@ -584,11 +584,11 @@ function UnlockPageContent() {
                             </div>
                           )}
                           {item.type === 'text' && (
-                            <div className="p-6 bg-[#2D2926]/5 h-48 flex items-center justify-center text-[#2D2926]/60">Text content</div>
+                            <div className="p-6 bg-[#2D2926]/5 h-48 flex items-center justify-center text-[#2D2926]/75">Text content</div>
                           )}
                         </button>
                         <div className="p-3 border-t border-[#2D2926]/10">
-                          <p className="text-xs text-[#2D2926]/60 capitalize">{item.type}</p>
+                          <p className="text-xs text-[#2D2926]/75 capitalize">{item.type}</p>
                         </div>
                       </div>
                     ))}
@@ -603,7 +603,7 @@ function UnlockPageContent() {
                     setUnlockError(null);
                     setUnlockMomentModal((m) => ({ ...m, open: false }));
                   }}
-                  className="mt-6 text-sm text-[#2D2926]/60 hover:text-[#2D2926] underline"
+                  className="mt-6 text-sm text-[#2D2926]/75 hover:text-[#2D2926] underline"
                 >
                   Unlock another code
                 </button>
@@ -752,7 +752,7 @@ function UnlockPageContent() {
               className="absolute left-1/2 top-[27%] -translate-x-1/2 text-center"
             >
               <p className="font-serif text-2xl sm:text-4xl text-[#2D2926] tracking-wide">Moment Unlocked</p>
-              <p className="text-sm sm:text-base text-[#2D2926]/65 mt-2">A memory worth celebrating</p>
+              <p className="text-sm sm:text-base text-[#2D2926]/75 mt-2">A memory worth celebrating</p>
             </motion.div>
           </motion.div>
         )}
@@ -806,7 +806,7 @@ export default function UnlockPage() {
     <Suspense
       fallback={
         <div className="min-h-screen bg-[#FDF9F5] flex items-center justify-center">
-          <p className="text-[#2D2926]/60">Loading…</p>
+          <p className="text-[#2D2926]/75">Loading…</p>
         </div>
       }
     >
