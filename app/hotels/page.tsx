@@ -149,7 +149,7 @@ export default function HotelsPage() {
               <h2 className="mt-3 font-serif text-[34px] leading-[1.04] sm:text-[42px]">Most welcome notes are read once and thrown away.</h2>
             </div>
             <div className="self-end text-[15px] leading-[1.75] text-[#22323A]/68">
-              <p>Printed letters, flyers and programmes create clutter and waste, then disappear.</p>
+              <p>Printed letters, flyers and programs create clutter and waste, then disappear.</p>
               <p className="mt-4">
                 <strong className="font-semibold text-[#22323A]">Guests remember how they felt. They rarely keep the paper.</strong>
               </p>

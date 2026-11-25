@@ -82,13 +82,12 @@ export default function TermsPage() {
         <ul className={bullet}>
           <li>Curated UNIKMO is an optional concierge service. After checkout we contact you to collect your materials.</li>
           <li>
-            The Times Square Edition adds a Times Square appearance, subject to scheduling and availability. If a slot
-            cannot be arranged within a reasonable time, we will reschedule or refund that portion of the order.
+            The Times Square Edition is coming soon and is not currently available to order.
           </li>
           <li>Extra keepsake cards for the same finished memory can be added at checkout at the price shown.</li>
           <li>
-            Curated orders are personalised and made to order. By ordering, you ask us to begin work immediately and
-            acknowledge that once production has started the order cannot be cancelled or refunded, and (where a statutory
+            Curated orders are personalized and made to order. By ordering, you ask us to begin work immediately and
+            acknowledge that once production has started the order cannot be canceled or refunded, and (where a statutory
             cancellation right would otherwise apply) that right is lost once we have begun.
           </li>
         </ul>
@@ -105,14 +104,14 @@ export default function TermsPage() {
         <ul className={bullet}>
           <li>Digital access codes and delivered digital Moments are non-refundable once issued.</li>
           <li>Unused physical cards may be returned in line with the return details provided with your order.</li>
-          <li>Personalised and Curated items are non-refundable once production has begun (see section 8).</li>
+          <li>Personalized and Curated items are non-refundable once production has begun (see section 8).</li>
           <li>Nothing here limits a refund we are required to give for a faulty or misdescribed product.</li>
         </ul>
         <p>
           <span className="font-medium text-[#22323A]">Consumers in the EU/EEA and UK:</span> distance-selling law gives
           you a 14-day right to withdraw from most online purchases. That right does <span className="font-medium text-[#22323A]">not</span>{' '}
-          apply to goods made to your specification or clearly personalised, or to digital content once its creation or
-          delivery has begun with your prior express consent — which covers UNIKMO Moments, personalised cards and Curated
+          apply to goods made to your specification or clearly personalized, or to digital content once its creation or
+          delivery has begun with your prior express consent — which covers UNIKMO Moments, personalized cards and Curated
           orders. Where the right does apply, contact us within 14 days of delivery.
         </p>
       </LegalSection>
@@ -126,7 +125,7 @@ export default function TermsPage() {
 
       <LegalSection heading="12. Limitation of liability">
         <p>
-          To the fullest extent permitted by law, UNIKMO is not liable for loss of content, unauthorised access,
+          To the fullest extent permitted by law, UNIKMO is not liable for loss of content, unauthorized access,
           service interruptions, or indirect, incidental or consequential damages (including emotional distress). Our
           total liability for any claim is limited to the amount you paid for the order giving rise to the claim. Some
           jurisdictions do not allow certain limitations, so parts of this section may not apply to you.

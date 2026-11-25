@@ -14,12 +14,6 @@ const EXPERIENCES: Array<{ key: CuratedExperienceKey; title: string; note: strin
     note: 'We assemble your moments into one finished UNIKMO memory.',
     price: CURATED_PRODUCTS.KEEP_IT.price,
   },
-  {
-    key: 'SHOW_IT',
-    title: 'Show It — Times Square Edition',
-    note: 'Everything in Keep It, plus a Times Square appearance captured into the memory.',
-    price: CURATED_PRODUCTS.SHOW_IT.price,
-  },
 ];
 
 const EXTRA_PRICE = CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard;
@@ -43,7 +37,7 @@ export default function CuratedCheckout() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          productKey: experience === 'KEEP_IT' ? 'curated-keep' : 'curated-show',
+          productKey: 'curated-keep',
           deliveryType: delivery,
           quantity: 1,
           extraKeepsakes: extras,
@@ -71,23 +65,29 @@ export default function CuratedCheckout() {
               <button
                 key={option.key}
                 type="button"
-                onClick={() => option.key === 'KEEP_IT' && setExperience(option.key)}
-                disabled={option.key === 'SHOW_IT'}
+                onClick={() => setExperience(option.key)}
                 aria-pressed={active}
                 className={`rounded-[14px] border p-4 text-left transition ${
                   active
                     ? 'border-[#B38846] bg-[#F8F2EB] shadow-[0_10px_30px_rgba(179,136,70,.12)]'
                     : 'border-[#22323A]/[0.12] bg-[#FCF9F4] hover:border-[#B38846]/60'
-                } ${option.key === 'SHOW_IT' ? 'cursor-not-allowed opacity-60' : ''}`}
+                }`}
               >
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="font-serif text-[17px]">{option.title}</span>
-                  <span className="text-[13px] font-medium text-[#22323A]">{option.key === 'SHOW_IT' ? 'Coming soon' : `$${option.price}`}</span>
+                  <span className="text-[13px] font-medium text-[#22323A]">${option.price}</span>
                 </div>
                 <p className="mt-2 text-[11px] leading-[1.55] text-[#22323A]/58">{option.note}</p>
               </button>
             );
           })}
+          <div className="rounded-[14px] border border-dashed border-[#22323A]/[0.16] bg-[#FCF9F4]/60 p-4 text-left" role="group" aria-label="Times Square Edition, coming soon">
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="font-serif text-[17px] text-[#22323A]/70">Times Square Edition</span>
+              <span className="text-[13px] font-medium text-[#22323A]/70">Coming soon</span>
+            </div>
+            <p className="mt-2 text-[12px] leading-[1.55] text-[#22323A]/65">Not yet available to order.</p>
+          </div>
         </div>
       </fieldset>
 
@@ -175,7 +175,7 @@ export default function CuratedCheckout() {
 
       <p className="mt-4 text-[10px] leading-[1.6] text-[#22323A]/45">
         Checkout is handled securely by Stripe. After payment we email you to collect your photos, videos and
-        messages and to confirm Times Square scheduling where selected.
+        messages.
       </p>
       {error ? <p className="mt-2 text-xs text-red-700">{error}</p> : null}
     </div>

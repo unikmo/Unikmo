@@ -9,13 +9,13 @@ import { CURATED_PRODUCTS } from '@/lib/curated-products';
 export const metadata: Metadata = {
   title: 'Curated UNIKMO | Keep It, Show It, Share It',
   description:
-    'Send us the moments you choose. We professionally curate them into a finished UNIKMO memory, with an optional Times Square Edition and extra physical keepsakes.',
+    'Send us the moments you choose. We professionally curate them into a finished UNIKMO memory, with extra physical keepsakes. A Times Square Edition is coming soon.',
   alternates: { canonical: 'https://www.unikmo.com/curated' },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'Curated UNIKMO | Keep It, Show It, Share It',
     description:
-      'Professional memory curation, an optional Times Square appearance, and additional physical UNIKMO keepsakes.',
+      'Professional memory curation and additional physical UNIKMO keepsakes. Times Square Edition coming soon.',
     url: 'https://www.unikmo.com/curated',
     siteName: 'UNIKMO',
     images: ['https://www.unikmo.com/og-image.jpg'],
@@ -93,12 +93,12 @@ const faqs = [
   {
     question: 'How much does Curated UNIKMO cost?',
     answer:
-      'Keep It — Curated is $249. Show It — Times Square Edition is coming soon and will include everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
+      'Keep It — Curated is $249. The Times Square Edition is coming soon and is not yet available to order. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
   },
   {
     question: 'What is the Times Square Edition?',
     answer:
-      'Times Square Edition adds a public Times Square appearance to the curated service. The appearance is captured and incorporated into the finished UNIKMO memory, subject to scheduling and availability.',
+      'The Times Square Edition is coming soon. It is not yet available to order, and no price has been set.',
   },
   {
     question: 'Can Curated UNIKMO be delivered digitally?',
@@ -125,7 +125,7 @@ export default function CuratedPage() {
     url: 'https://www.unikmo.com/curated',
     name: 'Curated UNIKMO',
     description:
-      'An optional UNIKMO concierge service for professional memory curation, a Times Square Edition, and additional physical keepsakes.',
+      'An optional UNIKMO concierge service for professional memory curation and additional physical keepsakes.',
     isPartOf: { '@id': 'https://www.unikmo.com/#website' },
     about: { '@id': 'https://www.unikmo.com/#brand' },
     inLanguage: 'en',
@@ -140,7 +140,7 @@ export default function CuratedPage() {
     provider: { '@id': 'https://www.unikmo.com/#organization' },
     url: 'https://www.unikmo.com/curated',
     description:
-      'Customers intentionally submit selected photos, videos and messages for professional curation into a finished UNIKMO memory, with an optional Times Square Edition and additional physical keepsakes.',
+      'Customers intentionally submit selected photos, videos and messages for professional curation into a finished UNIKMO memory, and additional physical keepsakes.',
     offers: [
       { '@type': 'Offer', name: 'Keep It — Curated', price: String(CURATED_PRODUCTS.KEEP_IT.price), priceCurrency: 'USD' },
       { '@type': 'Offer', name: 'Extra Keepsake Card', price: String(CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard), priceCurrency: 'USD' },
@@ -210,8 +210,8 @@ export default function CuratedPage() {
 
           <p className="mx-auto mt-7 max-w-[820px] text-[15px] leading-[1.75] text-[#22323A]/68 sm:text-[17px]">
             Send us the photos, videos and messages you choose. We professionally assemble them into one finished
-            UNIKMO memory — then you decide whether to keep it private, show it in Times Square, or share extra
-            keepsakes.
+            UNIKMO memory — then you decide whether to keep it private or share extra
+            keepsakes. A Times Square Edition is coming soon.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             <a href="#order" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Start Curated</a>
@@ -270,7 +270,7 @@ export default function CuratedPage() {
         <section className="px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[980px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Times Square Edition</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Times Square Edition &middot; Coming soon</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">POP. Go public. Keep it.</h2>
               <p className="mx-auto mt-4 max-w-[700px] text-[14px] leading-[1.75] text-[#22323A]/62 sm:text-[15px]">
                 The public moment can begin with your own POP — confetti, a cork, a team cheer or another celebration burst. We curate the submitted material, the Times Square appearance and its capture into the finished memory.
@@ -289,7 +289,7 @@ export default function CuratedPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-center text-[10px] leading-[1.6] text-[#22323A]/45">After checkout we confirm Times Square scheduling and capture with you before any files are submitted.</p>
+            <p className="mt-4 text-center text-[12px] leading-[1.6] text-[#22323A]/65">Times Square Edition is coming soon and is not yet available to order.</p>
           </div>
         </section>
 

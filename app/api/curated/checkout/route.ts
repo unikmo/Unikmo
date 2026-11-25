@@ -18,13 +18,14 @@ export async function POST(request: NextRequest) {
     if (experience === 'SHOW_IT') return NextResponse.json({ error: 'Times Square Edition is coming soon' }, { status: 400 });
     const delivery: CuratedDeliveryKey = /digital/i.test(body.delivery ?? '') ? 'digital' : 'physical';
     const extraKeepsakes = Math.max(0, Math.min(25, Math.floor(Number(body.extraKeepsakes) || 0)));
-    const product = getCommerceProduct(experience === 'KEEP_IT' ? 'curated-keep' : 'curated-show');
+    const product = getCommerceProduct('curated-keep');
     if (!product) return NextResponse.json({ error: 'Unknown product' }, { status: 400 });
     const origin = process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
       : process.env.BASE_URL?.replace(/\/$/, '') || request.nextUrl.origin;
     const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
+      adaptive_pricing: { enabled: false },
       customer_creation: 'always',
       shipping_address_collection: delivery === 'digital' ? undefined : { allowed_countries: ['US', 'CA', 'GB', 'DE', 'FR', 'NL', 'BE', 'AT', 'CH'] },
       line_items: [

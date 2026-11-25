@@ -40,7 +40,7 @@ export const acquisitionPages: Record<string, AcquisitionPage> = {
     examplesTitle: 'What could you put inside?',
     examplesIntro: 'A thoughtful gift does not need a long production. It needs one detail that feels unmistakably yours.',
     examples: [
-      { title: 'A 45-second voice note', copy: 'Tell them the small thing they do that you notice more than they realise.' },
+      { title: 'A 45-second voice note', copy: 'Tell them the small thing they do that you notice more than they realize.' },
       { title: 'A photo with the story behind it', copy: 'Use one image and explain why that day still matters to you.' },
       { title: 'A short private video', copy: 'Say what you would want them to hear again on a difficult or distant day.' },
     ],

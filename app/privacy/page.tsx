@@ -61,7 +61,7 @@ export default function PrivacyPage() {
           legitimate interests (running and securing the site), consent (any non-essential cookies), and legal
           obligation.
         </p>
-        <p>We do not sell your personal information, and we do not share it for cross-context behavioural advertising.</p>
+        <p>We do not sell your personal information, and we do not share it for cross-context behavioral advertising.</p>
       </LegalSection>
 
       <LegalSection heading="4. Content privacy">
@@ -102,7 +102,7 @@ export default function PrivacyPage() {
 
       <LegalSection heading="8. Security">
         <p>
-          We take reasonable technical and organisational measures to protect personal information. No method of
+          We take reasonable technical and organizational measures to protect personal information. No method of
           transmission or storage is completely secure, and we cannot guarantee absolute security.
         </p>
       </LegalSection>
@@ -130,7 +130,7 @@ export default function PrivacyPage() {
           exercising these rights.
         </p>
         <p>
-          We do not &ldquo;sell&rdquo; personal information and do not &ldquo;share&rdquo; it for cross-context behavioural
+          We do not &ldquo;sell&rdquo; personal information and do not &ldquo;share&rdquo; it for cross-context behavioral
           advertising as those terms are defined under California law. To make a request, email{' '}
           <a href={`mailto:${COMPANY.email}`} className={link}>{COMPANY.email}</a>. We will verify your request using the
           email associated with your order.

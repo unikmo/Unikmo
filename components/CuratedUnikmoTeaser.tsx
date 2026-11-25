@@ -12,7 +12,7 @@ const offerings = [
     eyebrow: 'Show It',
     title: 'Times Square Edition',
     price: 'Coming soon',
-    copy: 'We curate it, show it in Times Square, capture the moment and preserve the experience inside your UNIKMO.',
+    copy: 'A public Times Square moment, captured and kept inside your UNIKMO. Not yet available to order.',
   },
   {
     eyebrow: 'Share It',
@@ -67,7 +67,7 @@ export default function CuratedUnikmoTeaser() {
             </h2>
             <p className="mt-5 max-w-[540px] text-[13px] leading-[1.75] text-[#22323A]/64 sm:text-[14px]">
               Send us the photos, videos and messages. We&rsquo;ll curate the story, handle the
-              optional Times Square experience, and deliver your finished UNIKMO.
+              and deliver your finished UNIKMO.
             </p>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
