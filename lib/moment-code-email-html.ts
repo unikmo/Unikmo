@@ -1,239 +1,52 @@
 /**
- * Builds the exact HTML used for the Moment Keys email.
- * This is intentionally "HTML-only" (no nodemailer / server deps) so it can be used
- * both in the email sender and in the admin preview (client-side iframe).
+ * Compact transactional Moment Keys email.
+ * Rendered with email-safe tables and inline styles for Outlook and mobile clients.
+ * No external QR service or absolute-position overlays are required.
  */
-
-import type { DeliveryType, Quantity } from './code-generator';
+import type { DeliveryType } from './code-generator';
 
 type BuildArgs = {
   codes: string[];
   orderId: string;
-  baseUrl?: string; // e.g. https://yourdomain.com (no trailing slash recommended)
-  // Optional override: if you ever want physical/split templates later.
+  baseUrl?: string;
   deliveryType?: DeliveryType;
 };
 
-type TierConfig = {
-  productImagePath: string; // path under /public (no baseUrl)
-  // QR placement relative to the rendered product image box.
-  // Values are in percentages of image width/height after scaling.
-  qr: {
-    leftPct: number;
-    topPct: number;
-    // QR overlay size in percentages of product image width/height after scaling.
-    sizeXPct: number;
-    sizeYPct: number;
-  };
-  qrBgColor: string; // hex without '#'
-  // For converting bbox pixels (detected from original assets) into rendered px.
-  // Email HTML sets the product image width to 520px on desktop.
-  // These are used to compute QR px size that matches scaling.
-  original: { imgW: number; qrW: number; qrH: number };
-};
-
-// Shared config: the email overlays a live QR code onto the real UNIKMO back-card
-// design (public/card-back.png), inside the placeholder QR box already printed on it.
-// Box measured directly from the 1920x1362 export: 496x496px centered at (959, 496).
-const BACK_CARD_TIER: TierConfig = {
-  productImagePath: '/card-back.png',
-  qr: { leftPct: 49.9479, topPct: 36.417, sizeXPct: 25.8333, sizeYPct: 36.417 },
-  qrBgColor: 'F7F2EF',
-  original: { imgW: 1920, qrW: 496, qrH: 496 },
-};
-
-const TIER_BY_COUNT: Record<1 | 4 | 7, TierConfig> = {
-  1: BACK_CARD_TIER,
-  4: BACK_CARD_TIER,
-  7: BACK_CARD_TIER,
-};
-
-function normalizeBaseUrl(baseUrl: string) {
-  return baseUrl.replace(/\/$/, '');
-}
+const escapeHtml = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
 export function buildMomentCodesEmailHtml({ codes, orderId, baseUrl, deliveryType }: BuildArgs): { html: string } {
-  const safeBaseUrl = normalizeBaseUrl(baseUrl ?? 'https://yourdomain.com');
-  const uploadPageUrl = `${safeBaseUrl}/upload`;
-  const uploadUrl = `${uploadPageUrl}?code=${encodeURIComponent(codes[0] || '')}`;
-  const unlockBaseUrl = `${safeBaseUrl}/unlock`;
-
-  const firstCode = codes[0] || '';
-
-  const count = codes.length as Quantity | number;
-  const tierCount = (count === 7 || count === 4 || count === 1 ? count : 1) as 1 | 4 | 7;
-  const tier = TIER_BY_COUNT[tierCount];
-  const cardBlocksHtml = codes
-    .map((code, index) => {
-      const unlockUrlForCode = `${unlockBaseUrl}?code=${encodeURIComponent(code)}`;
-      const qrUrlForCode = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
-        unlockUrlForCode
-      )}&bgcolor=${tier.qrBgColor}&color=2D2926`;
-
-      return `
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 16px auto 0; max-width: 520px; width: 100%;">
-          <tr>
-            <td style="padding: 0;">
-              ${
-                codes.length > 1
-                  ? `<div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: #B38846; font-weight: 600; margin: 0 0 8px 2px;">Card ${index + 1}</div>`
-                  : ''
-              }
-              <div style="position: relative; border-radius: 14px; overflow: hidden; border: 1px solid rgba(45,41,38,0.12);">
-                <img
-                  src="${safeBaseUrl}${tier.productImagePath}"
-                  width="520"
-                  alt="UNIKMO card"
-                  style="width: 100%; max-width: 520px; height: auto; display: block; border: 0;"
-                />
-                <img
-                  src="${qrUrlForCode}"
-                  width="92"
-                  alt="QR for Key ${code}"
-                  style="
-                    position: absolute;
-                    left: ${tier.qr.leftPct}%;
-                    top: ${tier.qr.topPct}%;
-                    width: ${tier.qr.sizeXPct}%;
-                    height: ${tier.qr.sizeYPct}%;
-                    transform: translate(-50%, -50%);
-                    border: 0;
-                    background: #${tier.qrBgColor};
-                  "
-                />
-                <div
-                  style="
-                    position: absolute;
-                    left: 49%;
-                    bottom: 14px;
-                    transform: translateX(-50%);
-                    background: rgba(253,249,245,0.9);
-                    border: 1px solid rgba(45,41,38,0.2);
-                    border-radius: 999px;
-                    padding: 7px 12px;
-                    font-family: 'Courier New', monospace;
-                    font-size: 13px;
-                    letter-spacing: 1.1px;
-                    color: #22323A;
-                    white-space: nowrap;
-                  "
-                >${code}</div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      `;
-    })
-    .join('');
-
-  const html = `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-          line-height: 1.6; color: #22323A; background: #F7F1EA;
-          padding: 40px 20px; min-height: 100vh;
-        }
-        .email-container { max-width: 600px; margin: 0 auto; background: #FDF9F5; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(45, 41, 38, 0.08); }
-        .header { background: #EFE8E5; padding: 36px 30px; text-align: center; }
-        .logo { font-size: 28px; font-weight: 700; color: #22323A; margin-bottom: 8px; font-family: Georgia, 'Times New Roman', serif; letter-spacing: 0.02em; }
-        .header-subtitle { color: #22323A; font-size: 15px; opacity: 0.85; }
-        .content { padding: 36px 30px; }
-        .greeting { font-size: 22px; font-weight: 600; color: #22323A; margin-bottom: 16px; font-family: Georgia, 'Times New Roman', serif; }
-        .message { color: #22323A; font-size: 15px; margin-bottom: 28px; line-height: 1.7; opacity: 0.9; }
-        .order-info { background: #EFE8E5; border-radius: 12px; padding: 18px 20px; margin-bottom: 28px; }
-        .order-label { color: #B38846; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; font-weight: 600; }
-        .order-number { color: #22323A; font-size: 20px; font-weight: 700; font-family: 'Courier New', monospace; }
-        .codes-section { margin: 28px 0; }
-        .codes-title { color: #22323A; font-size: 17px; font-weight: 600; margin-bottom: 16px; text-align: center; font-family: Georgia, 'Times New Roman', serif; }
-        .code-item { background: #FBF7F2; border: 1px solid rgba(45, 41, 38, 0.08); border-radius: 12px; padding: 20px; margin-bottom: 12px; text-align: center; box-shadow: 0 4px 16px rgba(45, 41, 38, 0.04); }
-        .code-label { color: #B38846; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; font-weight: 600; }
-        .code-value { color: #22323A; font-size: 20px; font-weight: 700; font-family: 'Courier New', monospace; letter-spacing: 2px; }
-        .actions { margin: 32px 0; text-align: center; }
-        .button { display: inline-block; padding: 14px 28px; margin: 8px; background: #22323A; color: #FDF9F5; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
-        .button:hover { background: #1E1B18; }
-        .button-secondary { background: #FDF9F5; color: #22323A; border: 1px solid #D3C7BB; padding: 14px 28px; }
-        .button-secondary:hover { background: #EFE8E5; }
-        .info-box { background: #EFE8E5; border-radius: 12px; padding: 18px 20px; margin: 28px 0; }
-        .info-title { color: #22323A; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
-        .info-text { color: #22323A; font-size: 14px; line-height: 1.65; opacity: 0.85; }
-        .footer { margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(45, 41, 38, 0.1); text-align: center; }
-        .footer-text { color: #22323A; font-size: 13px; line-height: 1.75; opacity: 0.75; }
-        .footer-brand { color: #22323A; font-weight: 600; margin-top: 12px; font-family: Georgia, 'Times New Roman', serif; }
-        .divider { height: 1px; background: rgba(45, 41, 38, 0.1); margin: 28px 0; }
-        @media only screen and (max-width: 600px) {
-          .content { padding: 28px 20px; }
-          .header { padding: 28px 20px; }
-          .button { display: block; margin: 8px 0; }
-        }
-      </style>
-    </head>
-    <body>
-      <div class="email-container">
-        <div class="header">
-          <div class="logo">UNIKMO</div>
-          <div class="header-subtitle">Your moment is ready</div>
-        </div>
-
-        <div class="content">
-          <div class="greeting">Thank you for your purchase</div>
-
-          <div class="message">
-            Your order is confirmed and your unique Moment Key${codes.length > 1 ? 's are' : ' is'} ready to use.
-          </div>
-
-          <div class="order-info">
-            <div class="order-label">Order Number</div>
-            <div class="order-number">#${orderId}</div>
-          </div>
-
-          <div class="codes-section">
-            <div class="codes-title">Your card &amp; access code</div>
-            ${cardBlocksHtml}
-          </div>
-
-          <div class="divider"></div>
-          
-          <div class="actions">
-            <a
-              href="${uploadUrl}"
-              class="button"
-              style="display: inline-block; padding: 14px 28px; margin: 8px; background-color: #22323A; color: #FDF9F5 !important; text-decoration: none !important; border-radius: 12px; font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid #22323A; -webkit-text-fill-color: #FDF9F5;"
-            >Upload your media</a>
-            <a
-              href="${unlockBaseUrl}"
-              class="button button-secondary"
-              style="display: inline-block; padding: 14px 28px; margin: 8px; background-color: #FDF9F5 !important; color: #22323A !important; text-decoration: none !important; border-radius: 12px; font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid #D3C7BB; -webkit-text-fill-color: #22323A;"
-            >Unlock moment</a>
-          </div>
-          
-          <div class="info-box">
-            <div class="info-title"><span>Important information</span></div>
-            <div class="info-text">
-              <strong>Upload your media:</strong> <a href="${uploadUrl}" style="color: #22323A; font-weight: 600;">${uploadPageUrl.replace(/^https?:\/\//, '')}</a> (your Key is pre-filled)<br>
-              <strong>Share with recipient:</strong> Give them the Key above and they can unlock at <a href="${unlockBaseUrl}" style="color: #22323A; font-weight: 600;">${unlockBaseUrl.replace(/^https?:\/\//, '')}</a><br>
-              <strong>Remember:</strong> Keep your Key safe - it's the only way to access your moment!
-            </div>
-          </div>
-          
-          <div class="footer">
-            <div class="footer-text">
-              If you have any questions, please don't hesitate to contact us.<br>
-              We're here to help make your moment special!
-            </div>
-            <div class="footer-brand">Best regards,<br>The UNIKMO Team</div>
-          </div>
-        </div>
-      </div>
-    </body>
-  </html>
-  `;
-
+  const origin = (baseUrl || 'https://unikmo.com').replace(/\/$/, '');
+  const uploadUrl = `${origin}/upload`;
+  const safeOrder = escapeHtml(orderId);
+  const count = codes.length;
+  const rows = codes.map((code, index) => {
+    const safeCode = escapeHtml(code);
+    const personalizedUrl = `${uploadUrl}?code=${encodeURIComponent(code)}`;
+    return `<tr><td style="padding:14px 16px;border-bottom:1px solid #e8e1d7;font:12px Arial,sans-serif;color:#857969;vertical-align:middle"> ${String(index + 1).padStart(2, '0')} </td>
+      <td style="padding:14px 8px;border-bottom:1px solid #e8e1d7;font:600 14px 'Courier New',monospace;letter-spacing:.4px;color:#23313a;word-break:break-word">${safeCode}</td>
+      <td style="padding:14px 14px;border-bottom:1px solid #e8e1d7;text-align:right"><a href="${escapeHtml(personalizedUrl)}" style="font:12px Arial,sans-serif;color:#23313a;text-decoration:underline">Personalize</a></td></tr>`;
+  }).join('');
+  const fulfillment = deliveryType === 'physical' || deliveryType === 'split'
+    ? 'Your Moment Keys are available now. Any physical cards included in your order will be handled separately.'
+    : 'Your Moment Keys are available now for digital gifting.';
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:24px 12px;background:#f3eee7;color:#23313a;font-family:Arial,Helvetica,sans-serif">
+<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:580px;margin:0 auto;background:#fffdf9;border:1px solid #e7dfd5;border-radius:12px">
+<tr><td style="padding:32px 28px 22px;text-align:center;border-bottom:1px solid #e8e1d7">
+<div style="font:normal 30px Georgia,serif;letter-spacing:2px">UNIKMO</div><div style="font:10px Arial,sans-serif;letter-spacing:2.4px;color:#927b60;margin-top:9px">A MOMENT WORTH KEEPING</div></td></tr>
+<tr><td style="padding:28px 28px 12px">
+<h1 style="font:normal 27px Georgia,serif;line-height:1.25;margin:0 0 12px">Your moments begin here.</h1>
+<p style="font:14px/1.7 Arial,sans-serif;color:#555b5b;margin:0 0 18px">Your ${count} unique Moment Key${count === 1 ? ' is' : 's are'} ready. Personalize each moment, then share its key with someone special.</p>
+<p style="font:11px Arial,sans-serif;color:#897e70;margin:0 0 18px">ORDER #${safeOrder}</p>
+<img src="${origin}/card-back.png" alt="UNIKMO keepsake card design" width="520" style="display:block;width:100%;max-width:520px;height:auto;border:0;border-radius:8px">
+<p style="font:11px Arial,sans-serif;letter-spacing:1.7px;color:#927b60;margin:25px 0 8px">YOUR MOMENT KEYS</p>
+<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;border-top:1px solid #e8e1d7">${rows}</table>
+<p style="font:12px/1.7 Arial,sans-serif;color:#726a61;margin:16px 0 22px">Tip: Print this list and cross out each key after gifting it to keep track of your moments.</p>
+<table role="presentation" cellpadding="0" cellspacing="0" width="100%"><tr><td align="center" style="padding:4px 0 22px"><a href="${uploadUrl}" style="display:inline-block;background:#23313a;color:#ffffff;text-decoration:none;padding:15px 24px;border-radius:5px;font:600 12px Arial,sans-serif;letter-spacing:1px">PERSONALIZE YOUR MOMENTS</a></td></tr></table>
+<p style="font:13px/1.7 Arial,sans-serif;color:#555b5b;margin:0 0 10px"><strong>Create.</strong> Add your photos, videos or message using the Personalize link next to the chosen key.<br><strong>Share.</strong> Give the recipient that key to unlock their moment at <a href="${origin}/unlock" style="color:#23313a">unikmo.com/unlock</a>.<br><strong>Remember.</strong> Keep any unused keys private.</p>
+<p style="font:12px/1.7 Arial,sans-serif;color:#77716b;margin:16px 0 0">${fulfillment}</p>
+</td></tr><tr><td style="padding:22px 28px 28px;text-align:center;border-top:1px solid #e8e1d7;font:12px/1.7 Arial,sans-serif;color:#81766a">Made for meaningful moments.<br>UNIKMO · <a href="${origin}" style="color:#23313a">unikmo.com</a></td></tr></table></body></html>`;
   return { html };
 }
-

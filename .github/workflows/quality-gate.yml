@@ -1,0 +1,48 @@
+name: Quality gate
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, codex/stripe-checkout-admin]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: qa-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Reject retired commerce provider references
+        shell: bash
+        run: |
+          retired="$(printf '%s%s' 'shop' 'ify')"
+          if git ls-files | grep -i "$retired"; then exit 1; fi
+          if git grep -niI "$retired"; then exit 1; fi
+      - name: Resolve candidate migration dependencies
+        run: npm install --no-audit --no-fund
+      - name: Apply compatible transitive security fixes
+        run: npm audit fix --ignore-scripts --no-fund --audit-level=high
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: migration-lockfile
+          path: package-lock.json
+      - name: Offline identifier regression checks
+        run: npm run qa:offline
+      - name: TypeScript
+        run: npx tsc --noEmit
+      - name: Dependency security audit
+        run: npm audit --omit=dev --audit-level=high
+      - name: Production build
+        run: npm run build

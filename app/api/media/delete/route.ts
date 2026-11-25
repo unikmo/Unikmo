@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import MomentCode from '@/models/MomentCode';
+import { isRetailKeyEligible } from '@/lib/retail-key-eligibility';
 import { deleteS3Object, extractS3ObjectKeyFromMediaUrl, getS3Config } from '@/lib/s3';
 
 async function handleDelete(request: NextRequest) {
@@ -21,6 +22,8 @@ async function handleDelete(request: NextRequest) {
     if (!momentCode) {
       return NextResponse.json({ error: 'Invalid code' }, { status: 404 });
     }
+
+    if (!await isRetailKeyEligible(momentCode)) return NextResponse.json({ error: 'Key not sold' }, { status: 403 });
 
     if (momentCode.status !== 'new') {
       return NextResponse.json(

@@ -1,0 +1,62 @@
+name: WebPro permanent browser QA
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '30 5 * * 1'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated QA tools
+        working-directory: qa/browser
+        run: npm install --no-audit --no-fund
+      - name: Install browsers
+        working-directory: qa/browser
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Build and start isolated candidate
+        id: preview
+        if: github.event_name == 'pull_request'
+        run: |
+          npm install --no-audit --no-fund
+          npm audit fix --ignore-scripts --no-fund --audit-level=high
+          npm run build
+          npm start -- --hostname 127.0.0.1 --port 3000 > /tmp/unikmo-preview.log 2>&1 &
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3000/ >/dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/unikmo-preview.log
+          exit 1
+      - name: Audit candidate or live public site (read only)
+        working-directory: qa/browser
+        env:
+          QA_BASE_URL: ${{ github.event_name == 'pull_request' && 'http://127.0.0.1:3000' || 'https://unikmo.com' }}
+          VISUAL_BASELINES_APPROVED: ${{ vars.VISUAL_BASELINES_APPROVED }}
+        run: npm test
+      - name: Lighthouse performance and SEO
+        if: ${{ !cancelled() && steps.preview.outcome != 'failure' }}
+        working-directory: qa/browser
+        env:
+          QA_BASE_URL: ${{ github.event_name == 'pull_request' && 'http://127.0.0.1:3000' || 'https://unikmo.com' }}
+        run: npm run lighthouse
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unikmo-browser-qa
+          path: |
+            qa-results/
+            qa/browser/playwright-report/
+          if-no-files-found: warn

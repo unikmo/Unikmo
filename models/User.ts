@@ -4,7 +4,6 @@ export interface IUser extends Document {
   email: string;
   roles: ('buyer' | 'admin')[];
   password?: string;
-  shopifyCustomerId?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,10 +25,6 @@ const UserSchema: Schema = new Schema(
       required: true,
     },
     password: {
-      type: String,
-      required: false,
-    },
-    shopifyCustomerId: {
       type: String,
       required: false,
     },

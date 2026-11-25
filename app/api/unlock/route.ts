@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import MomentCode from '@/models/MomentCode';
+import { isRetailKeyEligible } from '@/lib/retail-key-eligibility';
 import '@/models/Order';
 import '@/models/User';
 import { sendUnlockNotificationEmail } from '@/lib/email';
@@ -41,7 +42,7 @@ function isMongoConnectivityError(err: unknown): boolean {
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
-    const ip = request.headers.get('x-forwarded-for') || request.ip || 'unknown';
+    const ip = request.headers.get('x-real-ip') || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         { error: 'Too many attempts. Please try again later.' },
@@ -75,7 +76,7 @@ export async function POST(request: NextRequest) {
 
     const momentCode = await MomentCode.findOne({ code: code.toUpperCase().trim() })
       .populate('user', 'email')
-      .populate('order', 'shopifyOrderId');
+      .populate('order', 'orderReference');
 
     if (!momentCode) {
       return NextResponse.json(
@@ -83,6 +84,8 @@ export async function POST(request: NextRequest) {
         { status: 404 }
       );
     }
+
+    if (!await isRetailKeyEligible(momentCode)) return NextResponse.json({ error: 'This Moment Key has not been sold.', reason: 'not_sold' }, { status: 403 });
 
     if (momentCode.status === 'revoked') {
       return NextResponse.json(

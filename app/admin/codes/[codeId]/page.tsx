@@ -15,7 +15,7 @@ interface CodeDetail {
   _id: string;
   code: string;
   user: { email: string };
-  order: { shopifyOrderId: string; email: string; totalPrice: number };
+  order: { orderReference: string; email: string; totalPrice: number };
   quantity: number;
   deliveryType: string;
   status: string;
@@ -87,7 +87,7 @@ export default function CodeDetailPage() {
           </div>
           <div>
             <p className="text-[#2D2926]/60 text-xs uppercase tracking-wide">Order</p>
-            <p className="text-[#2D2926] mt-0.5 font-mono">{code.order.shopifyOrderId}</p>
+            <p className="text-[#2D2926] mt-0.5 font-mono">{code.order.orderReference}</p>
           </div>
           <div>
             <p className="text-[#2D2926]/60 text-xs uppercase tracking-wide">Status</p>

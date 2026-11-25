@@ -56,9 +56,9 @@ const faqs = [
       'Memories are private by default. Access requires the UNIKMO link and the card’s private access code, so the card and code should be shared only with the intended recipient.',
   },
   {
-    question: 'Is storage guaranteed forever?',
+    question: 'How long will my memory remain available?',
     answer:
-      'No. UNIKMO aims to provide long-term access but does not promise permanent storage. The FAQ contains the current storage policy.',
+      'UNIKMO aims to provide long-term access but does not promise permanent storage. The FAQ contains the current storage policy.',
   },
 ];
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import CuratedCheckout from '@/components/CuratedCheckout';
 import TimesSquareRotator from '@/components/TimesSquareRotator';
 import SiteFooter from '@/components/SiteFooter';
-import { CURATED_PRODUCTS, curatedBuyUrl } from '@/lib/curated-products';
+import { CURATED_PRODUCTS } from '@/lib/curated-products';
 
 export const metadata: Metadata = {
   title: 'Curated UNIKMO | Keep It, Show It, Share It',
@@ -32,7 +32,7 @@ const choices = [
     imageAlt: 'A finished UNIKMO keepsake card beside printed photos',
     price: `$${CURATED_PRODUCTS.KEEP_IT.price}`,
     priceNote: 'Physical or digital delivery',
-    href: curatedBuyUrl(CURATED_PRODUCTS.KEEP_IT.variants.physical.id),
+    href: '#order',
     cta: 'Buy Keep It',
     description:
       'You send the photos, videos and messages you want us to work with. We select, sequence and edit them into one finished memory worth keeping.',
@@ -50,10 +50,10 @@ const choices = [
     subtitle: 'Times Square Edition',
     image: '/curated/ts-ny.webp',
     imageAlt: 'A UNIKMO card held up in front of a Times Square billboard',
-    price: `$${CURATED_PRODUCTS.SHOW_IT.price}`,
+    price: 'Coming soon',
     priceNote: 'Everything in Keep It, plus Times Square',
-    href: curatedBuyUrl(CURATED_PRODUCTS.SHOW_IT.variants.physical.id),
-    cta: 'Buy Show It',
+    href: '#order',
+    cta: 'Coming soon',
     description:
       'Take the finished moment public. We prepare the Times Square creative, coordinate the appearance, capture it, and incorporate that public moment into the finished UNIKMO memory.',
     points: [
@@ -71,7 +71,7 @@ const choices = [
     imageAlt: 'Four people holding matching UNIKMO keepsake cards',
     price: `$${CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard} each`,
     priceNote: 'Add any quantity at checkout',
-    href: curatedBuyUrl(CURATED_PRODUCTS.EXTRA_KEEPSAKES.variants.standard.id),
+    href: '#order',
     cta: 'Buy an extra card',
     description:
       'Give the same finished curated memory to family, friends, colleagues or employees who were part of it.',
@@ -93,7 +93,7 @@ const faqs = [
   {
     question: 'How much does Curated UNIKMO cost?',
     answer:
-      'Keep It — Curated is $199. Show It — Times Square Edition is $399 and includes everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
+      'Keep It — Curated is $249. Show It — Times Square Edition is coming soon and will include everything in Keep It plus the Times Square appearance and its capture. Additional physical keepsake cards are $12 each and can be added at checkout. Prices are in USD.',
   },
   {
     question: 'What is the Times Square Edition?',
@@ -143,7 +143,6 @@ export default function CuratedPage() {
       'Customers intentionally submit selected photos, videos and messages for professional curation into a finished UNIKMO memory, with an optional Times Square Edition and additional physical keepsakes.',
     offers: [
       { '@type': 'Offer', name: 'Keep It — Curated', price: String(CURATED_PRODUCTS.KEEP_IT.price), priceCurrency: 'USD' },
-      { '@type': 'Offer', name: 'Show It — Times Square Edition', price: String(CURATED_PRODUCTS.SHOW_IT.price), priceCurrency: 'USD' },
       { '@type': 'Offer', name: 'Extra Keepsake Card', price: String(CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard), priceCurrency: 'USD' },
     ],
   };
@@ -255,7 +254,7 @@ export default function CuratedPage() {
                       ))}
                     </ul>
                     <div className="mt-6 flex flex-1 flex-col justify-end gap-3 pt-1">
-                      <a href={choice.href} className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">{choice.cta}</a>
+                      {choice.cta === 'Coming soon' ? <span aria-disabled="true" className="inline-flex min-h-[46px] items-center justify-center rounded-lg border border-[#B38846]/50 px-6 text-[11px] font-medium text-[#B38846]">Coming soon</span> : <a href={choice.href} className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">{choice.cta}</a>}
                       <a href="#order" className="text-center text-[11px] font-medium text-[#22323A]/60 underline decoration-[#B38846]/45 underline-offset-4">Configure delivery &amp; extras</a>
                     </div>
                   </div>
@@ -263,7 +262,7 @@ export default function CuratedPage() {
               ))}
             </div>
             <p className="mx-auto mt-8 max-w-[640px] text-center text-[11px] leading-[1.6] text-[#22323A]/45">
-              Prices are in USD. Checkout is handled securely by Shopify. Digital delivery is available for the same price at checkout.
+              Prices are in USD. Checkout is handled securely by Stripe. Digital delivery is available for the same price at checkout.
             </p>
           </div>
         </section>
@@ -320,7 +319,7 @@ export default function CuratedPage() {
             <div className="mx-auto max-w-[680px] text-center">
               <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Order your curated memory</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose it, then check out.</h2>
-              <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Pick your experience, delivery and any extra keepsake cards. Payment is handled securely by Shopify. Right after checkout we email you to collect your photos, videos and messages.</p>
+              <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Pick your experience, delivery and any extra keepsake cards. Payment is handled securely by Stripe. Right after checkout we email you to collect your photos, videos and messages.</p>
             </div>
             <div className="mt-9"><CuratedCheckout /></div>
           </div>

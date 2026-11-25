@@ -5,13 +5,13 @@ const offerings = [
   {
     eyebrow: 'Keep It',
     title: 'Curated Memory',
-    price: '$199',
+    price: '$249',
     copy: 'We professionally assemble the photos, videos and messages you choose into one finished UNIKMO.',
   },
   {
     eyebrow: 'Show It',
     title: 'Times Square Edition',
-    price: '$399',
+    price: 'Coming soon',
     copy: 'We curate it, show it in Times Square, capture the moment and preserve the experience inside your UNIKMO.',
   },
   {

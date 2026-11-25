@@ -138,10 +138,10 @@ export async function sendMomentCodesEmail(
   codes: string[],
   orderId: string
 ): Promise<void> {
-  const baseUrl = (process.env.BASE_URL || 'https://yourdomain.com').replace(/\/$/, '');
+  const baseUrl = (process.env.BASE_URL || 'https://unikmo.com').replace(/\/$/, '');
   const { html } = buildMomentCodesEmailHtml({ codes, orderId, baseUrl });
 
-  const subject = `Your Moment Key${codes.length > 1 ? 's' : ''} - UNIKMO`;
+  const subject = 'Your UNIKMO Moment Keys Are Ready';
 
   const success = await sendEmail(to, subject, html);
   

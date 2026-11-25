@@ -7,11 +7,11 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { orderId: string } }
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
     await connectDB();
-    const { orderId } = params;
+    const { orderId } = await params;
 
     const order = await Order.findById(orderId).populate('user', 'email');
     if (!order) {
@@ -25,8 +25,8 @@ export async function GET(
     return NextResponse.json({
       order: {
         _id: order._id.toString(),
-        shopifyOrderId: order.shopifyOrderId,
-        shopifyOrderName: order.shopifyOrderName || '',
+        orderReference: order.orderReference,
+        orderName: order.orderName || '',
         email: order.email,
         customerName: order.customerName || '',
         source: order.source || 'webhook',
