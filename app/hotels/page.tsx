@@ -8,14 +8,14 @@ const TISONIK_HOTELS_URL = 'https://tisonik.com/hotels';
 const PILOT_MAILTO = `mailto:${COMPANY.email}?subject=${encodeURIComponent('UNIKMO for Hotels: pilot conversation')}`;
 
 export const metadata: Metadata = {
-  title: 'UNIKMO for Hotels | A Guest Experience Keepsake for Luxury Hotels & Resorts',
+  title: 'UNIKMO for Hotels | A Guest Experience Keepsake for Hotels & Resorts',
   description:
     'A UNIKMO card waits in the room. Guests scan it, receive a personal welcome, and leave with a digital keepsake of their stay. No new app. Start with one property.',
   alternates: { canonical: 'https://www.unikmo.com/hotels' },
   robots: { index: true, follow: true },
   openGraph: {
     title: 'UNIKMO for Hotels',
-    description: 'A welcome card that becomes a keepsake, for premium and luxury hospitality. No new app. Start with one property.',
+    description: 'A welcome card that becomes a keepsake, for hotels and resorts. No new app. Start with one property.',
     url: 'https://www.unikmo.com/hotels',
     siteName: 'UNIKMO',
     images: ['https://www.unikmo.com/og-image.jpg'],
@@ -66,7 +66,7 @@ export default function HotelsPage() {
     '@id': 'https://www.unikmo.com/hotels#webpage',
     url: 'https://www.unikmo.com/hotels',
     name: 'UNIKMO for Hotels',
-    description: 'A welcome card that becomes a digital keepsake of the stay, for premium and luxury hospitality.',
+    description: 'A welcome card that becomes a digital keepsake of the stay, for hotels and resorts.',
     isPartOf: { '@id': 'https://www.unikmo.com/#website' },
     about: { '@id': 'https://www.unikmo.com/#brand' },
     inLanguage: 'en',
@@ -230,7 +230,7 @@ export default function HotelsPage() {
             <div className="mx-auto mt-8 max-w-[680px] rounded-[18px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-6 text-left shadow-[0_8px_26px_rgba(34,50,58,.04)] sm:p-7">
               <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">Pilot pricing</p>
               <p className="mt-3 text-[14px] leading-[1.75] text-[#22323A]/72 sm:text-[15px]">
-                For the first one-ship / one-property pilot we keep pricing deliberately simple and low ($5 per guest on ships / $8 per stay in hotels) so the focus stays on measuring real impact. After a successful pilot we move to standard commercial pricing.
+                We start with one property so the focus stays on measuring real impact. Pilot terms are agreed with each property; contact us to discuss.
               </p>
             </div>
             <a

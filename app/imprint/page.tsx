@@ -16,7 +16,6 @@ const rows: Array<[string, React.ReactNode]> = [
   ['Wyoming Secretary of State filing ID', COMPANY.filingId],
   ['Principal / mailing address', COMPANY.addressOneLine],
   ['Registered agent', COMPANY.registeredAgent],
-  ['Represented by', `Manager of ${COMPANY.legalName}`],
   [
     'Email',
     <a key="e" href={`mailto:${COMPANY.email}`} className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">
