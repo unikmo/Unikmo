@@ -4,6 +4,7 @@ import SocialLinks from '@/components/SocialLinks';
 
 const legal = [
   { label: 'Contact', href: '/contact' },
+  { label: 'Hotels & Cruises', href: '/hotels' },
   { label: 'Privacy', href: '/privacy' },
   { label: 'Cookies', href: '/cookies' },
   { label: 'Terms', href: '/terms' },
