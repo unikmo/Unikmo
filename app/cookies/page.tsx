@@ -73,7 +73,7 @@ export default function CookiePolicyPage() {
       </LegalSection>
 
       <LegalSection heading="3. Cookie categories">
-        <div className="overflow-x-auto">
+        <div tabIndex={0} role="region" aria-label="Cookie categories table" className="overflow-x-auto rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#22323A]">
           <table className="w-full min-w-[520px] border-collapse text-left text-[13px]">
             <thead>
               <tr className="border-b border-[#22323A]/[0.12] text-[11px] uppercase tracking-[0.1em] text-[#22323A]/55">
