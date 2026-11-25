@@ -35,3 +35,20 @@ main > section:not(:first-child):has(h2) {
 /* Accessible dark gold for text and controls on the light brand palette. */
 [class*="text-\[\#B38846\]"] { color: #795721; }
 [class*="bg-\[\#B38846\]"][class*="text-white"] { background-color: #795721; }
+
+/* Readable secondary copy on ivory and white: retain brand hue, remove low-alpha text. */
+[class~="text-[#22323A]/30"],
+[class~="text-[#22323A]/35"],
+[class~="text-[#22323A]/40"],
+[class~="text-[#22323A]/45"],
+[class~="text-[#22323A]/48"],
+[class~="text-[#22323A]/50"],
+[class~="text-[#22323A]/52"],
+[class~="text-[#22323A]/55"],
+[class~="text-[#22323A]/58"],
+[class~="text-[#22323A]/60"],
+[class~="text-[#22323A]/62"],
+[class~="text-[#22323A]/65"],
+[class~="text-[#22323A]/68"] {
+  color: #59646a;
+}
