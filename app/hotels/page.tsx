@@ -101,7 +101,7 @@ export default function HotelsPage() {
         </div>
       </header>
 
-      <main>
+      <main id="main" tabIndex={-1}>
         {/* Hero */}
         <section className="px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
           <div className="mx-auto max-w-[900px]">

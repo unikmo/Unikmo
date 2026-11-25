@@ -20,8 +20,4 @@ export const COMPANY = {
   registeredAgent: 'Registered Agents Inc, 30 N Gould St, Ste R, Sheridan, WY 82801',
   email: 'hello@unikmo.com',
   governingLaw: 'the State of Wyoming, United States',
-  social: {
-    instagram: 'https://www.instagram.com/unikmo_first',
-    tiktok: 'https://www.tiktok.com/@myunikmo',
-  },
 } as const;

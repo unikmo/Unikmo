@@ -1,3 +1,5 @@
+import { VISIBLE_SOCIAL_ACCOUNTS } from '@/lib/social';
+
 export default function SiteEntityJsonLd() {
   const entityGraph = {
     '@context': 'https://schema.org',
@@ -27,8 +29,7 @@ export default function SiteEntityJsonLd() {
           availableLanguage: 'en',
         },
         sameAs: [
-          'https://www.instagram.com/unikmo_first',
-          'https://www.tiktok.com/@myunikmo',
+          ...VISIBLE_SOCIAL_ACCOUNTS.map((a) => a.url),
         ],
         logo: {
           '@type': 'ImageObject',

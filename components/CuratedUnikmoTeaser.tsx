@@ -66,7 +66,7 @@ export default function CuratedUnikmoTeaser() {
               Want the memory without doing the work?
             </h2>
             <p className="mt-5 max-w-[540px] text-[13px] leading-[1.75] text-[#22323A]/64 sm:text-[14px]">
-              Send us the photos, videos and messages. We&rsquo;ll curate the story, handle the
+              Send us the photos, videos and messages. We&rsquo;ll curate the story
               and deliver your finished UNIKMO.
             </p>
 

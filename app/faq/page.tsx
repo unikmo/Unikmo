@@ -85,7 +85,7 @@ export default function FaqPage() {
         </div>
       </header>
 
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16">
           <div className="mx-auto max-w-[820px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Before you choose</p>

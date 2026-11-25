@@ -186,7 +186,7 @@ export default function HowUnikmoWorksPage() {
         </div>
       </header>
 
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="px-5 pb-14 pt-14 text-center sm:px-8 sm:pb-16 sm:pt-18 lg:pt-20">
           <div className="mx-auto max-w-[860px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">The factual guide</p>

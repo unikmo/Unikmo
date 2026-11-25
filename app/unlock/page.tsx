@@ -489,7 +489,7 @@ function UnlockPageContent() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+      <main id="main" tabIndex={-1} className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
         {!unlocked && (
           <motion.div
             initial={{ opacity: 0, y: 12 }}

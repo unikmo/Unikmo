@@ -57,6 +57,12 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="antialiased font-sans">
         <SiteEntityJsonLd />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:inline-flex focus:min-h-[44px] focus:items-center focus:rounded-lg focus:bg-[#22323A] focus:px-5 focus:text-[14px] focus:font-medium focus:text-white"
+        >
+          Skip to main content
+        </a>
         <ErrorBoundary>
           <ToastProvider />
           {children}

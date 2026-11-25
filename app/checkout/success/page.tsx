@@ -31,7 +31,7 @@ export default async function CheckoutSuccessPage({ searchParams }: { searchPara
   if (!order) redirect('/');
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#FDF9F5] px-5">
+    <main id="main" tabIndex={-1} className="flex min-h-screen items-center justify-center bg-[#FDF9F5] px-5">
       <div className="w-full max-w-xl rounded-3xl border border-[#E3DAD0] bg-white p-8 text-center shadow-sm sm:p-12">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-2xl text-emerald-700" aria-hidden="true">✓</div>
         <p className="mt-6 text-xs font-medium uppercase tracking-[0.2em] text-[#8A6A30]">Payment received</p>

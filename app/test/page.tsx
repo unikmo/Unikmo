@@ -221,7 +221,7 @@ export default function TestPage() {
   return (
     <div className="min-h-screen bg-[#FCF9F4] text-[#22323A]">
       <Header />
-      <main>
+      <main id="main" tabIndex={-1}>
         <section id="top" className="px-5 pb-14 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
           <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Give a moment they can return to.</h1>
           <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">Turn a video, voice note, photo or message into a beautiful physical card.</strong> They scan it to unlock your private moment.</p>

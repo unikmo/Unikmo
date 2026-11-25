@@ -38,7 +38,7 @@ export default function LegalPageShell({
         </div>
       </header>
 
-      <main className="px-5 py-14 sm:px-8 lg:py-20">
+      <main id="main" tabIndex={-1} className="px-5 py-14 sm:px-8 lg:py-20">
         <div className="mx-auto max-w-[760px]">
           <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">{eyebrow}</p>
           <h1 className="mt-3 font-serif text-[34px] leading-[1.1] sm:text-[44px]">{title}</h1>

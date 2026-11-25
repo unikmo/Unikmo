@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import LegalPageShell from '@/components/LegalPageShell';
 import ContactForm from '@/components/ContactForm';
 import { COMPANY } from '@/lib/company';
+import SocialLinks from '@/components/SocialLinks';
 
 export const metadata: Metadata = {
   title: 'Contact | UNIKMO',
@@ -26,6 +27,7 @@ export default function ContactPage() {
           </a>
           .
         </p>
+        <SocialLinks className="-ml-3 mt-2" />
         <p className="mt-3">
           UNIKMO is a product of {COMPANY.legalName}, {COMPANY.addressOneLine}. Full company details are on the{' '}
           <a href="/imprint" className="underline decoration-[#B38846]/50 underline-offset-4 hover:text-[#B38846]">

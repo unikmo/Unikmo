@@ -461,7 +461,7 @@ export default function MockupOnePreview() {
   return (
     <div className="min-h-screen bg-[#FCF9F4] text-[#22323A] selection:bg-[#B38846]/25">
       <Header />
-      <main>
+      <main id="main" tabIndex={-1}>
         <Hero />
         <TrustStrip />
         <CardExperience />

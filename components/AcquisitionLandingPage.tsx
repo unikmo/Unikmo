@@ -134,7 +134,7 @@ export default function AcquisitionLandingPage({ page }: { page: AcquisitionPage
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <PageHeader />
 
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
           <div className="mx-auto max-w-[900px]">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">{page.eyebrow}</p>

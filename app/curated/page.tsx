@@ -187,7 +187,7 @@ export default function CuratedPage() {
         </div>
       </header>
 
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="px-5 pb-14 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
           <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Curated UNIKMO</p>
           <h1 className="mx-auto mt-4 max-w-[980px] font-serif text-[39px] leading-[1.03] tracking-[-0.025em] sm:text-[52px] lg:text-[62px]">
