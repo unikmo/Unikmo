@@ -20,8 +20,8 @@ export default function SocialLinks({ className = '' }: { className?: string }) 
             href={a.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`UNIKMO on ${a.label} (${a.handle})`}
-            title={`${a.label} ${a.handle}`}
+            aria-label={a.accessibleName ?? `UNIKMO on ${a.label} (${a.handle})`}
+            title={a.accessibleName ?? `${a.label} ${a.handle}`}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#22323A]/70 transition hover:text-[#8A6528] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8A6528]"
           >
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" focusable="false">
