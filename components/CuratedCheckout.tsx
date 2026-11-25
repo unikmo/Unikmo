@@ -7,7 +7,9 @@ import {
   type CuratedExperienceKey,
 } from '@/lib/curated-products';
 
-const EXPERIENCES: Array<{ key: CuratedExperienceKey; title: string; note: string; price: number }> = [
+type PurchasableExperience = Exclude<CuratedExperienceKey, 'SHOW_IT'>;
+
+const EXPERIENCES: Array<{ key: PurchasableExperience; title: string; note: string; price: number }> = [
   {
     key: 'KEEP_IT',
     title: 'Keep It — Curated',
@@ -20,7 +22,7 @@ const EXTRA_PRICE = CURATED_PRODUCTS.EXTRA_KEEPSAKES.pricePerCard;
 const MAX_EXTRAS = 25;
 
 export default function CuratedCheckout() {
-  const [experience, setExperience] = useState<CuratedExperienceKey>('KEEP_IT');
+  const [experience, setExperience] = useState<PurchasableExperience>('KEEP_IT');
   const [delivery, setDelivery] = useState<CuratedDeliveryKey>('physical');
   const [extras, setExtras] = useState(0);
   const [redirecting, setRedirecting] = useState(false);
@@ -55,7 +57,7 @@ export default function CuratedCheckout() {
   return (
     <div className="rounded-[20px] border border-[#22323A]/[0.08] bg-white/60 p-6 shadow-[0_16px_45px_rgba(34,50,58,.05)] sm:p-8">
       <fieldset>
-        <legend className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
+        <legend className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
           1. Choose your experience
         </legend>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -77,7 +79,7 @@ export default function CuratedCheckout() {
                   <span className="font-serif text-[17px]">{option.title}</span>
                   <span className="text-[13px] font-medium text-[#22323A]">${option.price}</span>
                 </div>
-                <p className="mt-2 text-[11px] leading-[1.55] text-[#22323A]/58">{option.note}</p>
+                <p className="mt-2 text-[12px] leading-[1.55] text-[#22323A]/58">{option.note}</p>
               </button>
             );
           })}
@@ -92,7 +94,7 @@ export default function CuratedCheckout() {
       </fieldset>
 
       <fieldset className="mt-7 border-t border-[#22323A]/[0.08] pt-6">
-        <legend className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
+        <legend className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
           2. Choose delivery
         </legend>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -118,10 +120,10 @@ export default function CuratedCheckout() {
       </fieldset>
 
       <fieldset className="mt-7 border-t border-[#22323A]/[0.08] pt-6">
-        <legend className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
+        <legend className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">
           3. Add extra keepsake cards
         </legend>
-        <p className="mt-1 text-[11px] leading-[1.6] text-[#22323A]/52">
+        <p className="mt-1 text-[12px] leading-[1.6] text-[#22323A]/52">
           Same finished curated memory. ${EXTRA_PRICE} per additional physical card.
         </p>
         <div className="mt-4 flex items-center gap-4">
@@ -156,9 +158,9 @@ export default function CuratedCheckout() {
 
       <div className="mt-8 flex flex-col gap-4 border-t border-[#22323A]/[0.08] pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">Total today</p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#B38846]">Total today</p>
           <p className="mt-1 font-serif text-[30px] leading-none">${total}</p>
-          <p className="mt-1 text-[11px] text-[#22323A]/50">
+          <p className="mt-1 text-[12px] text-[#22323A]/50">
             {CURATED_PRODUCTS[experience].label} · {delivery === 'physical' ? 'Physical' : 'Digital'}
             {extras > 0 ? ` · ${extras} extra card${extras === 1 ? '' : 's'}` : ''}
           </p>
@@ -173,7 +175,7 @@ export default function CuratedCheckout() {
         </button>
       </div>
 
-      <p className="mt-4 text-[10px] leading-[1.6] text-[#22323A]/45">
+      <p className="mt-4 text-[12px] leading-[1.6] text-[#22323A]/45">
         Checkout is handled securely by Stripe. After payment we email you to collect your photos, videos and
         messages.
       </p>

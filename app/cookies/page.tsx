@@ -76,7 +76,7 @@ export default function CookiePolicyPage() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] border-collapse text-left text-[13px]">
             <thead>
-              <tr className="border-b border-[#22323A]/[0.12] text-[11px] uppercase tracking-[0.1em] text-[#22323A]/55">
+              <tr className="border-b border-[#22323A]/[0.12] text-[12px] uppercase tracking-[0.1em] text-[#22323A]/55">
                 <th className="py-2 pr-4 font-medium">Category</th>
                 <th className="py-2 pr-4 font-medium">Consent</th>
                 <th className="py-2 font-medium">What it is for</th>

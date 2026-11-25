@@ -40,7 +40,7 @@ const occasions = [
     image: '/occasions/anniversary.png',
     position: 'object-[50%_8%]',
     headline: 'Give your shared story somewhere to live.',
-    copy: 'Turn a voice note, video, photo or written memory into something physical they can keep with the date and the feeling attached.',
+    copy: 'Turn a voice note, video, photo or written memory into something physical they can revisit, with the date and the feeling attached.',
   },
   {
     title: 'Long-distance love',
@@ -118,9 +118,9 @@ function HeroCarousel() {
       ))}
       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#17232A]/35 to-transparent" />
       <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 sm:bottom-6 sm:left-7 sm:right-7">
-        <p className="max-w-[70%] text-left text-[11px] leading-relaxed text-white/95 sm:text-[13px]">{slides[index].caption}</p>
+        <p className="max-w-[70%] text-left text-[12px] leading-relaxed text-white/95 sm:text-[13px]">{slides[index].caption}</p>
         <div className="flex gap-2" aria-label="Hero story slides">
-          {slides.map((slide, i) => <button key={slide.image} type="button" onClick={() => setIndex(i)} aria-label={`Show story image ${i + 1}`} className={`h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-white' : 'w-1.5 bg-white/50'}`} />)}
+          {slides.map((slide, i) => <button key={slide.image} type="button" onClick={() => setIndex(i)} aria-label={`Show story image ${i + 1}`} aria-current={i === index} className="inline-flex h-11 min-w-[44px] items-center justify-center"><span className={`block h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-white' : 'w-1.5 bg-white/50'}`} /></button>)}
         </div>
       </div>
     </div>
@@ -132,12 +132,13 @@ function Header() {
     <header className="sticky top-0 z-40 border-b border-[#22323A]/[0.06] bg-[#FCF9F4]/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[72px] max-w-[1440px] items-center px-5 sm:px-8 lg:px-12">
         <a href="#top" aria-label="UNIKMO home"><Image src="/unikmo-logo.svg" alt="UNIKMO" width={729} height={220} priority className="h-8 w-auto sm:h-9" /></a>
-        <nav className="ml-auto hidden items-center gap-8 text-[11px] text-[#22323A]/70 md:flex">
-          <a href="#how" className="hover:text-[#B38846]">How it works</a>
-          <a href="#moments" className="hover:text-[#B38846]">Occasions</a>
-          <a href="#stories" className="hover:text-[#B38846]">Reviews</a>
+        <nav className="ml-auto hidden items-center gap-8 text-[12px] text-[#22323A]/70 md:flex">
+          <a href="#how" className="inline-flex min-h-[44px] items-center hover:text-[#B38846]">How it works</a>
+          <a href="#moments" className="inline-flex min-h-[44px] items-center hover:text-[#B38846]">Occasions</a>
+          <a href="#stories" className="inline-flex min-h-[44px] items-center hover:text-[#B38846]">Reviews</a>
+          <a href="/corporate" className="inline-flex min-h-[44px] items-center hover:text-[#B38846]">Corporate</a>
         </nav>
-        <a href="#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9D773D] md:ml-8">Choose Your Card</a>
+        <a href="#shop" className="ml-auto inline-flex min-h-[44px] items-center rounded-lg bg-[#B38846] px-5 text-[12px] font-medium text-white transition hover:bg-[#9D773D] md:ml-8">Choose Your Card</a>
       </div>
     </header>
   );
@@ -151,7 +152,7 @@ function TrustIcon({ kind }: { kind: 'lock' | 'phone' | 'leaf' | 'quality' }) {
 }
 
 function CheckLine({ children }: { children: React.ReactNode }) {
-  return <li className="flex items-start gap-3 text-left text-[12px] leading-[1.55] text-[#22323A]/68"><span className="mt-[2px] flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full border border-[#B38846]/45 text-[10px] font-semibold text-[#B38846]">✓</span><span>{children}</span></li>;
+  return <li className="flex items-start gap-3 text-left text-[12px] leading-[1.55] text-[#22323A]/68"><span className="mt-[2px] flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full border border-[#B38846]/45 text-[12px] font-semibold text-[#B38846]">✓</span><span>{children}</span></li>;
 }
 
 function ProductStage({ side }: { side: 'front' | 'back' }) {
@@ -164,7 +165,7 @@ function ProductStage({ side }: { side: 'front' | 'back' }) {
           <Image src={isFront ? '/card-front.png' : '/card-back.png'} alt={isFront ? 'Front of the UNIKMO card' : 'Back of the UNIKMO card with QR code and private key'} fill className="object-cover" sizes="(min-width:768px) 42vw, 86vw" />
         </div>
       </div>
-      <figcaption className="mt-3 text-center text-[11px] uppercase tracking-[0.18em] text-[#22323A]/55">{isFront ? 'Front' : 'Back'}</figcaption>
+      <figcaption className="mt-3 text-center text-[12px] uppercase tracking-[0.18em] text-[#22323A]/55">{isFront ? 'Front' : 'Back'}</figcaption>
     </figure>
   );
 }
@@ -226,37 +227,37 @@ export default function TestPage() {
           <h1 className="mx-auto max-w-[760px] font-serif text-[30px] leading-[1.08] tracking-[-0.025em] sm:text-[38px] lg:text-[46px]">Give a moment they can return to.</h1>
           <p className="mx-auto mt-5 max-w-[760px] text-[15px] leading-[1.62] text-[#22323A]/72 sm:text-[17px]"><strong className="font-semibold text-[#22323A]">Turn a video, voice note, photo or message into a beautiful physical card.</strong> They scan it to unlock your private moment.</p>
           <div className="mt-7 sm:mt-9"><HeroCarousel /></div>
-          <div className="mx-auto mt-6 flex max-w-[620px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-[#22323A]/55 sm:text-[12px]"><span>No app required</span><span aria-hidden="true">•</span><span>Private by design</span><span aria-hidden="true">•</span><span>Made to revisit</span></div>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"><a href="#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a><a href="#how" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See how it works</a></div>
+          <div className="mx-auto mt-6 flex max-w-[620px] flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[12px] text-[#22323A]/55 sm:text-[12px]"><span>No app required</span><span aria-hidden="true">•</span><span>Private by design</span><span aria-hidden="true">•</span><span>Made to revisit</span></div>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3"><a href="#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Choose Your Card</a><a href="#how" className="inline-flex min-h-[44px] items-center text-[12px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See how it works</a></div>
         </section>
 
         <section className="border-y border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1120px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">One card. Two sides.</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The card is the key. The memory is the gift.</h2><p className="mx-auto mt-3 max-w-[560px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">The real UNIKMO card — front and back.</p></div>
+            <div className="text-center"><p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">One card. Two sides.</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The card is the key. The memory is the gift.</h2><p className="mx-auto mt-3 max-w-[560px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">The real UNIKMO card — front and back.</p></div>
             <div className="mt-10 grid gap-6 md:grid-cols-2"><ProductStage side="front" /><ProductStage side="back" /></div>
           </div>
         </section>
 
         <section id="how" className="px-5 py-16 sm:px-8 lg:py-20">
-          <div className="mx-auto max-w-[1120px]"><p className="text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">How it works</p><div className="mt-9 grid gap-7 md:grid-cols-4">{[
+          <div className="mx-auto max-w-[1120px]"><p className="text-center text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">How it works</p><div className="mt-9 grid gap-7 md:grid-cols-4">{[
             ['01', 'Create', 'Add a private video, voice note, photo or message.'],
             ['02', 'Give', 'Your memory is connected to the physical UNIKMO card.'],
             ['03', 'Scan', 'They scan the QR code and enter the private key.'],
             ['04', 'Feel', 'The moment opens — and can be revisited later.'],
-          ].map(([n, title, body]) => <article key={n} className="text-center"><div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#B38846]/40 text-[11px] font-semibold text-[#B38846]">{n}</div><h3 className="mt-4 font-serif text-[22px]">{title}</h3><p className="mx-auto mt-2 max-w-[220px] text-[12px] leading-relaxed text-[#22323A]/58">{body}</p></article>)}</div></div>
+          ].map(([n, title, body]) => <article key={n} className="text-center"><div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#B38846]/40 text-[12px] font-semibold text-[#B38846]">{n}</div><h3 className="mt-4 font-serif text-[22px]">{title}</h3><p className="mx-auto mt-2 max-w-[220px] text-[12px] leading-relaxed text-[#22323A]/58">{body}</p></article>)}</div></div>
         </section>
 
         <section id="moments" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1160px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture who it is for</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">For life’s meaningful moments.</h2></div>
-            <div className="mx-auto mt-8 grid max-w-[860px] grid-cols-2 gap-2 rounded-[16px] border border-[#22323A]/[0.07] bg-[#FCF9F4]/70 p-2 sm:grid-cols-4">{occasions.map((occasion, index) => <button key={occasion.title} type="button" onClick={() => setActiveOccasion(index)} aria-pressed={activeOccasion === index} className={`min-h-[48px] rounded-[11px] px-3 py-2 text-[10px] font-medium uppercase tracking-[0.12em] transition ${activeOccasion === index ? 'bg-[#22323A] text-white shadow-sm' : 'text-[#22323A]/58 hover:bg-white hover:text-[#22323A]'}`}>{occasion.title}</button>)}</div>
+            <div className="text-center"><p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Picture who it is for</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">For life’s meaningful moments.</h2></div>
+            <div className="mx-auto mt-8 grid max-w-[860px] grid-cols-2 gap-2 rounded-[16px] border border-[#22323A]/[0.07] bg-[#FCF9F4]/70 p-2 sm:grid-cols-4">{occasions.map((occasion, index) => <button key={occasion.title} type="button" onClick={() => setActiveOccasion(index)} aria-pressed={activeOccasion === index} className={`min-h-[48px] rounded-[11px] px-3 py-2 text-[12px] font-medium uppercase tracking-[0.12em] transition ${activeOccasion === index ? 'bg-[#22323A] text-white shadow-sm' : 'text-[#22323A]/58 hover:bg-white hover:text-[#22323A]'}`}>{occasion.title}</button>)}</div>
             <div className="mt-6 overflow-hidden rounded-[22px] border border-[#22323A]/[0.07] bg-[#FCF9F4] shadow-[0_18px_55px_rgba(34,50,58,.07)]">
               <div className="grid lg:grid-cols-[1.35fr_.85fr]">
                 <div className="relative aspect-[16/10] min-h-[300px] overflow-hidden lg:aspect-auto lg:min-h-[480px]">
                   <Image key={active.image} src={active.image} alt={`${active.title} gifting moment`} fill className={`object-cover scale-[1.18] ${active.position}`} style={{ filter: 'saturate(.84) contrast(.96) brightness(1.03)' }} sizes="(max-width:1024px) 100vw, 62vw" />
                   <div className="absolute inset-0 bg-[#D8C8B8]/[0.035] mix-blend-multiply" />
                 </div>
-                <div className="flex items-center p-7 text-left sm:p-10 lg:p-12"><div><p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#B38846]">{active.title}</p><h3 className="mt-4 max-w-[390px] font-serif text-[28px] leading-[1.15] sm:text-[34px]">{active.headline}</h3><p className="mt-5 max-w-[410px] text-[13px] leading-[1.75] text-[#22323A]/62 sm:text-[14px]">{active.copy}</p><a href="#shop" className="mt-7 inline-flex items-center gap-2 text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Choose a card <span aria-hidden="true">→</span></a></div></div>
+                <div className="flex items-center p-7 text-left sm:p-10 lg:p-12"><div><p className="text-[12px] font-semibold uppercase tracking-[0.24em] text-[#B38846]">{active.title}</p><h3 className="mt-4 max-w-[390px] font-serif text-[28px] leading-[1.15] sm:text-[34px]">{active.headline}</h3><p className="mt-5 max-w-[410px] text-[13px] leading-[1.75] text-[#22323A]/62 sm:text-[14px]">{active.copy}</p><a href="#shop" className="mt-7 inline-flex items-center gap-2 text-[12px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Choose a card <span aria-hidden="true">→</span></a></div></div>
               </div>
             </div>
           </div>
@@ -264,36 +265,36 @@ export default function TestPage() {
 
         <section id="stories" className="px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[900px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Trust comes from people</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The feeling is the proof.</h2></div>
+            <div className="text-center"><p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Trust comes from people</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">The feeling is the proof.</h2></div>
             <div className="mt-10 grid gap-5 md:grid-cols-2">
-              <article className="overflow-hidden rounded-[20px] border border-[#22323A]/[0.07] bg-white/45"><div className="relative aspect-[4/3]"><Image src="/testimonials/customer-london.jpg" alt="Matt L., London" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" /></div><div className="p-6"><blockquote className="font-serif text-[20px] leading-[1.42]">“I gave it to my partner for her birthday. <strong className="font-semibold text-[#17232A]">She cried within seconds.</strong> It felt deeply personal — not just another gift.”</blockquote><p className="mt-4 text-[11px] text-[#22323A]/55">— Matt L., London</p></div></article>
-              <article className="overflow-hidden rounded-[20px] border border-[#22323A]/[0.07] bg-white/45"><div className="relative aspect-[4/3]"><Image src="/testimonials/customer-newyork.jpg" alt="Sophie M., New York" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" /></div><div className="p-6"><blockquote className="font-serif text-[20px] leading-[1.42]">“Such a simple idea, but <strong className="font-semibold text-[#17232A]">incredibly powerful.</strong> The moment we unlocked the message together, it became something we’ll remember.”</blockquote><p className="mt-4 text-[11px] text-[#22323A]/55">— Sophie M., New York</p></div></article>
+              <article className="overflow-hidden rounded-[20px] border border-[#22323A]/[0.07] bg-white/45"><div className="relative aspect-[4/3]"><Image src="/testimonials/customer-london.jpg" alt="Matt L., London" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" /></div><div className="p-6"><blockquote className="font-serif text-[20px] leading-[1.42]">“I gave it to my partner for her birthday. <strong className="font-semibold text-[#17232A]">She cried within seconds.</strong> It felt deeply personal — not just another gift.”</blockquote><p className="mt-4 text-[12px] text-[#22323A]/55">— Matt L., London</p></div></article>
+              <article className="overflow-hidden rounded-[20px] border border-[#22323A]/[0.07] bg-white/45"><div className="relative aspect-[4/3]"><Image src="/testimonials/customer-newyork.jpg" alt="Sophie M., New York" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" /></div><div className="p-6"><blockquote className="font-serif text-[20px] leading-[1.42]">“Such a simple idea, but <strong className="font-semibold text-[#17232A]">incredibly powerful.</strong> The moment we unlocked the message together, it became something we’ll remember.”</blockquote><p className="mt-4 text-[12px] text-[#22323A]/55">— Sophie M., New York</p></div></article>
             </div>
           </div>
         </section>
 
         <section id="shop" className="bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1240px]">
-            <div className="text-center"><p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Pick the way you want to give it.</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Same UNIKMO experience. Choose how many separate cards — and private memories — you want to give.</p></div>
+            <div className="text-center"><p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Pick the way you want to give it.</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Same UNIKMO experience. Choose how many separate cards — and private memories — you want to give.</p></div>
             {checkoutError ? <p role="alert" className="mt-6 text-center text-sm text-red-700">{checkoutError}</p> : null}
             <div className="mt-10 grid gap-6 md:grid-cols-3">{(orderedProducts.length ? orderedProducts : fallbackProducts).map((product) => {
               const details = getProductDetails(product.title);
               const displayName = normalizedProductName(product.title);
-              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white">Most cards for your money</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><button type="button" onClick={() => startCheckout(product)} disabled={!product.productKey || startingCheckout === product.id} className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[11px] font-medium text-white transition hover:bg-[#17232A] disabled:opacity-60">{startingCheckout === product.id ? 'Opening checkout…' : details.button}</button></article>;
+              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white">Most cards for your money</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[12px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><button type="button" onClick={() => startCheckout(product)} disabled={!product.productKey || startingCheckout === product.id} className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[12px] font-medium text-white transition hover:bg-[#17232A] disabled:opacity-60">{startingCheckout === product.id ? 'Opening checkout…' : details.button}</button></article>;
             })}</div>
           </div>
         </section>
 
         <CuratedUnikmoTeaser />
 
-        <section className="border-t border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-8 sm:px-8"><div className="mx-auto flex max-w-[900px] flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left"><p className="text-[13px] leading-[1.7] text-[#22323A]/70">UNIKMO is also used by cruise lines and luxury hotels as a welcome and keepsake.</p><Link href="/hotels" className="text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">For hotels and cruise lines <span aria-hidden="true">→</span></Link></div></section>
+        <section className="border-t border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-8 sm:px-8"><div className="mx-auto flex max-w-[900px] flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left"><p className="text-[13px] leading-[1.7] text-[#22323A]/70">UNIKMO is also used by cruise lines and luxury hotels as a welcome and keepsake.</p><Link href="/hotels" className="text-[12px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">For hotels and cruise lines <span aria-hidden="true">→</span></Link></div></section>
 
         <section className="border-t border-[#22323A]/[0.06] bg-[#FCF9F4] px-5 py-8 sm:px-8"><div className="mx-auto grid max-w-[1180px] gap-5 sm:grid-cols-2 lg:grid-cols-4">{[
           ['lock', 'Private & secure', 'Your moments stay private.'],
           ['phone', 'No app required', 'They open it in the browser.'],
           ['leaf', 'A tree planted', 'For every order.'],
           ['quality', 'Premium quality', 'Made to be kept.'],
-        ].map(([kind, title, body]) => <div key={title} className="flex items-center gap-4"><div className="text-[#B38846]"><TrustIcon kind={kind as 'lock' | 'phone' | 'leaf' | 'quality'} /></div><div><p className="text-[12px] font-medium">{title}</p><p className="mt-1 text-[11px] text-[#22323A]/55">{body}</p></div></div>)}</div></section>
+        ].map(([kind, title, body]) => <div key={title} className="flex items-center gap-4"><div className="text-[#B38846]"><TrustIcon kind={kind as 'lock' | 'phone' | 'leaf' | 'quality'} /></div><div><p className="text-[12px] font-medium">{title}</p><p className="mt-1 text-[12px] text-[#22323A]/55">{body}</p></div></div>)}</div></section>
       </main>
       <SiteFooter />
     </div>

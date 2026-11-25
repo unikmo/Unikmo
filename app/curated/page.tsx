@@ -179,17 +179,17 @@ export default function CuratedPage() {
           <Link href="/" aria-label="UNIKMO home">
             <Image src="/unikmo-logo-header.png" alt="UNIKMO — The Key to Your Memory" width={729} height={220} priority className="h-8 w-auto sm:h-9" />
           </Link>
-          <nav className="ml-auto hidden items-center gap-7 text-[11px] text-[#22323A]/65 md:flex">
+          <nav className="ml-auto hidden items-center gap-7 text-[12px] text-[#22323A]/65 md:flex">
             <Link href="/how-unikmo-works" className="hover:text-[#B38846]">How it works</Link>
             <Link href="/faq" className="hover:text-[#B38846]">FAQ</Link>
           </nav>
-          <a href="#order" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9D773D] md:ml-8">Start Curated</a>
+          <a href="#order" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[12px] font-medium text-white transition hover:bg-[#9D773D] md:ml-8">Start Curated</a>
         </div>
       </header>
 
       <main id="main" tabIndex={-1}>
         <section className="px-5 pb-14 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16 lg:pt-20">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Curated UNIKMO</p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Curated UNIKMO</p>
           <h1 className="mx-auto mt-4 max-w-[980px] font-serif text-[39px] leading-[1.03] tracking-[-0.025em] sm:text-[52px] lg:text-[62px]">
             You bring the moments. We make the memory.
           </h1>
@@ -214,16 +214,16 @@ export default function CuratedPage() {
             keepsakes. A Times Square Edition is coming soon.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            <a href="#order" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">Start Curated</a>
-            <a href="#choices" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See the three choices</a>
+            <a href="#order" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">Start Curated</a>
+            <a href="#choices" className="inline-flex min-h-[44px] items-center text-[12px] font-medium text-[#22323A]/70 underline decoration-[#B38846]/50 underline-offset-4">See the three choices</a>
           </div>
-          <p className="mt-5 text-[11px] leading-[1.6] text-[#22323A]/45">Curated is optional. Standard UNIKMO remains self-created and private by design.</p>
+          <p className="mt-5 text-[12px] leading-[1.6] text-[#22323A]/45">Curated is optional. Standard UNIKMO remains self-created and private by design.</p>
         </section>
 
         <section id="choices" className="border-y border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[1120px]">
             <div className="mx-auto max-w-[720px] text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Keep it. Show it. Share it.</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Keep it. Show it. Share it.</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">One memory. Three ways to take it further.</h2>
             </div>
 
@@ -235,33 +235,33 @@ export default function CuratedPage() {
                   </div>
                   <div className="flex flex-1 flex-col p-7">
                     <div className="flex items-center justify-between gap-4">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#B38846]/40 text-[10px] font-semibold text-[#B38846]">{choice.number}</span>
-                      <span className="text-[9px] font-semibold tracking-[0.2em] text-[#B38846]">{choice.label}</span>
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[#B38846]/40 text-[12px] font-semibold text-[#B38846]">{choice.number}</span>
+                      <span className="text-[12px] font-semibold tracking-[0.2em] text-[#B38846]">{choice.label}</span>
                     </div>
                     <h3 className="mt-5 font-serif text-[27px] leading-[1.12]">{choice.title}</h3>
-                    {'subtitle' in choice && choice.subtitle ? <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{choice.subtitle}</p> : null}
+                    {'subtitle' in choice && choice.subtitle ? <p className="mt-1 text-[12px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{choice.subtitle}</p> : null}
                     <div className="mt-4 flex items-baseline gap-2">
                       <span className="font-serif text-[26px] leading-none">{choice.price}</span>
-                      <span className="text-[11px] text-[#22323A]/50">{choice.priceNote}</span>
+                      <span className="text-[12px] text-[#22323A]/50">{choice.priceNote}</span>
                     </div>
                     <p className="mt-4 text-[13px] leading-[1.7] text-[#22323A]/62">{choice.description}</p>
                     <ul className="mt-6 space-y-3 border-t border-[#22323A]/[0.07] pt-5">
                       {choice.points.map((point) => (
                         <li key={point} className="flex items-start gap-3 text-[12px] leading-[1.55] text-[#22323A]/65">
-                          <span className="mt-[2px] flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full border border-[#B38846]/45 text-[10px] font-semibold text-[#B38846]">✓</span>
+                          <span className="mt-[2px] flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full border border-[#B38846]/45 text-[12px] font-semibold text-[#B38846]">✓</span>
                           <span>{point}</span>
                         </li>
                       ))}
                     </ul>
                     <div className="mt-6 flex flex-1 flex-col justify-end gap-3 pt-1">
-                      {choice.cta === 'Coming soon' ? <span aria-disabled="true" className="inline-flex min-h-[46px] items-center justify-center rounded-lg border border-[#B38846]/50 px-6 text-[11px] font-medium text-[#B38846]">Coming soon</span> : <a href={choice.href} className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]">{choice.cta}</a>}
-                      <a href="#order" className="text-center text-[11px] font-medium text-[#22323A]/60 underline decoration-[#B38846]/45 underline-offset-4">Configure delivery &amp; extras</a>
+                      {choice.cta === 'Coming soon' ? <span aria-disabled="true" className="inline-flex min-h-[46px] items-center justify-center rounded-lg border border-[#B38846]/50 px-6 text-[12px] font-medium text-[#B38846]">Coming soon</span> : <a href={choice.href} className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[12px] font-medium text-white transition hover:bg-[#9D773D]">{choice.cta}</a>}
+                      <a href="#order" className="text-center text-[12px] font-medium text-[#22323A]/60 underline decoration-[#B38846]/45 underline-offset-4">Configure delivery &amp; extras</a>
                     </div>
                   </div>
                 </article>
               ))}
             </div>
-            <p className="mx-auto mt-8 max-w-[640px] text-center text-[11px] leading-[1.6] text-[#22323A]/45">
+            <p className="mx-auto mt-8 max-w-[640px] text-center text-[12px] leading-[1.6] text-[#22323A]/45">
               Prices are in USD. Checkout is handled securely by Stripe. Digital delivery is available for the same price at checkout.
             </p>
           </div>
@@ -270,7 +270,7 @@ export default function CuratedPage() {
         <section className="px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[980px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Times Square Edition &middot; Coming soon</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Times Square Edition &middot; Coming soon</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">POP. Go public. Keep it.</h2>
               <p className="mx-auto mt-4 max-w-[700px] text-[14px] leading-[1.75] text-[#22323A]/62 sm:text-[15px]">
                 The public moment can begin with your own POP — confetti, a cork, a team cheer or another celebration burst. We curate the submitted material, the Times Square appearance and its capture into the finished memory.
@@ -284,7 +284,7 @@ export default function CuratedPage() {
                 ['UNIKMO', 'Preserve the public moment inside the curated memory.'],
               ].map(([title, copy], index) => (
                 <div key={title} className={`p-8 text-center ${index ? 'border-t border-white/10 md:border-l md:border-t-0' : ''}`}>
-                  <p className="text-[10px] font-semibold tracking-[0.22em] text-[#D7B77C]">{title}</p>
+                  <p className="text-[12px] font-semibold tracking-[0.22em] text-[#D7B77C]">{title}</p>
                   <p className="mx-auto mt-3 max-w-[240px] text-[13px] leading-[1.65] text-white/62">{copy}</p>
                 </div>
               ))}
@@ -296,17 +296,17 @@ export default function CuratedPage() {
         <section className="border-y border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[920px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Digital or physical</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Digital or physical</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose how the finished memory arrives.</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-2">
               <article className="rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-7 text-center">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">Digital delivery</p>
+                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">Digital delivery</p>
                 <h3 className="mt-3 font-serif text-[27px]">Fast and easy to send.</h3>
                 <p className="mx-auto mt-3 max-w-[350px] text-[13px] leading-[1.7] text-[#22323A]/62">Choose digital delivery when the finished curated memory needs to reach someone without a physical card.</p>
               </article>
               <article className="rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] p-7 text-center">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">Physical delivery</p>
+                <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">Physical delivery</p>
                 <h3 className="mt-3 font-serif text-[27px]">A memory they can hold.</h3>
                 <p className="mx-auto mt-3 max-w-[350px] text-[13px] leading-[1.7] text-[#22323A]/62">Receive a personalized UNIKMO card, then add extra physical keepsakes for $12 each when more people should have the same finished memory.</p>
               </article>
@@ -317,7 +317,7 @@ export default function CuratedPage() {
         <section id="order" className="px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[900px]">
             <div className="mx-auto max-w-[680px] text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Order your curated memory</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Order your curated memory</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Choose it, then check out.</h2>
               <p className="mx-auto mt-4 max-w-[620px] text-[13px] leading-[1.7] text-[#22323A]/60 sm:text-[14px]">Pick your experience, delivery and any extra keepsake cards. Payment is handled securely by Stripe. Right after checkout we email you to collect your photos, videos and messages.</p>
             </div>
@@ -328,10 +328,10 @@ export default function CuratedPage() {
         <section className="border-t border-[#22323A]/[0.06] bg-[#F8F2EB] px-5 py-16 sm:px-8 lg:py-20">
           <div className="mx-auto max-w-[900px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Clear distinction</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Clear distinction</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[42px]">Curated when you want help. Standard when you do not.</h2>
               <p className="mx-auto mt-4 max-w-[680px] text-[14px] leading-[1.75] text-[#22323A]/62">With standard UNIKMO, you create the private memory yourself. With Curated UNIKMO, you intentionally submit selected materials for us to assemble into the finished story.</p>
-              <Link href="/#shop" className="mt-7 inline-flex min-h-[46px] items-center justify-center text-[11px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Choose standard UNIKMO instead</Link>
+              <Link href="/#shop" className="mt-7 inline-flex min-h-[46px] items-center justify-center text-[12px] font-medium text-[#22323A] underline decoration-[#B38846]/55 underline-offset-4">Choose standard UNIKMO instead</Link>
             </div>
 
             <div className="mt-10 divide-y divide-[#22323A]/[0.08] border-y border-[#22323A]/[0.08]">

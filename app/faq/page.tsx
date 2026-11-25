@@ -77,25 +77,25 @@ export default function FaqPage() {
       <header className="sticky top-0 z-40 border-b border-[#22323A]/[0.07] bg-[#FCF9F4]/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[72px] max-w-[1240px] items-center px-5 sm:px-8">
           <Link href="/" aria-label="UNIKMO home"><Image src="/unikmo-logo-header.png" alt="UNIKMO — The Key to Your Memory" width={729} height={220} priority className="h-8 w-auto sm:h-9" /></Link>
-          <nav className="ml-auto hidden items-center gap-7 text-[11px] text-[#22323A]/65 md:flex">
+          <nav className="ml-auto hidden items-center gap-7 text-[12px] text-[#22323A]/65 md:flex">
             <Link href="/#how-it-works" className="hover:text-[#B38846]">How it works</Link>
             <Link href="/faq" className="text-[#B38846]">FAQ</Link>
           </nav>
-          <Link href="/#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9F783D] md:ml-8">Choose Your Card</Link>
+          <Link href="/#shop" className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[12px] font-medium text-white transition hover:bg-[#9F783D] md:ml-8">Choose Your Card</Link>
         </div>
       </header>
 
       <main id="main" tabIndex={-1}>
         <section className="px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 sm:pt-16">
           <div className="mx-auto max-w-[820px]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Before you choose</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Before you choose</p>
             <h1 className="mt-4 font-serif text-[36px] leading-[1.04] tracking-[-0.025em] sm:text-[46px]">Questions about UNIKMO.</h1>
             <p className="mx-auto mt-5 max-w-[700px] text-[15px] leading-[1.7] text-[#22323A]/68 sm:text-[16px]">
               <strong className="font-semibold text-[#22323A]">A physical card that unlocks your private video, voice note, photo or message.</strong> Here is what to know before you give one.
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
-              <Link href="/#how-it-works" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4">See how it works</Link>
+              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
+              <Link href="/#how-it-works" className="inline-flex min-h-[44px] items-center text-[12px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4">See how it works</Link>
             </div>
           </div>
 
@@ -122,10 +122,10 @@ export default function FaqPage() {
 
         <section className="px-5 py-14 text-center sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[760px]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Ready when the moment is</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.25em] text-[#B38846]">Ready when the moment is</p>
             <h2 className="mt-3 font-serif text-[32px] leading-[1.06] sm:text-[40px]">Choose the card. Then make it personal.</h2>
             <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-[#22323A]/62">Single Key, 4-Key Bundle, or 7-Key Bundle — each card unlocks its own private memory.</p>
-            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
+            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[12px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
           </div>
         </section>
       </main>

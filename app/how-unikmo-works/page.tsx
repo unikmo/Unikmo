@@ -174,12 +174,12 @@ export default function HowUnikmoWorksPage() {
               className="h-8 w-auto sm:h-9"
             />
           </Link>
-          <nav className="ml-auto hidden items-center gap-7 text-[11px] text-[#22323A]/65 md:flex">
+          <nav className="ml-auto hidden items-center gap-7 text-[12px] text-[#22323A]/65 md:flex">
             <Link href="/faq" className="hover:text-[#B38846]">FAQ</Link>
           </nav>
           <Link
             href="/#shop"
-            className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[11px] font-medium text-white transition hover:bg-[#9F783D] md:ml-8"
+            className="ml-auto rounded-lg bg-[#B38846] px-5 py-3 text-[12px] font-medium text-white transition hover:bg-[#9F783D] md:ml-8"
           >
             Choose Your Card
           </Link>
@@ -189,14 +189,14 @@ export default function HowUnikmoWorksPage() {
       <main id="main" tabIndex={-1}>
         <section className="px-5 pb-14 pt-14 text-center sm:px-8 sm:pb-16 sm:pt-18 lg:pt-20">
           <div className="mx-auto max-w-[860px]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">The factual guide</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">The factual guide</p>
             <h1 className="mt-4 font-serif text-[38px] leading-[1.04] tracking-[-0.025em] sm:text-[48px] lg:text-[56px]">How UNIKMO works.</h1>
             <p className="mx-auto mt-5 max-w-[760px] text-[16px] leading-[1.68] text-[#22323A]/72 sm:text-[18px]">
               <strong className="font-semibold text-[#22323A]">UNIKMO is a physical keepsake card that unlocks a private digital memory.</strong> The memory can be a video, voice note, photo, or written message.
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
-              <Link href="/faq" className="inline-flex min-h-[44px] items-center text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4">Read the FAQ</Link>
+              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-7 text-[12px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
+              <Link href="/faq" className="inline-flex min-h-[44px] items-center text-[12px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/45 underline-offset-4">Read the FAQ</Link>
             </div>
           </div>
 
@@ -217,13 +217,13 @@ export default function HowUnikmoWorksPage() {
         <section className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[1040px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">UNIKMO at a glance</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">UNIKMO at a glance</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">The core product facts.</h2>
             </div>
             <dl className="mt-9 grid overflow-hidden rounded-[20px] border border-[#22323A]/[0.08] bg-[#FCF9F4] sm:grid-cols-2">
               {facts.map(([term, value]) => (
                 <div key={term} className="border-b border-[#22323A]/[0.07] p-6 sm:[&:nth-last-child(-n+2)]:border-b-0">
-                  <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">{term}</dt>
+                  <dt className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#B38846]">{term}</dt>
                   <dd className="mt-2 text-[14px] leading-[1.65] text-[#22323A]/72">{value}</dd>
                 </div>
               ))}
@@ -234,7 +234,7 @@ export default function HowUnikmoWorksPage() {
         <section className="px-5 py-14 sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[1080px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Four simple steps</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Four simple steps</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">Create. Give. Scan. Revisit.</h2>
             </div>
             <div className="mt-9 grid gap-6 md:grid-cols-4">
@@ -245,7 +245,7 @@ export default function HowUnikmoWorksPage() {
                 ['04', 'Revisit', 'The memory opens in the browser and can be revisited later.'],
               ].map(([number, title, copy]) => (
                 <article key={number} className="text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#B38846]/40 text-[11px] font-semibold text-[#B38846]">{number}</div>
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#B38846]/40 text-[12px] font-semibold text-[#B38846]">{number}</div>
                   <h3 className="mt-4 font-serif text-[24px]">{title}</h3>
                   <p className="mx-auto mt-2 max-w-[230px] text-[13px] leading-[1.65] text-[#22323A]/62">{copy}</p>
                 </article>
@@ -257,7 +257,7 @@ export default function HowUnikmoWorksPage() {
         <section className="border-y border-[#22323A]/[0.06] bg-[#F7F0E8] px-5 py-14 sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[1040px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Card options</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Card options</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">Choose how many moments you want to give.</h2>
             </div>
             <div className="mt-9 grid gap-5 md:grid-cols-3">
@@ -272,13 +272,13 @@ export default function HowUnikmoWorksPage() {
                   </div>
                   <div className="p-6">
                     <h3 className="font-serif text-[26px]">{name}</h3>
-                    <p className="mt-2 text-[11px] uppercase tracking-[0.14em] text-[#B38846]">{detail}</p>
+                    <p className="mt-2 text-[12px] uppercase tracking-[0.14em] text-[#B38846]">{detail}</p>
                   </div>
                 </article>
               ))}
             </div>
             <div className="mt-8 text-center">
-              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#22323A] px-7 text-[11px] font-medium text-white transition hover:bg-[#34464F]">Choose Your Card</Link>
+              <Link href="/#shop" className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#22323A] px-7 text-[12px] font-medium text-white transition hover:bg-[#34464F]">Choose Your Card</Link>
             </div>
           </div>
         </section>
@@ -286,7 +286,7 @@ export default function HowUnikmoWorksPage() {
         <section className="px-5 py-14 sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[900px]">
             <div className="text-center">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Clear answers</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Clear answers</p>
               <h2 className="mt-3 font-serif text-[32px] sm:text-[40px]">Frequently asked questions.</h2>
             </div>
             <div className="mt-8 divide-y divide-[#22323A]/[0.08] border-y border-[#22323A]/[0.08]">
@@ -308,10 +308,10 @@ export default function HowUnikmoWorksPage() {
 
         <section className="bg-[#22323A] px-5 py-14 text-center text-white sm:px-8 sm:py-16">
           <div className="mx-auto max-w-[760px]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#D7B77C]">The card is the key</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.28em] text-[#D7B77C]">The card is the key</p>
             <h2 className="mt-3 font-serif text-[34px] leading-[1.05] sm:text-[42px]">The memory is the gift.</h2>
             <p className="mx-auto mt-4 max-w-[620px] text-[14px] leading-[1.7] text-white/68">Choose a card, make it personal, and give someone a moment they can return to.</p>
-            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[11px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
+            <Link href="/#shop" className="mt-7 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#B38846] px-8 text-[12px] font-medium text-white transition hover:bg-[#9F783D]">Choose Your Card</Link>
           </div>
         </section>
       </main>

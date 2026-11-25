@@ -59,7 +59,7 @@ export default function CuratedUnikmoTeaser() {
 
         <div className="flex items-center p-7 sm:p-10 lg:p-12">
           <div className="w-full">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#B38846]">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.28em] text-[#B38846]">
               Curated UNIKMO
             </p>
             <h2 className="mt-4 max-w-[520px] font-serif text-[32px] leading-[1.08] sm:text-[42px]">
@@ -87,12 +87,12 @@ export default function CuratedUnikmoTeaser() {
                       }
                     />
                   </div>
-                  <p className="mt-4 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#B38846]">
+                  <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#B38846]">
                     {offering.eyebrow}
                   </p>
                   <h3 className="mt-1 font-serif text-[18px]">{offering.title}</h3>
                   <p className="mt-2 font-serif text-[17px] text-[#22323A]">{offering.price}</p>
-                  <p className="mt-2 text-[11px] leading-[1.6] text-[#22323A]/58">{offering.copy}</p>
+                  <p className="mt-2 text-[12px] leading-[1.6] text-[#22323A]/58">{offering.copy}</p>
                 </article>
               ))}
             </div>
@@ -100,19 +100,19 @@ export default function CuratedUnikmoTeaser() {
             <div className="mt-7 flex flex-wrap items-center gap-5">
               <Link
                 href="/curated#order"
-                className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[11px] font-medium text-white transition hover:bg-[#9D773D]"
+                className="inline-flex min-h-[46px] items-center justify-center rounded-lg bg-[#B38846] px-6 text-[12px] font-medium text-white transition hover:bg-[#9D773D]"
               >
                 Have Us Create It <span className="ml-2" aria-hidden="true">&rarr;</span>
               </Link>
               <Link
                 href="/curated"
-                className="text-[11px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/55 underline-offset-4"
+                className="text-[12px] font-medium text-[#22323A]/68 underline decoration-[#B38846]/55 underline-offset-4"
               >
                 Learn about Curated UNIKMO &rarr;
               </Link>
             </div>
 
-            <p className="mt-5 text-[11px] text-[#22323A]/48">
+            <p className="mt-5 text-[12px] text-[#22323A]/48">
               Curated is optional. Standard UNIKMO remains self-created and private by design.
             </p>
           </div>

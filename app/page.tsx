@@ -4,7 +4,7 @@ import TestPage from './test/page';
 
 export const metadata: Metadata = {
   title: 'UNIKMO | Give a moment they can revisit',
-  description: 'Turn a private video, voice note, photo or message into a physical UNIKMO card they can scan and keep.',
+  description: 'Turn a private video, voice note, photo or message into a physical UNIKMO card they can scan and revisit.',
   alternates: { canonical: 'https://www.unikmo.com/' },
 };
 

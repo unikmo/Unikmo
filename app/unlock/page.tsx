@@ -511,7 +511,7 @@ function UnlockPageContent() {
             />
 
             <div className="relative z-10">
-              <p className="font-serif text-[11px] sm:text-[12px] text-[#2D2926]/70 uppercase tracking-wide">
+              <p className="font-serif text-[12px] sm:text-[12px] text-[#2D2926]/70 uppercase tracking-wide">
                 Unlock Your Moment
               </p>
               <h1 className="font-serif text-2xl sm:text-4xl text-[#2D2926] mt-2">
@@ -529,8 +529,11 @@ function UnlockPageContent() {
           <div className="rounded-xl bg-white/60 border border-[#2D2926]/10 p-4 sm:p-6 shadow-sm">
             {!unlocked ? (
               <>
-                <label className="block text-sm font-medium text-[#2D2926] mb-2">Moment Code</label>
+                <label htmlFor="moment-code" className="block text-sm font-medium text-[#2D2926] mb-2">Moment Code</label>
                 <input
+                  id="moment-code"
+                  name="momentCode"
+                  autoComplete="off"
                   type="text"
                   value={unlockCode}
                   onChange={(e) => setUnlockCode(e.target.value.toUpperCase())}
