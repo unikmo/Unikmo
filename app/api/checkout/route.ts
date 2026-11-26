@@ -7,17 +7,33 @@ import type { DeliveryType } from '@/lib/code-generator';
 export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
+  const nativeForm = request.headers.get('content-type')?.includes('application/x-www-form-urlencoded') === true;
+  const fail = (message: string, status: number) => {
+    if (!nativeForm) return NextResponse.json({ error: message }, { status, headers: { 'Cache-Control': 'no-store' } });
+    const target = new URL('/', request.url);
+    target.searchParams.set('checkout_error', message);
+    target.hash = 'shop';
+    return NextResponse.redirect(target, 303);
+  };
   try {
-    const body = await request.json();
+    let body;
+    if (nativeForm) {
+      const form = await request.formData();
+      const key = form.get('productKey');
+      if (key !== 'single' && key !== 'four' && key !== 'seven') return fail('Invalid card bundle. Please try again.', 400);
+      body = { productKey: key, deliveryType: 'physical', quantity: 1 };
+    } else {
+      body = await request.json();
+    }
     if (body.productKey === 'curated-show') {
-      return NextResponse.json({ error: 'Times Square Edition is coming soon' }, { status: 400 });
+      return fail('Times Square Edition is coming soon', 400);
     }
     const product = getCommerceProduct(body.productKey);
     const deliveryType = String(body.deliveryType || 'digital') as DeliveryType;
     const quantity = Math.max(1, Math.min(50, Math.floor(Number(body.quantity) || 1)));
     const extraKeepsakes = Math.max(0, Math.min(25, Math.floor(Number(body.extraKeepsakes) || 0)));
     if (!product || !product.allowedDeliveryTypes.includes(deliveryType)) {
-      return NextResponse.json({ error: 'Invalid product or delivery type' }, { status: 400 });
+      return fail('Invalid product or delivery type', 400);
     }
 
     const previewOrigin = process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL
@@ -59,11 +75,12 @@ export async function POST(request: NextRequest) {
       cancel_url: `${origin}/#shop`,
     });
     if (!session.url) throw new Error('Stripe returned a checkout session without a URL');
+    if (nativeForm) return NextResponse.redirect(session.url, 303);
     return NextResponse.json({ checkoutUrl: session.url }, { headers: { 'Cache-Control': 'no-store' } });
   } catch (error) {
     const reference = crypto.randomUUID();
     const details = error as { type?: string; code?: string; param?: string; requestId?: string; name?: string };
     console.error('Stripe checkout error', { reference, type: details?.type || details?.name, code: details?.code, param: details?.param, requestId: details?.requestId });
-    return NextResponse.json({ error: `Unable to start secure checkout. Please try again or contact support with reference ${reference}.` }, { status: 500, headers: { 'Cache-Control': 'no-store' } });
+    return fail(`Unable to start secure checkout. Please try again or contact support with reference ${reference}.`, 500);
   }
 }
