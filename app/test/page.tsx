@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CuratedUnikmoTeaser from '@/components/CuratedUnikmoTeaser';
 import SiteFooter from '@/components/SiteFooter';
 import { COMMERCE_PRODUCTS } from '@/lib/commerce-products';
@@ -175,35 +175,18 @@ function ProductStage({ side }: { side: 'front' | 'back' }) {
 }
 
 export default function TestPage() {
-  const [startingCheckout, setStartingCheckout] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState('');
   const [activeOccasion, setActiveOccasion] = useState(0);
-  const checkoutInFlight = useRef(false);
   const active = occasions[activeOccasion];
-
-  const startCheckout = async (product: Product) => {
-    if (checkoutInFlight.current) return;
-    checkoutInFlight.current = true;
-    setStartingCheckout(product.id);
-    setCheckoutError('');
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productKey: product.productKey, deliveryType: 'physical', quantity: 1 }),
-        signal: AbortSignal.timeout(20000),
-      });
-      const data = await response.json().catch(() => null);
-      if (!response.ok || typeof data?.checkoutUrl !== 'string') throw new Error(data?.error || 'Checkout is temporarily unavailable. Please try again.');
-      const destination = new URL(data.checkoutUrl);
-      if (destination.protocol !== 'https:' || destination.hostname !== 'checkout.stripe.com') throw new Error('Checkout is temporarily unavailable. Please try again.');
-      window.location.assign(destination.href);
-    } catch (error) {
-      setCheckoutError(error instanceof Error && error.name !== 'TimeoutError' ? error.message : 'Checkout timed out. Please try again.');
-      setStartingCheckout(null);
-      checkoutInFlight.current = false;
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const error = url.searchParams.get('checkout_error');
+    if (error) {
+      setCheckoutError(error);
+      url.searchParams.delete('checkout_error');
+      window.history.replaceState(null, '', url.href);
     }
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#FCF9F4] text-[#22323A]">
@@ -266,7 +249,7 @@ export default function TestPage() {
             <div className="mt-10 grid gap-6 md:grid-cols-3">{retailProducts.map((product) => {
               const details = getProductDetails(product.title);
               const displayName = normalizedProductName(product.title);
-              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white">Most cards for your money</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[12px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><button type="button" onClick={() => startCheckout(product)} disabled={startingCheckout !== null} className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[12px] font-medium text-white transition hover:bg-[#17232A] disabled:opacity-60">{startingCheckout === product.id ? 'Opening checkout…' : details.button}</button></article>;
+              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white">Most cards for your money</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[12px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><form method="post" action="/api/checkout"><input type="hidden" name="productKey" value={product.productKey} /><button type="submit" className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[12px] font-medium text-white transition hover:bg-[#17232A]">{details.button}</button></form></article>;
             })}</div>
           </div>
         </section>
