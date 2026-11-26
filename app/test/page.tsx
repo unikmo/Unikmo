@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CuratedUnikmoTeaser from '@/components/CuratedUnikmoTeaser';
 import SiteFooter from '@/components/SiteFooter';
+import { COMMERCE_PRODUCTS } from '@/lib/commerce-products';
 
 type Product = {
   id: string;
-  productKey?: 'single' | 'four' | 'seven';
+  productKey: 'single' | 'four' | 'seven';
   title: string;
   image?: string | null;
   imageAlt?: string | null;
@@ -17,7 +18,10 @@ type Product = {
   currencyCode?: string | null;
 };
 
-type ProductsResponse = { products?: Product[] };
+const retailProducts: Product[] = (['single', 'four', 'seven'] as const).map((key) => {
+  const product = COMMERCE_PRODUCTS[key];
+  return { id: key, productKey: key, title: product.name, image: product.image, price: (product.unitAmount / 100).toFixed(2), currencyCode: product.currency.toUpperCase() };
+});
 
 const slides = [
   { image: '/story/matt-writes.png', caption: 'A thought becomes something worth keeping.', position: 'object-[50%_25%]' },
@@ -171,53 +175,18 @@ function ProductStage({ side }: { side: 'front' | 'back' }) {
 }
 
 export default function TestPage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [startingCheckout, setStartingCheckout] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState('');
   const [activeOccasion, setActiveOccasion] = useState(0);
-
-  useEffect(() => {
-    fetch('/api/products')
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('product fetch failed'))))
-      .then((data: ProductsResponse) => { setProducts(data.products || []); })
-      .catch(() => { setProducts([]); });
-  }, []);
-
-  const orderedProducts = useMemo(() => {
-    const rank = (title: string) => {
-      const t = title.toLowerCase();
-      if (t.includes('7') || t.includes('seven')) return 3;
-      if (t.includes('4') || t.includes('four')) return 2;
-      return 1;
-    };
-    return [...products].sort((a, b) => rank(a.title) - rank(b.title)).slice(0, 3);
-  }, [products]);
-
   const active = occasions[activeOccasion];
-  const fallbackProducts: Product[] = [
-    { id: 'single', productKey: 'single', title: 'Single Key', image: '/cardfrontunikmo.jpg', price: '24', currencyCode: 'USD' },
-    { id: 'four', productKey: 'four', title: '4-Key Bundle', image: '/cardfrontsite4.png', price: '64', currencyCode: 'USD' },
-    { id: 'seven', productKey: 'seven', title: '7-Key Bundle', image: '/cardfrontsite7.png', price: '72', currencyCode: 'USD' },
-  ];
-
-  const startCheckout = async (product: Product) => {
-    if (!product.productKey) return;
-    setStartingCheckout(product.id);
-    setCheckoutError('');
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productKey: product.productKey, deliveryType: 'physical', quantity: 1 }),
-      });
-      const data = await response.json();
-      if (!response.ok || !data.checkoutUrl) throw new Error(data.error || 'Checkout is unavailable');
-      window.location.href = data.checkoutUrl;
-    } catch (error) {
-      setCheckoutError(error instanceof Error ? error.message : 'Checkout is unavailable');
-      setStartingCheckout(null);
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const error = url.searchParams.get('checkout_error');
+    if (error) {
+      setCheckoutError(error);
+      url.searchParams.delete('checkout_error');
+      window.history.replaceState(null, '', url.href);
     }
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#FCF9F4] text-[#22323A]">
@@ -277,10 +246,10 @@ export default function TestPage() {
           <div className="mx-auto max-w-[1240px]">
             <div className="text-center"><p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-[#B38846]">Choose your card</p><h2 className="mt-3 font-serif text-[31px] sm:text-[40px]">Pick the way you want to give it.</h2><p className="mx-auto mt-3 max-w-[610px] text-[13px] leading-relaxed text-[#22323A]/60 sm:text-[14px]">Same UNIKMO experience. Choose how many separate cards — and private memories — you want to give.</p></div>
             {checkoutError ? <p role="alert" className="mt-6 text-center text-sm text-red-700">{checkoutError}</p> : null}
-            <div className="mt-10 grid gap-6 md:grid-cols-3">{(orderedProducts.length ? orderedProducts : fallbackProducts).map((product) => {
+            <div className="mt-10 grid gap-6 md:grid-cols-3">{retailProducts.map((product) => {
               const details = getProductDetails(product.title);
               const displayName = normalizedProductName(product.title);
-              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white">Most cards for your money</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[12px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><button type="button" onClick={() => startCheckout(product)} disabled={!product.productKey || startingCheckout === product.id} className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[12px] font-medium text-white transition hover:bg-[#17232A] disabled:opacity-60">{startingCheckout === product.id ? 'Opening checkout…' : details.button}</button></article>;
+              return <article key={product.id} className="relative rounded-[20px] border border-[#22323A]/[0.07] bg-white/60 p-6 text-center shadow-[0_14px_40px_rgba(34,50,58,.04)]">{details.bestValue ? <span className="absolute right-4 top-4 z-10 rounded-full bg-[#22323A] px-3 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white">Most cards for your money</span> : null}<div className="relative mx-auto aspect-[3/2] w-full max-w-[390px] overflow-hidden rounded-[16px] bg-[#FAF6F1]">{product.image ? <Image src={product.image} alt={product.imageAlt || displayName} fill unoptimized={product.image.startsWith('http')} className="object-contain p-2" sizes="390px" /> : null}</div><h3 className="mt-5 font-serif text-[24px]">{displayName}</h3><p className="mt-1 text-[12px] font-medium uppercase tracking-[0.14em] text-[#B38846]">{details.count}</p>{product.price ? <p className="mt-3 text-[18px] font-medium text-[#22323A]">{formatCurrency(product.price, product.currencyCode)}</p> : null}<ul className="mx-auto mt-5 max-w-[300px] space-y-3 border-t border-[#22323A]/[0.07] pt-5"><CheckLine>{details.explanation}</CheckLine><CheckLine>QR code + private access code on every card</CheckLine><CheckLine>{details.use}</CheckLine></ul><form method="post" action="/api/checkout"><input type="hidden" name="productKey" value={product.productKey} /><button type="submit" className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#22323A] px-6 text-[12px] font-medium text-white transition hover:bg-[#17232A]">{details.button}</button></form></article>;
             })}</div>
           </div>
         </section>
