@@ -58,9 +58,12 @@ export async function POST(request: NextRequest) {
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/#shop`,
     });
-    return NextResponse.json({ checkoutUrl: session.url });
+    if (!session.url) throw new Error('Stripe returned a checkout session without a URL');
+    return NextResponse.json({ checkoutUrl: session.url }, { headers: { 'Cache-Control': 'no-store' } });
   } catch (error) {
-    console.error('Stripe checkout error:', error);
-    return NextResponse.json({ error: 'Unable to start checkout' }, { status: 500 });
+    const reference = crypto.randomUUID();
+    const details = error as { type?: string; code?: string; param?: string; requestId?: string; name?: string };
+    console.error('Stripe checkout error', { reference, type: details?.type || details?.name, code: details?.code, param: details?.param, requestId: details?.requestId });
+    return NextResponse.json({ error: `Unable to start secure checkout. Please try again or contact support with reference ${reference}.` }, { status: 500, headers: { 'Cache-Control': 'no-store' } });
   }
 }
